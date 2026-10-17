@@ -141,31 +141,40 @@ function EjecucionDetalle() {
           },
         ];
 
-    const rows = filas.map((f) => ({
-      ...base,
-      "Candidato · código": f.codigo,
-      "Candidato · nombre": f.nombre,
-      "Candidato · empresa": f.empresa,
-      "Candidato · selección":
-        f.candidato_id === decision.candidato_id ? "Definitivo" : "Preseleccionado",
-      "Score motor": f.scores.score_deterministico ?? "",
-      "Score semántico": f.scores.score_semantico ?? "",
-      "Score final": f.scores.score_final ?? "",
-      ...decisionCols,
-      ...iaCols,
-      ...benchCols,
-    }));
-
-    const libro = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(libro, XLSX.utils.json_to_sheet(rows), "RESULTADOS");
-    const nombre = (cargo?.nombre ?? "homologacion")
-      .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g, "")
-      .replace(/[^A-Za-z0-9]+/g, "_")
-      .replace(/^_+|_+$/g, "")
-      .slice(0, 60) || "cargo";
-    const fecha = new Date(ejecucion.fecha ?? Date.now()).toISOString().slice(0, 10);
-    XLSX.writeFile(libro, `homologacion_${nombre}_${fecha}.xlsx`);
+    void XLSX;
+    return {
+      cargo: {
+        codigo: cargo?.codigo_cargo ?? "", nombre: cargo?.nombre ?? "", empresa: cargo?.empresas?.nombre ?? "",
+        area: cargo?.nombre_area ?? "", subarea: cargo?.nombre_subarea ?? "", nivel: cargo?.nivel_jerarquico ?? "",
+        sueldo: cargo?.sueldo != null ? Number(cargo.sueldo) : null,
+      },
+      referencia: {
+        nombre: decision.cargos?.nombre ?? "", codigo: decision.cargos?.codigo_cargo ?? "",
+        empresa: decision.cargos?.empresas?.nombre ?? "",
+      },
+      decision: {
+        analista: decision.usuario ?? "", fecha: decision.fecha ?? null,
+        comentario: decision.comentario ?? "", tamano: decision.tamano_empresa ?? "",
+      },
+      ia: { modelo: analisis?.modelo ?? "", confianza: validada?.confianza ?? null, explicacion: validada?.explicacion_breve ?? "" },
+      banda: banda
+        ? { p25: n(banda.p25), p50: n(banda.p50), p75: n(banda.p75), promedio: n(banda.promedio), fuente: banda.fuente ?? "", anio: banda.anio ?? null }
+        : null,
+      candidatos: filas.map((f) => ({
+        nombre: f.nombre, codigo: f.codigo, empresa: f.empresa,
+        definitivo: f.candidato_id === decision.candidato_id,
+        motor: n(f.scores.score_deterministico), semantico: n(f.scores.score_semantico), final: n(f.scores.score_final),
+      })).sort((a, b) => (b.final ?? b.motor ?? -1) - (a.final ?? a.motor ?? -1)),
+      fechaEjecucion: ejecucion.fecha ?? null,
+    } satisfies DatosInforme;
+  }
+  async function exportar() {
+    const d = await datosInforme();
+    if (d) await exportarExcel(d);
+  }
+  function exportarPdf() {
+    const d = datosInformeSync();
+    if (d && !abrirInformePdf(d)) toast.error("Permite ventanas emergentes para generar el informe PDF.");
   }
 
   return (
