@@ -9,7 +9,6 @@ import { BenchmarkPanel } from "@/components/benchmark-panel";
 import { VistaEspejo } from "@/components/vista-espejo";
 import { ordenarPorPuntaje } from "@/components/score-chip";
 import { DetailSkeleton } from "@/components/loading-skeleton";
-import { toast } from "sonner";
 import { abrirInformePdf, exportarExcel, type DatosInforme } from "@/lib/exportacion";
 
 
@@ -149,7 +148,7 @@ function EjecucionDetalle() {
   }
   function exportarPdf() {
     const d = datosInformeSync();
-    if (d && !abrirInformePdf(d)) toast.error("Permite ventanas emergentes para generar el informe PDF.");
+    if (d && !abrirInformePdf(d)) window.alert("Permite ventanas emergentes para generar el informe PDF.");
   }
 
   return (
