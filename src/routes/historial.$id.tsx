@@ -73,33 +73,6 @@ function EjecucionDetalle() {
     const banda = decision.tamano_empresa
       ? bandas.find((b) => b.tipo_empresa === decision.tamano_empresa)
       : undefined;
-    const base = {
-      "Cargo interno · código": cargo?.codigo_cargo ?? "",
-      "Cargo interno · nombre": cargo?.nombre ?? "",
-      "Cargo interno · empresa": cargo?.empresas?.nombre ?? "",
-      "Cargo interno · área": cargo?.nombre_area ?? "",
-      "Cargo interno · subárea": cargo?.nombre_subarea ?? "",
-      "Cargo interno · nivel": cargo?.nivel_jerarquico ?? "",
-    };
-    const decisionCols = {
-      "Decisión · analista": decision.usuario ?? "",
-      "Decisión · fecha": decision.fecha ? formatFecha(decision.fecha) : "",
-      "Decisión · comentario": decision.comentario ?? "",
-    };
-    const iaCols = {
-      "Análisis IA · confianza": validada?.confianza ?? "",
-      "Análisis IA · modelo": analisis?.modelo ?? "",
-      "Análisis IA · explicación": validada?.explicacion_breve ?? "",
-    };
-    const benchCols = {
-      "Benchmark · P25": banda?.p25 ?? "",
-      "Benchmark · P50": banda?.p50 ?? "",
-      "Benchmark · P75": banda?.p75 ?? "",
-      "Benchmark · Promedio": banda?.promedio ?? "",
-      "Benchmark · fuente": banda?.fuente ?? "",
-      "Benchmark · año": banda?.anio ?? "",
-      "Benchmark · tamaño": decision.tamano_empresa ?? "",
-    };
 
     type Fila = {
       candidato_id: string;
@@ -269,13 +242,22 @@ function EjecucionDetalle() {
         <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
           <h2 className="text-lg font-medium">Decisión del analista</h2>
           {decision && (
-            <button
-              type="button"
-              className="rounded-md border px-3 py-1.5 text-sm font-medium hover:bg-muted"
-              onClick={exportar}
-            >
-              Exportar resultados
-            </button>
+            <div className="flex flex-wrap gap-2">
+              <button
+                type="button"
+                className="rounded-md border px-3 py-1.5 text-sm font-medium hover:bg-muted"
+                onClick={exportar}
+              >
+                Exportar Excel
+              </button>
+              <button
+                type="button"
+                className="rounded-md border px-3 py-1.5 text-sm font-medium hover:bg-muted"
+                onClick={exportarPdf}
+              >
+                Informe PDF
+              </button>
+            </div>
           )}
         </div>
         {decision ? (
