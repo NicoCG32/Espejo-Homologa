@@ -143,7 +143,7 @@ function EjecucionDetalle() {
           },
         ];
 
-    void XLSX;
+
     return {
       cargo: {
         codigo: cargo?.codigo_cargo ?? "", nombre: cargo?.nombre ?? "", empresa: cargo?.empresas?.nombre ?? "",
@@ -171,7 +171,7 @@ function EjecucionDetalle() {
     } satisfies DatosInforme;
   }
   async function exportar() {
-    const d = await datosInforme();
+    const d = datosInformeSync();
     if (d) await exportarExcel(d);
   }
   function exportarPdf() {
