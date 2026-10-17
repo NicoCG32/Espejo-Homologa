@@ -9,6 +9,8 @@ import { BenchmarkPanel } from "@/components/benchmark-panel";
 import { VistaEspejo } from "@/components/vista-espejo";
 import { ordenarPorPuntaje } from "@/components/score-chip";
 import { DetailSkeleton } from "@/components/loading-skeleton";
+import { toast } from "sonner";
+import { abrirInformePdf, exportarExcel, type DatosInforme } from "@/lib/exportacion";
 
 
 function pct(v: number | null | undefined) {
@@ -63,10 +65,10 @@ function EjecucionDetalle() {
     explicacion_breve: string;
   } | null;
 
-  // Exportación a Excel: sólo lee datos ya persistidos, nunca recalcula ni llama a la IA.
-  async function exportar() {
-    if (!decision) return;
-    const XLSX = await import("xlsx");
+  // Exportaciones: sólo leen datos ya persistidos, nunca recalculan ni llaman a la IA.
+  const n = (v: unknown) => (v == null || v === "" || Number.isNaN(Number(v)) ? null : Number(v));
+  function datosInformeSync(): DatosInforme | null {
+    if (!decision) return null;
     const bandas = data?.bandas ?? [];
     const banda = decision.tamano_empresa
       ? bandas.find((b) => b.tipo_empresa === decision.tamano_empresa)
