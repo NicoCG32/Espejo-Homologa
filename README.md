@@ -55,6 +55,13 @@ mercado, y jamás influye en la comparación.
 El nombre no es decorativo: la plataforma pone el cargo interno frente a su **reflejo** en el
 mercado. Ese espejo es la metáfora que guía la interfaz, el vocabulario y el orden de las pantallas.
 
+> ### 🔭 Más allá de la homologación
+> El motor es, en esencia, un calce **perfil requerido ↔ perfiles disponibles**: reglas
+> determinísticas primero, IA sólo sobre preseleccionados y decisión humana al final. La misma
+> arquitectura sirve para **reclutamiento**, **movilidad interna** y **planes de carrera**.
+> Pros, contras y potencia del modelo en
+> [docs/15 · Escalabilidad y reclutamiento](./docs/15-escalabilidad-y-reclutamiento.md).
+
 ---
 
 ## Núcleo del producto
