@@ -1,13 +1,17 @@
 # Documentación — Espejo: Homologa
 
 Documentación técnica y funcional del piloto. Cada archivo cubre una capa del sistema y puede
-leerse por separado. Si es tu primer contacto con el proyecto, el orden recomendado es
-**01 → 02 → 03** y después el resto según necesidad.
+leerse por separado.
+
+**Rutas de lectura:**
+- **Negocio, dirección o inversión:** 00 → 15 → 02.
+- **Técnica:** 01 → 02 → 03 y después el resto según necesidad.
 
 ## Índice
 
 | # | Documento | Contenido |
 |---|-----------|-----------|
+| 00 | [**Problemática, cliente y valor**](./00-problematica-cliente-y-valor.md) | **Dolor, arquetipos de cliente, solución, justificación y viabilidad** |
 | 01 | [Arquitectura](./01-arquitectura.md) | Stack, capas, límites cliente/servidor, estructura de carpetas |
 | 02 | [Funcionalidades](./02-funcionalidades.md) | Qué hace cada pestaña de la aplicación |
 | 03 | [Flujo de homologación](./03-flujo-homologacion.md) | Paso a paso del recorrido profesional y del cálculo |
