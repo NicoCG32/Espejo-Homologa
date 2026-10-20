@@ -71,7 +71,31 @@ Cada descarte tiene causa, cada score tiene desglose y cada elección queda firm
 4. Anonimización opcional antes del análisis.
 5. Estados de proceso (postulado, preseleccionado, entrevistado, elegido).
 
-## 7. Principios que no cambian
+## 7. Rubros expandibles fuera de RRHH
+
+El patrón *A ↔ B con reglas, IA acotada y decisión humana* aplica a cualquier cruce de catálogos:
+
+| Rubro | A | B | Valor |
+|---|---|---|---|
+| Compras y licitaciones | Especificación técnica requerida | Catálogo de proveedores / códigos de insumo | Menos errores de adjudicación, trazabilidad ante auditoría |
+| Educación superior | Asignatura de origen | Malla de destino | Convalidación de créditos en minutos y con criterio uniforme |
+| Salud y seguros | Prestación descrita | Nomencladores (CIE, aranceles) | Codificación consistente y menos rechazos de reembolso |
+| Sector público | Cargo de una institución | Escalas o catálogos de otra | Equiparación de cargos entre servicios |
+
+## 8. Inversiones viables y su motivo
+
+| Prioridad | Inversión | Motivo |
+|---|---|---|
+| 1 | **Ingesta no estructurada** (OCR y lectura multimodal de PDF/Word) | Elimina la principal barrera de adopción: preparar planillas limpias. Habilita CVs y encuestas comerciales |
+| 2 | **Autenticación, multiempresa y cifrado en reposo** | Los datos salariales son secreto corporativo; el aislamiento por cliente es condición de venta |
+| 3 | **Certificación ISO 27001 / SOC 2** | Requisito de banca, retail y multinacionales para contratar proveedores que manejan datos sensibles |
+| 4 | **Gobernanza** (estados de revisión, vigencia por ciclo de encuesta) | Convierte la herramienta en proceso institucional recurrente |
+| 5 | **Dashboard de diagnóstico global** | Pasa de homologar cargos a mostrar competitividad salarial por área: valor directo para Gerencia y Finanzas |
+| 6 | **Calibración con casos reales** | Valida los pesos por defecto y fortalece la credibilidad comercial |
+
+Las inversiones 1–3 abren mercado; 4–6 aumentan retención y ticket por cliente.
+
+## 9. Principios que no cambian
 
 - La IA traduce e interpreta; no decide.
 - Lo que no está en los datos no se inventa.

@@ -13,6 +13,8 @@ sobre las planillas reales del piloto.
 [![IA](https://img.shields.io/badge/Gemini_+_Groq-structured_output-1558B0)](#)
 
 [Documentación](./docs/README.md) ·
+[Problemática y valor](./docs/00-problematica-cliente-y-valor.md) ·
+[Escalabilidad](./docs/15-escalabilidad-y-reclutamiento.md) ·
 [Arquitectura](./docs/01-arquitectura.md) ·
 [Flujo](./docs/03-flujo-homologacion.md) ·
 [Base de datos](./docs/04-base-de-datos.md) ·
