@@ -22,6 +22,11 @@ leerse por separado. Si es tu primer contacto con el proyecto, el orden recomend
 | 12 | [Resiliencia de la IA](./12-resiliencia-ia.md) | Reintentos, proveedor de respaldo, mensajes al usuario |
 | 13 | [Decisión, benchmark y exportación](./13-decision-benchmark-exportacion.md) | Dos etapas, mercado y salida a Excel |
 | 14 | [Identidad visual y experiencia](./14-identidad-y-experiencia.md) | Metáfora del espejo, tono, estados y responsive |
+| 15 | [**Escalabilidad y reclutamiento**](./15-escalabilidad-y-reclutamiento.md) | **Apunte estratégico:** otros usos del motor, pros, contras y potencia del modelo |
+
+> **Destacado:** el motor es un calce genérico *perfil requerido ↔ perfiles disponibles*.
+> Ver el [capítulo 15](./15-escalabilidad-y-reclutamiento.md) para su extensión a reclutamiento,
+> movilidad interna y planes de carrera.
 
 ## Principios que rigen el proyecto
 
