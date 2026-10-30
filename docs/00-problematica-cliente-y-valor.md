@@ -9,7 +9,7 @@ Para fijar sueldos competitivos, una empresa debe saber **a qué cargo del merca
 de sus cargos internos**. Las encuestas salariales (Mercer, WTW, Korn Ferry, PwC o encuestas
 locales) traen cientos de cargos con nombres y descripciones distintos a los de la empresa.
 
-Hoy ese cruce —la *homologación*— se hace a mano: abrir la planilla, buscar el cargo "parecido",
+Hoy ese cruce —la _homologación_— se hace a mano: abrir la planilla, buscar el cargo "parecido",
 leer descripciones y justificarlo en un correo o una celda. El resultado es:
 
 - **Lento:** decenas o cientos de cargos por ciclo; semanas de trabajo de analistas senior.
@@ -20,13 +20,13 @@ leer descripciones y justificarlo en un correo o una celda. El resultado es:
 
 ## 2. Quién sufre el dolor
 
-| Arquetipo | Dolor principal | Qué gana con Espejo |
-|---|---|---|
-| **Gerencia de Personas / Compensaciones** | Ciclos anuales largos, presión por cerrar bandas a tiempo | Candidatos ordenados en minutos y decisión documentada |
-| **Analista de compensaciones** | Trabajo repetitivo, difícil de defender ante jefaturas | Metodología explícita, Vista Espejo y justificación breve |
-| **Consultoras de RRHH** | Consultores senior atrapados en cruces operativos; márgenes bajos | Más clientes por consultor, entregables Excel/PDF estandarizados |
-| **Comité de Remuneraciones / Directorio** | Falta de respaldo auditable para aprobar políticas salariales | Informe ejecutivo firmado con brechas frente a P25/P50/P75/Promedio |
-| **Finanzas (CFO)** | Costo de nómina desalineado con el mercado | Diagnóstico basado en equivalencias correctas, no en intuición |
+| Arquetipo                                 | Dolor principal                                                   | Qué gana con Espejo                                                 |
+| ----------------------------------------- | ----------------------------------------------------------------- | ------------------------------------------------------------------- |
+| **Gerencia de Personas / Compensaciones** | Ciclos anuales largos, presión por cerrar bandas a tiempo         | Candidatos ordenados en minutos y decisión documentada              |
+| **Analista de compensaciones**            | Trabajo repetitivo, difícil de defender ante jefaturas            | Metodología explícita, Vista Espejo y justificación breve           |
+| **Consultoras de RRHH**                   | Consultores senior atrapados en cruces operativos; márgenes bajos | Más clientes por consultor, entregables Excel/PDF estandarizados    |
+| **Comité de Remuneraciones / Directorio** | Falta de respaldo auditable para aprobar políticas salariales     | Informe ejecutivo firmado con brechas frente a P25/P50/P75/Promedio |
+| **Finanzas (CFO)**                        | Costo de nómina desalineado con el mercado                        | Diagnóstico basado en equivalencias correctas, no en intuición      |
 
 ## 3. Magnitud del dolor
 
@@ -41,7 +41,7 @@ leer descripciones y justificarlo en un correo o una celda. El resultado es:
 
 ## 4. La solución
 
-**Idea abstracta:** poner el cargo interno frente a su *reflejo* en el mercado y medir cuánto se
+**Idea abstracta:** poner el cargo interno frente a su _reflejo_ en el mercado y medir cuánto se
 parecen por su contenido, nunca por su sueldo.
 
 **Idea desarrollada:**
@@ -60,13 +60,13 @@ Arquitectura, servicios externos y funcionalidades: ver capítulos [01](./01-arq
 
 ## 5. Por qué resuelve el problema
 
-| Dolor | Respuesta de Espejo |
-|---|---|
-| Lento | Motor sobre todo el catálogo en segundos; IA sólo sobre la terna |
-| Subjetivo | Criterios y pesos explícitos, guardados en cada ejecución |
-| Poco trazable | Historial con scores, comentario, analista, fecha y exportación |
-| Contaminado por el sueldo | La remuneración nunca entra al motor ni a la IA |
-| Desconfianza en la IA | La IA no decide: interpreta y explica; la persona elige |
+| Dolor                     | Respuesta de Espejo                                              |
+| ------------------------- | ---------------------------------------------------------------- |
+| Lento                     | Motor sobre todo el catálogo en segundos; IA sólo sobre la terna |
+| Subjetivo                 | Criterios y pesos explícitos, guardados en cada ejecución        |
+| Poco trazable             | Historial con scores, comentario, analista, fecha y exportación  |
+| Contaminado por el sueldo | La remuneración nunca entra al motor ni a la IA                  |
+| Desconfianza en la IA     | La IA no decide: interpreta y explica; la persona elige          |
 
 ## 6. Por qué es apto y viable
 
@@ -78,3 +78,48 @@ Arquitectura, servicios externos y funcionalidades: ver capítulos [01](./01-arq
 - **Éticamente:** separa contenido de remuneración y deja la decisión en manos humanas.
 
 Escalabilidad, otros rubros e inversiones: ver [capítulo 15](./15-escalabilidad-y-reclutamiento.md).
+
+<!-- DOCUMENTACION:nivel-2026-10-29:BEGIN -->
+
+**Nivel:** general.
+
+## Síntesis general — Espejo · Homologa
+
+Revisión documental: 2026-10-29. Base `c281b646e7bf` en `main`; árbol inicialmente limpio. La inspección de fuentes no sustituye pruebas de ejecución.
+
+**Estado y alcance:** Piloto web de homologación por contenido; fuente local actualizada por fast-forward a main remoto. El cálculo, la interpretación semántica y el benchmark tienen contratos diferentes.
+
+### Problemática
+
+Comparar un cargo interno con una encuesta de mercado mediante semejanza de nombre o remuneración produce decisiones difíciles de explicar. Las planillas dispersas y la ausencia de criterios persistidos dificultan reproducir la homologación y su posterior benchmark.
+
+### Cliente, usuario y beneficiario
+
+| Perfil              | Contexto                                      | Necesidad                                            |
+| ------------------- | --------------------------------------------- | ---------------------------------------------------- |
+| Usuario             | Analista de compensaciones o recursos humanos | Comparar contenido del cargo con criterios trazables |
+| Revisor             | Responsable de aprobar la selección           | Entender coincidencias, descartes y fuentes          |
+| Comprador potencial | Organización o consultora de compensaciones   | Piloto y condiciones comerciales aún no demostrados  |
+
+### Solución y límites
+
+Importa planillas, conserva empresas/cargos/diccionario, aplica filtros y ponderaciones determinísticas, añade lectura semántica de candidatos y separa preselección de selección final. El sueldo se consulta al final como referencia de mercado, sin participar en la homologación.
+
+### Por qué corresponde al problema
+
+| Fricción / necesidad         | Mecanismo de la solución                                         |
+| ---------------------------- | ---------------------------------------------------------------- |
+| Cargos con nombres parecidos | Se compara contenido y atributos normalizados                    |
+| Decisiones irreproducibles   | Ejecución y criterios usados permanecen identificados            |
+| Sesgo salarial               | La remuneración no entra al score ni al análisis de equivalencia |
+
+### Validación pendiente o continua
+
+Tiempo de homologación revisada, concordancia entre analistas y proporción de decisiones reproducibles; no se presume exactitud por tener un score.
+
+La motivación del creador se presenta en [16-motivacion-y-contexto.md](16-motivacion-y-contexto.md); el análisis de costos y proyección se separa en [18-analisis-economico-clp-usd.md](18-analisis-economico-clp-usd.md). Afinidad personal, un prototipo o cercanía con una organización no equivalen a demanda/venta demostrada.
+
+## Fuentes de implementación y contratos
+
+[README.md](../README.md) · [docs/01-arquitectura.md](01-arquitectura.md) · [docs/04-base-de-datos.md](04-base-de-datos.md) · [docs/06-motor-deterministico.md](06-motor-deterministico.md) · [docs/07-analisis-semantico.md](07-analisis-semantico.md) · [docs/13-decision-benchmark-exportacion.md](13-decision-benchmark-exportacion.md).
+<!-- DOCUMENTACION:nivel-2026-10-29:END -->
