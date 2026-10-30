@@ -1,6 +1,4 @@
 import { useCallback, useState } from "react";
-import lightLogo from "@/assets/LightLogo.png.asset.json";
-import darkLogo from "@/assets/DarkLogo.png.asset.json";
 
 type LogoPrincipalProps = {
   className?: string;
@@ -8,7 +6,11 @@ type LogoPrincipalProps = {
   eager?: boolean;
 };
 
-export function LogoPrincipal({ className, alt = "Espejo: Homologa", eager = false }: LogoPrincipalProps) {
+export function LogoPrincipal({
+  className,
+  alt = "Espejo: Homologa",
+  eager = false,
+}: LogoPrincipalProps) {
   const [listo, setListo] = useState(false);
   const detectarCarga = useCallback((imagen: HTMLImageElement | null) => {
     if (imagen?.complete && imagen.naturalWidth > 0) setListo(true);
@@ -24,7 +26,7 @@ export function LogoPrincipal({ className, alt = "Espejo: Homologa", eager = fal
       <span className="logo-principal-skeleton" aria-hidden="true" />
       <img
         ref={detectarCarga}
-        src={lightLogo.url}
+        src="/brand/espejo-logo-horizontal-claro.svg"
         alt=""
         aria-hidden="true"
         className="logo-principal-imagen logo-principal-claro"
@@ -35,7 +37,7 @@ export function LogoPrincipal({ className, alt = "Espejo: Homologa", eager = fal
       />
       <img
         ref={detectarCarga}
-        src={darkLogo.url}
+        src="/brand/espejo-logo-horizontal-oscuro.svg"
         alt=""
         aria-hidden="true"
         className="logo-principal-imagen logo-principal-oscuro"

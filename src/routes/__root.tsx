@@ -9,13 +9,20 @@ import {
   type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
-import { BookMarked, Building2, ClipboardList, History, Home, Settings2, Sparkles } from "lucide-react";
+import {
+  BookMarked,
+  Building2,
+  ClipboardList,
+  History,
+  Home,
+  Settings2,
+  Sparkles,
+} from "lucide-react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { LogoEspejo } from "@/components/logo-espejo";
 import { TEMA_SCRIPT, ThemeToggle } from "../components/theme-toggle";
-
 
 function NotFoundComponent() {
   return (
@@ -83,10 +90,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Espejo: Homologa" },
-      { name: "description", content: "Encuentra cargos equivalentes con un proceso claro y guiado." },
+      {
+        name: "description",
+        content: "Encuentra cargos equivalentes con un proceso claro y guiado.",
+      },
       { name: "author", content: "Espejo: Homologa" },
       { property: "og:title", content: "Espejo: Homologa" },
-      { property: "og:description", content: "Encuentra cargos equivalentes con un proceso claro y guiado." },
+      {
+        property: "og:description",
+        content: "Encuentra cargos equivalentes con un proceso claro y guiado.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
@@ -97,6 +110,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "apple-touch-icon", href: "/brand/apple-touch-icon.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -126,7 +140,6 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
-
 const NAV = [
   { to: "/", label: "Inicio", icon: Home, group: "principal" },
   { to: "/homologacion/nueva", label: "Seleccionar cargo", icon: Sparkles, group: "principal" },
@@ -137,7 +150,6 @@ const NAV = [
   { to: "/diccionario", label: "Diccionario", icon: BookMarked, group: "gestión" },
 ] as const;
 
-
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
@@ -147,14 +159,21 @@ function RootComponent() {
         <aside className="app-sidebar">
           <Link to="/" className="brand-lockup" aria-label="Espejo: Homologa — Inicio">
             <LogoEspejo className="brand-mark" title="Espejo: Homologa" />
-            <span><strong>Espejo:</strong> Homologa</span>
+            <span>
+              <strong>Espejo:</strong> Homologa
+            </span>
           </Link>
           <nav className="sidebar-nav" aria-label="Navegación principal">
             <p>Principal</p>
             {NAV.filter((item) => item.group === "principal").map((item) => {
               const Icon = item.icon;
               return (
-                <Link key={item.to} to={item.to} activeOptions={{ exact: item.to === "/" }} activeProps={{ className: "active" }}>
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  activeOptions={{ exact: item.to === "/" }}
+                  activeProps={{ className: "active" }}
+                >
                   <Icon aria-hidden="true" /> <span>{item.label}</span>
                 </Link>
               );
@@ -175,17 +194,23 @@ function RootComponent() {
         </aside>
         <div className="app-workspace">
           <header className="workspace-header">
-            <Link to="/" className="mobile-brand"><LogoEspejo className="brand-mark-sm" /> <span>Espejo: <strong>Homologa</strong></span></Link>
-            <div className="header-theme"><ThemeToggle /></div>
+            <Link to="/" className="mobile-brand">
+              <LogoEspejo className="brand-mark-sm" />{" "}
+              <span>
+                Espejo: <strong>Homologa</strong>
+              </span>
+            </Link>
+            <div className="header-theme">
+              <ThemeToggle />
+            </div>
           </header>
 
           <main className="workspace-content">
-          {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-          <Outlet />
+            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+            <Outlet />
           </main>
         </div>
       </div>
     </QueryClientProvider>
   );
 }
-

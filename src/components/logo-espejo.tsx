@@ -6,40 +6,24 @@
 import { useId } from "react";
 
 export function LogoEspejo({ className, title }: { className?: string; title?: string }) {
-  const uid = useId().replace(/:/g, "");
-  const gA = `esp-a-${uid}`;
-  const gB = `esp-b-${uid}`;
-
   return (
-    <svg
+    <span
       className={className ? `logo-espejo ${className}` : "logo-espejo"}
-      viewBox="0 0 64 64"
-      role={title ? "img" : "presentation"}
-      aria-hidden={title ? undefined : true}
+      role={title ? "img" : undefined}
       aria-label={title}
-      focusable="false"
+      aria-hidden={title ? undefined : true}
     >
-      {title ? <title>{title}</title> : null}
-      <defs>
-        <linearGradient id={gA} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="var(--logo-1)" />
-          <stop offset="100%" stopColor="var(--logo-2)" />
-        </linearGradient>
-        <linearGradient id={gB} x1="1" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="var(--logo-3)" />
-          <stop offset="100%" stopColor="var(--logo-2)" />
-        </linearGradient>
-      </defs>
-      {/* Prisma izquierdo: el cargo interno */}
-      <path d="M29 6 6 32l23 26V6Z" fill={`url(#${gA})`} />
-      {/* Prisma derecho: el cargo de referencia, reflejado y translúcido */}
-      <path d="M35 6 58 32 35 58V6Z" fill={`url(#${gB})`} opacity=".85" />
-      {/* Eje de reflexión */}
-      <path d="M32 3v58" stroke="var(--logo-axis)" strokeWidth="2" strokeLinecap="round" opacity=".9" />
-      {/* Destellos de refracción */}
-      <path d="M29 6 6 32h13Z" fill="var(--logo-shine)" opacity=".5" />
-      <path d="M35 58 58 32H45Z" fill="var(--logo-shine)" opacity=".35" />
-    </svg>
+      <img
+        src="/brand/espejo-isotipo-transparente.svg"
+        className="block h-full w-full object-contain dark:hidden"
+        alt=""
+      />
+      <img
+        src="/brand/espejo-isotipo-transparente-oscuro.svg"
+        className="hidden h-full w-full object-contain dark:block"
+        alt=""
+      />
+    </span>
   );
 }
 
@@ -73,7 +57,15 @@ export function EspejoPrismas({ className }: { className?: string }) {
       </defs>
 
       {/* Halo atmosférico */}
-      <ellipse cx="210" cy="180" rx="140" ry="110" fill="var(--logo-2)" opacity=".18" filter={`url(#${blur})`} />
+      <ellipse
+        cx="210"
+        cy="180"
+        rx="140"
+        ry="110"
+        fill="var(--logo-2)"
+        opacity=".18"
+        filter={`url(#${blur})`}
+      />
 
       {/* Haz de luz que cruza entre ambos planos */}
       <rect x="60" y="160" width="300" height="20" fill={`url(#${g3})`} />
@@ -82,18 +74,36 @@ export function EspejoPrismas({ className }: { className?: string }) {
       <g>
         <path d="M185 40 60 105v130l125 65V40Z" fill={`url(#${g1})`} />
         <path d="M185 40 60 105l125 40V40Z" fill="var(--logo-shine)" opacity=".28" />
-        <path d="M185 40 60 105v130l125 65V40Z" fill="none" stroke="var(--logo-edge)" strokeWidth="1.5" opacity=".6" />
+        <path
+          d="M185 40 60 105v130l125 65V40Z"
+          fill="none"
+          stroke="var(--logo-edge)"
+          strokeWidth="1.5"
+          opacity=".6"
+        />
       </g>
 
       {/* Plano derecho: el reflejo */}
       <g>
         <path d="M235 40 360 105v130l-125 65V40Z" fill={`url(#${g2})`} opacity=".9" />
         <path d="M235 40 360 105l-125 40V40Z" fill="var(--logo-shine)" opacity=".2" />
-        <path d="M235 40 360 105v130l-125 65V40Z" fill="none" stroke="var(--logo-edge)" strokeWidth="1.5" opacity=".45" />
+        <path
+          d="M235 40 360 105v130l-125 65V40Z"
+          fill="none"
+          stroke="var(--logo-edge)"
+          strokeWidth="1.5"
+          opacity=".45"
+        />
       </g>
 
       {/* Eje central de simetría */}
-      <path d="M210 26v288" stroke="var(--logo-axis)" strokeWidth="2" strokeLinecap="round" opacity=".55" />
+      <path
+        d="M210 26v288"
+        stroke="var(--logo-axis)"
+        strokeWidth="2"
+        strokeLinecap="round"
+        opacity=".55"
+      />
       <circle cx="210" cy="170" r="7" fill="var(--logo-shine)" opacity=".85" />
     </svg>
   );

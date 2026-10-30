@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "project": "Espejo-Homologa",
+  "bannerLight": "espejo-banner-claro.png",
+  "bannerDark": "espejo-banner-oscuro.png",
+  "resources": [
+    "apple-touch-icon.png",
+    "espejo-banner-claro.png",
+    "espejo-banner-claro.svg",
+    "espejo-banner-oscuro.png",
+    "espejo-banner-oscuro.svg",
+    "espejo-icono-app-claro.png",
+    "espejo-icono-app-claro.svg",
+    "espejo-icono-app-oscuro.png",
+    "espejo-icono-app-oscuro.svg",
+    "espejo-identidad-cuadrada-oscura.png",
+    "espejo-identidad-cuadrada-oscura.svg",
+    "espejo-identidad-cuadrada.png",
+    "espejo-identidad-cuadrada.svg",
+    "espejo-isotipo-transparente-oscuro.png",
+    "espejo-isotipo-transparente-oscuro.svg",
+    "espejo-isotipo-transparente.png",
+    "espejo-isotipo-transparente.svg",
+    "espejo-logo-horizontal-claro.png",
+    "espejo-logo-horizontal-claro.svg",
+    "espejo-logo-horizontal-oscuro.png",
+    "espejo-logo-horizontal-oscuro.svg",
+    "favicon.png",
+    "icon-192.png",
+    "icon-256.png",
+    "icon-512.png"
+  ]
+}
