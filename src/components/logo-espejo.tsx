@@ -1,14 +1,21 @@
 /**
  * Identidad visual de Espejo: Homologa.
- * Isotipo vectorial: dos prismas enfrentados que se reflejan (cargo interno ↔ cargo de referencia).
- * Los degradados se definen por instancia con un id único para poder usar varios logos por página.
+ * Isotipo completo, con una variante de contraste para superficies siempre oscuras.
  */
 import { useId } from "react";
 
-export function LogoEspejo({ className, title }: { className?: string; title?: string }) {
+export function LogoEspejo({
+  className,
+  title,
+  surface = "theme",
+}: {
+  className?: string;
+  title?: string;
+  surface?: "theme" | "dark";
+}) {
   return (
     <span
-      className={className ? `logo-espejo ${className}` : "logo-espejo"}
+      className={`logo-espejo${surface === "dark" ? " logo-espejo-sobre-oscuro" : ""}${className ? ` ${className}` : ""}`}
       role={title ? "img" : undefined}
       aria-label={title}
       aria-hidden={title ? undefined : true}
@@ -17,14 +24,14 @@ export function LogoEspejo({ className, title }: { className?: string; title?: s
         src="/brand/espejo-isotipo-transparente.svg"
         width={656}
         height={656}
-        className="block h-full w-full object-contain dark:hidden"
+        className="logo-espejo-claro"
         alt=""
       />
       <img
         src="/brand/espejo-isotipo-transparente-oscuro.svg"
         width={656}
         height={656}
-        className="hidden h-full w-full object-contain dark:block"
+        className="logo-espejo-oscuro"
         alt=""
       />
     </span>

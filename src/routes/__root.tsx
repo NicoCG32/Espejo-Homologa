@@ -158,8 +158,8 @@ function RootComponent() {
       <div className="app-frame">
         <aside className="app-sidebar">
           <Link to="/" className="brand-lockup" aria-label="Espejo: Homologa — Inicio">
-            <LogoEspejo className="brand-mark" title="Espejo: Homologa" />
-            <span>
+            <LogoEspejo className="brand-mark" surface="dark" />
+            <span className="brand-label">
               <strong>Espejo:</strong> Homologa
             </span>
           </Link>
@@ -194,9 +194,9 @@ function RootComponent() {
         </aside>
         <div className="app-workspace">
           <header className="workspace-header">
-            <Link to="/" className="mobile-brand">
+            <Link to="/" className="mobile-brand" aria-label="Espejo: Homologa — Inicio">
               <LogoEspejo className="brand-mark-sm" />{" "}
-              <span>
+              <span className="mobile-brand-label">
                 Espejo: <strong>Homologa</strong>
               </span>
             </Link>
