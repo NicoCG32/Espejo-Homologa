@@ -102,15 +102,7 @@ empresas 1──n cargos 1──n bandas_salariales
 Viven en `supabase/migrations/` y se aplican en orden cronológico. Cada `CREATE TABLE` en `public`
 incluye sus `GRANT` al rol de servicio y habilita RLS en la misma migración.
 
-<!-- DOCUMENTACION:nivel-2026-10-29:BEGIN -->
-
-**Nivel:** técnica.
-
 ## Dominio y representación de datos
-
-Revisión documental: 2026-10-29. Base `c281b646e7bf` en `main`; árbol inicialmente limpio. La inspección de fuentes no sustituye pruebas de ejecución.
-
-**Estado y alcance:** Piloto web de homologación por contenido; fuente local actualizada por fast-forward a main remoto. El cálculo, la interpretación semántica y el benchmark tienen contratos diferentes.
 
 ### Entidades y conceptos
 
@@ -145,7 +137,7 @@ Revisión documental: 2026-10-29. Base `c281b646e7bf` en `main`; árbol inicialm
 
 PostgreSQL gestionado y acceso desde funciones servidor según contrato actual. Criterios usados, estados y resultados se persisten para trazabilidad. Un NULL salarial significa dato no disponible, no cero. Revisar migraciones y políticas efectivamente aplicadas; no afirmar seguridad de producción sólo por tener SQL en Git.
 
-La cardinalidad de dominio no prueba que exista una FK física. Revisar adaptadores/migraciones para identificar qué se valida por esquema, por caso de uso o por lectura. No usar «RLS» para almacenamiento que no dispone de esas políticas.
+El diagrama describe relaciones del dominio. Los adaptadores y el esquema de persistencia determinan cómo se mantienen esas relaciones al guardar o recuperar datos.
 
 ### Consistencia y evolución
 
@@ -155,9 +147,8 @@ La cardinalidad de dominio no prueba que exista una FK física. Revisar adaptado
 - La normalización se identifica por versión/huella; su caché no legitima inventar contenido faltante.
 - Preseleccionar varios y elegir finalmente uno son estados distintos; el score no es una aprobación humana.
 
-Cambios de formato, referencias y restauración se comprueban con datos de prueba. El respaldo/artefacto debe indicar versión; la documentación no autoriza transformar datos reales ni rebajar un esquema para abrirlo con un ejecutable anterior.
+Antes de cambiar el formato de almacenamiento, comprueba la migración y la restauración con una copia de prueba. Conserva la versión del respaldo y verifica su compatibilidad con la aplicación que lo abrirá.
 
-## Fuentes de implementación y contratos
+## Código y documentación relacionada
 
 [README.md](../README.md) · [docs/01-arquitectura.md](01-arquitectura.md) · [docs/06-motor-deterministico.md](06-motor-deterministico.md) · [docs/07-analisis-semantico.md](07-analisis-semantico.md) · [docs/13-decision-benchmark-exportacion.md](13-decision-benchmark-exportacion.md).
-<!-- DOCUMENTACION:nivel-2026-10-29:END -->

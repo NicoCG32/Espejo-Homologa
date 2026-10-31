@@ -79,15 +79,9 @@ Arquitectura, servicios externos y funcionalidades: ver capítulos [01](./01-arq
 
 Escalabilidad, otros rubros e inversiones: ver [capítulo 15](./15-escalabilidad-y-reclutamiento.md).
 
-<!-- DOCUMENTACION:nivel-2026-10-29:BEGIN -->
-
-**Nivel:** general.
-
 ## Síntesis general — Espejo · Homologa
 
-Revisión documental: 2026-10-29. Base `c281b646e7bf` en `main`; árbol inicialmente limpio. La inspección de fuentes no sustituye pruebas de ejecución.
-
-**Estado y alcance:** Piloto web de homologación por contenido; fuente local actualizada por fast-forward a main remoto. El cálculo, la interpretación semántica y el benchmark tienen contratos diferentes.
+**Disponibilidad:** Piloto web de homologación de cargos por contenido, con cálculo determinístico, análisis semántico y benchmark salarial separados.
 
 ### Problemática
 
@@ -117,9 +111,8 @@ Importa planillas, conserva empresas/cargos/diccionario, aplica filtros y ponder
 
 Tiempo de homologación revisada, concordancia entre analistas y proporción de decisiones reproducibles; no se presume exactitud por tener un score.
 
-La motivación del creador se presenta en [16-motivacion-y-contexto.md](16-motivacion-y-contexto.md); el análisis de costos y proyección se separa en [18-analisis-economico-clp-usd.md](18-analisis-economico-clp-usd.md). Afinidad personal, un prototipo o cercanía con una organización no equivalen a demanda/venta demostrada.
+Puedes conocer el origen del proyecto en [16-motivacion-y-contexto.md](16-motivacion-y-contexto.md); el análisis de costos y proyección se separa en [18-analisis-economico-clp-usd.md](18-analisis-economico-clp-usd.md).
 
-## Fuentes de implementación y contratos
+## Código y documentación relacionada
 
 [README.md](../README.md) · [docs/01-arquitectura.md](01-arquitectura.md) · [docs/04-base-de-datos.md](04-base-de-datos.md) · [docs/06-motor-deterministico.md](06-motor-deterministico.md) · [docs/07-analisis-semantico.md](07-analisis-semantico.md) · [docs/13-decision-benchmark-exportacion.md](13-decision-benchmark-exportacion.md).
-<!-- DOCUMENTACION:nivel-2026-10-29:END -->

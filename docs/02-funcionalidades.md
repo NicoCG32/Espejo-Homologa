@@ -65,15 +65,9 @@
 - Al eliminar una entrada en uso se informa cuántos cargos la usan y se pide confirmación; los
   cargos no se modifican.
 
-<!-- DOCUMENTACION:nivel-2026-10-29:BEGIN -->
+## Capacidades y límites
 
-**Nivel:** general / técnica.
-
-## Catálogo de capacidades — revisión 2026-10-29
-
-Revisión documental: 2026-10-29. Base `c281b646e7bf` en `main`; árbol inicialmente limpio. La inspección de fuentes no sustituye pruebas de ejecución.
-
-**Estado y alcance:** Piloto web de homologación por contenido; fuente local actualizada por fast-forward a main remoto. El cálculo, la interpretación semántica y el benchmark tienen contratos diferentes.
+**Disponibilidad:** Piloto web de homologación de cargos por contenido, con cálculo determinístico, análisis semántico y benchmark salarial separados.
 
 | Módulo        | Capacidad / propósito                    | Caso borde o límite                  |
 | ------------- | ---------------------------------------- | ------------------------------------ |
@@ -84,9 +78,8 @@ Revisión documental: 2026-10-29. Base `c281b646e7bf` en `main`; árbol inicialm
 | Benchmark     | Bandas por tamaño y procedencia          | No disponible frente a cero          |
 | Exportación   | Excel/PDF según revisión                 | Datos persistidos y trazabilidad     |
 
-Los módulos propuestos se identifican expresamente. La disponibilidad en una plataforma no se extrapola a las demás; la aceptación debe cubrir los casos borde del recorrido principal.
+Las capacidades previstas se distinguen de las disponibles. Consulta los requisitos de la plataforma que vas a utilizar.
 
-## Fuentes de implementación y contratos
+## Código y documentación relacionada
 
 [README.md](../README.md) · [docs/01-arquitectura.md](01-arquitectura.md) · [docs/04-base-de-datos.md](04-base-de-datos.md) · [docs/06-motor-deterministico.md](06-motor-deterministico.md) · [docs/07-analisis-semantico.md](07-analisis-semantico.md) · [docs/13-decision-benchmark-exportacion.md](13-decision-benchmark-exportacion.md).
-<!-- DOCUMENTACION:nivel-2026-10-29:END -->

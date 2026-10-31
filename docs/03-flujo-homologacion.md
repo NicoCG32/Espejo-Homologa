@@ -21,11 +21,11 @@ Cargo  →  Revisión  →  Candidatos  →  Análisis IA  →  Decisión
 Si falta algo para homologar, la pantalla muestra un aviso con enlace directo a la pestaña
 correspondiente:
 
-| Falta | Ir a |
-|-------|------|
-| No hay cargos internos | `/cargos` |
-| No hay catálogo de referencia | `/cargos` |
-| No hay criterios configurados | `/criterios` |
+| Falta                          | Ir a         |
+| ------------------------------ | ------------ |
+| No hay cargos internos         | `/cargos`    |
+| No hay catálogo de referencia  | `/cargos`    |
+| No hay criterios configurados  | `/criterios` |
 | Toda la ponderación está en 0% | `/criterios` |
 
 ## Flujo técnico
@@ -50,11 +50,11 @@ UI (homologacion.nueva.tsx)
 
 ## Scores
 
-| Score | Origen | Estado actual |
-|-------|--------|---------------|
-| `score_deterministico` | Motor, 0–1 | Calculado siempre |
-| `score_semantico` | Gemini, 0–100 | Sólo si el análisis IA se ejecuta con éxito |
-| `score_final` | Híbrido, 0–1 | `det × peso_motor + (sem/100) × peso_ia` |
+| Score                  | Origen        | Estado actual                               |
+| ---------------------- | ------------- | ------------------------------------------- |
+| `score_deterministico` | Motor, 0–1    | Calculado siempre                           |
+| `score_semantico`      | Gemini, 0–100 | Sólo si el análisis IA se ejecuta con éxito |
+| `score_final`          | Híbrido, 0–1  | `det × peso_motor + (sem/100) × peso_ia`    |
 
 La ponderación por defecto es **70% motor / 30% IA**, editable en **Criterios** (ambas partes suman
 100%) y almacenada en `configuracion.pesos_score`.
@@ -87,4 +87,3 @@ cargo interno, cargo de referencia confirmado, tamaño seleccionado, fuente, añ
 promedio, remuneración actual del cargo interno y las diferencias informativas frente a cada valor
 de mercado. Todo dato ausente se muestra como "No disponible"; nunca se estima ni se interpola, y
 la remuneración no participa en ningún score ni en la selección de candidatos.
-
