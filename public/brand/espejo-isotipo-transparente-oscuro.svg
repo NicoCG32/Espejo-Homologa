@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024"><defs>
+<svg xmlns="http://www.w3.org/2000/svg" width="656" height="656" viewBox="183 180 656 656"><defs>
  <linearGradient id="prism" x1="0" x2="0.95" y1="0" y2="1"><stop offset="0" stop-color="#102B54"/><stop offset="0.35" stop-color="#116BC0"/><stop offset="0.72" stop-color="#13A5A8"/><stop offset="1" stop-color="#42D7B7"/></linearGradient>
  <linearGradient id="bright" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0C64DD"/><stop offset="0.52" stop-color="#168DDB"/><stop offset="1" stop-color="#25C3A8"/></linearGradient>
  <linearGradient id="titleBanner" gradientUnits="userSpaceOnUse" x1="1320" y1="0" x2="2620" y2="0"><stop stop-color="#1574E4"/><stop offset=".56" stop-color="#188BD5"/><stop offset="1" stop-color="#10B6A7"/></linearGradient>

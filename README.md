@@ -1,8 +1,8 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="branding/espejo-banner-oscuro.png" />
-  <img src="branding/espejo-banner-claro.png" alt="Identidad visual de Espejo-Homologa" width="100%" />
+  <source media="(prefers-color-scheme: dark)" srcset="branding/banners/espejo-banner-oscuro.png" />
+  <img src="branding/banners/espejo-banner-claro.png" alt="Identidad visual de Espejo-Homologa" width="100%" />
 </picture>
 
 # Espejo-Homologa

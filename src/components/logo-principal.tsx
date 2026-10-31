@@ -27,6 +27,8 @@ export function LogoPrincipal({
       <img
         ref={detectarCarga}
         src="/brand/espejo-logo-horizontal-claro.svg"
+        width={1467}
+        height={488}
         alt=""
         aria-hidden="true"
         className="logo-principal-imagen logo-principal-claro"
@@ -38,6 +40,8 @@ export function LogoPrincipal({
       <img
         ref={detectarCarga}
         src="/brand/espejo-logo-horizontal-oscuro.svg"
+        width={1467}
+        height={488}
         alt=""
         aria-hidden="true"
         className="logo-principal-imagen logo-principal-oscuro"

@@ -15,11 +15,15 @@ export function LogoEspejo({ className, title }: { className?: string; title?: s
     >
       <img
         src="/brand/espejo-isotipo-transparente.svg"
+        width={656}
+        height={656}
         className="block h-full w-full object-contain dark:hidden"
         alt=""
       />
       <img
         src="/brand/espejo-isotipo-transparente-oscuro.svg"
+        width={656}
+        height={656}
         className="hidden h-full w-full object-contain dark:block"
         alt=""
       />

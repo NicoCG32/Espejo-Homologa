@@ -594,10 +594,10 @@
 
 /* Portada: identidad principal adaptada al tema */
 .home-intro { background: linear-gradient(125deg, color-mix(in oklch, var(--card) 92%, transparent), color-mix(in oklch, var(--accent) 72%, transparent)); backdrop-filter: blur(12px); }
-.home-logo-wrap { width: min(100%, 360px); aspect-ratio: 1; padding: 0; border-radius: 0; background: none; box-shadow: none; backdrop-filter: none; }
+.home-logo-wrap { width: min(100%, 360px); aspect-ratio: 1467 / 488; padding: 0; border-radius: 0; background: none; box-shadow: none; backdrop-filter: none; }
 .home-hero-logo { width: 100%; height: 100%; }
 
-.logo-principal { position: relative; display: block; aspect-ratio: 1; overflow: hidden; }
+.logo-principal { position: relative; display: block; aspect-ratio: 1467 / 488; overflow: hidden; }
 .logo-principal-imagen { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity 180ms ease; }
 .logo-principal-oscuro { display: none; }
 .dark .logo-principal-claro { display: none; }
@@ -655,7 +655,7 @@
 }
 .bienvenida-logo {
   width: min(100%, 320px);
-  aspect-ratio: 1;
+  aspect-ratio: 1467 / 488;
 }
 .bienvenida-lema { margin: 0; color: var(--muted-foreground); font-size: .95rem; line-height: 1.5; }
 .bienvenida-cta {
