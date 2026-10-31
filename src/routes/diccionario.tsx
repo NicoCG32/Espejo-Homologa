@@ -19,9 +19,15 @@ export const Route = createFileRoute("/diccionario")({
   head: () => ({
     meta: [
       { title: "Diccionario — Espejo: Homologa" },
-      { name: "description", content: "Áreas, subáreas y niveles jerárquicos usados al cargar cargos." },
+      {
+        name: "description",
+        content: "Áreas, subáreas y niveles jerárquicos usados al cargar cargos.",
+      },
       { property: "og:title", content: "Diccionario — Espejo: Homologa" },
-      { property: "og:description", content: "Listas de áreas, subáreas y niveles jerárquicos editables." },
+      {
+        property: "og:description",
+        content: "Listas de áreas, subáreas y niveles jerárquicos editables.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -45,7 +51,8 @@ function DiccionarioPage() {
   const invalidate = () => qc.invalidateQueries({ queryKey: ["diccionario"] });
 
   const crearMut = useMutation({
-    mutationFn: (v: { tipo: DiccionarioTipo; codigo: string; nombre: string }) => crear({ data: v }),
+    mutationFn: (v: { tipo: DiccionarioTipo; codigo: string; nombre: string }) =>
+      crear({ data: v }),
     onSuccess: (_d, v) => {
       setNuevo((p) => ({ ...p, [v.tipo]: { codigo: "", nombre: "" } }));
       setError(null);
@@ -69,7 +76,12 @@ function DiccionarioPage() {
   });
 
   const borrarMut = useMutation({
-    mutationFn: async (v: { id: string; tipo: DiccionarioTipo; codigo: string; nombre: string }) => {
+    mutationFn: async (v: {
+      id: string;
+      tipo: DiccionarioTipo;
+      codigo: string;
+      nombre: string;
+    }) => {
       const { usos: cantidad } = await usos({ data: { tipo: v.tipo, codigo: v.codigo } });
       if (cantidad > 0) {
         const ok = window.confirm(
@@ -126,7 +138,10 @@ function DiccionarioPage() {
                             onChange={(e) =>
                               setEdicion((p) => ({
                                 ...p,
-                                [f.id]: { codigo: e.target.value, nombre: p[f.id]?.nombre ?? f.nombre },
+                                [f.id]: {
+                                  codigo: e.target.value,
+                                  nombre: p[f.id]?.nombre ?? f.nombre,
+                                },
                               }))
                             }
                           />
@@ -138,7 +153,10 @@ function DiccionarioPage() {
                             onChange={(e) =>
                               setEdicion((p) => ({
                                 ...p,
-                                [f.id]: { codigo: p[f.id]?.codigo ?? f.codigo, nombre: e.target.value },
+                                [f.id]: {
+                                  codigo: p[f.id]?.codigo ?? f.codigo,
+                                  nombre: e.target.value,
+                                },
                               }))
                             }
                           />
@@ -157,7 +175,14 @@ function DiccionarioPage() {
                             type="button"
                             variant="ghost"
                             className="text-destructive"
-                            onClick={() => borrarMut.mutate({ id: f.id, tipo, codigo: f.codigo, nombre: f.nombre })}
+                            onClick={() =>
+                              borrarMut.mutate({
+                                id: f.id,
+                                tipo,
+                                codigo: f.codigo,
+                                nombre: f.nombre,
+                              })
+                            }
                           >
                             Eliminar
                           </Button>
@@ -179,14 +204,18 @@ function DiccionarioPage() {
                 className="w-24 rounded-md border bg-background px-2 py-1 text-sm"
                 placeholder="Código"
                 value={alta.codigo}
-                onChange={(e) => setNuevo((p) => ({ ...p, [tipo]: { ...alta, codigo: e.target.value } }))}
+                onChange={(e) =>
+                  setNuevo((p) => ({ ...p, [tipo]: { ...alta, codigo: e.target.value } }))
+                }
                 required
               />
               <input
                 className="flex-1 rounded-md border bg-background px-2 py-1 text-sm"
                 placeholder="Nombre"
                 value={alta.nombre}
-                onChange={(e) => setNuevo((p) => ({ ...p, [tipo]: { ...alta, nombre: e.target.value } }))}
+                onChange={(e) =>
+                  setNuevo((p) => ({ ...p, [tipo]: { ...alta, nombre: e.target.value } }))
+                }
                 required
               />
               <Button type="submit" disabled={crearMut.isPending}>

@@ -2,7 +2,6 @@ import { createServerFn } from "@tanstack/react-start";
 import type { EntradaNorm, FichaNorm } from "./normalizacion.server";
 import type { Json } from "@/integrations/supabase/types";
 
-
 export const listEjecuciones = createServerFn({ method: "GET" }).handler(async () => {
   const { getDb, unwrap } = await import("./supabase-public.server");
   return unwrap(
@@ -58,7 +57,9 @@ export const getEjecucion = createServerFn({ method: "GET" })
       unwrap(
         await getDb()
           .from("decision_preseleccion")
-          .select("candidato_id, scores_utilizados, created_at, cargos:candidato_id(id, nombre, codigo_cargo, empresas(nombre))")
+          .select(
+            "candidato_id, scores_utilizados, created_at, cargos:candidato_id(id, nombre, codigo_cargo, empresas(nombre))",
+          )
           .eq("ejecucion_id", data.id)
           .order("created_at", { ascending: true }),
       ) ?? [];
@@ -131,7 +132,9 @@ export const guardarPreseleccion = createServerFn({ method: "POST" })
   .inputValidator((input: { ejecucion_id: string; candidato_ids: string[] }) => {
     if (!input?.ejecucion_id) throw new Error("Falta la ejecución");
     const ids = Array.from(
-      new Set((Array.isArray(input.candidato_ids) ? input.candidato_ids : []).map(String).filter(Boolean)),
+      new Set(
+        (Array.isArray(input.candidato_ids) ? input.candidato_ids : []).map(String).filter(Boolean),
+      ),
     );
     if (!ids.length) throw new Error("Marca al menos un candidato");
     return { ejecucion_id: String(input.ejecucion_id), candidato_ids: ids };
@@ -142,7 +145,8 @@ export const guardarPreseleccion = createServerFn({ method: "POST" })
     const decision = unwrap(
       await db.from("decisiones").select("id").eq("ejecucion_id", data.ejecucion_id).maybeSingle(),
     );
-    if (decision) throw new Error("La decisión definitiva ya fue registrada para esta homologación");
+    if (decision)
+      throw new Error("La decisión definitiva ya fue registrada para esta homologación");
 
     const resultados =
       unwrap(
@@ -199,8 +203,6 @@ export const setTamanoBenchmark = createServerFn({ method: "POST" })
     );
   });
 
-
-
 export const createEjecucion = createServerFn({ method: "POST" })
   .inputValidator((input: { cargo_id: string }) => {
     if (!input?.cargo_id) throw new Error("Debes seleccionar un cargo interno");
@@ -230,8 +232,11 @@ export const createEjecucion = createServerFn({ method: "POST" })
 export const ejecutarHomologacion = createServerFn({ method: "POST" })
   .inputValidator((input: { cargo_id: string; pesos: { id: string; peso: number }[] }) => {
     if (!input?.cargo_id) throw new Error("Debes seleccionar un cargo interno");
-    const pesos = Array.isArray(input.pesos) ? input.pesos.map((p) => ({ id: String(p.id), peso: Number(p.peso) })) : [];
-    if (pesos.some((p) => !Number.isFinite(p.peso) || p.peso < 0) || !pesos.some((p) => p.peso > 0)) throw new Error("Define al menos un peso mayor que cero");
+    const pesos = Array.isArray(input.pesos)
+      ? input.pesos.map((p) => ({ id: String(p.id), peso: Number(p.peso) }))
+      : [];
+    if (pesos.some((p) => !Number.isFinite(p.peso) || p.peso < 0) || !pesos.some((p) => p.peso > 0))
+      throw new Error("Define al menos un peso mayor que cero");
     return { cargo_id: String(input.cargo_id), pesos };
   })
   .handler(async ({ data }) => {
@@ -263,7 +268,8 @@ export const ejecutarHomologacion = createServerFn({ method: "POST" })
       await db.from("cargos").select(select).eq("id", data.cargo_id).maybeSingle(),
     ) as CargoRow | null;
     if (!interno) throw new Error("El cargo no existe");
-    if (interno.tipo !== "INTERNO") throw new Error("La homologación sólo aplica a cargos internos");
+    if (interno.tipo !== "INTERNO")
+      throw new Error("La homologación sólo aplica a cargos internos");
 
     const referencias = (unwrap(
       await db.from("cargos").select(select).eq("tipo", "REFERENCIA").order("nombre"),
@@ -302,7 +308,6 @@ export const ejecutarHomologacion = createServerFn({ method: "POST" })
             .from("cargos")
             .update({ atributos_semanticos: atributos as Json })
             .eq("id", id);
-
         }
       } catch (e) {
         avisoNormalizacion =
@@ -330,16 +335,16 @@ export const ejecutarHomologacion = createServerFn({ method: "POST" })
       empresa_nombre: c.empresas?.nombre ?? null,
     });
 
-    const criteriosBase =
-      (unwrap(await db.from("criterios").select("id, nombre, peso, activo, campo, obligatorio")) ??
-        []).filter((c) => c.campo !== "tipo_empresa");
+    const criteriosBase = (
+      unwrap(await db.from("criterios").select("id, nombre, peso, activo, campo, obligatorio")) ??
+      []
+    ).filter((c) => c.campo !== "tipo_empresa");
     const pesos = new Map(data.pesos.map((p) => [p.id, p.peso]));
     const criterios = criteriosBase.map((c) => {
       const peso = pesos.has(c.id) ? Number(pesos.get(c.id)) : Number(c.peso);
       // La ponderación de esta homologación manda: 0% equivale a no comparar la columna.
       return { ...c, peso, activo: pesos.has(c.id) ? peso > 0 : c.activo };
     });
-
 
     const ejecucion = unwrap(
       await db
@@ -389,7 +394,6 @@ export const ejecutarHomologacion = createServerFn({ method: "POST" })
         aviso_normalizacion: avisoNormalizacion,
         ...motor,
       };
-
     } catch (e) {
       await db.from("ejecuciones").update({ estado: "ERROR" }).eq("id", ejecucion.id);
       throw e instanceof Error ? e : new Error("Error al ejecutar el motor");
@@ -466,7 +470,6 @@ export const analizarSemantica = createServerFn({ method: "POST" })
         experiencia_requerida: r.cargos!.experiencia_requerida ?? "",
         requisitos_formacion: r.cargos!.requisitos_formacion ?? "",
       }));
-
 
     const registrarError = async (mensaje: string) => {
       await db.from("analisis_semanticos").insert({

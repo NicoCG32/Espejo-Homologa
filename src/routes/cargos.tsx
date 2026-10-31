@@ -34,7 +34,6 @@ import { listEmpresas } from "@/lib/empresas.functions";
 import { importarDiccionario, listDiccionario } from "@/lib/diccionario.functions";
 import { listHomologados } from "@/lib/homologacion.functions";
 
-
 import { formatSueldo } from "@/lib/format";
 import { Button } from "@/components/ui/button";
 import { ReiniciarDatos } from "@/components/reiniciar-datos";
@@ -44,9 +43,15 @@ export const Route = createFileRoute("/cargos")({
   head: () => ({
     meta: [
       { title: "Cargos — Espejo: Homologa" },
-      { name: "description", content: "Cargos internos y de referencia con su empresa, descripción y sueldo." },
+      {
+        name: "description",
+        content: "Cargos internos y de referencia con su empresa, descripción y sueldo.",
+      },
       { property: "og:title", content: "Cargos — Espejo: Homologa" },
-      { property: "og:description", content: "Administra cargos internos y de referencia por empresa." },
+      {
+        property: "og:description",
+        content: "Administra cargos internos y de referencia por empresa.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -70,7 +75,6 @@ const COLS_CARGO: [ColCargo, string][] = [
   ["sueldo", "Sueldo"],
 ];
 
-
 function CargosPage() {
   const qc = useQueryClient();
   const listC = useServerFn(listCargos);
@@ -80,7 +84,6 @@ function CargosPage() {
   const importar = useServerFn(importarCargos);
   const listD = useServerFn(listDiccionario);
   const importarDicc = useServerFn(importarDiccionario);
-  
 
   const cargos = useQuery({ queryKey: ["cargos"], queryFn: () => listC() });
   const empresas = useQuery({ queryKey: ["empresas"], queryFn: () => listE() });
@@ -120,7 +123,6 @@ function CargosPage() {
     setOrden((o) => (o?.col === col ? { col, asc: !o.asc } : { col, asc: true }));
   const flecha = (col: ColCargo) => (orden?.col === col ? (orden.asc ? " ↑" : " ↓") : "");
 
-
   const listH = useServerFn(listHomologados);
   const homologados = useQuery({ queryKey: ["homologados"], queryFn: () => listH() });
   const mapaHomologados = useMemo(() => {
@@ -128,7 +130,6 @@ function CargosPage() {
     for (const h of homologados.data ?? []) m.set(h.cargo_id, h.ejecucion_id);
     return m;
   }, [homologados.data]);
-
 
   const invalidate = () => qc.invalidateQueries();
 
@@ -163,7 +164,6 @@ function CargosPage() {
     onError: (e: Error) => setError(e.message),
   });
 
-
   const resueltos = useMemo(
     () => aplicarDiccionario(cargosCarga, diccionario.data ?? []),
     [cargosCarga, diccionario.data],
@@ -174,13 +174,35 @@ function CargosPage() {
       importar({
         data: {
           empresa_id: modoCarga === "INTERNO" && empresaId ? empresaId : null,
-          empresa_defecto: modoCarga === "REFERENCIA" ? { nombre: EMPRESA_CATALOGO, tipo: EMPRESA_CATALOGO_TIPO } : null,
+          empresa_defecto:
+            modoCarga === "REFERENCIA"
+              ? { nombre: EMPRESA_CATALOGO, tipo: EMPRESA_CATALOGO_TIPO }
+              : null,
           tipo: modoCarga,
           cargos: resueltos.cargos,
-          bandas: modoCarga === "REFERENCIA" ? bandasCarga.map((b) => ({ ...b, fuente: fuenteBandas.trim() || null, anio: anioBandas ? Number(anioBandas) : null })) : [],
+          bandas:
+            modoCarga === "REFERENCIA"
+              ? bandasCarga.map((b) => ({
+                  ...b,
+                  fuente: fuenteBandas.trim() || null,
+                  anio: anioBandas ? Number(anioBandas) : null,
+                }))
+              : [],
         },
       }),
-    onSuccess: () => { setCargosCarga([]); setBandasCarga([]); setErroresCarga([]); setArchivoCargos(""); setArchivoBandas(""); setDiccionarioArchivo([]); setRevisado(false); setBusqueda(""); setVisibles(12); setError(null); invalidate(); },
+    onSuccess: () => {
+      setCargosCarga([]);
+      setBandasCarga([]);
+      setErroresCarga([]);
+      setArchivoCargos("");
+      setArchivoBandas("");
+      setDiccionarioArchivo([]);
+      setRevisado(false);
+      setBusqueda("");
+      setVisibles(12);
+      setError(null);
+      invalidate();
+    },
     onError: (e: Error) => setError(e.message),
   });
 
@@ -204,7 +226,9 @@ function CargosPage() {
       if (!sheet) continue;
       out.set(
         nombreHoja,
-        XLSX.utils.sheet_to_json<unknown[]>(sheet, { header: 1, raw: true, defval: "" }) as (string | number | boolean | null)[][],
+        XLSX.utils.sheet_to_json<unknown[]>(sheet, { header: 1, raw: true, defval: "" }) as (
+          string | number | boolean | null
+        )[][],
       );
     }
     if (!out.size) throw new Error("El archivo no contiene hojas");
@@ -223,7 +247,7 @@ function CargosPage() {
     try {
       const hojas = await hojasArchivo(file);
       const nombreDatos = [...hojas.keys()].find((n) => n.toLowerCase() !== "diccionario");
-      const filas = nombreDatos ? hojas.get(nombreDatos) ?? [] : [];
+      const filas = nombreDatos ? (hojas.get(nombreDatos) ?? []) : [];
       const r = leerCargos(filas);
       setCargosCarga(r.cargos);
       setErroresCarga(r.errores);
@@ -239,14 +263,21 @@ function CargosPage() {
 
   async function cargarBandas(file: File | undefined) {
     if (!file) return;
-    try { setBandasCarga(leerBandas(await filasArchivo(file))); setArchivoBandas(file.name); setError(null); }
-    catch (e) { setError(e instanceof Error ? e.message : "No se pudo leer el archivo de remuneraciones"); }
+    try {
+      setBandasCarga(leerBandas(await filasArchivo(file)));
+      setArchivoBandas(file.name);
+      setError(null);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "No se pudo leer el archivo de remuneraciones");
+    }
   }
 
   const empresaDestino = (empresas.data ?? []).find((e) => e.id === empresaId) ?? null;
 
   const tarjetas = useMemo(() => {
-    const conocidas = new Map((empresas.data ?? []).map((e) => [normalizarNombreEmpresa(e.nombre), e]));
+    const conocidas = new Map(
+      (empresas.data ?? []).map((e) => [normalizarNombreEmpresa(e.nombre), e]),
+    );
     const bandasPorCodigo = new Map<string, BandaImport[]>();
     for (const b of bandasCarga) {
       const lista = bandasPorCodigo.get(b.codigo_cargo) ?? [];
@@ -257,7 +288,9 @@ function CargosPage() {
     const yaCargados = new Set(
       (cargos.data ?? [])
         .filter((c) => c.codigo_cargo)
-        .map((c) => `${normalizarNombreEmpresa(c.empresas?.nombre ?? "")}|${c.tipo}|${c.codigo_cargo}`),
+        .map(
+          (c) => `${normalizarNombreEmpresa(c.empresas?.nombre ?? "")}|${c.tipo}|${c.codigo_cargo}`,
+        ),
     );
     const avisosPorCargo = new Map<string, string[]>();
     for (const a of resueltos.avisos) {
@@ -268,9 +301,14 @@ function CargosPage() {
     return resueltos.cargos.map((c) => {
       const nombreEmpresa =
         c.empresa_nombre ||
-        (modoCarga === "REFERENCIA" ? EMPRESA_CATALOGO : empresaDestino?.nombre ?? "");
-      const existente = nombreEmpresa ? conocidas.get(normalizarNombreEmpresa(nombreEmpresa)) : undefined;
-      const tipoEmpresa = existente?.tamano ?? c.empresa_tipo ?? (modoCarga === "REFERENCIA" ? EMPRESA_CATALOGO_TIPO : null);
+        (modoCarga === "REFERENCIA" ? EMPRESA_CATALOGO : (empresaDestino?.nombre ?? ""));
+      const existente = nombreEmpresa
+        ? conocidas.get(normalizarNombreEmpresa(nombreEmpresa))
+        : undefined;
+      const tipoEmpresa =
+        existente?.tamano ??
+        c.empresa_tipo ??
+        (modoCarga === "REFERENCIA" ? EMPRESA_CATALOGO_TIPO : null);
       return {
         cargo: c,
         nombreEmpresa,
@@ -281,7 +319,7 @@ function CargosPage() {
           `${normalizarNombreEmpresa(nombreEmpresa)}|${modoCarga}|${c.codigo_cargo}`,
         ),
         avisos: avisosPorCargo.get(c.codigo_cargo) ?? [],
-        bandas: modoCarga === "REFERENCIA" ? bandasPorCodigo.get(c.codigo_cargo) ?? [] : [],
+        bandas: modoCarga === "REFERENCIA" ? (bandasPorCodigo.get(c.codigo_cargo) ?? []) : [],
       };
     });
   }, [resueltos, bandasCarga, empresas.data, empresaDestino, modoCarga, cargos.data]);
@@ -290,12 +328,16 @@ function CargosPage() {
     const q = normalizarNombreEmpresa(busqueda);
     if (!q) return tarjetas;
     return tarjetas.filter((t) =>
-      normalizarNombreEmpresa(`${t.cargo.nombre} ${t.cargo.codigo_cargo} ${t.nombreEmpresa} ${t.cargo.nombre_area}`).includes(q),
+      normalizarNombreEmpresa(
+        `${t.cargo.nombre} ${t.cargo.codigo_cargo} ${t.nombreEmpresa} ${t.cargo.nombre_area}`,
+      ).includes(q),
     );
   }, [tarjetas, busqueda]);
 
   const empresasNuevas = useMemo(
-    () => new Set(tarjetas.filter((t) => t.nueva).map((t) => normalizarNombreEmpresa(t.nombreEmpresa))).size,
+    () =>
+      new Set(tarjetas.filter((t) => t.nueva).map((t) => normalizarNombreEmpresa(t.nombreEmpresa)))
+        .size,
     [tarjetas],
   );
   const faltaEmpresa = tarjetas.some((t) => t.sinEmpresa);
@@ -322,7 +364,11 @@ function CargosPage() {
   }, [cargosCarga, bandasCarga, resueltos.avisos, erroresCarga]);
 
   const puedeGuardar =
-    !!cargosCarga.length && !faltaEmpresa && !erroresCarga.length && revisado && !importMut.isPending;
+    !!cargosCarga.length &&
+    !faltaEmpresa &&
+    !erroresCarga.length &&
+    revisado &&
+    !importMut.isPending;
 
   const filtrados = useMemo(() => {
     const q = normalizarNombreEmpresa(buscarCatalogo);
@@ -335,34 +381,51 @@ function CargosPage() {
         if (filtroEstado === "HOMOLOGADO" && !hecho) return false;
         if (filtroEstado === "PENDIENTE" && hecho) return false;
       }
-      if (q && !normalizarNombreEmpresa(
-        `${c.nombre} ${c.codigo_cargo ?? ""} ${c.empresas?.nombre ?? ""} ${c.nombre_area ?? ""}`,
-      ).includes(q)) return false;
+      if (
+        q &&
+        !normalizarNombreEmpresa(
+          `${c.nombre} ${c.codigo_cargo ?? ""} ${c.empresas?.nombre ?? ""} ${c.nombre_area ?? ""}`,
+        ).includes(q)
+      )
+        return false;
       return true;
     });
     if (!orden) return base;
     const valor = (c: (typeof base)[number]) => {
       switch (orden.col) {
-        case "codigo": return c.codigo_cargo ?? "";
-        case "nombre": return c.nombre ?? "";
-        case "empresa": return c.empresas?.nombre ?? "";
-        case "tipo": return c.tipo ?? "";
-        case "area": return c.nombre_area ?? "";
-        default: return c.sueldo == null ? null : Number(c.sueldo);
+        case "codigo":
+          return c.codigo_cargo ?? "";
+        case "nombre":
+          return c.nombre ?? "";
+        case "empresa":
+          return c.empresas?.nombre ?? "";
+        case "tipo":
+          return c.tipo ?? "";
+        case "area":
+          return c.nombre_area ?? "";
+        default:
+          return c.sueldo == null ? null : Number(c.sueldo);
       }
     };
     const dir = orden.asc ? 1 : -1;
     return [...base].sort((a, b) => {
-      const x = valor(a), y = valor(b);
+      const x = valor(a),
+        y = valor(b);
       if (x == null && y == null) return 0;
       if (x == null) return 1;
       if (y == null) return -1;
       if (typeof x === "number" && typeof y === "number") return (x - y) * dir;
       return String(x).localeCompare(String(y), "es") * dir;
     });
-  }, [cargos.data, filtroEmpresa, filtroTipo, filtroEstado, mapaHomologados, buscarCatalogo, orden]);
-
-
+  }, [
+    cargos.data,
+    filtroEmpresa,
+    filtroTipo,
+    filtroEstado,
+    mapaHomologados,
+    buscarCatalogo,
+    orden,
+  ]);
 
   const sinEmpresas = !empresas.isLoading && !empresas.data?.length;
 
@@ -378,34 +441,127 @@ function CargosPage() {
 
       <section className="import-panel">
         <div className="import-heading">
-          <div><p className="eyebrow">Carga masiva</p><h2>Cargar datos</h2><p>Usa una planilla para cargos propios o las dos planillas de la encuesta para el catálogo.</p></div>
+          <div>
+            <p className="eyebrow">Carga masiva</p>
+            <h2>Cargar datos</h2>
+            <p>
+              Usa una planilla para cargos propios o las dos planillas de la encuesta para el
+              catálogo.
+            </p>
+          </div>
           <FileSpreadsheet aria-hidden="true" />
         </div>
         <div className="import-mode" role="group" aria-label="Tipo de carga">
-          <Button type="button" variant={modoCarga === "INTERNO" ? "default" : "outline"} onClick={() => { setModoCarga("INTERNO"); setBandasCarga([]); }}>Cargos de empresa</Button>
-          <Button type="button" variant={modoCarga === "REFERENCIA" ? "default" : "outline"} onClick={() => setModoCarga("REFERENCIA")}>Catálogo de encuesta</Button>
+          <Button
+            type="button"
+            variant={modoCarga === "INTERNO" ? "default" : "outline"}
+            onClick={() => {
+              setModoCarga("INTERNO");
+              setBandasCarga([]);
+            }}
+          >
+            Cargos de empresa
+          </Button>
+          <Button
+            type="button"
+            variant={modoCarga === "REFERENCIA" ? "default" : "outline"}
+            onClick={() => setModoCarga("REFERENCIA")}
+          >
+            Catálogo de encuesta
+          </Button>
         </div>
         {modoCarga === "INTERNO" ? (
-          <label className="text-sm"><span className="mb-1 block text-muted-foreground">Empresa de destino (opcional si la planilla trae la columna Empresa)</span><select value={empresaId} onChange={(e) => setEmpresaId(e.target.value)}><option value="">Detectar desde la planilla</option>{(empresas.data ?? []).map((e) => <option key={e.id} value={e.id}>{e.nombre}</option>)}</select></label>
+          <label className="text-sm">
+            <span className="mb-1 block text-muted-foreground">
+              Empresa de destino (opcional si la planilla trae la columna Empresa)
+            </span>
+            <select value={empresaId} onChange={(e) => setEmpresaId(e.target.value)}>
+              <option value="">Detectar desde la planilla</option>
+              {(empresas.data ?? []).map((e) => (
+                <option key={e.id} value={e.id}>
+                  {e.nombre}
+                </option>
+              ))}
+            </select>
+          </label>
         ) : (
-          <p className="text-sm text-muted-foreground">El catálogo se guarda en la empresa de referencia «{EMPRESA_CATALOGO}», que se crea automáticamente si no existe.</p>
+          <p className="text-sm text-muted-foreground">
+            El catálogo se guarda en la empresa de referencia «{EMPRESA_CATALOGO}», que se crea
+            automáticamente si no existe.
+          </p>
         )}
         <div className="import-files">
-          <label className="file-picker"><Upload aria-hidden="true" /><span><strong>{modoCarga === "INTERNO" ? "Planilla de cargos" : "Encuesta Piloto"}</strong><small>{archivoCargos || "CSV o XLSX"}</small></span><input type="file" accept=".csv,.xlsx,.xls" onChange={(e) => cargarEstructura(e.target.files?.[0])} /></label>
-          {modoCarga === "REFERENCIA" && <label className="file-picker"><Upload aria-hidden="true" /><span><strong>Encuesta Piloto Remuneraciones</strong><small>{archivoBandas || "XLSX"}</small></span><input type="file" accept=".xlsx,.xls,.csv" onChange={(e) => cargarBandas(e.target.files?.[0])} /></label>}
+          <label className="file-picker">
+            <Upload aria-hidden="true" />
+            <span>
+              <strong>{modoCarga === "INTERNO" ? "Planilla de cargos" : "Encuesta Piloto"}</strong>
+              <small>{archivoCargos || "CSV o XLSX"}</small>
+            </span>
+            <input
+              type="file"
+              accept=".csv,.xlsx,.xls"
+              onChange={(e) => cargarEstructura(e.target.files?.[0])}
+            />
+          </label>
+          {modoCarga === "REFERENCIA" && (
+            <label className="file-picker">
+              <Upload aria-hidden="true" />
+              <span>
+                <strong>Encuesta Piloto Remuneraciones</strong>
+                <small>{archivoBandas || "XLSX"}</small>
+              </span>
+              <input
+                type="file"
+                accept=".xlsx,.xls,.csv"
+                onChange={(e) => cargarBandas(e.target.files?.[0])}
+              />
+            </label>
+          )}
         </div>
         {modoCarga === "REFERENCIA" && (
           <div className="import-files">
-            <label className="text-sm"><span className="mb-1 block text-muted-foreground">Fuente de las remuneraciones</span><input value={fuenteBandas} onChange={(e) => setFuenteBandas(e.target.value)} placeholder="Ej.: Encuesta Piloto" /></label>
-            <label className="text-sm"><span className="mb-1 block text-muted-foreground">Año de las remuneraciones</span><input value={anioBandas} onChange={(e) => setAnioBandas(e.target.value.replace(/[^0-9]/g, "").slice(0, 4))} inputMode="numeric" placeholder="Ej.: 2026" /></label>
+            <label className="text-sm">
+              <span className="mb-1 block text-muted-foreground">Fuente de las remuneraciones</span>
+              <input
+                value={fuenteBandas}
+                onChange={(e) => setFuenteBandas(e.target.value)}
+                placeholder="Ej.: Encuesta Piloto"
+              />
+            </label>
+            <label className="text-sm">
+              <span className="mb-1 block text-muted-foreground">Año de las remuneraciones</span>
+              <input
+                value={anioBandas}
+                onChange={(e) => setAnioBandas(e.target.value.replace(/[^0-9]/g, "").slice(0, 4))}
+                inputMode="numeric"
+                placeholder="Ej.: 2026"
+              />
+            </label>
           </div>
         )}
-        <details className="criteria-summary"><summary>Ver formato esperado</summary><div>Se acepta «ID Cargo» o «Código del cargo» junto al nombre del cargo, los códigos de Área, Subárea y Nivel Jerárquico (se traducen con el Diccionario), la descripción u Objetivo del cargo, Funciones principales, Responsabilidades, Requisitos de formación, Experiencia requerida y la remuneración bruta mensual (solo informativa). Las remuneraciones de la encuesta se cruzan por ID Cargo.</div></details>
+        <details className="criteria-summary">
+          <summary>Ver formato esperado</summary>
+          <div>
+            Se acepta «ID Cargo» o «Código del cargo» junto al nombre del cargo, los códigos de
+            Área, Subárea y Nivel Jerárquico (se traducen con el Diccionario), la descripción u
+            Objetivo del cargo, Funciones principales, Responsabilidades, Requisitos de formación,
+            Experiencia requerida y la remuneración bruta mensual (solo informativa). Las
+            remuneraciones de la encuesta se cruzan por ID Cargo.
+          </div>
+        </details>
         {diccionarioArchivo.length > 0 && (
           <div className="import-preview">
             <strong>El archivo trae una hoja Diccionario</strong>
-            <p>{diccionarioArchivo.length} entradas. Puedes sumarlas a tu diccionario sin reemplazar las actuales.</p>
-            <Button type="button" variant="outline" disabled={diccMut.isPending} onClick={() => diccMut.mutate()}>
+            <p>
+              {diccionarioArchivo.length} entradas. Puedes sumarlas a tu diccionario sin reemplazar
+              las actuales.
+            </p>
+            <Button
+              type="button"
+              variant="outline"
+              disabled={diccMut.isPending}
+              onClick={() => diccMut.mutate()}
+            >
               {diccMut.isPending ? "Agregando…" : "Agregar al diccionario"}
             </Button>
             {resultadoDicc && <p>{resultadoDicc}</p>}
@@ -414,57 +570,132 @@ function CargosPage() {
         {(cargosCarga.length > 0 || erroresCarga.length > 0) && (
           <div className="import-preview">
             <strong>Resumen de validación</strong>
-            <p>✓ {resumen.cargos} {modoCarga === "INTERNO" ? "cargos internos" : "cargos de referencia"} detectados · {empresasNuevas} empresas nuevas</p>
+            <p>
+              ✓ {resumen.cargos}{" "}
+              {modoCarga === "INTERNO" ? "cargos internos" : "cargos de referencia"} detectados ·{" "}
+              {empresasNuevas} empresas nuevas
+            </p>
             {modoCarga === "REFERENCIA" && (
               <>
                 <p>✓ {resumen.bandas} registros de remuneraciones detectados</p>
-                <p>✓ {resumen.conRemuneracion} de {resumen.cargos} cargos de referencia tienen remuneraciones</p>
+                <p>
+                  ✓ {resumen.conRemuneracion} de {resumen.cargos} cargos de referencia tienen
+                  remuneraciones
+                </p>
                 {resumen.sinRemuneracion.length > 0 && (
-                  <p className="text-amber-700">⚠ {resumen.sinRemuneracion.length} cargos sin remuneración informada (se guardan igual): {resumen.sinRemuneracion.slice(0, 6).join(", ")}{resumen.sinRemuneracion.length > 6 ? "…" : ""}</p>
+                  <p className="text-amber-700">
+                    ⚠ {resumen.sinRemuneracion.length} cargos sin remuneración informada (se guardan
+                    igual): {resumen.sinRemuneracion.slice(0, 6).join(", ")}
+                    {resumen.sinRemuneracion.length > 6 ? "…" : ""}
+                  </p>
                 )}
                 {resumen.sinCargo.length > 0 && (
-                  <p className="text-amber-700">⚠ {resumen.sinCargo.length} IDs de remuneraciones sin cargo en el catálogo: {resumen.sinCargo.slice(0, 6).join(", ")}{resumen.sinCargo.length > 6 ? "…" : ""}</p>
+                  <p className="text-amber-700">
+                    ⚠ {resumen.sinCargo.length} IDs de remuneraciones sin cargo en el catálogo:{" "}
+                    {resumen.sinCargo.slice(0, 6).join(", ")}
+                    {resumen.sinCargo.length > 6 ? "…" : ""}
+                  </p>
                 )}
-                {resumen.bandas === 0 && <p className="text-amber-700">⚠ Aún no cargas el archivo de remuneraciones.</p>}
+                {resumen.bandas === 0 && (
+                  <p className="text-amber-700">⚠ Aún no cargas el archivo de remuneraciones.</p>
+                )}
               </>
             )}
             {modoCarga === "INTERNO" && resumen.sinSueldo > 0 && (
-              <p className="text-amber-700">⚠ {resumen.sinSueldo} cargos sin remuneración en la planilla (se guardan como dato no disponible).</p>
+              <p className="text-amber-700">
+                ⚠ {resumen.sinSueldo} cargos sin remuneración en la planilla (se guardan como dato
+                no disponible).
+              </p>
             )}
-            {resumen.avisos > 0 && <p className="text-amber-700">⚠ {resumen.avisos} datos faltantes o códigos fuera del diccionario (detalle en cada tarjeta).</p>}
-            {erroresCarga.length > 0 && <p className="text-destructive">⚠ {erroresCarga.length} inconsistencias que impiden guardar:</p>}
-            {erroresCarga.slice(0, 5).map((e) => <p key={e} className="text-destructive">{e}</p>)}
-            {erroresCarga.length > 5 && <p className="text-destructive">…y {erroresCarga.length - 5} más.</p>}
-            {faltaEmpresa && <p className="text-destructive">Hay filas sin empresa: agrégala en la planilla o elige una empresa de destino.</p>}
+            {resumen.avisos > 0 && (
+              <p className="text-amber-700">
+                ⚠ {resumen.avisos} datos faltantes o códigos fuera del diccionario (detalle en cada
+                tarjeta).
+              </p>
+            )}
+            {erroresCarga.length > 0 && (
+              <p className="text-destructive">
+                ⚠ {erroresCarga.length} inconsistencias que impiden guardar:
+              </p>
+            )}
+            {erroresCarga.slice(0, 5).map((e) => (
+              <p key={e} className="text-destructive">
+                {e}
+              </p>
+            ))}
+            {erroresCarga.length > 5 && (
+              <p className="text-destructive">…y {erroresCarga.length - 5} más.</p>
+            )}
+            {faltaEmpresa && (
+              <p className="text-destructive">
+                Hay filas sin empresa: agrégala en la planilla o elige una empresa de destino.
+              </p>
+            )}
           </div>
         )}
 
         {cargosCarga.length > 0 && (
           <div className="import-review">
-            <input className="import-search" placeholder="Buscar cargo, código o empresa…" value={busqueda} onChange={(e) => { setBusqueda(e.target.value); setVisibles(12); }} />
+            <input
+              className="import-search"
+              placeholder="Buscar cargo, código o empresa…"
+              value={busqueda}
+              onChange={(e) => {
+                setBusqueda(e.target.value);
+                setVisibles(12);
+              }}
+            />
             <div className="import-cards">
               {tarjetasFiltradas.slice(0, visibles).map((t, i) => (
-                <article key={`${t.cargo.codigo_cargo}-${i}`} className={`import-card${t.sinEmpresa ? " is-problema" : ""}`}>
+                <article
+                  key={`${t.cargo.codigo_cargo}-${i}`}
+                  className={`import-card${t.sinEmpresa ? " is-problema" : ""}`}
+                >
                   <header>
                     <div>
                       <strong>{t.cargo.nombre}</strong>
                       <small>
-                        {t.cargo.codigo_cargo} · {modoCarga === "INTERNO" ? "Interno" : "Referencia"} ·{" "}
+                        {t.cargo.codigo_cargo} ·{" "}
+                        {modoCarga === "INTERNO" ? "Interno" : "Referencia"} ·{" "}
                         {t.actualiza ? "actualiza un cargo existente" : "cargo nuevo"}
                       </small>
                     </div>
                     <span className={`empresa-tag${t.nueva ? " is-nueva" : ""}`}>
-                      {t.sinEmpresa ? "Sin empresa" : `${t.nombreEmpresa}${t.tipoEmpresa ? ` · ${t.tipoEmpresa}` : ""}${t.nueva ? " · nueva" : ""}`}
+                      {t.sinEmpresa
+                        ? "Sin empresa"
+                        : `${t.nombreEmpresa}${t.tipoEmpresa ? ` · ${t.tipoEmpresa}` : ""}${t.nueva ? " · nueva" : ""}`}
                     </span>
                   </header>
                   <dl>
-                    <div><dt>Área</dt><dd>{[t.cargo.codigo_area, t.cargo.nombre_area].filter(Boolean).join(" · ") || "—"}</dd></div>
-                    <div><dt>Subárea</dt><dd>{[t.cargo.codigo_subarea, t.cargo.nombre_subarea].filter(Boolean).join(" · ") || "—"}</dd></div>
-                    <div><dt>Nivel</dt><dd>{[t.cargo.codigo_nivel_jerarquico, t.cargo.nivel_jerarquico].filter(Boolean).join(" · ") || "—"}</dd></div>
+                    <div>
+                      <dt>Área</dt>
+                      <dd>
+                        {[t.cargo.codigo_area, t.cargo.nombre_area].filter(Boolean).join(" · ") ||
+                          "—"}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>Subárea</dt>
+                      <dd>
+                        {[t.cargo.codigo_subarea, t.cargo.nombre_subarea]
+                          .filter(Boolean)
+                          .join(" · ") || "—"}
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>Nivel</dt>
+                      <dd>
+                        {[t.cargo.codigo_nivel_jerarquico, t.cargo.nivel_jerarquico]
+                          .filter(Boolean)
+                          .join(" · ") || "—"}
+                      </dd>
+                    </div>
                   </dl>
                   {t.avisos.length > 0 && (
                     <ul className="import-card-avisos">
-                      {t.avisos.map((a) => <li key={a}>{a}</li>)}
+                      {t.avisos.map((a) => (
+                        <li key={a}>{a}</li>
+                      ))}
                     </ul>
                   )}
                   {(() => {
@@ -472,22 +703,41 @@ function CargosPage() {
                     const abierto = detalleTarjeta === clave;
                     return (
                       <>
-                        <button type="button" className="detail-toggle" onClick={() => setDetalleTarjeta(abierto ? null : clave)}>
+                        <button
+                          type="button"
+                          className="detail-toggle"
+                          onClick={() => setDetalleTarjeta(abierto ? null : clave)}
+                        >
                           {abierto ? "Ocultar detalle" : "Mostrar detalle"}
                         </button>
                         {abierto && (
                           <div className="detail-block">
                             <dl>
-                              <div><dt>Experiencia</dt><dd>{t.cargo.experiencia_requerida || "—"}</dd></div>
-                              <div><dt>Formación</dt><dd>{t.cargo.requisitos_formacion || "—"}</dd></div>
-                              {t.cargo.sueldo !== null && <div><dt>Remuneración</dt><dd>{t.cargo.sueldo}</dd></div>}
-                              <div><dt>Descripción</dt><dd>{t.cargo.descripcion || "—"}</dd></div>
+                              <div>
+                                <dt>Experiencia</dt>
+                                <dd>{t.cargo.experiencia_requerida || "—"}</dd>
+                              </div>
+                              <div>
+                                <dt>Formación</dt>
+                                <dd>{t.cargo.requisitos_formacion || "—"}</dd>
+                              </div>
+                              {t.cargo.sueldo !== null && (
+                                <div>
+                                  <dt>Remuneración</dt>
+                                  <dd>{t.cargo.sueldo}</dd>
+                                </div>
+                              )}
+                              <div>
+                                <dt>Descripción</dt>
+                                <dd>{t.cargo.descripcion || "—"}</dd>
+                              </div>
                             </dl>
                             {t.bandas.length > 0 && (
                               <ul className="import-card-bandas">
                                 {t.bandas.map((b) => (
                                   <li key={b.tipo_empresa}>
-                                    <span>{b.tipo_empresa}</span> P25 {b.p25 ?? "—"} · P50 {b.p50 ?? "—"} · P75 {b.p75 ?? "—"} · Prom. {b.promedio ?? "—"}
+                                    <span>{b.tipo_empresa}</span> P25 {b.p25 ?? "—"} · P50{" "}
+                                    {b.p50 ?? "—"} · P75 {b.p75 ?? "—"} · Prom. {b.promedio ?? "—"}
                                   </li>
                                 ))}
                               </ul>
@@ -506,15 +756,31 @@ function CargosPage() {
               </Button>
             )}
             <label className="import-confirm">
-              <input type="checkbox" checked={revisado} onChange={(e) => setRevisado(e.target.checked)} />
+              <input
+                type="checkbox"
+                checked={revisado}
+                onChange={(e) => setRevisado(e.target.checked)}
+              />
               <span>Revisé la vista previa y los datos están correctos</span>
             </label>
           </div>
         )}
 
-        <div className="import-actions"><Button type="button" variant="outline" onClick={descargarPlantilla}>Descargar plantilla</Button><Button type="button" disabled={!puedeGuardar} onClick={() => importMut.mutate()}>{importMut.isPending ? "Cargando…" : "Guardar datos"}</Button></div>
+        <div className="import-actions">
+          <Button type="button" variant="outline" onClick={descargarPlantilla}>
+            Descargar plantilla
+          </Button>
+          <Button type="button" disabled={!puedeGuardar} onClick={() => importMut.mutate()}>
+            {importMut.isPending ? "Cargando…" : "Guardar datos"}
+          </Button>
+        </div>
         {importMut.isPending && <CardsSkeleton count={3} />}
-        {importMut.data && <p className="text-sm">Carga lista: {importMut.data.empresas} empresas nuevas, {importMut.data.creados} cargos nuevos, {importMut.data.actualizados} actualizados y {importMut.data.bandas} bandas.</p>}
+        {importMut.data && (
+          <p className="text-sm">
+            Carga lista: {importMut.data.empresas} empresas nuevas, {importMut.data.creados} cargos
+            nuevos, {importMut.data.actualizados} actualizados y {importMut.data.bandas} bandas.
+          </p>
+        )}
       </section>
 
       <form
@@ -608,24 +874,19 @@ function CargosPage() {
                   className="w-full rounded-md border bg-background px-3 py-2"
                   rows={2}
                   value={atributos[a.clave]}
-                  onChange={(e) =>
-                    setAtributos((prev) => ({ ...prev, [a.clave]: e.target.value }))
-                  }
+                  onChange={(e) => setAtributos((prev) => ({ ...prev, [a.clave]: e.target.value }))}
                 />
               </label>
             ))}
           </div>
           <p className="mt-2 text-xs text-muted-foreground">
-            Se usan solo en el análisis semántico. Lo que dejes vacío se envía vacío y no se completa
-            automáticamente.
+            Se usan solo en el análisis semántico. Lo que dejes vacío se envía vacío y no se
+            completa automáticamente.
           </p>
         </details>
 
         <div className="sm:col-span-2">
-          <Button
-            type="submit"
-            disabled={createMut.isPending}
-          >
+          <Button type="submit" disabled={createMut.isPending}>
             Agregar cargo
           </Button>
         </div>
@@ -642,7 +903,6 @@ function CargosPage() {
           onChange={(e) => setBuscarCatalogo(e.target.value)}
         />
         <select
-
           className="rounded-md border bg-background px-3 py-2"
           value={filtroEmpresa}
           onChange={(e) => setFiltroEmpresa(e.target.value)}
@@ -664,21 +924,24 @@ function CargosPage() {
           <option value="REFERENCIA">Referencia</option>
         </select>
         <div className="filter-chips" role="group" aria-label="Estado de homologación">
-          {([["", "Todos"], ["PENDIENTE", "Pendientes"], ["HOMOLOGADO", "Homologados"]] as const).map(
-            ([valor, texto]) => (
-              <button
-                type="button"
-                key={texto}
-                aria-pressed={filtroEstado === valor}
-                onClick={() => setFiltroEstado(valor)}
-              >
-                {texto}
-              </button>
-            ),
-          )}
+          {(
+            [
+              ["", "Todos"],
+              ["PENDIENTE", "Pendientes"],
+              ["HOMOLOGADO", "Homologados"],
+            ] as const
+          ).map(([valor, texto]) => (
+            <button
+              type="button"
+              key={texto}
+              aria-pressed={filtroEstado === valor}
+              onClick={() => setFiltroEstado(valor)}
+            >
+              {texto}
+            </button>
+          ))}
         </div>
       </div>
-
 
       {cargos.isLoading ? (
         <TableSkeleton rows={7} columns={7} />
@@ -720,11 +983,13 @@ function CargosPage() {
             return (
               <div key={c.id} className="data-group">
                 <div className="data-row">
-                  <span data-label="Código" className="data-code">{c.codigo_cargo || "—"}</span>
+                  <span data-label="Código" className="data-code">
+                    {c.codigo_cargo || "—"}
+                  </span>
                   <span data-label="Cargo" className="data-main">
                     {c.nombre}
-                    {c.tipo === "INTERNO" && (
-                      mapaHomologados.has(c.id) ? (
+                    {c.tipo === "INTERNO" &&
+                      (mapaHomologados.has(c.id) ? (
                         <Link
                           className="estado-chip ok"
                           to="/historial"
@@ -737,8 +1002,7 @@ function CargosPage() {
                         <Link className="estado-chip pend" to="/homologacion/nueva">
                           Pendiente
                         </Link>
-                      )
-                    )}
+                      ))}
                   </span>
                   <span data-label="Empresa">{c.empresas?.nombre ?? "—"}</span>
 
@@ -746,22 +1010,41 @@ function CargosPage() {
                   <span data-label="Área">{c.nombre_area || "—"}</span>
                   <span data-label="Sueldo">{formatSueldo(c.sueldo)}</span>
                   <span className="data-actions">
-                    <button type="button" className="detail-toggle" onClick={() => setDetalleFila(abierto ? null : c.id)}>
+                    <button
+                      type="button"
+                      className="detail-toggle"
+                      onClick={() => setDetalleFila(abierto ? null : c.id)}
+                    >
                       {abierto ? "Ocultar detalle" : "Mostrar detalle"}
                     </button>
-                    <button type="button" className="row-delete" onClick={() => deleteMut.mutate(c.id)}>Eliminar</button>
+                    <button
+                      type="button"
+                      className="row-delete"
+                      onClick={() => deleteMut.mutate(c.id)}
+                    >
+                      Eliminar
+                    </button>
                   </span>
                 </div>
                 {abierto && (
                   <div className="detail-block">
                     <dl>
                       {CAMPOS_ESTRUCTURALES.filter((k) => c[k.clave]).map((k) => (
-                        <div key={k.clave}><dt>{k.etiqueta}</dt><dd>{String(c[k.clave])}</dd></div>
+                        <div key={k.clave}>
+                          <dt>{k.etiqueta}</dt>
+                          <dd>{String(c[k.clave])}</dd>
+                        </div>
                       ))}
-                      <div><dt>Descripción</dt><dd>{c.descripcion || "—"}</dd></div>
+                      <div>
+                        <dt>Descripción</dt>
+                        <dd>{c.descripcion || "—"}</dd>
+                      </div>
                       <div>
                         <dt>Atributos semánticos</dt>
-                        <dd>{contarAtributos(c.atributos_semanticos)} de {ATRIBUTOS_SEMANTICOS.length} completos</dd>
+                        <dd>
+                          {contarAtributos(c.atributos_semanticos)} de {ATRIBUTOS_SEMANTICOS.length}{" "}
+                          completos
+                        </dd>
                       </div>
                     </dl>
                   </div>
@@ -774,6 +1057,5 @@ function CargosPage() {
 
       <ReiniciarDatos />
     </div>
-
   );
 }

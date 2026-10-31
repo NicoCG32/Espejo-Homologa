@@ -15,7 +15,9 @@ export function TableSkeleton({ rows = 5, columns = 4 }: { rows?: number; column
     <div className="skeleton-table" style={gridStyle} role="status" aria-label="Cargando tabla">
       <span className="sr-only">Cargando datos…</span>
       <div className="skeleton-table-row skeleton-table-head">
-        {Array.from({ length: columns }, (_, i) => <Skeleton key={i} className="skeleton-line skeleton-short" />)}
+        {Array.from({ length: columns }, (_, i) => (
+          <Skeleton key={i} className="skeleton-line skeleton-short" />
+        ))}
       </div>
       {Array.from({ length: rows }, (_, row) => (
         <div className="skeleton-table-row" key={row}>
@@ -30,14 +32,23 @@ export function TableSkeleton({ rows = 5, columns = 4 }: { rows?: number; column
 
 export function ScoreTableSkeleton({ rows = 5 }: { rows?: number }) {
   return (
-    <div className="score-table skeleton-score-table" role="status" aria-label="Cargando candidatos">
+    <div
+      className="score-table skeleton-score-table"
+      role="status"
+      aria-label="Cargando candidatos"
+    >
       <span className="sr-only">Cargando candidatos…</span>
       <div className="score-row score-head">
-        {Array.from({ length: 4 }, (_, i) => <Skeleton key={i} className="skeleton-line skeleton-short" />)}
+        {Array.from({ length: 4 }, (_, i) => (
+          <Skeleton key={i} className="skeleton-line skeleton-short" />
+        ))}
       </div>
       {Array.from({ length: rows }, (_, i) => (
         <div className="score-row" key={i}>
-          <div className="skeleton-copy"><Skeleton className="skeleton-line skeleton-wide" /><Skeleton className="skeleton-line skeleton-short" /></div>
+          <div className="skeleton-copy">
+            <Skeleton className="skeleton-line skeleton-wide" />
+            <Skeleton className="skeleton-line skeleton-short" />
+          </div>
           <Skeleton className="skeleton-pill" />
           <Skeleton className="skeleton-pill" />
           <Skeleton className="skeleton-pill" />
@@ -69,9 +80,16 @@ export function DetailSkeleton() {
       <Skeleton className="skeleton-line skeleton-short" />
       <Skeleton className="skeleton-title" />
       <Skeleton className="skeleton-line skeleton-wide" />
-      <div className="skeleton-panel"><Skeleton className="skeleton-line skeleton-short" /><Skeleton className="skeleton-line skeleton-wide" /></div>
+      <div className="skeleton-panel">
+        <Skeleton className="skeleton-line skeleton-short" />
+        <Skeleton className="skeleton-line skeleton-wide" />
+      </div>
       <TableSkeleton rows={5} columns={4} />
-      <div className="skeleton-panel skeleton-panel-tall"><Skeleton className="skeleton-line skeleton-short" /><Skeleton className="skeleton-line" /><Skeleton className="skeleton-line skeleton-wide" /></div>
+      <div className="skeleton-panel skeleton-panel-tall">
+        <Skeleton className="skeleton-line skeleton-short" />
+        <Skeleton className="skeleton-line" />
+        <Skeleton className="skeleton-line skeleton-wide" />
+      </div>
     </div>
   );
 }

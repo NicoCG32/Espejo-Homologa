@@ -21,7 +21,6 @@ export const CAMPOS_CRITERIO: Record<CriterioCampo, string> = {
   requisitos: "Requisitos / formación",
 };
 
-
 export type Criterio = {
   id: string;
   nombre: string;
@@ -44,7 +43,6 @@ export const listCriterios = createServerFn({ method: "GET" }).handler(async () 
   return filas
     .filter((c) => c.campo !== "tipo_empresa")
     .map((c) => ({ ...c, campo: c.campo as CriterioCampo }));
-
 });
 
 /**
@@ -79,20 +77,17 @@ export const asegurarCriterios = createServerFn({ method: "POST" }).handler(asyn
   return { creados: faltantes.length };
 });
 
-
 /** Guarda de una sola vez la ponderación (en %) de todas las columnas. */
 export const guardarPesos = createServerFn({ method: "POST" })
-  .inputValidator(
-    (input: { pesos: { id: string; peso: number; obligatorio?: boolean }[] }) => {
-      const pesos = (Array.isArray(input?.pesos) ? input.pesos : []).map((p) => {
-        const peso = Number(p?.peso);
-        if (!Number.isFinite(peso) || peso < 0) throw new Error("Ponderación inválida");
-        return { id: String(p.id), peso, obligatorio: Boolean(p?.obligatorio) };
-      });
-      if (!pesos.length) throw new Error("No hay ponderaciones que guardar");
-      return { pesos };
-    },
-  )
+  .inputValidator((input: { pesos: { id: string; peso: number; obligatorio?: boolean }[] }) => {
+    const pesos = (Array.isArray(input?.pesos) ? input.pesos : []).map((p) => {
+      const peso = Number(p?.peso);
+      if (!Number.isFinite(peso) || peso < 0) throw new Error("Ponderación inválida");
+      return { id: String(p.id), peso, obligatorio: Boolean(p?.obligatorio) };
+    });
+    if (!pesos.length) throw new Error("No hay ponderaciones que guardar");
+    return { pesos };
+  })
   .handler(async ({ data }) => {
     const { getDb } = await import("./supabase-public.server");
     const db = getDb();

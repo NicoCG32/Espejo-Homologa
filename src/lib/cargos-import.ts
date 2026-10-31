@@ -35,8 +35,11 @@ export type BandaImport = {
   anio?: number | null;
 };
 
-
-export type EntradaDiccionario = { tipo: "AREA" | "SUBAREA" | "NIVEL"; codigo: string; nombre: string };
+export type EntradaDiccionario = {
+  tipo: "AREA" | "SUBAREA" | "NIVEL";
+  codigo: string;
+  nombre: string;
+};
 
 type Celda = string | number | boolean | null | undefined;
 
@@ -121,7 +124,9 @@ export function leerCargos(rows: Celda[][]) {
     vistos.set(codigo, fila);
 
     const empresaNombre = texto(valor(row, indices, "Empresa", "Nombre Empresa", "Razón Social"));
-    const empresaTipo = leerTipoEmpresa(valor(row, indices, "Tamaño", "Tamaño Empresa", "Tipo Empresa"));
+    const empresaTipo = leerTipoEmpresa(
+      valor(row, indices, "Tamaño", "Tamaño Empresa", "Tipo Empresa"),
+    );
 
     // Área y subárea: algunas planillas traen solo el código, otras código y nombre.
     const areaCodigo = texto(valor(row, indices, "Código Área"));
@@ -152,7 +157,9 @@ export function leerCargos(rows: Celda[][]) {
       codigo_nivel_jerarquico: nivelCodigo,
       nivel_jerarquico: nivelNombre,
       descripcion,
-      experiencia_requerida: texto(valor(row, indices, "Experiencia Requerida", "Experiencia requerida")),
+      experiencia_requerida: texto(
+        valor(row, indices, "Experiencia Requerida", "Experiencia requerida"),
+      ),
       requisitos_formacion: texto(
         valor(row, indices, "Requisitos Formación", "Requisitos de formación", "Formación"),
       ),
@@ -168,13 +175,22 @@ export function leerCargos(rows: Celda[][]) {
 /** Lee la hoja "Diccionario" cuando viene dentro del archivo cargado. */
 export function leerDiccionario(rows: Celda[][]) {
   const entradas: EntradaDiccionario[] = [];
-  const headerIndex = rows.findIndex((row) => row?.some((v) => clave(v) === "area" || clave(v) === "niveljerarquico"));
+  const headerIndex = rows.findIndex((row) =>
+    row?.some((v) => clave(v) === "area" || clave(v) === "niveljerarquico"),
+  );
   if (headerIndex < 0) return entradas;
   const header = rows[headerIndex] ?? [];
   const bloques: { tipo: EntradaDiccionario["tipo"]; nombreCol: number; codigoCol: number }[] = [];
   header.forEach((v, i) => {
     const k = clave(v);
-    const tipo = k === "area" ? "AREA" : k === "subarea" ? "SUBAREA" : k === "niveljerarquico" ? "NIVEL" : null;
+    const tipo =
+      k === "area"
+        ? "AREA"
+        : k === "subarea"
+          ? "SUBAREA"
+          : k === "niveljerarquico"
+            ? "NIVEL"
+            : null;
     if (!tipo) return;
     const codigoCol = header.findIndex((h, j) => j > i && clave(h) === "codigo");
     if (codigoCol > 0) bloques.push({ tipo, nombreCol: i, codigoCol });
@@ -201,14 +217,35 @@ export function aplicarDiccionario(cargos: ImportCargo[], diccionario: EntradaDi
   const resueltos = cargos.map((c) => {
     const copia = { ...c };
     const campos = [
-      { tipo: "AREA" as const, etiqueta: "área", codigo: c.codigo_area, nombre: c.nombre_area, set: (v: string) => (copia.nombre_area = v) },
-      { tipo: "SUBAREA" as const, etiqueta: "subárea", codigo: c.codigo_subarea, nombre: c.nombre_subarea, set: (v: string) => (copia.nombre_subarea = v) },
-      { tipo: "NIVEL" as const, etiqueta: "nivel jerárquico", codigo: c.codigo_nivel_jerarquico, nombre: c.nivel_jerarquico, set: (v: string) => (copia.nivel_jerarquico = v) },
+      {
+        tipo: "AREA" as const,
+        etiqueta: "área",
+        codigo: c.codigo_area,
+        nombre: c.nombre_area,
+        set: (v: string) => (copia.nombre_area = v),
+      },
+      {
+        tipo: "SUBAREA" as const,
+        etiqueta: "subárea",
+        codigo: c.codigo_subarea,
+        nombre: c.nombre_subarea,
+        set: (v: string) => (copia.nombre_subarea = v),
+      },
+      {
+        tipo: "NIVEL" as const,
+        etiqueta: "nivel jerárquico",
+        codigo: c.codigo_nivel_jerarquico,
+        nombre: c.nivel_jerarquico,
+        set: (v: string) => (copia.nivel_jerarquico = v),
+      },
     ];
     for (const campo of campos) {
       if (!campo.codigo) {
         if (!campo.nombre)
-          avisos.push({ cargo: c.codigo_cargo, mensaje: `no indica ${campo.etiqueta}; corrige la planilla` });
+          avisos.push({
+            cargo: c.codigo_cargo,
+            mensaje: `no indica ${campo.etiqueta}; corrige la planilla`,
+          });
         continue;
       }
       const delDiccionario = mapa.get(`${campo.tipo}|${campo.codigo}`);
@@ -235,7 +272,11 @@ export function leerBandas(rows: Celda[][]) {
   const group = rows[headerIndex - 1];
   if (!header || !group) throw new Error("No se encontró la estructura de remuneraciones");
   const idIndex = header.findIndex((v) => CLAVES_ID.includes(clave(v)));
-  const columnas: { i: number; tipo: "P" | "M" | "G"; campo: "p25" | "p50" | "p75" | "promedio" }[] = [];
+  const columnas: {
+    i: number;
+    tipo: "P" | "M" | "G";
+    campo: "p25" | "p50" | "p75" | "promedio";
+  }[] = [];
   let tipo: "P" | "M" | "G" | null = null;
   for (let i = 0; i < header.length; i += 1) {
     const grupo = clave(group[i]);
@@ -252,9 +293,19 @@ export function leerBandas(rows: Celda[][]) {
     if (!codigo) return;
     for (const t of ["P", "M", "G"] as const) {
       const cols = columnas.filter((c) => c.tipo === t);
-      const datos = Object.fromEntries(cols.map((c) => [c.campo, numero(row[c.i])])) as Record<string, number | null>;
+      const datos = Object.fromEntries(cols.map((c) => [c.campo, numero(row[c.i])])) as Record<
+        string,
+        number | null
+      >;
       if (Object.values(datos).every((v) => v === null)) continue;
-      bandas.push({ codigo_cargo: codigo, tipo_empresa: t, p25: datos["p25"] ?? null, p50: datos["p50"] ?? null, p75: datos["p75"] ?? null, promedio: datos["promedio"] ?? null });
+      bandas.push({
+        codigo_cargo: codigo,
+        tipo_empresa: t,
+        p25: datos["p25"] ?? null,
+        p50: datos["p50"] ?? null,
+        p75: datos["p75"] ?? null,
+        promedio: datos["promedio"] ?? null,
+      });
     }
   });
   return bandas;

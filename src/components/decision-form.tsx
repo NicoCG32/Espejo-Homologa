@@ -2,7 +2,11 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
 
-import { getPreseleccion, guardarDecision, guardarPreseleccion } from "@/lib/homologacion.functions";
+import {
+  getPreseleccion,
+  guardarDecision,
+  guardarPreseleccion,
+} from "@/lib/homologacion.functions";
 import { formatSueldo } from "@/lib/format";
 import { Button } from "@/components/ui/button";
 import { ScoreChip, a100, ordenarPorPuntaje } from "@/components/score-chip";
@@ -107,7 +111,6 @@ function mejorDe(lista: { id: string; score_final?: number | string | null }[]) 
   }, null)?.id;
 }
 
-
 /**
  * Decisión del analista en dos etapas:
  * 1. Preselección de N candidatos (persistida).
@@ -139,7 +142,6 @@ export function DecisionForm({
   const guardar = useServerFn(guardarDecision);
   const qc = useQueryClient();
 
-
   const pre = useQuery({
     queryKey: ["preseleccion", ejecucionId],
     queryFn: () => getPre({ data: { ejecucion_id: ejecucionId } }),
@@ -148,7 +150,6 @@ export function DecisionForm({
   // Referencia visual: el candidato con mayor score final entre los preseleccionados.
   // Si el mejor global no se preselecciona, la recomendación pasa al mejor de los elegidos.
   const mejorId = mejorDe(preseleccion);
-
 
   const [etapa, setEtapa] = useState<1 | 2>(1);
   const [marcados, setMarcados] = useState<Set<string>>(new Set());
@@ -226,8 +227,9 @@ export function DecisionForm({
     const marcadosArr = candidatos.filter((c) => marcados.has(c.id));
     const mejorEtapa1 = mejorDe(marcadosArr.length ? marcadosArr : candidatos);
     // Tabla siempre ordenada de mayor a menor puntaje (pendientes al final).
-    const ordenados = ordenarPorPuntaje(candidatos, (c) =>
-      a100(c.score_final) ?? sem100(c.score_semantico) ?? a100(c.score_deterministico),
+    const ordenados = ordenarPorPuntaje(
+      candidatos,
+      (c) => a100(c.score_final) ?? sem100(c.score_semantico) ?? a100(c.score_deterministico),
     );
     return (
       <form
@@ -319,8 +321,9 @@ export function DecisionForm({
       </label>
 
       <div className="space-y-3">
-        {ordenarPorPuntaje(preseleccion, (c) =>
-          a100(c.score_final) ?? sem100(c.score_semantico) ?? a100(c.score_deterministico),
+        {ordenarPorPuntaje(
+          preseleccion,
+          (c) => a100(c.score_final) ?? sem100(c.score_semantico) ?? a100(c.score_deterministico),
         ).map((c) => {
           const banda = tamano ? c.bandas.find((b) => b.tipo_empresa === tamano) : undefined;
           const elegido = candidatoId === c.id;
@@ -376,25 +379,46 @@ export function DecisionForm({
 
               {!tamano ? null : (
                 <dl className="benchmark-grid mt-2">
-                  <div><dt>Tamaño</dt><dd>{TAMANOS.find((t) => t.valor === tamano)?.etiqueta}</dd></div>
-                  <div><dt>P25</dt><dd>{monto(banda?.p25)}</dd></div>
-                  <div><dt>P50</dt><dd>{monto(banda?.p50)}</dd></div>
-                  <div><dt>P75</dt><dd>{monto(banda?.p75)}</dd></div>
-                  <div><dt>Promedio</dt><dd>{monto(banda?.promedio)}</dd></div>
+                  <div>
+                    <dt>Tamaño</dt>
+                    <dd>{TAMANOS.find((t) => t.valor === tamano)?.etiqueta}</dd>
+                  </div>
+                  <div>
+                    <dt>P25</dt>
+                    <dd>{monto(banda?.p25)}</dd>
+                  </div>
+                  <div>
+                    <dt>P50</dt>
+                    <dd>{monto(banda?.p50)}</dd>
+                  </div>
+                  <div>
+                    <dt>P75</dt>
+                    <dd>{monto(banda?.p75)}</dd>
+                  </div>
+                  <div>
+                    <dt>Promedio</dt>
+                    <dd>{monto(banda?.promedio)}</dd>
+                  </div>
                   <div>
                     <dt>Empresa vs P50</dt>
-                    <dd><Brecha empresa={sueldoInterno} encuesta={banda?.p50} /></dd>
+                    <dd>
+                      <Brecha empresa={sueldoInterno} encuesta={banda?.p50} />
+                    </dd>
                   </div>
-                  <div><dt>Fuente</dt><dd>{banda?.fuente?.trim() ? banda.fuente : ND}</dd></div>
-                  <div><dt>Año</dt><dd>{banda?.anio ?? ND}</dd></div>
+                  <div>
+                    <dt>Fuente</dt>
+                    <dd>{banda?.fuente?.trim() ? banda.fuente : ND}</dd>
+                  </div>
+                  <div>
+                    <dt>Año</dt>
+                    <dd>{banda?.anio ?? ND}</dd>
+                  </div>
                 </dl>
               )}
             </label>
           );
         })}
       </div>
-
-
 
       <label className="block">
         <span>Analista que confirma</span>
@@ -418,9 +442,13 @@ export function DecisionForm({
         />
       </label>
 
-
       <div className="flex flex-wrap gap-2">
-        <Button type="button" variant="outline" disabled={mut.isPending} onClick={() => setEtapa(1)}>
+        <Button
+          type="button"
+          variant="outline"
+          disabled={mut.isPending}
+          onClick={() => setEtapa(1)}
+        >
           Volver a la preselección
         </Button>
 
@@ -441,7 +469,9 @@ export function DecisionForm({
           <VistaEspejo
             interno={interno}
             candidato={fichaSel}
-            remuneracionA={num(sueldoInterno) == null ? "No informada" : formatSueldo(sueldoInterno)}
+            remuneracionA={
+              num(sueldoInterno) == null ? "No informada" : formatSueldo(sueldoInterno)
+            }
             remuneracionB={(() => {
               if (!tamano) return "Selecciona un tamaño de empresa";
               const b = preseleccion

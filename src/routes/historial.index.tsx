@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useMemo, useState } from "react";
 
-
 import { listEjecuciones } from "@/lib/homologacion.functions";
 import { formatFecha } from "@/lib/format";
 import { TableSkeleton } from "@/components/loading-skeleton";
@@ -17,9 +16,15 @@ export const Route = createFileRoute("/historial/")({
   head: () => ({
     meta: [
       { title: "Historial — Espejo: Homologa" },
-      { name: "description", content: "Historial de ejecuciones de homologación por cargo interno." },
+      {
+        name: "description",
+        content: "Historial de ejecuciones de homologación por cargo interno.",
+      },
       { property: "og:title", content: "Historial — Espejo: Homologa" },
-      { property: "og:description", content: "Revisa las ejecuciones de homologación y sus resultados." },
+      {
+        property: "og:description",
+        content: "Revisa las ejecuciones de homologación y sus resultados.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -57,12 +62,12 @@ function HistorialPage() {
     });
     const valor = (e: (typeof base)[number]) =>
       orden.col === "cargo"
-        ? e.cargos?.nombre ?? ""
+        ? (e.cargos?.nombre ?? "")
         : orden.col === "empresa"
-          ? e.cargos?.empresas?.nombre ?? ""
+          ? (e.cargos?.empresas?.nombre ?? "")
           : orden.col === "estado"
-            ? e.estado ?? ""
-            : e.fecha ?? "";
+            ? (e.estado ?? "")
+            : (e.fecha ?? "");
     const dir = orden.asc ? 1 : -1;
     return base.sort((a, b) => String(valor(a)).localeCompare(String(valor(b)), "es") * dir);
   }, [data, orden, buscar, cargo]);
@@ -111,7 +116,6 @@ function HistorialPage() {
             </tr>
           </thead>
           <tbody>
-
             {filas.map((e) => (
               <tr key={e.id}>
                 <td className="border-b py-2">{e.cargos?.nombre ?? "—"}</td>

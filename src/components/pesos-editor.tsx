@@ -45,9 +45,7 @@ export function pesosIniciales(criterios: Criterio[]): MapaPesos {
   let acumulado = 0;
   criterios.forEach((c, i) => {
     const v =
-      i === criterios.length - 1
-        ? 100 - acumulado
-        : Math.round((Number(c.peso) / total) * 100);
+      i === criterios.length - 1 ? 100 - acumulado : Math.round((Number(c.peso) / total) * 100);
     acumulado += v;
     out[c.id] = Math.max(0, v);
   });
@@ -85,9 +83,7 @@ export function PesosEditor({
       guardarP({
         data: {
           nombre: nombrePreset,
-          pesos: Object.fromEntries(
-            criterios.map((c) => [c.campo, pesos[c.id] ?? 0]),
-          ),
+          pesos: Object.fromEntries(criterios.map((c) => [c.campo, pesos[c.id] ?? 0])),
         },
       }),
     onSuccess: () => {

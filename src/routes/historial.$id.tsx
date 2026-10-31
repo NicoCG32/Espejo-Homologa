@@ -11,7 +11,6 @@ import { ordenarPorPuntaje } from "@/components/score-chip";
 import { DetailSkeleton } from "@/components/loading-skeleton";
 import { abrirInformePdf, exportarExcel, type DatosInforme } from "@/lib/exportacion";
 
-
 function pct(v: number | null | undefined) {
   return v == null ? "—" : `${(Number(v) * 100).toFixed(1)}%`;
 }
@@ -20,9 +19,15 @@ export const Route = createFileRoute("/historial/$id")({
   head: () => ({
     meta: [
       { title: "Detalle de homologación — Espejo: Homologa" },
-      { name: "description", content: "Resultados de una ejecución de homologación y comparación salarial." },
+      {
+        name: "description",
+        content: "Resultados de una ejecución de homologación y comparación salarial.",
+      },
       { property: "og:title", content: "Detalle de homologación — Espejo: Homologa" },
-      { property: "og:description", content: "Resultados y comparación salarial de una homologación." },
+      {
+        property: "og:description",
+        content: "Resultados y comparación salarial de una homologación.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -39,7 +44,8 @@ function EjecucionDetalle() {
   });
 
   if (isLoading) return <DetailSkeleton />;
-  if (!data?.ejecucion) return <p className="text-sm text-muted-foreground">Ejecución no encontrada.</p>;
+  if (!data?.ejecucion)
+    return <p className="text-sm text-muted-foreground">Ejecución no encontrada.</p>;
 
   const { ejecucion } = data;
   const resultados = data.resultados ?? [];
@@ -115,30 +121,53 @@ function EjecucionDetalle() {
           },
         ];
 
-
     return {
       cargo: {
-        codigo: cargo?.codigo_cargo ?? "", nombre: cargo?.nombre ?? "", empresa: cargo?.empresas?.nombre ?? "",
-        area: cargo?.nombre_area ?? "", subarea: cargo?.nombre_subarea ?? "", nivel: cargo?.nivel_jerarquico ?? "",
+        codigo: cargo?.codigo_cargo ?? "",
+        nombre: cargo?.nombre ?? "",
+        empresa: cargo?.empresas?.nombre ?? "",
+        area: cargo?.nombre_area ?? "",
+        subarea: cargo?.nombre_subarea ?? "",
+        nivel: cargo?.nivel_jerarquico ?? "",
         sueldo: cargo?.sueldo != null ? Number(cargo.sueldo) : null,
       },
       referencia: {
-        nombre: decision.cargos?.nombre ?? "", codigo: decision.cargos?.codigo_cargo ?? "",
+        nombre: decision.cargos?.nombre ?? "",
+        codigo: decision.cargos?.codigo_cargo ?? "",
         empresa: decision.cargos?.empresas?.nombre ?? "",
       },
       decision: {
-        analista: decision.usuario ?? "", fecha: decision.fecha ?? null,
-        comentario: decision.comentario ?? "", tamano: decision.tamano_empresa ?? "",
+        analista: decision.usuario ?? "",
+        fecha: decision.fecha ?? null,
+        comentario: decision.comentario ?? "",
+        tamano: decision.tamano_empresa ?? "",
       },
-      ia: { modelo: analisis?.modelo ?? "", confianza: validada?.confianza ?? null, explicacion: validada?.explicacion_breve ?? "" },
+      ia: {
+        modelo: analisis?.modelo ?? "",
+        confianza: validada?.confianza ?? null,
+        explicacion: validada?.explicacion_breve ?? "",
+      },
       banda: banda
-        ? { p25: n(banda.p25), p50: n(banda.p50), p75: n(banda.p75), promedio: n(banda.promedio), fuente: banda.fuente ?? "", anio: banda.anio ?? null }
+        ? {
+            p25: n(banda.p25),
+            p50: n(banda.p50),
+            p75: n(banda.p75),
+            promedio: n(banda.promedio),
+            fuente: banda.fuente ?? "",
+            anio: banda.anio ?? null,
+          }
         : null,
-      candidatos: filas.map((f) => ({
-        nombre: f.nombre, codigo: f.codigo, empresa: f.empresa,
-        definitivo: f.candidato_id === decision.candidato_id,
-        motor: n(f.scores.score_deterministico), semantico: n(f.scores.score_semantico), final: n(f.scores.score_final),
-      })).sort((a, b) => (b.final ?? b.motor ?? -1) - (a.final ?? a.motor ?? -1)),
+      candidatos: filas
+        .map((f) => ({
+          nombre: f.nombre,
+          codigo: f.codigo,
+          empresa: f.empresa,
+          definitivo: f.candidato_id === decision.candidato_id,
+          motor: n(f.scores.score_deterministico),
+          semantico: n(f.scores.score_semantico),
+          final: n(f.scores.score_final),
+        }))
+        .sort((a, b) => (b.final ?? b.motor ?? -1) - (a.final ?? a.motor ?? -1)),
       fechaEjecucion: ejecucion.fecha ?? null,
     } satisfies DatosInforme;
   }
@@ -148,7 +177,8 @@ function EjecucionDetalle() {
   }
   function exportarPdf() {
     const d = datosInformeSync();
-    if (d && !abrirInformePdf(d)) window.alert("Permite ventanas emergentes para generar el informe PDF.");
+    if (d && !abrirInformePdf(d))
+      window.alert("Permite ventanas emergentes para generar el informe PDF.");
   }
 
   return (
@@ -158,7 +188,8 @@ function EjecucionDetalle() {
       </Link>
       <h1 className="text-2xl font-semibold">{cargo?.nombre ?? "Ejecución"}</h1>
       <div className="text-sm text-muted-foreground">
-        {cargo?.empresas?.nombre ?? "—"} · {formatFecha(ejecucion.fecha)} · Estado: {ejecucion.estado}
+        {cargo?.empresas?.nombre ?? "—"} · {formatFecha(ejecucion.fecha)} · Estado:{" "}
+        {ejecucion.estado}
       </div>
       {cargo?.descripcion && <p className="text-sm">{cargo.descripcion}</p>}
       <div className="rounded-lg border p-4 text-sm">
@@ -170,16 +201,17 @@ function EjecucionDetalle() {
           <h2 className="mb-2 text-lg font-medium">Análisis semántico</h2>
           {analisis.estado !== "OK" || !validada ? (
             <p className="text-destructive">
-              El análisis semántico no pudo ejecutarse: {analisis.error_mensaje ?? "error desconocido"}.
-              Los resultados determinísticos se mantienen sin cambios.
+              El análisis semántico no pudo ejecutarse:{" "}
+              {analisis.error_mensaje ?? "error desconocido"}. Los resultados determinísticos se
+              mantienen sin cambios.
             </p>
           ) : (
             <div className="space-y-2">
               <p>
                 Candidato recomendado:{" "}
                 <strong>
-                  {resultados.find((r) => r.candidato_id === validada.candidato_recomendado_id)?.cargos
-                    ?.nombre ?? validada.candidato_recomendado_id}
+                  {resultados.find((r) => r.candidato_id === validada.candidato_recomendado_id)
+                    ?.cargos?.nombre ?? validada.candidato_recomendado_id}
                 </strong>{" "}
                 · score semántico {validada.score_semantico} · confianza {validada.confianza}
               </p>
@@ -262,8 +294,7 @@ function EjecucionDetalle() {
         {decision ? (
           <div className="space-y-1">
             <p>
-              Cargo homologado:{" "}
-              <strong>{decision.cargos?.nombre ?? decision.candidato_id}</strong>
+              Cargo homologado: <strong>{decision.cargos?.nombre ?? decision.candidato_id}</strong>
               {decision.cargos?.empresas?.nombre ? ` — ${decision.cargos.empresas.nombre}` : ""}
             </p>
             <p className="text-muted-foreground">
@@ -272,9 +303,7 @@ function EjecucionDetalle() {
             {decision.comentario && <p>{decision.comentario}</p>}
             <p className="text-xs text-muted-foreground">
               Scores al momento de decidir: motor {pct(scoresDecision?.score_deterministico)} · IA{" "}
-              {scoresDecision?.score_semantico == null
-                ? "—"
-                : `${scoresDecision.score_semantico}%`}{" "}
+              {scoresDecision?.score_semantico == null ? "—" : `${scoresDecision.score_semantico}%`}{" "}
               · final {pct(scoresDecision?.score_final)}
             </p>
             {preseleccion.length > 0 && (
@@ -355,7 +384,6 @@ function EjecucionDetalle() {
               );
             })()}
           </div>
-
         ) : (
           <DecisionForm
             ejecucionId={id}
@@ -419,7 +447,6 @@ function EjecucionDetalle() {
           />
         </section>
       )}
-
     </div>
   );
 }

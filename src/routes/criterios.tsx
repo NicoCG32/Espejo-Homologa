@@ -3,11 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
 
-import {
-  asegurarCriterios,
-  guardarPesos,
-  listCriterios,
-} from "@/lib/criterios.functions";
+import { asegurarCriterios, guardarPesos, listCriterios } from "@/lib/criterios.functions";
 import { PesosEditor, pesosIniciales, type MapaPesos } from "@/components/pesos-editor";
 import { getPesosScore, setPesosScore } from "@/lib/configuracion.functions";
 import { Button } from "@/components/ui/button";
@@ -17,9 +13,15 @@ export const Route = createFileRoute("/criterios")({
   head: () => ({
     meta: [
       { title: "Criterios — Espejo: Homologa" },
-      { name: "description", content: "Ponderación por columna comparada y configuraciones guardadas." },
+      {
+        name: "description",
+        content: "Ponderación por columna comparada y configuraciones guardadas.",
+      },
       { property: "og:title", content: "Criterios — Espejo: Homologa" },
-      { property: "og:description", content: "Ajusta con deslizadores cuánto pesa cada columna en la comparación." },
+      {
+        property: "og:description",
+        content: "Ajusta con deslizadores cuánto pesa cada columna en la comparación.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -112,12 +114,14 @@ function CriteriosPage() {
             pesos={pesos}
             onChange={setPesos}
             obligatorios={obligatorios}
-            onToggleObligatorio={(id, valor) =>
-              setObligatorios((p) => ({ ...p, [id]: valor }))
-            }
+            onToggleObligatorio={(id, valor) => setObligatorios((p) => ({ ...p, [id]: valor }))}
           />
           <div className="mt-4">
-            <Button type="button" disabled={guardarMut.isPending} onClick={() => guardarMut.mutate()}>
+            <Button
+              type="button"
+              disabled={guardarMut.isPending}
+              onClick={() => guardarMut.mutate()}
+            >
               {guardarMut.isPending ? "Guardando…" : "Guardar ponderación"}
             </Button>
           </div>
@@ -134,26 +138,32 @@ function CriteriosPage() {
           comparación por reglas se conserva intacta.
         </p>
         {hibrido.isLoading ? (
-          <div className="skeleton-panel" role="status" aria-label="Cargando ponderación del resultado">
+          <div
+            className="skeleton-panel"
+            role="status"
+            aria-label="Cargando ponderación del resultado"
+          >
             <span className="sr-only">Cargando ponderación…</span>
             <Skeleton className="skeleton-line skeleton-wide" />
             <Skeleton className="skeleton-line skeleton-short" />
           </div>
-        ) : <div className="flex items-center gap-3">
-          <input
-            type="range"
-            min={0}
-            max={100}
-            step={5}
-            value={pesoMotor}
-            onChange={(e) => setPesoMotor(Number(e.target.value))}
-            className="flex-1"
-            aria-label="Porcentaje de la comparación por reglas"
-          />
-          <span className="text-sm whitespace-nowrap">
-            Reglas {pesoMotor}% · IA {100 - pesoMotor}%
-          </span>
-        </div>}
+        ) : (
+          <div className="flex items-center gap-3">
+            <input
+              type="range"
+              min={0}
+              max={100}
+              step={5}
+              value={pesoMotor}
+              onChange={(e) => setPesoMotor(Number(e.target.value))}
+              className="flex-1"
+              aria-label="Porcentaje de la comparación por reglas"
+            />
+            <span className="text-sm whitespace-nowrap">
+              Reglas {pesoMotor}% · IA {100 - pesoMotor}%
+            </span>
+          </div>
+        )}
         <Button type="button" disabled={hibridoMut.isPending} onClick={() => hibridoMut.mutate()}>
           {hibridoMut.isPending ? "Guardando…" : "Guardar ponderación del resultado"}
         </Button>

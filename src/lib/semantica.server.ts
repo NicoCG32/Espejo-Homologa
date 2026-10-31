@@ -82,7 +82,6 @@ export type CargoSemantico = {
   requisitos_formacion: string;
 };
 
-
 export type ScorePorCandidato = {
   candidato_id: string;
   score_semantico: number;
@@ -148,7 +147,8 @@ function listaDeTextos(v: unknown): string[] {
 
 /** Valida estrictamente la respuesta del modelo contra los candidatos realmente enviados. */
 export function validarAnalisis(raw: unknown, enviados: CargoSemantico[]): AnalisisSemantico {
-  if (!raw || typeof raw !== "object") throw new SemanticoError("La respuesta no es un objeto JSON");
+  if (!raw || typeof raw !== "object")
+    throw new SemanticoError("La respuesta no es un objeto JSON");
   const o = raw as Record<string, unknown>;
   const ids = new Set(enviados.map((c) => c.id));
 
@@ -227,7 +227,6 @@ export function construirPayload(interno: CargoSemantico, candidatos: CargoSeman
     candidatos_preseleccionados: candidatos.map(limpiar),
   };
 }
-
 
 export async function analizarConGemini(interno: CargoSemantico, candidatos: CargoSemantico[]) {
   const apiKey = process.env["GEMINI_API_KEY"];

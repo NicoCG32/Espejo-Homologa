@@ -64,7 +64,11 @@ export function VistaEspejo({
   /** Referencia visual: valor de mercado del candidato. */
   remuneracionB?: string | undefined;
 }) {
-  const filas: { etiqueta: string; a?: string | null | undefined; b?: string | null | undefined }[] = [
+  const filas: {
+    etiqueta: string;
+    a?: string | null | undefined;
+    b?: string | null | undefined;
+  }[] = [
     {
       etiqueta: "Cargo",
       a: `${interno.codigo_cargo ? `${interno.codigo_cargo} · ` : ""}${interno.nombre}`,
@@ -75,7 +79,11 @@ export function VistaEspejo({
     { etiqueta: "Subárea", a: interno.nombre_subarea, b: candidato.nombre_subarea },
     { etiqueta: "Nivel", a: interno.nivel_jerarquico, b: candidato.nivel_jerarquico },
     { etiqueta: "Formación", a: interno.requisitos_formacion, b: candidato.requisitos_formacion },
-    { etiqueta: "Experiencia", a: interno.experiencia_requerida, b: candidato.experiencia_requerida },
+    {
+      etiqueta: "Experiencia",
+      a: interno.experiencia_requerida,
+      b: candidato.experiencia_requerida,
+    },
     { etiqueta: "Descripción", a: interno.descripcion, b: candidato.descripcion },
   ];
   if (remuneracionA !== undefined || remuneracionB !== undefined) {

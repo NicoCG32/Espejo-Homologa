@@ -72,7 +72,6 @@ function normalizarExperiencia(raw: unknown): ExperienciaNorm | null {
   return ficha;
 }
 
-
 function normalizarFormacion(raw: unknown): FormacionNorm | null {
   if (!raw || typeof raw !== "object") return null;
   const o = raw as Record<string, unknown>;

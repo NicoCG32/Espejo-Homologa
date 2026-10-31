@@ -111,17 +111,24 @@ export const deleteDiccionario = createServerFn({ method: "POST" })
 
 /** Agrega al diccionario las entradas que trae un archivo, sin pisar las existentes. */
 export const importarDiccionario = createServerFn({ method: "POST" })
-  .inputValidator((input: { entradas: { tipo: DiccionarioTipo; codigo: string; nombre: string }[] }) => {
-    const entradas = (Array.isArray(input?.entradas) ? input.entradas : [])
-      .map((e) => ({ tipo: validarTipo(e?.tipo), codigo: String(e?.codigo ?? "").trim(), nombre: String(e?.nombre ?? "").trim() }))
-      .filter((e) => e.codigo && e.nombre);
-    if (!entradas.length) throw new Error("El archivo no trae entradas de diccionario");
-    return { entradas };
-  })
+  .inputValidator(
+    (input: { entradas: { tipo: DiccionarioTipo; codigo: string; nombre: string }[] }) => {
+      const entradas = (Array.isArray(input?.entradas) ? input.entradas : [])
+        .map((e) => ({
+          tipo: validarTipo(e?.tipo),
+          codigo: String(e?.codigo ?? "").trim(),
+          nombre: String(e?.nombre ?? "").trim(),
+        }))
+        .filter((e) => e.codigo && e.nombre);
+      if (!entradas.length) throw new Error("El archivo no trae entradas de diccionario");
+      return { entradas };
+    },
+  )
   .handler(async ({ data }) => {
     const { getDb, unwrap } = await import("./supabase-public.server");
     const db = getDb();
-    const existentes = unwrap(await db.from("diccionario_entradas").select("tipo, codigo, nombre")) ?? [];
+    const existentes =
+      unwrap(await db.from("diccionario_entradas").select("tipo, codigo, nombre")) ?? [];
     const mapa = new Map(existentes.map((e) => [`${e.tipo}|${e.codigo}`, e.nombre]));
     const nuevas: typeof data.entradas = [];
     const conflictos: string[] = [];
@@ -132,7 +139,9 @@ export const importarDiccionario = createServerFn({ method: "POST" })
         continue;
       }
       if (actual.trim().toLowerCase() !== e.nombre.trim().toLowerCase()) {
-        conflictos.push(`${e.tipo} ${e.codigo}: el diccionario dice «${actual}» y el archivo «${e.nombre}»`);
+        conflictos.push(
+          `${e.tipo} ${e.codigo}: el diccionario dice «${actual}» y el archivo «${e.nombre}»`,
+        );
       }
     }
     if (nuevas.length) {

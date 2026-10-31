@@ -11,7 +11,9 @@ export function esTransitorio(e: unknown): boolean {
   const texto = [e instanceof Error ? e.message : String(e), o["status"], o["code"]]
     .filter((x) => x !== undefined && x !== null)
     .join(" ");
-  return /\b(500|502|503|504|429)\b|UNAVAILABLE|high demand|overload|RESOURCE_EXHAUSTED/i.test(texto);
+  return /\b(500|502|503|504|429)\b|UNAVAILABLE|high demand|overload|RESOURCE_EXHAUSTED/i.test(
+    texto,
+  );
 }
 
 const ESPERAS = [1000, 2000, 4000];

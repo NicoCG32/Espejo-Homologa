@@ -34,7 +34,10 @@ export function ReiniciarDatos() {
         <AlertTriangle aria-hidden="true" />
         <div>
           <strong>Reiniciar todos los datos</strong>
-          <small>Borra empresas, cargos, bandas e historial de homologaciones. El diccionario y los criterios se conservan.</small>
+          <small>
+            Borra empresas, cargos, bandas e historial de homologaciones. El diccionario y los
+            criterios se conservan.
+          </small>
         </div>
         <Button type="button" variant="outline" size="sm" onClick={() => setAbierto((v) => !v)}>
           {abierto ? "Cancelar" : "Eliminar datos"}
@@ -42,8 +45,14 @@ export function ReiniciarDatos() {
       </div>
       {abierto && (
         <div className="danger-confirm">
-          <p>Para confirmar, escribe <strong>ELIMINAR</strong>.</p>
-          <input value={confirmacion} onChange={(e) => setConfirmacion(e.target.value)} placeholder="ELIMINAR" />
+          <p>
+            Para confirmar, escribe <strong>ELIMINAR</strong>.
+          </p>
+          <input
+            value={confirmacion}
+            onChange={(e) => setConfirmacion(e.target.value)}
+            placeholder="ELIMINAR"
+          />
           <Button
             type="button"
             variant="destructive"

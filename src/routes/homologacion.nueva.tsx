@@ -6,7 +6,11 @@ import { useEffect, useState } from "react";
 import { listCargos } from "@/lib/cargos.functions";
 import { listCriterios } from "@/lib/criterios.functions";
 import { PesosEditor, pesosIniciales } from "@/components/pesos-editor";
-import { analizarSemantica, ejecutarHomologacion, listHomologados } from "@/lib/homologacion.functions";
+import {
+  analizarSemantica,
+  ejecutarHomologacion,
+  listHomologados,
+} from "@/lib/homologacion.functions";
 import {
   ArrowLeft,
   ArrowRight,
@@ -87,16 +91,32 @@ function NuevaHomologacion() {
   const activos = criterios.data ?? [];
   const totalPesos = activos.reduce((s, c) => s + Number(pesos[c.id] ?? 0), 0);
 
-
   const faltantes: { texto: string; to: "/cargos" | "/criterios"; pestana: string }[] = [];
   if (!cargos.isLoading && !internos.length)
-    faltantes.push({ texto: "No hay cargos internos cargados; carga al menos uno.", to: "/cargos", pestana: "Cargos" });
+    faltantes.push({
+      texto: "No hay cargos internos cargados; carga al menos uno.",
+      to: "/cargos",
+      pestana: "Cargos",
+    });
   if (!cargos.isLoading && !referencias.length)
-    faltantes.push({ texto: "No hay cargos de referencia para comparar; carga el catálogo de la encuesta.", to: "/cargos", pestana: "Cargos" });
+    faltantes.push({
+      texto: "No hay cargos de referencia para comparar; carga el catálogo de la encuesta.",
+      to: "/cargos",
+      pestana: "Cargos",
+    });
   if (!criterios.isLoading && !activos.length)
-    faltantes.push({ texto: "No hay criterios de comparación definidos.", to: "/criterios", pestana: "Criterios" });
+    faltantes.push({
+      texto: "No hay criterios de comparación definidos.",
+      to: "/criterios",
+      pestana: "Criterios",
+    });
   else if (!criterios.isLoading && totalPesos <= 0)
-    faltantes.push({ texto: "Toda la ponderación está en 0%: asigna porcentaje a al menos un criterio o carga una configuración guardada.", to: "/criterios", pestana: "Criterios" });
+    faltantes.push({
+      texto:
+        "Toda la ponderación está en 0%: asigna porcentaje a al menos un criterio o carga una configuración guardada.",
+      to: "/criterios",
+      pestana: "Criterios",
+    });
 
   useEffect(() => {
     if (!activos.length) return;
@@ -104,7 +124,13 @@ function NuevaHomologacion() {
   }, [criterios.data]);
 
   const mut = useMutation({
-    mutationFn: () => ejecutar({ data: { cargo_id: cargoId, pesos: activos.map((c) => ({ id: c.id, peso: Number(pesos[c.id] ?? 0) })) } }),
+    mutationFn: () =>
+      ejecutar({
+        data: {
+          cargo_id: cargoId,
+          pesos: activos.map((c) => ({ id: c.id, peso: Number(pesos[c.id] ?? 0) })),
+        },
+      }),
     onMutate: () => {
       setError(null);
       setSemError(null);
@@ -146,7 +172,6 @@ function NuevaHomologacion() {
     "Paso 2 de 3: comparando misión, formación y experiencia. Esto puede tardar unos segundos.",
     "Paso 3 de 3: el primer motor está saturado; consultando el motor de respaldo para no perder tu avance.",
   ];
-
 
   const res = mut.data;
   const semOk = sem.data && sem.data.ok ? sem.data : null;
@@ -196,7 +221,6 @@ function NuevaHomologacion() {
         }
       : null;
 
-
   return (
     <div className="process-page">
       <div className="page-heading">
@@ -212,11 +236,7 @@ function NuevaHomologacion() {
       <ol className="wizard-steps">
         {PASOS.map((p, i) => (
           <li key={p} className={i + 1 === paso ? "current" : i + 1 < paso ? "done" : ""}>
-            <button
-              type="button"
-              disabled={i + 1 > maxPaso}
-              onClick={() => setPaso(i + 1)}
-            >
+            <button type="button" disabled={i + 1 > maxPaso} onClick={() => setPaso(i + 1)}>
               <span>{i + 1}</span>
               {p}
             </button>
@@ -255,9 +275,6 @@ function NuevaHomologacion() {
         </aside>
       )}
 
-
-
-
       {paso === 1 && (
         <form
           className="selection-panel"
@@ -281,21 +298,29 @@ function NuevaHomologacion() {
               />
             </div>
             <div className="filter-chips" role="group" aria-label="Estado de homologación">
-              {([["", "Todos"], ["PENDIENTE", "Pendientes"], ["HOMOLOGADO", "Homologados"]] as const).map(
-                ([valor, texto]) => (
-                  <button
-                    type="button"
-                    key={texto}
-                    aria-pressed={filtroEstado === valor}
-                    onClick={() => setFiltroEstado(valor)}
-                  >
-                    {texto}
-                  </button>
-                ),
-              )}
+              {(
+                [
+                  ["", "Todos"],
+                  ["PENDIENTE", "Pendientes"],
+                  ["HOMOLOGADO", "Homologados"],
+                ] as const
+              ).map(([valor, texto]) => (
+                <button
+                  type="button"
+                  key={texto}
+                  aria-pressed={filtroEstado === valor}
+                  onClick={() => setFiltroEstado(valor)}
+                >
+                  {texto}
+                </button>
+              ))}
             </div>
             {cargos.isLoading || homologados.isLoading ? (
-              <div className="cargo-picker-list" role="status" aria-label="Cargando cargos internos">
+              <div
+                className="cargo-picker-list"
+                role="status"
+                aria-label="Cargando cargos internos"
+              >
                 <span className="sr-only">Cargando cargos internos…</span>
                 {Array.from({ length: 5 }, (_, i) => (
                   <div className="cargo-option" key={i}>
@@ -352,14 +377,18 @@ function NuevaHomologacion() {
             )}
           </div>
 
-
-          <details className="criteria-summary"><summary>Ajustar ponderación de esta homologación</summary><div>
-            {criterios.isLoading
-              ? <CardsSkeleton count={3} />
-              : activos.length
-                ? <PesosEditor criterios={activos} pesos={pesos} onChange={setPesos} />
-                : "ninguna definida"}
-          </div></details>
+          <details className="criteria-summary">
+            <summary>Ajustar ponderación de esta homologación</summary>
+            <div>
+              {criterios.isLoading ? (
+                <CardsSkeleton count={3} />
+              ) : activos.length ? (
+                <PesosEditor criterios={activos} pesos={pesos} onChange={setPesos} />
+              ) : (
+                "ninguna definida"
+              )}
+            </div>
+          </details>
 
           {faltantes.length > 0 && (
             <div className="missing-panel">
@@ -368,15 +397,27 @@ function NuevaHomologacion() {
                 {faltantes.map((f) => (
                   <li key={f.texto}>
                     {f.texto}{" "}
-                    <Link to={f.to}>Ir a {f.pestana} <ArrowRight aria-hidden="true" /></Link>
+                    <Link to={f.to}>
+                      Ir a {f.pestana} <ArrowRight aria-hidden="true" />
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
           )}
 
-          <Button type="submit" disabled={mut.isPending || !cargoId || faltantes.length > 0} size="lg">
-            {mut.isPending ? "Buscando equivalencias…" : <>Encontrar candidatos <ArrowRight /></>}
+          <Button
+            type="submit"
+            disabled={mut.isPending || !cargoId || faltantes.length > 0}
+            size="lg"
+          >
+            {mut.isPending ? (
+              "Buscando equivalencias…"
+            ) : (
+              <>
+                Encontrar candidatos <ArrowRight />
+              </>
+            )}
           </Button>
           {mut.isPending && (
             <div className="skeleton-action">
@@ -389,7 +430,9 @@ function NuevaHomologacion() {
 
       {res && paso === 2 && (
         <section className="rounded-lg border p-4">
-          <h2 className="mb-2 font-medium"><ShieldCheck /> Cargo revisado</h2>
+          <h2 className="mb-2 font-medium">
+            <ShieldCheck /> Cargo revisado
+          </h2>
           <p className="text-sm">
             {res.evaluados} cargos de referencia revisados
             {res.pesoTotal <= 0 && " — no hay criterios activos para comparar"}
@@ -400,22 +443,30 @@ function NuevaHomologacion() {
       {res && paso === 3 && (
         <div className="space-y-6">
           <section className="rounded-lg border p-4">
-            <h2 className="mb-2 font-medium"><CheckCircle2 /> Candidatos preseleccionados</h2>
+            <h2 className="mb-2 font-medium">
+              <CheckCircle2 /> Candidatos preseleccionados
+            </h2>
             {!res.preseleccionados.length ? (
               <p className="text-sm text-muted-foreground">Ninguno.</p>
             ) : (
-              <div className="score-table"><div className="score-row score-head"><span>Candidato</span>
-                {([["motor", "Score motor"], ["sem", "Score semántico"], ["final", "Score final"]] as const).map(
-                  ([col, texto]) => (
+              <div className="score-table">
+                <div className="score-row score-head">
+                  <span>Candidato</span>
+                  {(
+                    [
+                      ["motor", "Score motor"],
+                      ["sem", "Score semántico"],
+                      ["final", "Score final"],
+                    ] as const
+                  ).map(([col, texto]) => (
                     <span key={col}>
                       <button type="button" className="th-sort" onClick={() => ordenarScore(col)}>
                         {texto}
                         {ordenScore.col === col ? (ordenScore.asc ? " ↑" : " ↓") : ""}
                       </button>
                     </span>
-                  ),
-                )}
-              </div>
+                  ))}
+                </div>
                 {preOrdenados.map((p, i) => {
                   const s = semOk?.analisis.scores_por_candidato.find(
                     (item) => item.candidato_id === p.cargo.id,
@@ -470,9 +521,6 @@ function NuevaHomologacion() {
             )}
           </section>
 
-
-
-
           <details className="panel-colapsable rounded-lg border p-4">
             <summary>
               <Users aria-hidden="true" /> Candidatos no compatibles ({res.descartados.length}) —
@@ -491,14 +539,14 @@ function NuevaHomologacion() {
               </ul>
             )}
           </details>
-
-
         </div>
       )}
 
       {res && paso === 4 && (
         <section className="rounded-lg border p-4">
-          <h2 className="mb-2 font-medium"><Bot /> Análisis IA</h2>
+          <h2 className="mb-2 font-medium">
+            <Bot /> Análisis IA
+          </h2>
           <p className="mb-3 text-sm text-muted-foreground">
             Se revisan los {res.preseleccionados.length} candidatos preseleccionados.
           </p>
@@ -550,7 +598,10 @@ function NuevaHomologacion() {
                 {semOk.analisis.confianza}
               </p>
               <ul className="space-y-2">
-                {ordenarPorPuntaje(semOk.analisis.scores_por_candidato, (s) => s.score_semantico).map((s) => (
+                {ordenarPorPuntaje(
+                  semOk.analisis.scores_por_candidato,
+                  (s) => s.score_semantico,
+                ).map((s) => (
                   <li key={s.candidato_id} className="border-b pb-2">
                     <p>
                       <strong>
@@ -570,7 +621,9 @@ function NuevaHomologacion() {
 
       {res && paso === 5 && (
         <section className="rounded-lg border p-4">
-          <h2 className="mb-2 font-medium"><Flag /> Decisión</h2>
+          <h2 className="mb-2 font-medium">
+            <Flag /> Decisión
+          </h2>
           <p className="text-sm">
             Cargo analizado: <strong>{res.cargo.nombre}</strong> · {res.preseleccionados.length}{" "}
             candidatos preseleccionados
@@ -654,15 +707,11 @@ function NuevaHomologacion() {
           </div>
           {(() => {
             const sel =
-              res.preseleccionados.find((p) => p.cargo.id === espejoId) ??
-              res.preseleccionados[0]!;
+              res.preseleccionados.find((p) => p.cargo.id === espejoId) ?? res.preseleccionados[0]!;
             return <VistaEspejo interno={res.cargo} candidato={sel.cargo} />;
           })()}
         </section>
       )}
-
-
     </div>
   );
 }
-

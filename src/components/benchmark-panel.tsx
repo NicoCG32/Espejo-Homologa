@@ -87,7 +87,8 @@ export function BenchmarkPanel({
   const [error, setError] = useState<string | null>(null);
 
   const mut = useMutation({
-    mutationFn: (t: "P" | "M" | "G") => guardar({ data: { ejecucion_id: ejecucionId, tamano_empresa: t } }),
+    mutationFn: (t: "P" | "M" | "G") =>
+      guardar({ data: { ejecucion_id: ejecucionId, tamano_empresa: t } }),
     onSuccess: () => qc.invalidateQueries({ queryKey: ["ejecucion", ejecucionId] }),
     onError: (e: Error) => setError(e.message),
   });
@@ -108,13 +109,22 @@ export function BenchmarkPanel({
   return (
     <div className="space-y-3 text-sm">
       <dl className="benchmark-grid">
-        <div><dt>Cargo interno</dt><dd>{cargoInterno || ND}</dd></div>
-        <div><dt>Cargo de referencia confirmado</dt><dd>{cargoReferencia || ND}</dd></div>
+        <div>
+          <dt>Cargo interno</dt>
+          <dd>{cargoInterno || ND}</dd>
+        </div>
+        <div>
+          <dt>Cargo de referencia confirmado</dt>
+          <dd>{cargoReferencia || ND}</dd>
+        </div>
         <div>
           <dt>Fuente</dt>
           <dd>{banda?.fuente?.trim() ? banda.fuente : ND}</dd>
         </div>
-        <div><dt>Año</dt><dd>{banda?.anio ?? ND}</dd></div>
+        <div>
+          <dt>Año</dt>
+          <dd>{banda?.anio ?? ND}</dd>
+        </div>
       </dl>
 
       <label className="block">
@@ -131,7 +141,9 @@ export function BenchmarkPanel({
         >
           <option value="">Selecciona…</option>
           {TAMANOS.map((t) => (
-            <option key={t.valor} value={t.valor}>{t.etiqueta}</option>
+            <option key={t.valor} value={t.valor}>
+              {t.etiqueta}
+            </option>
           ))}
         </select>
       </label>
@@ -166,38 +178,66 @@ export function BenchmarkPanel({
           </p>
         </div>
       ) : (
-
         <div className="benchmark-comparison">
-          <div className="benchmark-chart" aria-label="Gráfico comparativo de remuneración y mercado">
+          <div
+            className="benchmark-chart"
+            aria-label="Gráfico comparativo de remuneración y mercado"
+          >
             <h3>Comparación visual</h3>
             <div className="benchmark-chart-plot">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={datosGrafico} margin={{ top: 28, right: 8, left: 2, bottom: 0 }}>
                   <CartesianGrid vertical={false} stroke="var(--border)" />
-                  <XAxis dataKey="indicador" axisLine={false} tickLine={false} tick={false} height={1} />
-                  <YAxis axisLine={false} tickLine={false} width={54} tickFormatter={etiquetaGrafico} tick={{ fill: "var(--muted-foreground)", fontSize: 10 }} />
+                  <XAxis
+                    dataKey="indicador"
+                    axisLine={false}
+                    tickLine={false}
+                    tick={false}
+                    height={1}
+                  />
+                  <YAxis
+                    axisLine={false}
+                    tickLine={false}
+                    width={54}
+                    tickFormatter={etiquetaGrafico}
+                    tick={{ fill: "var(--muted-foreground)", fontSize: 10 }}
+                  />
                   <Tooltip
                     cursor={{ fill: "var(--muted)" }}
-                    formatter={(v) => [v == null ? ND : valorExactoGrafico(Number(v)), "Remuneración"]}
+                    formatter={(v) => [
+                      v == null ? ND : valorExactoGrafico(Number(v)),
+                      "Remuneración",
+                    ]}
                     labelStyle={{ color: "var(--foreground)", fontWeight: 600 }}
                     itemStyle={{ color: "var(--foreground)" }}
-                    contentStyle={{ background: "var(--card)", color: "var(--foreground)", border: "1px solid var(--border)", borderRadius: 6 }}
+                    contentStyle={{
+                      background: "var(--card)",
+                      color: "var(--foreground)",
+                      border: "1px solid var(--border)",
+                      borderRadius: 6,
+                    }}
                   />
                   <Bar dataKey="valor" radius={[5, 5, 0, 0]} maxBarSize={64}>
                     {datosGrafico.map((dato) => (
                       <Cell key={dato.indicador} fill="var(--chart-2)" />
                     ))}
-                    <LabelList dataKey="valor" position="top" formatter={(v: number) => valorExactoGrafico(v)} className="benchmark-chart-label" />
+                    <LabelList
+                      dataKey="valor"
+                      position="top"
+                      formatter={(v: number) => valorExactoGrafico(v)}
+                      className="benchmark-chart-label"
+                    />
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
             </div>
             <div className="benchmark-chart-boxes" aria-hidden="true">
-              {datosGrafico.map((dato) => <span key={dato.indicador}>{dato.indicador}</span>)}
+              {datosGrafico.map((dato) => (
+                <span key={dato.indicador}>{dato.indicador}</span>
+              ))}
               <strong>Encuesta</strong>
             </div>
           </div>
-
         </div>
       )}
 
@@ -221,7 +261,8 @@ export function BenchmarkPanel({
                 const d = e != null && m != null ? e - m : null;
                 const p = d != null && m ? (d / m) * 100 : null;
                 const signo = (x: number) => (x > 0 ? "+" : x < 0 ? "−" : "");
-                const cls = d == null ? "brecha-nd" : d > 0 ? "brecha-pos" : d < 0 ? "brecha-neg" : "";
+                const cls =
+                  d == null ? "brecha-nd" : d > 0 ? "brecha-pos" : d < 0 ? "brecha-neg" : "";
                 return (
                   <tr key={f.etiqueta}>
                     <td data-label="Estadígrafo">{f.etiqueta}</td>

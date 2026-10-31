@@ -6,8 +6,12 @@ import { createServerFn } from "@tanstack/react-start";
  */
 export const limpiarDatos = createServerFn({ method: "POST" })
   .inputValidator((input: { confirmacion: string }) => {
-    if (String(input?.confirmacion ?? "").trim().toUpperCase() !== "ELIMINAR") {
-      throw new Error('Debes escribir ELIMINAR para confirmar');
+    if (
+      String(input?.confirmacion ?? "")
+        .trim()
+        .toUpperCase() !== "ELIMINAR"
+    ) {
+      throw new Error("Debes escribir ELIMINAR para confirmar");
     }
     return { ok: true as const };
   })

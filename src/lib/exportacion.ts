@@ -14,11 +14,26 @@ export type FilaCandidato = {
 };
 
 export type DatosInforme = {
-  cargo: { codigo: string; nombre: string; empresa: string; area: string; subarea: string; nivel: string; sueldo: number | null };
+  cargo: {
+    codigo: string;
+    nombre: string;
+    empresa: string;
+    area: string;
+    subarea: string;
+    nivel: string;
+    sueldo: number | null;
+  };
   referencia: { nombre: string; codigo: string; empresa: string };
   decision: { analista: string; fecha: string | null; comentario: string; tamano: string };
   ia: { modelo: string; confianza: number | string | null; explicacion: string };
-  banda: { p25: number | null; p50: number | null; p75: number | null; promedio: number | null; fuente: string; anio: string | number | null } | null;
+  banda: {
+    p25: number | null;
+    p50: number | null;
+    p75: number | null;
+    promedio: number | null;
+    fuente: string;
+    anio: string | number | null;
+  } | null;
   candidatos: FilaCandidato[];
   fechaEjecucion: string | null;
 };
@@ -29,7 +44,9 @@ export function brechas(d: DatosInforme) {
   const s = d.cargo.sueldo;
   const b = d.banda;
   return (["P25", "P50", "P75", "Promedio"] as const).map((k) => {
-    const enc = num(b ? (k === "Promedio" ? b.promedio : b[k.toLowerCase() as "p25" | "p50" | "p75"]) : null);
+    const enc = num(
+      b ? (k === "Promedio" ? b.promedio : b[k.toLowerCase() as "p25" | "p50" | "p75"]) : null,
+    );
     const dif = s != null && enc != null ? s - enc : null;
     const pct = dif != null && enc ? (dif / enc) * 100 : null;
     return { k, enc, emp: s, dif, pct };
@@ -37,7 +54,13 @@ export function brechas(d: DatosInforme) {
 }
 
 export function nombreArchivo(d: DatosInforme, ext: string) {
-  const n = d.cargo.nombre.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^A-Za-z0-9]+/g, "_").replace(/^_+|_+$/g, "").slice(0, 60) || "cargo";
+  const n =
+    d.cargo.nombre
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^A-Za-z0-9]+/g, "_")
+      .replace(/^_+|_+$/g, "")
+      .slice(0, 60) || "cargo";
   const f = new Date(d.fechaEjecucion ?? Date.now()).toISOString().slice(0, 10);
   return `homologacion_${n}_${f}.${ext}`;
 }
@@ -74,16 +97,30 @@ export async function exportarExcel(d: DatosInforme) {
   const cand = [
     ["Código", "Cargo", "Empresa", "Selección", "Score motor", "Score semántico", "Score final"],
     ...d.candidatos.map((c) => [
-      c.codigo, c.nombre, c.empresa, c.definitivo ? "Definitivo" : "Preseleccionado",
-      c.motor != null ? c.motor : "", c.semantico != null ? c.semantico / 100 : "", c.final != null ? c.final : "",
+      c.codigo,
+      c.nombre,
+      c.empresa,
+      c.definitivo ? "Definitivo" : "Preseleccionado",
+      c.motor != null ? c.motor : "",
+      c.semantico != null ? c.semantico / 100 : "",
+      c.final != null ? c.final : "",
     ]),
   ];
   const h2 = XLSX.utils.aoa_to_sheet(cand);
-  for (let r = 1; r < cand.length; r++) for (const c of ["E", "F", "G"]) {
-    const cell = h2[`${c}${r + 1}`];
-    if (cell && typeof cell.v === "number") cell.z = "0.0%";
-  }
-  h2["!cols"] = [{ wch: 14 }, { wch: 40 }, { wch: 28 }, { wch: 16 }, { wch: 13 }, { wch: 15 }, { wch: 12 }];
+  for (let r = 1; r < cand.length; r++)
+    for (const c of ["E", "F", "G"]) {
+      const cell = h2[`${c}${r + 1}`];
+      if (cell && typeof cell.v === "number") cell.z = "0.0%";
+    }
+  h2["!cols"] = [
+    { wch: 14 },
+    { wch: 40 },
+    { wch: 28 },
+    { wch: 16 },
+    { wch: 13 },
+    { wch: 15 },
+    { wch: 12 },
+  ];
   XLSX.utils.book_append_sheet(libro, h2, "Candidatos y scores");
 
   const rows: (string | number | null)[][] = [
@@ -92,16 +129,39 @@ export async function exportarExcel(d: DatosInforme) {
   brechas(d).forEach((b, i) => {
     const r = i + 2;
     rows.push([
-      b.k, b.enc ?? "No disponible", b.emp ?? "No informada",
+      b.k,
+      b.enc ?? "No disponible",
+      b.emp ?? "No informada",
       b.enc != null && b.emp != null ? `=C${r}-B${r}` : "No disponible",
       b.enc != null && b.emp != null && b.enc !== 0 ? `=(C${r}-B${r})/B${r}` : "No disponible",
     ]);
   });
-  rows.push([], ["Fuente", d.banda?.fuente ?? ""], ["Año", d.banda?.anio ?? ""], ["Tamaño", d.decision.tamano]);
+  rows.push(
+    [],
+    ["Fuente", d.banda?.fuente ?? ""],
+    ["Año", d.banda?.anio ?? ""],
+    ["Tamaño", d.decision.tamano],
+  );
   const h3 = XLSX.utils.aoa_to_sheet(rows);
   for (let r = 2; r <= 5; r++) {
-    for (const c of ["B", "C", "D"]) { const x = h3[`${c}${r}`]; if (x) { if (typeof x.v === "string" && x.v.startsWith("=")) { x.f = x.v.slice(1); x.t = "n"; delete x.v; } if (x.t === "n") x.z = "$#,##0;($#,##0);-"; } }
-    const e = h3[`E${r}`]; if (e && typeof e.v === "string" && e.v.startsWith("=")) { e.f = e.v.slice(1); e.t = "n"; delete e.v; e.z = "0.0%"; }
+    for (const c of ["B", "C", "D"]) {
+      const x = h3[`${c}${r}`];
+      if (x) {
+        if (typeof x.v === "string" && x.v.startsWith("=")) {
+          x.f = x.v.slice(1);
+          x.t = "n";
+          delete x.v;
+        }
+        if (x.t === "n") x.z = "$#,##0;($#,##0);-";
+      }
+    }
+    const e = h3[`E${r}`];
+    if (e && typeof e.v === "string" && e.v.startsWith("=")) {
+      e.f = e.v.slice(1);
+      e.t = "n";
+      delete e.v;
+      e.z = "0.0%";
+    }
   }
   h3["!cols"] = [{ wch: 14 }, { wch: 16 }, { wch: 22 }, { wch: 16 }, { wch: 12 }];
   XLSX.utils.book_append_sheet(libro, h3, "Comparación salarial");
@@ -109,8 +169,13 @@ export async function exportarExcel(d: DatosInforme) {
   XLSX.writeFile(libro, nombreArchivo(d, "xlsx"));
 }
 
-const esc = (s: unknown) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!);
-const clp = (v: number | null) => (v == null ? "No disponible" : `$${Math.round(v).toLocaleString("es-CL")}`);
+const esc = (s: unknown) =>
+  String(s ?? "").replace(
+    /[&<>"]/g,
+    (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]!,
+  );
+const clp = (v: number | null) =>
+  v == null ? "No disponible" : `$${Math.round(v).toLocaleString("es-CL")}`;
 const pc = (v: number | null, f = 1) => (v == null ? "—" : `${(v * f).toFixed(1)}%`);
 
 function grafico(d: DatosInforme) {
@@ -118,13 +183,20 @@ function grafico(d: DatosInforme) {
   const vals = items.flatMap((i) => [i.enc, i.emp]).filter((v): v is number => v != null);
   if (!vals.length) return `<p class="muted">Sin datos de mercado para graficar.</p>`;
   const max = Math.max(...vals) * 1.1;
-  const W = 640, H = 220, base = 190, gw = W / 4;
+  const W = 640,
+    H = 220,
+    base = 190,
+    gw = W / 4;
   const bar = (x: number, v: number | null, color: string) =>
-    v == null ? "" : `<rect x="${x}" y="${base - (v / max) * 170}" width="40" height="${(v / max) * 170}" fill="${color}" rx="3"/>`;
-  const g = items.map((i, n) => {
-    const x = n * gw + gw / 2 - 44;
-    return `${bar(x, i.enc, "#1E3A8A")}${bar(x + 48, i.emp, "#14B8A6")}<text x="${n * gw + gw / 2}" y="${base + 18}" text-anchor="middle" font-size="12" fill="#334155">${i.k}</text>`;
-  }).join("");
+    v == null
+      ? ""
+      : `<rect x="${x}" y="${base - (v / max) * 170}" width="40" height="${(v / max) * 170}" fill="${color}" rx="3"/>`;
+  const g = items
+    .map((i, n) => {
+      const x = n * gw + gw / 2 - 44;
+      return `${bar(x, i.enc, "#1E3A8A")}${bar(x + 48, i.emp, "#14B8A6")}<text x="${n * gw + gw / 2}" y="${base + 18}" text-anchor="middle" font-size="12" fill="#334155">${i.k}</text>`;
+    })
+    .join("");
   return `<svg viewBox="0 0 ${W} ${H}" width="100%"><line x1="0" y1="${base}" x2="${W}" y2="${base}" stroke="#CBD5E1"/>${g}</svg>
   <div class="legend"><span><i style="background:#1E3A8A"></i>Encuesta</span><span><i style="background:#14B8A6"></i>Remuneración empresa</span></div>`;
 }
@@ -133,8 +205,18 @@ export function abrirInformePdf(d: DatosInforme) {
   const w = window.open("", "_blank");
   if (!w) return false;
   const logo = new URL(lightLogo.url, window.location.origin).toString();
-  const filas = brechas(d).map((b) => `<tr><td>${b.k}</td><td>${clp(b.enc)}</td><td>${b.emp == null ? "No informada" : clp(b.emp)}</td><td>${b.dif == null ? "No disponible" : clp(b.dif)}</td><td>${b.pct == null ? "No disponible" : `${b.pct.toFixed(1)}%`}</td></tr>`).join("");
-  const cand = d.candidatos.map((c) => `<tr class="${c.definitivo ? "def" : ""}"><td>${esc(c.nombre)}<div class="muted">${esc(c.codigo)} · ${esc(c.empresa)}</div></td><td>${c.definitivo ? "Definitivo" : "Preseleccionado"}</td><td>${pc(c.motor, 100)}</td><td>${c.semantico == null ? "—" : `${c.semantico}%`}</td><td>${pc(c.final, 100)}</td></tr>`).join("");
+  const filas = brechas(d)
+    .map(
+      (b) =>
+        `<tr><td>${b.k}</td><td>${clp(b.enc)}</td><td>${b.emp == null ? "No informada" : clp(b.emp)}</td><td>${b.dif == null ? "No disponible" : clp(b.dif)}</td><td>${b.pct == null ? "No disponible" : `${b.pct.toFixed(1)}%`}</td></tr>`,
+    )
+    .join("");
+  const cand = d.candidatos
+    .map(
+      (c) =>
+        `<tr class="${c.definitivo ? "def" : ""}"><td>${esc(c.nombre)}<div class="muted">${esc(c.codigo)} · ${esc(c.empresa)}</div></td><td>${c.definitivo ? "Definitivo" : "Preseleccionado"}</td><td>${pc(c.motor, 100)}</td><td>${c.semantico == null ? "—" : `${c.semantico}%`}</td><td>${pc(c.final, 100)}</td></tr>`,
+    )
+    .join("");
   const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><title>${esc(nombreArchivo(d, "pdf"))}</title>
 <style>
 @page{size:A4;margin:14mm}*{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}

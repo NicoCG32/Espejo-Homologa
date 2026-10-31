@@ -42,7 +42,6 @@ export type CargoMotor = {
   empresa_nombre: string | null;
 };
 
-
 export type DetalleCriterio = {
   criterio: string;
   campo: CriterioCampo;
@@ -248,7 +247,6 @@ const ETIQUETA_CAMPO: Record<CriterioCampo, string> = {
   experiencia: "experiencia requerida",
   requisitos: "requisitos / formación",
 };
-
 
 export function ejecutarMotor(
   interno: CargoMotor,

@@ -14,8 +14,7 @@ export const Route = createFileRoute("/")({
       { title: "Inicio — Espejo: Homologa" },
       {
         name: "description",
-        content:
-          "Selecciona un cargo y encuentra sus equivalentes con Espejo: Homologa.",
+        content: "Selecciona un cargo y encuentra sus equivalentes con Espejo: Homologa.",
       },
       { property: "og:title", content: "Espejo: Homologa" },
       {
@@ -48,7 +47,10 @@ function Index() {
         <div>
           <p className="eyebrow">Bienvenido a Espejo: Homologa</p>
           <h1>¿Qué cargo quieres homologar?</h1>
-          <p>Selecciona un cargo para encontrar equivalencias y tomar una decisión con información clara.</p>
+          <p>
+            Selecciona un cargo para encontrar equivalencias y tomar una decisión con información
+            clara.
+          </p>
           <Link to="/homologacion/nueva" className="primary-action">
             <Search aria-hidden="true" /> Seleccionar cargo <ArrowRight aria-hidden="true" />
           </Link>
@@ -62,27 +64,52 @@ function Index() {
         <div className="avance-grid">
           <article className="avance-card">
             <span>Cargos internos</span>
-            {cargos.isLoading ? <Skeleton className="skeleton-title" /> : <strong>{internos.length}</strong>}
+            {cargos.isLoading ? (
+              <Skeleton className="skeleton-title" />
+            ) : (
+              <strong>{internos.length}</strong>
+            )}
             <small>En el catálogo de tu empresa</small>
           </article>
           <article className="avance-card">
             <span>Ya homologados</span>
-            {cargos.isLoading || homologados.isLoading ? <Skeleton className="skeleton-title" /> : <strong>{completados}</strong>}
+            {cargos.isLoading || homologados.isLoading ? (
+              <Skeleton className="skeleton-title" />
+            ) : (
+              <strong>{completados}</strong>
+            )}
             <small>Con decisión registrada</small>
           </article>
           <article className="avance-card">
             <span>Pendientes</span>
-            {cargos.isLoading || homologados.isLoading ? <Skeleton className="skeleton-title" /> : <strong>{Math.max(0, pendientes)}</strong>}
+            {cargos.isLoading || homologados.isLoading ? (
+              <Skeleton className="skeleton-title" />
+            ) : (
+              <strong>{Math.max(0, pendientes)}</strong>
+            )}
             <small>Aún sin equivalencia elegida</small>
           </article>
         </div>
-        {cargos.isLoading || homologados.isLoading
-          ? <Skeleton className="avance-bar" />
-          : <div className="avance-bar" aria-hidden="true"><i style={{ width: `${avance}%` }} /></div>}
+        {cargos.isLoading || homologados.isLoading ? (
+          <Skeleton className="avance-bar" />
+        ) : (
+          <div className="avance-bar" aria-hidden="true">
+            <i style={{ width: `${avance}%` }} />
+          </div>
+        )}
         <div className="avance-foot">
           {cargos.isLoading || homologados.isLoading ? (
-            <><Skeleton className="skeleton-line skeleton-wide" /><Skeleton className="skeleton-pill" /></>
-          ) : <p>{internos.length ? `${avance}% del catálogo interno ya tiene una equivalencia decidida.` : "Aún no hay cargos internos cargados."}</p>}
+            <>
+              <Skeleton className="skeleton-line skeleton-wide" />
+              <Skeleton className="skeleton-pill" />
+            </>
+          ) : (
+            <p>
+              {internos.length
+                ? `${avance}% del catálogo interno ya tiene una equivalencia decidida.`
+                : "Aún no hay cargos internos cargados."}
+            </p>
+          )}
           {!cargos.isLoading && !homologados.isLoading && pendientes > 0 && (
             <Link to="/homologacion/nueva" className="primary-action">
               Homologar el siguiente pendiente <ArrowRight aria-hidden="true" />
@@ -93,13 +120,38 @@ function Index() {
 
       <section className="quick-grid" aria-label="Accesos rápidos">
         <Link to="/criterios" className="quick-featured">
-          <Settings2 /><span><strong>Criterios y pesos</strong><small>Ajusta cuánto pesa cada columna y guarda tus combinaciones.</small></span><ArrowRight />
+          <Settings2 />
+          <span>
+            <strong>Criterios y pesos</strong>
+            <small>Ajusta cuánto pesa cada columna y guarda tus combinaciones.</small>
+          </span>
+          <ArrowRight />
         </Link>
-        <Link to="/cargos"><BriefcaseBusiness /><span><strong>Cargos</strong><small>Revisa y administra los cargos disponibles.</small></span><ArrowRight /></Link>
-        <Link to="/historial"><History /><span><strong>Historial</strong><small>Consulta homologaciones y resultados anteriores.</small></span><ArrowRight /></Link>
-        <Link to="/empresas"><Building2 /><span><strong>Empresas</strong><small>Mantén actualizada la información de empresas.</small></span><ArrowRight /></Link>
+        <Link to="/cargos">
+          <BriefcaseBusiness />
+          <span>
+            <strong>Cargos</strong>
+            <small>Revisa y administra los cargos disponibles.</small>
+          </span>
+          <ArrowRight />
+        </Link>
+        <Link to="/historial">
+          <History />
+          <span>
+            <strong>Historial</strong>
+            <small>Consulta homologaciones y resultados anteriores.</small>
+          </span>
+          <ArrowRight />
+        </Link>
+        <Link to="/empresas">
+          <Building2 />
+          <span>
+            <strong>Empresas</strong>
+            <small>Mantén actualizada la información de empresas.</small>
+          </span>
+          <ArrowRight />
+        </Link>
       </section>
-
     </div>
   );
 }
