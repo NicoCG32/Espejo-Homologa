@@ -1,61 +1,31 @@
-# Identidad visual de Espejo-Homologa
+# Identidad visual · Espejo: Homologa
 
-Este catálogo reúne los originales y variantes de la identidad. Las dimensiones indican el lienzo del archivo: en SVG son unidades vectoriales; en PNG, WebP y JPG son píxeles.
+Esta identidad nació del contraste entre dos perspectivas frente a un mismo espejo. El azul profundo representa el lado interno del análisis; el turquesa, la referencia externa. Entre ambos aparece un espejo vertical y una red de conexiones: **el contenido es el puente para comparar, no el nombre del cargo ni su remuneración**.
 
-- [Banner claro](banners/espejo-banner-claro.png) · [Banner oscuro](banners/espejo-banner-oscuro.png).
-- Utiliza logos horizontales en cabeceras, isotipos en espacios compactos y banners en presentaciones. Conserva la proporción y deja espacio alrededor de la marca.
-- Los iconos cuadrados se reservan para favicon, PWA y aplicaciones; el archivo ICO contiene sus tamaños de navegador o escritorio.
-- Las variantes de mayor tamaño sirven para exportación. Ampliar un raster no añade detalle al original.
-- La aplicación carga sólo los recursos que necesita. Los originales de este catálogo se mantienen separados de las variantes de interfaz.
-- [Licencia y créditos](../LICENSING.md).
+## Qué recurso usar
 
-## Logos e isotipos
+| Uso | Variante clara | Variante oscura |
+| --- | --- | --- |
+| README principal o presentaciones | [Banner SVG](banners/espejo-banner-claro.svg) | [Banner SVG](banners/espejo-banner-oscuro.svg) |
+| Cabeceras y documentación | [Logo horizontal SVG](logos/espejo-logo-horizontal-claro.svg) | [Logo horizontal SVG](logos/espejo-logo-horizontal-oscuro.svg) |
+| Portadas cuadradas | [Portada SVG](portadas/espejo-identidad-cuadrada.svg) | [Portada SVG](portadas/espejo-identidad-cuadrada-oscura.svg) |
+| Espacios reducidos | [Isotipo SVG](logos/espejo-isotipo-transparente.svg) | [Isotipo SVG](logos/espejo-isotipo-transparente-oscuro.svg) |
 
-| Archivo                                                                                | Dimensiones | Formato |    Tamaño |
-| -------------------------------------------------------------------------------------- | ----------- | ------- | --------: |
-| [espejo-isotipo-transparente-oscuro.png](logos/espejo-isotipo-transparente-oscuro.png) | 1024 × 1024 | PNG     |  45.8 KiB |
-| [espejo-isotipo-transparente-oscuro.svg](logos/espejo-isotipo-transparente-oscuro.svg) | 1024 × 1024 | SVG     |   5.6 KiB |
-| [espejo-isotipo-transparente.png](logos/espejo-isotipo-transparente.png)               | 1024 × 1024 | PNG     |  63.7 KiB |
-| [espejo-isotipo-transparente.svg](logos/espejo-isotipo-transparente.svg)               | 1024 × 1024 | SVG     |   5.6 KiB |
-| [espejo-logo-horizontal-claro.png](logos/espejo-logo-horizontal-claro.png)             | 2440 × 660  | PNG     | 145.5 KiB |
-| [espejo-logo-horizontal-claro.svg](logos/espejo-logo-horizontal-claro.svg)             | 2440 × 660  | SVG     |  27.0 KiB |
-| [espejo-logo-horizontal-oscuro.png](logos/espejo-logo-horizontal-oscuro.png)           | 2440 × 660  | PNG     | 128.6 KiB |
-| [espejo-logo-horizontal-oscuro.svg](logos/espejo-logo-horizontal-oscuro.svg)           | 2440 × 660  | SVG     |  26.9 KiB |
+- Las variantes **claras** se usan sobre fondos claros y las **oscuras** sobre fondos oscuros.
+- Los SVG con nombre contienen «Espejo: Homologa» como texto convertido a trazados, sin depender de fuentes externas.
+- Los isotipos y los iconos se reservan para favicon, PWA y espacios pequeños donde el nombre completo no sería legible.
+- El `README.md` principal usa el banner y `docs/README.md` usa el logo horizontal con cambio automático según el tema de GitHub.
+- Los PNG equivalentes están renderizados a partir de los SVG de esta versión. Para otros tamaños, exporta desde el SVG y evita estirar imágenes rasterizadas.
+- No alteres el orden visual de «Espejo: Homologa», el color del espejo o la simetría de las siluetas. Conserva el espacio alrededor del logo.
 
-## Iconos de aplicación y navegador
+## Uso en la aplicación y tipografía
 
-| Archivo                                                           | Dimensiones | Formato |    Tamaño |
-| ----------------------------------------------------------------- | ----------- | ------- | --------: |
-| [apple-touch-icon.png](iconos/apple-touch-icon.png)               | 180 × 180   | PNG     |  24.3 KiB |
-| [espejo-icono-app-claro.png](iconos/espejo-icono-app-claro.png)   | 1024 × 1024 | PNG     | 290.5 KiB |
-| [espejo-icono-app-claro.svg](iconos/espejo-icono-app-claro.svg)   | 1024 × 1024 | SVG     |   6.0 KiB |
-| [espejo-icono-app-oscuro.png](iconos/espejo-icono-app-oscuro.png) | 1024 × 1024 | PNG     | 202.3 KiB |
-| [espejo-icono-app-oscuro.svg](iconos/espejo-icono-app-oscuro.svg) | 1024 × 1024 | SVG     |   5.9 KiB |
-| [favicon.png](iconos/favicon.png)                                 | 64 × 64     | PNG     |   5.5 KiB |
-| [icon-192.png](iconos/icon-192.png)                               | 192 × 192   | PNG     |  26.7 KiB |
-| [icon-256.png](iconos/icon-256.png)                               | 256 × 256   | PNG     |  39.9 KiB |
-| [icon-512.png](iconos/icon-512.png)                               | 512 × 512   | PNG     | 101.3 KiB |
+`branding/` conserva el catálogo para documentación y presentaciones; `public/brand/` contiene los recursos que sirve la aplicación. `LogoPrincipal` utiliza el logo horizontal para la portada y `LogoEspejo` el isotipo para navegación compacta. El informe imprimible usa el mismo logo horizontal claro de `public/brand/`.
 
-## Banners
+La interfaz usa **Epilogue** para texto y **Urbanist** para títulos, declaradas en `src/styles.css` y cargadas desde Google Fonts en `src/routes/__root.tsx`. El informe imprimible usa Arial/Helvetica como fuentes de sistema.
 
-| Archivo                                                      | Dimensiones | Formato |    Tamaño |
-| ------------------------------------------------------------ | ----------- | ------- | --------: |
-| [espejo-banner-claro.png](banners/espejo-banner-claro.png)   | 3000 × 1260 | PNG     | 733.7 KiB |
-| [espejo-banner-claro.svg](banners/espejo-banner-claro.svg)   | 3000 × 1260 | SVG     |  65.8 KiB |
-| [espejo-banner-oscuro.png](banners/espejo-banner-oscuro.png) | 3000 × 1260 | PNG     | 616.9 KiB |
-| [espejo-banner-oscuro.svg](banners/espejo-banner-oscuro.svg) | 3000 × 1260 | SVG     |  65.8 KiB |
+## Catálogo y créditos
 
-## Portadas y redes sociales
+El catálogo completo se encuentra en las carpetas `logos/`, `banners/`, `portadas/`, `iconos/` y `referencias/`. `manifest.json` registra dimensiones y sumas SHA-256 de cada recurso.
 
-| Archivo                                                                               | Dimensiones | Formato |    Tamaño |
-| ------------------------------------------------------------------------------------- | ----------- | ------- | --------: |
-| [espejo-identidad-cuadrada-oscura.png](portadas/espejo-identidad-cuadrada-oscura.png) | 1600 × 1600 | PNG     | 569.1 KiB |
-| [espejo-identidad-cuadrada-oscura.svg](portadas/espejo-identidad-cuadrada-oscura.svg) | 1600 × 1600 | SVG     |  44.2 KiB |
-| [espejo-identidad-cuadrada.png](portadas/espejo-identidad-cuadrada.png)               | 1600 × 1600 | PNG     | 772.3 KiB |
-| [espejo-identidad-cuadrada.svg](portadas/espejo-identidad-cuadrada.svg)               | 1600 × 1600 | SVG     |  44.2 KiB |
-
-## Referencias y originales
-
-| Archivo                                                                  | Dimensiones | Formato |    Tamaño |
-| ------------------------------------------------------------------------ | ----------- | ------- | --------: |
-| [espejo-homologa-original.jpg](referencias/espejo-homologa-original.jpg) | 1024 × 1024 | JPG     | 146.6 KiB |
+El archivo [original de referencia](referencias/espejo-homologa-original.jpg) se conserva para mantener el lenguaje visual. Consulta [licencias y créditos](../LICENSING.md) antes de reutilizar o distribuir los recursos.

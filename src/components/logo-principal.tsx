@@ -26,7 +26,7 @@ export function LogoPrincipal({
       <span className="logo-principal-skeleton" aria-hidden="true" />
       <img
         ref={detectarCarga}
-        src="/brand/espejo-logo-horizontal-claro.svg?v=2"
+        src="/brand/espejo-logo-horizontal-claro.svg?v=3"
         width={1467}
         height={488}
         alt=""
@@ -39,7 +39,7 @@ export function LogoPrincipal({
       />
       <img
         ref={detectarCarga}
-        src="/brand/espejo-logo-horizontal-oscuro.svg?v=2"
+        src="/brand/espejo-logo-horizontal-oscuro.svg?v=3"
         width={1467}
         height={488}
         alt=""

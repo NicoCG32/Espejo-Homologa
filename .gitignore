@@ -30,3 +30,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Lovable requires the root .env with public build-time configuration.
+# Private credentials belong in Lovable Secrets or ignored local overrides.
+.env.*
+!.env.example
+.dev.vars.*
+
+# Internal agent notes and local documentation archives
+/Agents/
+/AUDITORIA-*.md
+/docs/docs.zip

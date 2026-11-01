@@ -1,13 +1,22 @@
-# Roadmap
+# Roadmap · Espejo · Homologa
 
-- [x] Analizar los dos archivos cargados y definir el nuevo formato esperado
-- [x] Implementar carga masiva de cargos de empresa y catálogo según los nuevos archivos
-- [x] Permitir ajustar pesos por cada homologación
-- [x] Enviar formación y experiencia al análisis semántico
-- [x] Mostrar score del motor, score de Gemini y score final
-- [x] Pestaña Diccionario editable (áreas, subáreas, niveles) precargada
-- [x] Leer las tres planillas sin crear datos manuales
-- [x] Tamaño de empresa opcional con aviso en Empresas
-- [x] Documentar el proyecto en docs/ y renovar el README
-- [x] Incorporar tabla y gráfico comparativo al benchmark salarial
-- [x] Decisión en dos etapas: preselección múltiple y selección final única
+Estado de las funcionalidades y prioridades de desarrollo del piloto.
+
+## Base implementada en el repositorio
+
+- [x] Lectura y carga de cargos internos y referencias, con diccionario y bandas de encuesta.
+- [x] Motor determinístico con criterios ponderados y requisitos obligatorios.
+- [x] Normalización de experiencia/formación y análisis semántico asistido.
+- [x] Score motor, score IA y score híbrido; preselección múltiple y decisión definitiva única.
+- [x] Historial con benchmark e informes Excel/PDF imprimible.
+
+## Prioridades pendientes
+
+- [ ] Verificar y corregir autenticación/autorización de todas las funciones servidor.
+- [ ] Unificar o documentar procedimiento reproducible de migración desde base vacía.
+- [ ] Persistir versión del motor y pesos híbridos utilizados en cada cálculo.
+- [ ] Probar operaciones de preselección con transacciones/recuperación y concurrencia.
+- [ ] Automatizar pruebas de negocio, permisos e informes.
+- [ ] Validar flujo y precisión con analistas, datos autorizados y escenarios representativos.
+
+[Documentación](docs/README.md) · [Detalle de prioridades](docs/desarrollo/03-evolucion-y-prioridades.md).

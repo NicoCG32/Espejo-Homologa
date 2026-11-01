@@ -1,68 +1,70 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="branding/banners/espejo-banner-oscuro.png" />
-  <img src="branding/banners/espejo-banner-claro.png" alt="Identidad visual de Espejo-Homologa" width="100%" />
+  <source media="(prefers-color-scheme: dark)" srcset="branding/banners/espejo-banner-oscuro.svg" />
+  <img src="branding/banners/espejo-banner-claro.svg" alt="Espejo · Homologa: dos perspectivas de un mismo cargo" width="100%" />
 </picture>
 
-# Espejo-Homologa
+# Espejo · Homologa
 
-**Comparar por contenido. Decidir con trazabilidad.**
+**Comparar por contenido. Decidir con criterio.**
 
-[![Estado: Piloto](https://img.shields.io/badge/Estado-Piloto-91723F?style=flat-square&labelColor=263244)](#sobre-el-proyecto) [![Plataforma: Web / SSR](https://img.shields.io/badge/Plataforma-Web%20%2F%20SSR-386B8F?style=flat-square&labelColor=263244)](#usar-o-descargar) [![Licencia: PolyForm NC](https://img.shields.io/badge/Licencia-PolyForm%20NC-596273?style=flat-square&labelColor=263244)](LICENSING.md) [![Calidad](https://github.com/NicoCG32/Espejo-Homologa/actions/workflows/calidad.yml/badge.svg)](https://github.com/NicoCG32/Espejo-Homologa/actions/workflows/calidad.yml)
+**Espejo · Homologa** es un piloto web para profesionales que comparan cargos internos con referencias de encuestas salariales. Combina criterios ponderados y análisis asistido por IA para apoyar la decisión del analista, registrar los resultados y consultar bandas salariales. La referencia definitiva la confirma el profesional.
 
-[![React 19](https://img.shields.io/badge/React%2019-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](#tecnologías) [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=FFFFFF)](#tecnologías) [![TanStack Start](https://img.shields.io/badge/TanStack%20Start-155E75?style=for-the-badge&logo=tanstack&logoColor=FFFFFF)](#tecnologías) [![Supabase](https://img.shields.io/badge/Supabase-166534?style=for-the-badge&logo=supabase&logoColor=FFFFFF)](#tecnologías)
+[![Estado: piloto](https://img.shields.io/badge/Estado-Piloto-52647A?style=flat-square)](docs/general/01-proposito-y-alcance.md) [![React 19](https://img.shields.io/badge/React-19-1F6285?style=flat-square&logo=react)](package.json) [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](package.json) [![Calidad](https://github.com/NicoCG32/Espejo-Homologa/actions/workflows/calidad.yml/badge.svg)](https://github.com/NicoCG32/Espejo-Homologa/actions/workflows/calidad.yml)
 
-[Abrir aplicación](https://espejo-homologa.lovable.app) · [Documentación](docs/README.md) · [Arquitectura](docs/01-arquitectura-general.md) · [Inicio rápido](#ejecutar-desde-el-código)
+[Documentación](docs/README.md) · [Cómo funciona](docs/general/02-recorrido-del-analista.md) · [Arquitectura](docs/tecnica/01-arquitectura.md) · [Proyecto en GitHub](https://github.com/NicoCG32/Espejo-Homologa)
 
 </div>
 
----
+## Por qué existe
 
-## Sobre el proyecto
+Cuando dos cargos tienen nombres distintos, no necesariamente hacen trabajos distintos. También ocurre lo contrario: compartir un nombre no garantiza equivalencia. Desarrollamos **Espejo · Homologa** para ayudar a comparar cargos internos con referencias de una encuesta, documentar los criterios y dejar la decisión final en manos de quien conoce el contexto.
 
-Piloto web para homologar cargos por su contenido: importa planillas, compara con reglas e interpretación semántica y conserva la decisión del analista. La remuneración se consulta después como benchmark; no determina la homologación.
+El piloto combina un **motor determinístico**, un **análisis semántico asistido por IA** y una **decisión del analista**. La remuneración queda fuera del cálculo de similitud: se consulta como información de mercado, no como argumento para declarar que dos cargos son equivalentes.
 
-**Estado:** Piloto web con servidor. Surgió del curso externo Duplas Intergeneracionales de DesafíoLatam, patrocinado por Entel. No hay instaladores publicados en GitHub Releases.
+## El origen y las personas detrás
 
-## Tecnologías
+El proyecto nació en **Duplas Intergeneracionales Tech**, una experiencia de aprendizaje de Desafío Latam vinculada al Fondo 55+ Entel. La dupla estuvo formada por **Claudia Peña**, economista con experiencia en recursos humanos, y **Pablo Guzmán**, estudiante de Ingeniería Civil en Computación e Informática. Claudia aportó los criterios del rubro, las pruebas y la retroalimentación; Pablo condujo la implementación mediante prompts e iteraciones con Lovable, ChatGPT y GitHub. Contamos con tutoría semanal de **Gricel Sepúlveda**.
 
-| Área                       | Tecnologías y responsabilidad                                                   |
-| -------------------------- | ------------------------------------------------------------------------------- |
-| **Aplicación**             | React 19, TypeScript, TanStack Start y Tailwind CSS.                            |
-| **Datos**                  | PostgreSQL gestionado en Lovable Cloud/Supabase, con funciones de servidor.     |
-| **Análisis e intercambio** | Motor determinístico, Gemini con respaldo Groq y planillas Excel mediante xlsx. |
+La experiencia de la dupla y la metodología del curso están en [el origen de Espejo](docs/formativa/README.md).
 
-> **Enfoque técnico:** Reglas, interpretación semántica y decisión humana son etapas separadas.
+## Lo que hace el piloto
 
-## Usar o descargar
+1. Permite cargar empresas, cargos internos, referencias y bandas salariales desde planillas, con revisión previa de los datos.
+2. Compara el contenido con criterios configurables y conserva los pesos usados en cada ejecución.
+3. Interpreta semánticamente los candidatos admitidos por el motor, cuando el servicio de IA está disponible.
+4. Deja **preseleccionar varios** candidatos y confirmar **uno** como referencia definitiva para la ejecución.
+5. Presenta las bandas P25, P50, P75 y promedio según el tamaño escogido, y permite obtener informes Excel/PDF desde el historial.
 
-[Abrir la aplicación](https://espejo-homologa.lovable.app) · [Flujo del analista](docs/03-flujo-de-usuario.md). Utiliza datos de prueba al explorar: el entorno publicado y la vista previa comparten backend.
+El proyecto está en etapa de piloto. Para trabajar con información confidencial o desplegarlo en producción, revisa los [controles de acceso pendientes](docs/tecnica/07-seguridad-y-limitaciones.md).
 
-## Ejecutar desde el código
+## Cómo leer la documentación
 
-Con Bun y acceso al entorno de prueba descrito en [configuración y despliegue](docs/09-deploy-y-entorno.md), desde la raíz:
+| Área | Para quién | Punto de partida |
+| --- | --- | --- |
+| **General** | Personas que quieren entender o utilizar la propuesta | [Propósito](docs/general/01-proposito-y-alcance.md) · [Recorrido del analista](docs/general/02-recorrido-del-analista.md) |
+| **Técnica** | Quienes necesitan revisar el funcionamiento y sus límites | [Arquitectura](docs/tecnica/01-arquitectura.md) · [Datos y relaciones](docs/tecnica/02-dominio-y-datos.md) |
+| **Desarrollo** | Quienes van a ejecutar, mantener o extender el código | [Entorno local](docs/desarrollo/01-entorno-y-despliegue.md) · [Pruebas](docs/desarrollo/02-validacion-y-mantenimiento.md) |
+| **Formativa** | Quienes quieren conocer el origen y lo aprendido | [Contexto](docs/formativa/README.md) |
 
-```sh
+**[Índice completo con diagramas y rutas de lectura](docs/README.md)**
+
+## Tecnologías principales
+
+React 19 · TypeScript · TanStack Start/Router · Vite · Tailwind CSS 4 · PostgreSQL mediante Supabase · Gemini con respaldo Groq · Excel (`xlsx`). El código de la aplicación utiliza funciones de servidor para sus operaciones de datos.
+
+## Ejecutarlo localmente
+
+Con Bun instalado y las variables de entorno configuradas:
+
+```bash
 bun install --frozen-lockfile
 bun run dev
 ```
 
-Las pantallas de datos requieren el backend configurado. Las claves de administración y proveedores se mantienen en el servidor.
+Las operaciones sobre cargos y ejecuciones requieren una base configurada; el análisis IA requiere credenciales del proveedor. Consulta [instalación y despliegue](docs/desarrollo/01-entorno-y-despliegue.md) para configurar las variables públicas y los secretos del servidor.
 
-## Documentación
+## Licencia y autoría
 
-[Índice completo y rutas de lectura](docs/README.md) · [Importación de planillas](docs/05-importacion-excel.md).
-
-| Tipo                | Lectura                                                                                                                                                                          |
-| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| General             | [Problema, cliente y solución](docs/00-problematica-cliente-y-valor.md) · [Motivación](docs/16-motivacion-y-contexto.md)                                                         |
-| Técnica             | [Arquitectura y diagramas](docs/01-arquitectura-general.md) · [Dominio y datos](docs/04-base-de-datos.md)                                                                        |
-| Desarrollo          | [Etapas y metodología](docs/17-desarrollo-y-metodologia.md) · [Proyección](docs/15-escalabilidad-y-nuevos-mercados.md) · [Costos CLP/USD](docs/18-analisis-economico-clp-usd.md) |
-| Académica/formativa | [Contexto e informes originales](docs/academica/README.md)                                                                                                                       |
-
-[Identidad visual](branding/README.md): logos, banners y variantes de aplicación.
-
-## Licencia y créditos
-
-Código y documentación propios: [PolyForm Noncommercial 1.0.0](LICENSE), con [atribución](NOTICE). Uso comercial fuera de sus permisos: acuerdo previo de créditos y compensación. [Alcance y contacto](LICENSING.md).
+[Licencia](LICENSE) · [Alcance no comercial y créditos](LICENSING.md) · [Avisos](NOTICE) · [Identidad visual](branding/README.md). El uso comercial adicional requiere el acuerdo indicado en la licencia y sus condiciones complementarias.

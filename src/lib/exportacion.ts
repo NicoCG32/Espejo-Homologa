@@ -1,6 +1,5 @@
 // Exportaciones de una homologación cerrada. Sólo leen datos persistidos:
 // nunca recalculan el motor ni llaman a la IA.
-import lightLogo from "@/assets/LightLogo.png.asset.json";
 import { formatFecha } from "@/lib/format";
 
 export type FilaCandidato = {
@@ -179,32 +178,44 @@ const clp = (v: number | null) =>
 const pc = (v: number | null, f = 1) => (v == null ? "—" : `${(v * f).toFixed(1)}%`);
 
 function grafico(d: DatosInforme) {
+  // La remuneración interna sólo figura en la tabla de brechas, nunca en el gráfico.
+  // Así, el gráfico representa únicamente los cuatro estadígrafos de la encuesta.
   const items = brechas(d);
-  const vals = items.flatMap((i) => [i.enc, i.emp]).filter((v): v is number => v != null);
-  if (!vals.length) return `<p class="muted">Sin datos de mercado para graficar.</p>`;
-  const max = Math.max(...vals) * 1.1;
-  const W = 640,
-    H = 220,
-    base = 190,
-    gw = W / 4;
-  const bar = (x: number, v: number | null, color: string) =>
-    v == null
-      ? ""
-      : `<rect x="${x}" y="${base - (v / max) * 170}" width="40" height="${(v / max) * 170}" fill="${color}" rx="3"/>`;
-  const g = items
-    .map((i, n) => {
-      const x = n * gw + gw / 2 - 44;
-      return `${bar(x, i.enc, "#1E3A8A")}${bar(x + 48, i.emp, "#14B8A6")}<text x="${n * gw + gw / 2}" y="${base + 18}" text-anchor="middle" font-size="12" fill="#334155">${i.k}</text>`;
+  const valoresEncuesta = items.map((item) => item.enc).filter((v): v is number => v != null);
+  if (!valoresEncuesta.length) return `<p class="muted">Sin datos de mercado para graficar.</p>`;
+
+  const max = Math.max(...valoresEncuesta, 1) * 1.15;
+  const ancho = 640;
+  const alto = 238;
+  const base = 188;
+  const alturaUtil = 155;
+  const columna = ancho / items.length;
+  const anchoBarra = 58;
+  const barras = items
+    .map((item, indice) => {
+      const centro = indice * columna + columna / 2;
+      const nombre = `<text x="${centro}" y="${base + 23}" text-anchor="middle" font-size="12" fill="#334155">${item.k}</text>`;
+      if (item.enc == null) {
+        return `<text x="${centro}" y="${base - 12}" text-anchor="middle" font-size="11" fill="#64748B">Sin dato</text>${nombre}`;
+      }
+      const altura = (Math.max(0, item.enc) / max) * alturaUtil;
+      const x = centro - anchoBarra / 2;
+      const y = base - altura;
+      return `<rect x="${x}" y="${y}" width="${anchoBarra}" height="${altura}" fill="#1E3A8A" rx="3"/><text x="${centro}" y="${Math.max(15, y - 8)}" text-anchor="middle" font-size="11" fill="#334155">${esc(clp(item.enc))}</text>${nombre}`;
     })
     .join("");
-  return `<svg viewBox="0 0 ${W} ${H}" width="100%"><line x1="0" y1="${base}" x2="${W}" y2="${base}" stroke="#CBD5E1"/>${g}</svg>
-  <div class="legend"><span><i style="background:#1E3A8A"></i>Encuesta</span><span><i style="background:#14B8A6"></i>Remuneración empresa</span></div>`;
+
+  return `<div class="muted">Bandas de encuesta · ${esc(d.decision.tamano || "Tamaño no indicado")}</div>
+  <svg viewBox="0 0 ${ancho} ${alto}" width="100%" role="img" aria-label="Gráfico de los estadígrafos P25, P50, P75 y promedio de la encuesta"><line x1="0" y1="${base}" x2="${ancho}" y2="${base}" stroke="#CBD5E1"/>${barras}</svg>`;
 }
 
 export function abrirInformePdf(d: DatosInforme) {
   const w = window.open("", "_blank");
   if (!w) return false;
-  const logo = new URL(lightLogo.url, window.location.origin).toString();
+  const logo = new URL(
+    "/brand/espejo-logo-horizontal-claro.svg?v=3",
+    window.location.origin,
+  ).toString();
   const filas = brechas(d)
     .map(
       (b) =>
@@ -237,7 +248,8 @@ tr{break-inside:avoid}tr.def td{background:#FEF9C3;font-weight:600}
 <div class="card"><span class="tag">Cargo interno</span><b>${esc(d.cargo.nombre)}</b>${esc(d.cargo.codigo)} · ${esc(d.cargo.empresa)}<div class="muted">${esc(d.cargo.area)} / ${esc(d.cargo.subarea)} · Nivel ${esc(d.cargo.nivel)}</div></div>
 <div class="card"><span class="tag">Referencia homologada</span><b>${esc(d.referencia.nombre)}</b>${esc(d.referencia.codigo)} · ${esc(d.referencia.empresa)}<div class="muted">Benchmark: ${esc(d.decision.tamano || "—")}${d.banda?.fuente ? ` · ${esc(d.banda.fuente)}` : ""}${d.banda?.anio ? ` ${esc(d.banda.anio)}` : ""}</div></div>
 </div>
-<h2>Comparación salarial</h2>${grafico(d)}
+<h2>Benchmark · valores de encuesta</h2>${grafico(d)}
+<h2>Comparación salarial y brechas</h2>
 <table><thead><tr><th>Estadígrafo</th><th>Encuesta</th><th>Remuneración empresa</th><th>Diferencia</th><th>Brecha %</th></tr></thead><tbody>${filas}</tbody></table>
 <h2>Candidatos evaluados</h2>
 <table><thead><tr><th>Cargo</th><th>Selección</th><th>Motor</th><th>Semántico</th><th>Final</th></tr></thead><tbody>${cand}</tbody></table>

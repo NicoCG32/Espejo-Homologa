@@ -1,21 +1,19 @@
-# Routes
+# Rutas de Espejo · Homologa
 
-TanStack Start uses **file-based routing**. Every `.tsx` file in this directory
-defines a route. Do **not** create `src/pages/`, `src/routes/_app/index.tsx`, or
-`app/layout.tsx` — those are Next.js / Remix conventions. The only root layout
-is `src/routes/__root.tsx`.
+La aplicación usa el enrutamiento por archivos de TanStack Router/Start. Cada archivo de esta carpeta define una ruta o el diseño raíz.
 
-## Conventions
+| Archivo | Ruta | Uso |
+| --- | --- | --- |
+| `index.tsx` | `/` | Portada y acceso al recorrido |
+| `cargos.tsx` | `/cargos` | Cargos internos, referencias e importaciones |
+| `empresas.tsx` | `/empresas` | Empresas y tamaños |
+| `diccionario.tsx` | `/diccionario` | Códigos de área, subárea y nivel |
+| `criterios.tsx` | `/criterios` | Pesos y criterios |
+| `homologacion.nueva.tsx` | `/homologacion/nueva` | Asistente de cinco pasos |
+| `historial.index.tsx` | `/historial` | Ejecuciones anteriores |
+| `historial.$id.tsx` | `/historial/$id` | Resultados, decisión e informes |
+| `__root.tsx` | Diseño raíz | Navegación y estructura general |
 
-| File | URL |
-| --- | --- |
-| `index.tsx` | `/` |
-| `about.tsx` | `/about` |
-| `users/index.tsx` | `/users` |
-| `users/$id.tsx` | `/users/:id` (dynamic — bare `$`, no curly braces) |
-| `posts/{-$category}.tsx` | `/posts/:category?` (optional segment) |
-| `files/$.tsx` | `/files/*` (splat — read via `_splat` param, never `*`) |
-| `_layout.tsx` | layout route (renders children via `<Outlet />`) |
-| `__root.tsx` | app shell — wraps every page; preserve `<Outlet />` |
+El archivo `src/routeTree.gen.ts` se genera automáticamente: no se edita a mano.
 
-`routeTree.gen.ts` is auto-generated. Don't edit it by hand.
+[Flujos](../../docs/tecnica/05-flujos-y-estados.md) · [Arquitectura](../../docs/tecnica/01-arquitectura.md).
