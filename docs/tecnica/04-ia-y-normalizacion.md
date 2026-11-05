@@ -1,60 +1,60 @@
-# 04 · IA y normalización
+# 04 · Dos usos de IA dentro del producto
 
-La aplicación usa IA en dos etapas: normalizar los requisitos de los cargos y comparar semánticamente los candidatos admitidos por el motor. La referencia definitiva la confirma el analista.
+El servidor utiliza IA para **normalizar información de las fichas** y **comparar semánticamente los candidatos admitidos por el motor**. Sus resultados apoyan la decisión del analista.
 
-## A. Normalizar experiencia y formación
+## A. Normalización previa de experiencia y formación
 
-[`normalizacion.server.ts`](../../src/lib/normalizacion.server.ts) transforma textos libres en una ficha estructurada: rangos de años, áreas de experiencia, nivel, áreas y carreras de formación. Guarda la ficha en `cargos.atributos_semanticos._norm`, junto con `norm-1` y una huella del texto original. Si la huella coincide, puede reutilizarla sin volver a consultar al proveedor.
+[`normalizacion.server.ts`](../../src/lib/normalizacion.server.ts) convierte los textos originales en campos estructurados: rangos de años, áreas de experiencia, nivel de formación, áreas y carreras. La ficha se conserva dentro de `cargos.atributos_semanticos._norm`, junto con `norm-1` y una huella del texto. Cuando la huella sigue vigente se puede reutilizar sin una nueva llamada.
 
-La normalización debe conservar los datos ausentes. Si falla, la homologación continúa con el texto original y muestra un aviso; los puntajes pueden diferir de los obtenidos con una ficha normalizada.
+La instrucción exige no inventar datos: lo ausente vuelve como `null` o listas vacías. Si el servicio no responde, el motor continúa comparando el texto original. **El resultado puede cambiar** respecto de la ruta con ficha normalizada, aunque el sistema no interrumpa la ejecución.
 
-## B. Analizar la equivalencia semántica
+## B. Análisis semántico de candidatos
 
-[`semantica.server.ts`](../../src/lib/semantica.server.ts) toma únicamente el cargo interno y los **candidatos admitidos por el motor**, con nombre, descripción, siete atributos descriptivos y requisitos de experiencia/formación. Evalúa propósito, funciones, responsabilidades, conocimientos, complejidad, autonomía, alcance, experiencia y formación.
+[`semantica.server.ts`](../../src/lib/semantica.server.ts) recibe el cargo interno y **únicamente los candidatos que admitió el motor**. En el payload entran nombre, descripción, siete atributos de contenido (propósito, funciones, responsabilidades, conocimientos, complejidad, autonomía y alcance), experiencia y formación. **No entra remuneración, tamaño de empresa, catálogo completo, descartes ni pesos del motor.**
 
-No envía sueldo ni tamaño de empresa; tampoco envía los descartados, los pesos ni el catálogo completo. La respuesta tiene scores semánticos de 0 a 100 por candidato y una explicación breve, validada frente a los identificadores enviados.
+La respuesta se valida con IDs enviados, ausencia de duplicados, cobertura de todos los candidatos y rangos numéricos. Incluye score por candidato (0–100), confianza (0–1), explicación breve y una recomendación de referencia. Esa recomendación es informativa; la decisión humana se guarda por otro camino.
 
-## C. Reintentos y respaldo
+## Resiliencia frente a fallos del proveedor
 
 ```mermaid
 flowchart TD
-  A[Solicitud de normalización<br/>o análisis semántico] --> B[Gemini: JSON estructurado]
-  B --> C{¿Respuesta válida?}
-  C -->|Sí| V[Validar estructura y datos]
-  C -->|Error 429/5xx transitorio| R[Reintentos con esperas<br/>1 s, 2 s y 4 s más variación]
-  R --> T{¿Se agotaron?}
-  T -->|No| B
-  T -->|Sí| G[Intentar Groq]
-  C -->|Error no transitorio| X[Registrar / comunicar error]
-  G --> H{¿Hay respuesta válida?}
-  H -->|Sí| V
-  H -->|No| X
-  V --> I([Persistir análisis OK<br/>y scores, si aplica])
-  X --> J([Conservar el resultado<br/>determinístico])
-  classDef cool fill:#EDF5F8,stroke:#86ADBF,color:#193E56;
-  classDef good fill:#DDF2ED,stroke:#65A38F,color:#163F38;
-  classDef warn fill:#FFF1E6,stroke:#C58C5D,color:#603C29;
-  class A,B,C,R,T,G,H,V cool;
-  class I good;
-  class X,J warn;
+  A["Solicitud: normalización o análisis"] --> G["Gemini con JSON estructurado"]
+  G --> T{"¿La llamada terminó bien?"}
+  T -->|Sí| V["Parsear y validar respuesta"]
+  T -->|Error transitorio| R["Reintentos con backoff"]
+  R --> E{"¿Se agotaron?"}
+  E -->|No| G
+  E -->|Sí| Q["Intentar Groq"]
+  T -->|Otro error| F["Comunicar error"]
+  Q --> V
+  V --> K{"¿JSON válido y coherente?"}
+  K -->|Sí| OK["Guardar ficha o scores válidos"]
+  K -->|No| F
+  F --> NO["Conservar el motor<br/>o usar texto original"]
+  classDef dark fill:#123E5E,stroke:#369AC0,color:#FFFFFF;
+  classDef light fill:#E8F3F7,stroke:#8CB4C3,color:#183E56;
+  classDef alert fill:#FFF0DF,stroke:#D09F68,color:#64431B;
+  class G,Q,OK dark;
+  class A,T,R,E,V,K light;
+  class F,NO alert;
 ```
 
-El respaldo Groq se activa cuando Gemini agota los reintentos ante errores transitorios reconocidos. Los errores de formato JSON y otros fallos no transitorios se comunican sin activar automáticamente el respaldo. Los modelos se configuran mediante las variables del entorno y `groq.server.ts`; su uso depende de la cuota y disponibilidad del proveedor.
+El **respaldo con Groq no es universal**: se activa cuando se agotan errores transitorios reconocidos en Gemini. Falta de clave, respuesta malformada o un error no transitorio no garantizan esa alternativa. La disponibilidad del modelo indicado por `GEMINI_MODEL` y de las cuotas debe comprobarse en cada entorno.
 
-## D. Tres puntajes, dos escalas
+## Tres scores, dos escalas
 
-| Dato | Escala persistida | Cuándo existe |
-| --- | --- | --- |
-| `score_deterministico` | 0 a 1 | Si el candidato pasó el motor |
-| `score_semantico` | 0 a 100 | Cuando la respuesta de IA válida incluye al candidato |
-| `score_final` | 0 a 1 | Cuando existen ambos y se aplica el reparto global de pesos |
+| Campo persistido       | Escala | Origen                                                        |
+| ---------------------- | ------ | ------------------------------------------------------------- |
+| `score_deterministico` | 0–1    | Reglas y pesos del motor.                                     |
+| `score_semantico`      | 0–100  | Comparación semántica validada.                               |
+| `score_final`          | 0–1    | Combinación ponderada **si hay** datos de ambas evaluaciones. |
 
-Por defecto el reparto es **70 % motor / 30 % IA**, configurable en `configuracion.pesos_score`.
+El reparto predeterminado está en [`configuracion.functions.ts`](../../src/lib/configuracion.functions.ts): **70 % motor y 30 % IA**, configurable globalmente. Si los pesos son porcentajes que suman 100:
 
 $$
-S_{final}=\frac{p_m\, S_{motor}+p_{ia}\,(S_{IA}/100)}{100},\qquad p_m+p_{ia}=100
+S_{final}=\frac{p_{motor}S_{motor}+p_{IA}(S_{semantico}/100)}{100}
 $$
 
-El resultado numérico se guarda, pero los pesos híbridos aplicados no se conservan por ejecución. Versionarlos es una de las [mejoras pendientes](../desarrollo/03-evolucion-y-prioridades.md) para reproducir cálculos históricos.
+Cuando la IA no devuelve una evaluación válida, `score_semantico` y `score_final` pueden permanecer **`null`**. No corresponde convertirlos en cero. El score final calculado queda guardado, **pero el reparto global leído en esa ocasión no se conserva como snapshot autónomo por ejecución**; por eso no se garantiza su reproducción histórica exacta después de modificar la configuración.
 
-[Motor](03-motor-deterministico.md) · [Estados](05-flujos-y-estados.md) · [Prioridades](../desarrollo/03-evolucion-y-prioridades.md).
+[Motor](03-motor-deterministico.md) · [Flujos](05-flujos-y-estados.md) · [Validación](../desarrollo/02-validacion-y-mantenimiento.md)

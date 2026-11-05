@@ -1,40 +1,36 @@
-# 02 · Recorrido del analista
+# 02 · Cómo se usa Espejo
 
-La interfaz guía la comparación desde la elección de un cargo interno hasta la confirmación de su referencia.
+El recorrido parte de un cargo interno y termina con una referencia confirmada por el analista. Estas son las decisiones de cada etapa y la información que queda registrada.
 
-```mermaid
-flowchart LR
-  A[Preparar cargos<br/>y criterios] --> B[Elegir cargo<br/>interno]
-  B --> C[Revisar fichas<br/>y ponderación]
-  C --> D[Motor: candidatos<br/>y descartes]
-  D --> E[IA: lectura<br/>semántica opcional]
-  E --> F[Preseleccionar<br/>varios]
-  F --> G[Confirmar uno<br/>como definitivo]
-  G --> H[Consultar bandas<br/>y exportar]
-  classDef blue fill:#163A58,color:#fff,stroke:#357EA3,stroke-width:2px;
-  classDef light fill:#EAF3F7,color:#15374E,stroke:#8CAEBF;
-  classDef gold fill:#FFF3D8,color:#533D12,stroke:#C89B42,stroke-width:2px;
-  class A,B,C,D,E light;
-  class F,G gold;
-  class H blue;
-```
+## 1. Preparar los datos
 
-## Antes de empezar
+Se registran las empresas, las fichas de cargos internos y el catálogo de referencia. Las fichas pueden contener códigos de área, subárea y cargo, nivel jerárquico, descripciones, experiencia y formación. Los datos pueden incorporarse desde formularios o archivos admitidos por los lectores de planillas. Conviene revisar nombres, códigos y campos vacíos **antes** de homologar.
 
-En **Cargos** se cargan cargos internos y referencias; en **Empresas** se administra la información de las empresas, y en **Diccionario** los códigos de áreas, subáreas y niveles. En **Criterios** se ajustan ponderaciones y requisitos obligatorios. Una planilla de remuneraciones puede aportar las bandas de una encuesta, si sus códigos coinciden con el catálogo.
+## 2. Elegir el cargo y los pesos
 
-## Durante la comparación
+En _Nueva homologación_ se elige un cargo interno y se revisan los criterios. Es posible dar mayor o menor peso a cada aspecto y dejar campos fuera mediante peso cero. Los criterios obligatorios funcionan como condiciones de descarte cuando no existe información o coincidencia en ese campo. La ejecución guarda los criterios usados.
 
-1. **Cargo:** elige un cargo interno y comprueba que exista un catálogo de referencia.
-2. **Revisión:** revisa su ficha y las ponderaciones que se aplicarán. Puedes ajustar los pesos para esta ejecución sin cambiar los valores generales.
-3. **Candidatos:** el motor calcula similitudes, muestra candidatos admitidos y diferencia los descartes por criterios obligatorios.
-4. **Análisis IA:** el sistema intenta comparar semánticamente los candidatos del motor; si la IA falla, los puntajes determinísticos se conservan. Un score de IA ausente se muestra como pendiente, no como cero.
-5. **Decisión:** marca uno o varios candidatos para examinarlos y consultar sus bandas salariales por tamaño. Confirma una sola referencia, con nombre de analista y comentario opcional. Consultar las bandas no cambia los puntajes.
+## 3. Ejecutar la comparación
 
-## Después de confirmar
+El motor contrasta el cargo interno con los cargos de referencia y devuelve candidatos admitidos con su score; muestra los motivos de descarte para los excluidos. En experiencia y formación puede usar fichas normalizadas por IA cuando están disponibles, o conservar la comparación textual como alternativa.
 
-El historial conserva la ejecución, su análisis y la decisión. Desde allí puedes elegir el tamaño de empresa para consultar P25, P50, P75 y promedio, y exportar un informe Excel o un PDF para impresión. Las bandas se muestran cuando la encuesta contiene datos para el cargo y tamaño seleccionados.
+## 4. Pedir una segunda lectura, si conviene
 
-El estado **Completada** indica que terminó el cálculo determinístico. El análisis IA y la confirmación del analista se registran por separado.
+El análisis semántico evalúa **solo los candidatos admitidos**, sin sueldo ni tamaño de empresa. Cuando responde correctamente aparecen score semántico y score combinado. Si falla, no desaparecen los resultados del motor y el analista puede seguir con la información disponible.
 
-[Flujos y estados técnicos](../tecnica/05-flujos-y-estados.md) · [Volver al índice](../README.md).
+## 5. Preseleccionar y decidir
+
+El analista puede **marcar varios candidatos** para compararlos con más detenimiento. Esta preselección queda guardada. Después elige **uno definitivo**, indica quién tomó la decisión y puede agregar un comentario y seleccionar el tamaño para el benchmark. Si hay una preselección guardada, el definitivo debe pertenecer a ella. La sugerencia de IA es informativa.
+
+## 6. Revisar el benchmark y el historial
+
+Con la decisión registrada, el historial permite consultar las bandas de la referencia elegida. El gráfico presenta únicamente **P25, P50, P75 y promedio** de encuesta; el sueldo interno se conserva en las fichas y tablas de brechas, no como otra barra. Los informes Excel y la vista de impresión para PDF toman los datos disponibles del historial, sin volver a ejecutar IA.
+
+## Cuándo detenerse
+
+- Si el catálogo está incompleto o no hay candidatos, revisa los criterios antes de interpretar un score bajo como incompatibilidad definitiva.
+- Si el análisis semántico falla, trata el score final como **no disponible**, no como cero.
+- Si no hay banda para un tamaño, no la reemplaces por otro tamaño ni por un promedio inventado.
+- Si la referencia parece incorrecta a pesar de los scores, documenta por qué: **la decisión sigue siendo profesional**.
+
+[Propósito y alcance](01-proposito-y-alcance.md) · [Actividad y estados](../tecnica/05-flujos-y-estados.md) · [Importación e informes](../tecnica/06-importacion-y-exportacion.md)

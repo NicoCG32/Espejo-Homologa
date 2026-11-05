@@ -39,5 +39,10 @@ dist-ssr
 
 # Internal agent notes and local documentation archives
 /Agents/
-/AUDITORIA-*.md
+/agents/
+/AGENTS.md
+AUDITORIA*.md
+/INTEGRAR_PRIMERO.md
+/INVENTARIO_SHA256.txt
+/integrar-documentacion.*
 /docs/docs.zip

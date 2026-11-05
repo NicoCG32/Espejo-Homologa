@@ -1,31 +1,33 @@
-# 07 · Seguridad y límites del piloto
+# 07 · Seguridad y límites de confianza
 
-Las descripciones de cargos y las remuneraciones pueden contener información confidencial. El piloto necesita completar sus controles de acceso antes de trabajar con datos reales.
+Las fichas de cargos, las remuneraciones y las decisiones pueden contener información sensible. El piloto utiliza un cliente de base de datos con privilegios elevados y requiere controles de autorización antes de trabajar con datos confidenciales.
 
 ## Controles actuales
 
-- El acceso habitual a PostgreSQL se realiza desde funciones de servidor mediante [`getDb()`](../../src/lib/supabase-public.server.ts), que utiliza `SUPABASE_SERVICE_ROLE_KEY`.
-- Las migraciones incorporan RLS y revocan permisos a roles `anon` y `authenticated` para varias tablas. **Esto protege el acceso directo bajo esos roles, pero la clave de servicio puede omitir RLS**.
-- Se configura middleware CSRF para solicitudes a funciones servidor en [`src/start.ts`](../../src/start.ts), y el cliente adjunta un token de Supabase cuando existe sesión.
-- El middleware `requireSupabaseAuth` está definido, pero `src/start.ts` sólo registra `attachSupabaseAuth` para las funciones de servidor. Falta exigir la sesión y comprobar permisos en las operaciones de negocio.
-- El modelo semántico recibe únicamente atributos de contenido de cargo y candidatos admitidos; se excluyen remuneración y tamaño.
+- [`src/lib/supabase-public.server.ts`](../../src/lib/supabase-public.server.ts) crea un cliente de datos en el servidor con `SUPABASE_SERVICE_ROLE_KEY`, una credencial de privilegios elevados.
+- Las migraciones posteriores revocan acceso de `anon` y `authenticated` a las tablas principales y habilitan RLS. Estas restricciones protegen accesos directos que usen esos roles, **pero no sustituyen permisos de las funciones que usan rol de servicio**.
+- [`src/start.ts`](../../src/start.ts) configura un middleware CSRF para server functions. [`auth-attacher.ts`](../../src/integrations/supabase/auth-attacher.ts) adjunta un token desde el cliente **si existe sesión**.
+- [`requireSupabaseAuth`](../../src/integrations/supabase/auth-middleware.ts) está disponible como middleware, pero las funciones de negocio no lo aplican de forma general ni comprueban permisos por empresa/cargo antes de usar la clave de servicio.
+- El payload semántico excluye los sueldos y el tamaño de empresa. Las descripciones y los atributos del cargo sí se envían al proveedor de IA.
 
 ## Limitaciones
 
-| Área | Estado |
-| --- | --- |
-| Autorización | Las operaciones que usan el rol de servicio requieren comprobaciones explícitas de identidad y permisos. |
-| Aislamiento por organización | Falta una política de pertenencia y acceso aplicada a los datos de cada cliente. |
-| Historial | Las decisiones pueden actualizarse y los pesos híbridos no se versionan por ejecución. |
-| Operación | Los respaldos y la restauración deben comprobarse en el entorno de despliegue. |
+| Área                     | Limitación actual                                                                                     |
+| ------------------------ | ----------------------------------------------------------------------------------------------------- |
+| Acceso a datos           | Las funciones privilegiadas carecen de controles generales de aislamiento por usuario u organización. |
+| Historial de decisiones  | El `upsert` puede sustituir la decisión de una ejecución sin conservar la versión anterior.           |
+| Reproducción de cálculos | No se guardan por ejecución los pesos globales motor/IA ni los motivos de todos los descartes.        |
+| Escrituras compuestas    | El reemplazo de la preselección utiliza consultas separadas y puede quedar incompleto ante un fallo.  |
 
-## Requisitos antes de manejar datos reales
+## Qué resolver antes de tratar datos reales
 
-1. Exigir autenticación y comprobar permisos **en cada operación de servidor** antes de usar credenciales privilegiadas; diseñar aislamiento por organización o restringir el piloto a un entorno verdaderamente controlado.
-2. Revisar las tablas, políticas RLS, roles, privilegios y migraciones aplicadas en la instancia remota.
-3. Gestionar secretos exclusivamente en el entorno del servidor y en un gestor de secretos; no enviar claves de servicio al cliente ni al repositorio.
-4. Desactivar o proteger la función de reinicio masivo, definir respaldos verificables, restauración y límites de retención.
-5. Revisar el tratamiento de datos transmitidos a proveedores externos de IA y la autorización para usarlos.
-6. Incorporar pruebas de autorización, registros de acciones relevantes y un mecanismo de reversión/recuperación para operaciones compuestas.
+1. **Exigir autenticación y autorización en cada función del servidor**, con alcance por usuario/organización, antes de utilizar la credencial privilegiada. La protección CSRF no cumple esa función.
+2. Revisar los permisos y las políticas **realmente aplicadas** en Supabase, además de los archivos de migración del repositorio.
+3. Conservar las claves privadas fuera del cliente, logs y repositorio. Proteger las operaciones de eliminación/reinicio masivo.
+4. Definir respaldo, recuperación, retención de datos y autorización para transferir contenido a proveedores externos de IA.
+5. Hacer consistentes las escrituras compuestas, particularmente el reemplazo de la preselección. Agregar registro de cambios si la decisión puede editarse.
+6. Probar accesos no autorizados con una base de prueba antes de compartir un despliegue externo.
 
-[Prioridades de desarrollo](../desarrollo/03-evolucion-y-prioridades.md) · [Pruebas y mantenimiento](../desarrollo/02-validacion-y-mantenimiento.md).
+La [guía de RLS de Supabase](https://supabase.com/docs/guides/database/postgres/row-level-security) explica el alcance de las políticas de acceso y el uso de claves de servicio.
+
+[Arquitectura](01-arquitectura.md) · [Puesta en marcha](../desarrollo/01-entorno-y-despliegue.md) · [Prioridades](../desarrollo/03-evolucion-y-prioridades.md)

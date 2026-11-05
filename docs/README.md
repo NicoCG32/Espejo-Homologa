@@ -2,42 +2,30 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="../branding/logos/espejo-logo-horizontal-oscuro.svg" />
-  <img src="../branding/logos/espejo-logo-horizontal-claro.svg" alt="Espejo · Homologa" width="440" />
+  <img src="../branding/logos/espejo-logo-horizontal-claro.svg" alt="Identidad visual de Espejo · Homologa" width="500" />
 </picture>
 
-# Documentación
+# Documentación del proyecto
 
-*Una guía para entender el problema, revisar cómo funciona el software y continuar desarrollándolo.*
+_Una guía para conocer la propuesta, utilizar la aplicación y mantener el código._
 
 </div>
 
-La documentación se organiza en cuatro áreas: propósito y uso, funcionamiento técnico, desarrollo e historia del proyecto.
+La documentación se organiza en cuatro áreas: uso general, funcionamiento técnico, desarrollo y experiencia formativa de la dupla.
 
-## Elige tu ruta
+## Rutas de lectura
 
-| Área | Primero | Después |
-| --- | --- | --- |
-| **General** | [Por qué existe y hasta dónde llega](general/01-proposito-y-alcance.md) | [Cómo lo usa un analista](general/02-recorrido-del-analista.md) |
-| **Técnica** | [Arquitectura y límites](tecnica/01-arquitectura.md) | [Modelo de datos](tecnica/02-dominio-y-datos.md) · [Motor](tecnica/03-motor-deterministico.md) |
-| **Desarrollo** | [Arranque y despliegue](desarrollo/01-entorno-y-despliegue.md) | [Mantenimiento y pruebas](desarrollo/02-validacion-y-mantenimiento.md) |
-| **Formativa** | [La dupla, el contexto y los aprendizajes](formativa/README.md) | [Método de trabajo](formativa/01-metodologia-y-fuentes.md) |
+| Área           | Contenido                                        | Documentos                                                                                                                                                                                                                                                                                                                                                      |
+| -------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **General**    | Problema, alcance y trabajo del analista.        | [Propósito y alcance](general/01-proposito-y-alcance.md) · [Uso paso a paso](general/02-recorrido-del-analista.md)                                                                                                                                                                                                                                              |
+| **Técnica**    | Comparación de cargos, datos y resultados.       | [Arquitectura](tecnica/01-arquitectura.md) · [Dominio y datos](tecnica/02-dominio-y-datos.md) · [Motor](tecnica/03-motor-deterministico.md) · [IA](tecnica/04-ia-y-normalizacion.md) · [Flujos y estados](tecnica/05-flujos-y-estados.md) · [Entradas y salidas](tecnica/06-importacion-y-exportacion.md) · [Seguridad](tecnica/07-seguridad-y-limitaciones.md) |
+| **Desarrollo** | Instalación, mantenimiento y mejoras pendientes. | [Entorno y despliegue](desarrollo/01-entorno-y-despliegue.md) · [Validación](desarrollo/02-validacion-y-mantenimiento.md) · [Prioridades](desarrollo/03-evolucion-y-prioridades.md)                                                                                                                                                                             |
+| **Formativa**  | Origen del proyecto, colaboración y aprendizaje. | [Historia de la dupla](formativa/README.md) · [Método y fuentes](formativa/01-metodologia-y-fuentes.md)                                                                                                                                                                                                                                                         |
 
-## Mapa del sistema
+## El sistema, de un vistazo
 
-![Mapa simplificado de la arquitectura](assets/diagramas/vista-general.svg)
+![Esquema general: analista, interfaz, servidor, motor, IA y base de datos](assets/diagramas/vista-general.svg)
 
-[Diagrama editable y arquitectura por niveles](tecnica/01-arquitectura.md).
+La [arquitectura por niveles](tecnica/01-arquitectura.md) contiene diagramas de contexto, contenedores, componentes y despliegue. [Dominio y datos](tecnica/02-dominio-y-datos.md) describe las entidades y sus relaciones; [flujos y estados](tecnica/05-flujos-y-estados.md) explica la actividad, la secuencia de operaciones y los estados persistidos. Los diagramas Mermaid se pueden editar en los propios documentos; las versiones SVG y DOT están en [`assets/diagramas`](assets/diagramas).
 
-## Índice técnico completo
-
-| Capítulo | Qué responde |
-| --- | --- |
-| [01 · Arquitectura](tecnica/01-arquitectura.md) | ¿Qué se ejecuta en el navegador, servidor y servicios externos? Diagramas de contexto, contenedores y componentes. |
-| [02 · Dominio y datos](tecnica/02-dominio-y-datos.md) | ¿Qué se persiste y cómo se relacionan los registros? Modelo de dominio y ER. |
-| [03 · Motor determinístico](tecnica/03-motor-deterministico.md) | ¿Cómo se calculan los puntajes y descartes? Reglas, pesos y datos faltantes. |
-| [04 · IA y normalización](tecnica/04-ia-y-normalizacion.md) | ¿Qué se envía a los modelos y qué ocurre si fallan? |
-| [05 · Flujos y estados](tecnica/05-flujos-y-estados.md) | ¿Cómo se encadenan las operaciones y qué estados se guardan? Diagramas de actividad, secuencia y estados. |
-| [06 · Entradas y salidas](tecnica/06-importacion-y-exportacion.md) | ¿Cómo se importan planillas y se construyen los informes? |
-| [07 · Seguridad y límites](tecnica/07-seguridad-y-limitaciones.md) | Controles de acceso y requisitos para trabajar con datos reales. |
-
-[Presentación del proyecto](../README.md) · [Próximos pasos](../roadmap.md).
+[Volver a la portada](../README.md)

@@ -4,12 +4,12 @@ Esta identidad nació del contraste entre dos perspectivas frente a un mismo esp
 
 ## Qué recurso usar
 
-| Uso | Variante clara | Variante oscura |
-| --- | --- | --- |
-| README principal o presentaciones | [Banner SVG](banners/espejo-banner-claro.svg) | [Banner SVG](banners/espejo-banner-oscuro.svg) |
-| Cabeceras y documentación | [Logo horizontal SVG](logos/espejo-logo-horizontal-claro.svg) | [Logo horizontal SVG](logos/espejo-logo-horizontal-oscuro.svg) |
-| Portadas cuadradas | [Portada SVG](portadas/espejo-identidad-cuadrada.svg) | [Portada SVG](portadas/espejo-identidad-cuadrada-oscura.svg) |
-| Espacios reducidos | [Isotipo SVG](logos/espejo-isotipo-transparente.svg) | [Isotipo SVG](logos/espejo-isotipo-transparente-oscuro.svg) |
+| Uso                               | Variante clara                                                | Variante oscura                                                |
+| --------------------------------- | ------------------------------------------------------------- | -------------------------------------------------------------- |
+| README principal o presentaciones | [Banner SVG](banners/espejo-banner-claro.svg)                 | [Banner SVG](banners/espejo-banner-oscuro.svg)                 |
+| Cabeceras y documentación         | [Logo horizontal SVG](logos/espejo-logo-horizontal-claro.svg) | [Logo horizontal SVG](logos/espejo-logo-horizontal-oscuro.svg) |
+| Portadas cuadradas                | [Portada SVG](portadas/espejo-identidad-cuadrada.svg)         | [Portada SVG](portadas/espejo-identidad-cuadrada-oscura.svg)   |
+| Espacios reducidos                | [Isotipo SVG](logos/espejo-isotipo-transparente.svg)          | [Isotipo SVG](logos/espejo-isotipo-transparente-oscuro.svg)    |
 
 - Las variantes **claras** se usan sobre fondos claros y las **oscuras** sobre fondos oscuros.
 - Los SVG con nombre contienen «Espejo: Homologa» como texto convertido a trazados, sin depender de fuentes externas.

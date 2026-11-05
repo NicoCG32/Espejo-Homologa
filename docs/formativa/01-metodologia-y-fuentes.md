@@ -1,50 +1,54 @@
-# Cómo trabajamos · Del problema a los prompts y las pruebas
+# 01 · El curso, nuestra metodología y sus fuentes
 
-El curso combinaba ejercicios técnicos con el desarrollo de un proyecto en dupla. En Espejo usamos ese trabajo para pasar de la descripción del problema a un prototipo que Claudia podía probar.
+El curso se organizó en **dos bloques complementarios**: uno **técnico**, para aprender a trabajar con Lovable, y otro **de proyectos**, donde cada dupla aplicaba lo aprendido a una necesidad concreta.
 
-## Dos bloques de trabajo
+## Bloque técnico: aprender a guiar a Lovable
 
-El curso distinguía un **bloque técnico**, donde se aprendían habilidades sobre casos de práctica, y un **bloque de proyectos**, donde cada dupla aplicaba esas habilidades a su propio desafío. En el primero se trabajaba la secuencia *describir → construir → ajustar → publicar*, los briefs o instrucciones para Lovable, las tablas y relaciones, la navegación, los estados, los filtros, los resúmenes de datos y la revisión de usabilidad. En el segundo se ejercitaba la formulación de un problema verificable y la validación de un prototipo con personas.
+La enseñanza no se centraba en escribir todo el programa a mano, sino en aprender a **describir, construir, revisar y ajustar** una aplicación mediante instrucciones claras. Las guías recorren briefs, tablas y relaciones, listas/fichas/formularios, navegación, estados, filtros, resúmenes, detalles de experiencia de usuario y revisión mediante el Modo Plan. También incluyen el uso de Lovable para preparar el relato y una demostración final.
 
-Las guías organizaban el bloque de proyectos de esta manera:
+El curso usaba ejemplos compartidos, como **Registro de Postulantes**, para practicar antes de aplicar lo aprendido al proyecto de cada dupla.
 
-| Etapa | Propósito |
-| --- | --- |
-| **Match Day y V0** | Formar la dupla, acordar cómo colaborar, escoger un desafío y construir un primer boceto exploratorio. |
-| **Investigación y diagnóstico** | Confrontar la idea inicial con el problema real y aclarar qué valor puede aportar. |
-| **Definición de alcance** | Distinguir lo esencial de lo deseable y fijar un criterio de éxito comprobable. |
-| **Versión funcional V1** | Construir una demostración que permita recorrer la tarea principal. |
-| **Iteración y validación / V2** | Recoger observaciones de uso, contrastarlas con la revisión apoyada por IA y ajustar la solución. |
-| **Presentación final** | Explicar el problema, mostrar el prototipo, contar lo aprendido y responder preguntas de un panel. |
+## Bloque de proyectos: llevarlo a una necesidad real
 
-## Nuestra iteración, en la práctica
+| Momento del programa | Qué se buscaba                                                         | Cómo se relaciona con Espejo                               |
+| -------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------- |
+| Match Day y V0       | Formar la dupla, escoger desafío y hacer un boceto exploratorio.       | Claudia presentó el problema de homologación de cargos.    |
+| Diagnóstico          | Revisar el V0, investigar y precisar el problema.                      | La idea se contrastó con su experiencia profesional.       |
+| Alcance              | Distinguir lo esencial de lo deseable y fijar un criterio verificable. | La comparación de cargos por contenido definió el alcance. |
+| Construcción V1      | Obtener una versión funcional demostrable.                             | Iteraciones dirigidas mediante prompts en Lovable.         |
+| Validación y V2      | Probar, recibir observaciones y mejorar.                               | Claudia probaba el programa y comentaba los cambios.       |
+| Pitch final          | Explicar problema, solución, demo, impacto y cierre.                   | La dupla presentó el resultado del proyecto.               |
 
-Claudia describía situaciones y criterios que conocía por su experiencia profesional. Yo los traducía a prompts, probaba los cambios en Lovable y me apoyaba en ChatGPT para ajustar las instrucciones. GitHub nos permitía revisar y conservar las versiones del código.
+## Método de la dupla
 
-Luego Claudia probaba la aplicación y señalaba lo que encontraba útil, confuso o incompleto. Usábamos sus observaciones para decidir el siguiente ajuste y revisábamos los avances en las reuniones semanales con Gricel Sepúlveda.
+1. **Claudia explicaba el problema** y juzgaba si un resultado era razonable en su rubro.
+2. **Pablo traducía esa necesidad en prompts** para Lovable y ajustaba lo generado con apoyo de ChatGPT, usando GitHub para continuar el desarrollo.
+3. **Claudia probaba** la interfaz y señalaba errores, dificultades de uso o criterios que faltaban.
+4. **Gricel Sepúlveda retroalimentaba semanalmente** los avances del proyecto.
+5. La dupla repetía el ciclo para mejorar la versión de cada etapa.
 
-```mermaid
-flowchart TD
-  A["Claudia · problema y criterios del dominio"] --> B["Pablo · alcance, prompts y ajustes"]
-  B --> C["Lovable · construcción asistida"]
-  C --> D["Pablo · revisión técnica y repositorio GitHub"]
-  D --> E["Claudia · pruebas y observaciones"]
-  E --> F{"¿Resuelve el problema y se entiende?"}
-  F -->|Aún no| B
-  F -->|Suficientemente para esta etapa| G["Versión lista para la siguiente revisión"]
-  T["Gricel · retroalimentación semanal"] -.-> B
-  T -.-> E
-```
+## Dos funciones diferentes de la inteligencia artificial
 
-## Accesibilidad y pruebas de uso
+Lovable y ChatGPT apoyaron la construcción del software. Las funciones de IA de la aplicación utilizan Gemini y, bajo ciertas condiciones, Groq para normalizar texto y comparar cargos. Su funcionamiento se describe en [IA y normalización](../tecnica/04-ia-y-normalizacion.md).
 
-Queríamos que alguien que no hubiese construido el sistema pudiera entender qué estaba viendo y qué acción debía realizar. Las pruebas con Claudia nos llevaron a revisar las etiquetas, la navegación, el tamaño del texto y las explicaciones de los resultados.
+## Referencias documentales consultadas
 
-Queda pendiente ampliar las pruebas a más personas y realizar una evaluación de accesibilidad.
+Las siguientes guías del curso sirvieron de referencia para el trabajo de la dupla. Sus PDF no se distribuyen en este repositorio.
 
-## Dos usos distintos de la inteligencia artificial
+| Material                                                        | Qué respalda                                                                  |
+| --------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| _Primer contacto con Lovable_                                   | Flujo «Describir → Construir → Ajustar → Publicar», briefs y uso de créditos. |
+| _Estructura de datos y pantallas_                               | Tablas, relaciones, fichas y formularios.                                     |
+| _Construcción intermedia: pantallas conectadas y lógica simple_ | Navegación, estados, filtros y UX básica.                                     |
+| _Una habilidad nueva, antes de tu proyecto real_                | Práctica individual de resúmenes antes de aplicarla a desafíos propios.       |
+| _Iteración y validación_ (bloque técnico)                       | Revisión de estados de UX y uso de IA como revisora.                          |
+| _Pídele a Lovable que cuente tu historia_                       | Preparación del guion y la demo usando prompts.                               |
+| _Match Day, elección de desafío y V0 exploratorio_              | Formación de duplas y primer prototipo.                                       |
+| _Investigación y diagnóstico profundo_                          | Diagnóstico, decisión de pivotar y propuesta de valor.                        |
+| _Definición y acotación de alcance_                             | Separación de alcance esencial y deseable.                                    |
+| _Construcción de la versión funcional (V1)_                     | Prototipo demostrable y revisión crítica de sugerencias de IA.                |
+| _Iteración y validación_ (bloque de proyectos)                  | Pruebas con feedback y evolución hacia V2.                                    |
+| _Cómo preparar tu presentación final_                           | Showcase, demostración, roles y criterios de presentación.                    |
+| _Rúbrica de Evaluación del Pitch Final_                         | Criterios de evaluación de la presentación.                                   |
 
-- **IA para desarrollar Espejo:** Lovable y ChatGPT fueron herramientas de apoyo para convertir instrucciones en cambios, revisar ideas e iterar sobre el prototipo. El repositorio GitHub nos permitió conservar y continuar ese trabajo.
-- **IA dentro de Espejo:** la aplicación normaliza requisitos y compara el contenido de los cargos, como se explica en [IA y normalización](../tecnica/04-ia-y-normalizacion.md).
-
-[Volver al origen](README.md) · [Índice general](../README.md).
+[Volver a la historia de la dupla](README.md) · [Índice completo](../README.md)

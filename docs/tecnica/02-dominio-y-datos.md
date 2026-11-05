@@ -1,8 +1,8 @@
-# 02 · Modelo de dominio y base de datos
+# 02 · Dominio y modelo de persistencia
 
-La base separa **las fichas de cargos**, **los resultados de comparación** y **las decisiones del analista**. Cada ejecución vincula estos registros y conserva los criterios utilizados por el motor.
+El dominio distingue **la ficha de un cargo**, **una ejecución que compara cargos**, **los resultados calculados** y **la decisión del analista**. La confirmación de una homologación se registra por separado del cálculo de los puntajes.
 
-## Dominio: qué representa cada entidad
+## Modelo conceptual (dominio)
 
 ```mermaid
 classDiagram
@@ -15,11 +15,11 @@ classDiagram
   }
   class Cargo {
     +id
-    +tipo
+    +tipo INTERNO|REFERENCIA
     +nombre
     +descripcion
-    +sueldo
-    +atributos_semanticos
+    +atributos
+    +sueldo informativo
   }
   class Criterio {
     +campo
@@ -28,7 +28,7 @@ classDiagram
     +obligatorio
   }
   class Ejecucion {
-    +id
+    +cargo_id
     +estado
     +criterios_usados
   }
@@ -38,110 +38,88 @@ classDiagram
     +score_semantico
     +score_final
   }
-  class AnalisisIA {
-    +modelo
-    +estado
-    +prompt_version
-    +respuesta_validada
-  }
   class Preseleccion {
     +candidato_id
     +scores_utilizados
   }
   class Decision {
     +candidato_id
-    +usuario
+    +analista
     +comentario
-    +scores_utilizados
+    +tamano_empresa
   }
-  class Banda {
-    +tipo_empresa
-    +p25
-    +p50
-    +p75
+  class AnalisisSemantico {
+    +modelo
+    +prompt_version
+    +estado
+  }
+  class BandaSalarial {
+    +P25
+    +P50
+    +P75
     +promedio
+    +fuente
+    +anio
   }
   Empresa "1" --> "0..*" Cargo
   Cargo "1" --> "0..*" Ejecucion : interno
-  Cargo "1" --> "0..*" Banda : referencia
+  Cargo "1" --> "0..*" BandaSalarial : referencia
   Ejecucion "1" --> "0..*" Resultado
-  Ejecucion "1" --> "0..*" AnalisisIA
+  Ejecucion "1" --> "0..*" AnalisisSemantico
   Ejecucion "1" --> "0..*" Preseleccion
   Ejecucion "1" --> "0..1" Decision
   Resultado --> Cargo : candidato
   Preseleccion --> Cargo : marcado
-  Decision --> Cargo : elegido
+  Decision --> Cargo : definitivo
 ```
 
+Las clases representan conceptos del dominio; su persistencia se detalla en el siguiente modelo de tablas.
 
-**No todos los conceptos son estados.** Un `resultado` indica un candidato admitido por el motor; una `preseleccion` es una marca humana; una `decision` confirma uno. La existencia del primero no implica las otras dos cosas.
-
-## Modelo entidad–relación (persistencia)
+## Modelo entidad–relación (tablas)
 
 ```mermaid
 erDiagram
-  EMPRESAS ||--o{ CARGOS : tiene
-  CARGOS ||--o{ BANDAS_SALARIALES : dispone
-  CARGOS ||--o{ EJECUCIONES : cargo_interno
-  EJECUCIONES ||--o{ RESULTADOS : genera
+  EMPRESAS ||--o{ CARGOS : contiene
+  CARGOS ||--o{ BANDAS_SALARIALES : tiene
+  CARGOS ||--o{ EJECUCIONES : interno_evaluado
+  EJECUCIONES ||--o{ RESULTADOS : produce
   CARGOS ||--o{ RESULTADOS : candidato
   EJECUCIONES ||--o{ ANALISIS_SEMANTICOS : registra
-  EJECUCIONES ||--o{ DECISION_PRESELECCION : conserva
+  EJECUCIONES ||--o{ DECISION_PRESELECCION : guarda
   CARGOS ||--o{ DECISION_PRESELECCION : marcado
   EJECUCIONES ||--o| DECISIONES : confirma
   CARGOS ||--o{ DECISIONES : definitivo
   EMPRESAS {
     uuid id PK
-    string nombre
-    string tipo
-    string tamano
+    text nombre
+    enum tipo
+    enum tamano
   }
   CARGOS {
     uuid id PK
     uuid empresa_id FK
-    string tipo
-    string nombre
+    enum tipo
+    text nombre
+    text descripcion
     numeric sueldo
-    json atributos_semanticos
+    jsonb atributos_semanticos
   }
   BANDAS_SALARIALES {
     uuid id PK
     uuid cargo_id FK
-    string tipo_empresa
+    enum tipo_empresa
     numeric p25
     numeric p50
     numeric p75
     numeric promedio
-    string fuente
-    int anio
-  }
-  CRITERIOS {
-    uuid id PK
-    string campo
-    numeric peso
-    boolean activo
-    boolean obligatorio
-  }
-  PRESETS_PESOS {
-    uuid id PK
-    string nombre
-    json pesos
-  }
-  DICCIONARIO_ENTRADAS {
-    uuid id PK
-    string tipo
-    string codigo
-    string nombre
-  }
-  CONFIGURACION {
-    string clave PK
-    json valor
+    text fuente
+    integer anio
   }
   EJECUCIONES {
     uuid id PK
     uuid cargo_id FK
-    string estado
-    json criterios_usados
+    enum estado
+    jsonb criterios_usados
     timestamp fecha
   }
   RESULTADOS {
@@ -155,50 +133,49 @@ erDiagram
   ANALISIS_SEMANTICOS {
     uuid id PK
     uuid ejecucion_id FK
-    string estado
-    string modelo
-    json respuesta_validada
+    text modelo
+    text prompt_version
+    enum estado
+    jsonb respuesta_validada
   }
   DECISION_PRESELECCION {
     uuid id PK
     uuid ejecucion_id FK
     uuid candidato_id FK
-    json scores_utilizados
+    jsonb scores_utilizados
   }
   DECISIONES {
     uuid id PK
     uuid ejecucion_id FK
     uuid candidato_id FK
-    string usuario
-    json scores_utilizados
+    text usuario
+    text comentario
+    enum tamano_empresa
+    jsonb scores_utilizados
   }
 ```
 
+Este ER está **simplificado para lectura**: se omiten columnas técnicas, índices y tablas sin relaciones FK en este recorrido. Para restricciones exactas deben revisarse las migraciones SQL.
 
-Las tablas `CRITERIOS`, `PRESETS_PESOS`, `DICCIONARIO_ENTRADAS` y `CONFIGURACION` actúan como configuración o catálogos; no requieren una relación por clave foránea con las demás tablas para cumplir su función. El diagrama muestra las entidades principales y campos relevantes, no cada columna auxiliar o índice.
+## Tablas que completan el dominio
 
-## Qué se guarda realmente
+| Tabla                   | Para qué sirve                                   | Precisión importante                                                                                         |
+| ----------------------- | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| `criterios`             | Campo, peso, activación y obligatoriedad.        | Los pesos de la ejecución se conservan en `ejecuciones.criterios_usados`.                                    |
+| `presets_pesos`         | Conjuntos guardados de ponderaciones.            | No constituyen historial de decisiones.                                                                      |
+| `diccionario_entradas`  | Área, subárea y nivel; código/nombre.            | Catálogo auxiliar con unicidad por tipo y código.                                                            |
+| `configuracion`         | Guarda opciones globales como `pesos_score`.     | Los pesos globales motor/IA pueden cambiar después de una ejecución.                                         |
+| `bandas_salariales`     | Valores de encuesta por cargo y tamaño P/M/G.    | Única combinación `(cargo_id, tipo_empresa)`; valores faltantes admiten `null`.                              |
+| `analisis_semanticos`   | Intentos IA, modelo, versión, respuesta y error. | Puede haber varios intentos por ejecución.                                                                   |
+| `decision_preseleccion` | Uno o más candidatos elegidos para comparar.     | Unicidad `(ejecucion_id, candidato_id)`.                                                                     |
+| `decisiones`            | Referencia definitiva y nombre de analista.      | Restricción **única** por ejecución; la operación actual usa `upsert`, por lo que la fila puede sustituirse. |
 
-| Tabla | Contenido principal | Restricción o matiz |
-| --- | --- | --- |
-| `empresas` | Nombre, tipo, tamaño | Tamaño opcional para consulta salarial |
-| `cargos` | Ficha, tipo interno/referencia, códigos opcionales, sueldo y atributos | El sueldo es informativo y nullable |
-| `bandas_salariales` | P25, P50, P75, promedio por tamaño, fuente y año | Único por cargo y tamaño; ausencia ≠ cero |
-| `diccionario_entradas` | Código y nombre por área, subárea o nivel | Único por `(tipo, codigo)` |
-| `criterios` y `presets_pesos` | Campo, peso, obligatoriedad y ajustes guardados | El campo histórico `tipo_empresa` aún existe en el enum, pero no participa del motor actual |
-| `ejecuciones` | Cargo interno, fecha, estado y `criterios_usados` | Almacena la configuración determinística aplicada |
-| `resultados` | Candidato, score del motor, IA y final | El score final puede ser `NULL` |
-| `analisis_semanticos` | Estado, proveedor/modelo, versión del prompt, salida y errores | Puede haber más de un intento por ejecución |
-| `decision_preseleccion` | Conjunto marcado por el analista y copia de scores | Único `(ejecucion_id, candidato_id)` |
-| `decisiones` | Una referencia final, analista, comentario y scores utilizados | `ejecucion_id` único; puede reescribirse por `upsert` |
-| `configuracion` | Configuración global, incluidos pesos motor/IA | Los pesos son mutables y no se guardan por separado en cada ejecución |
+## Migraciones del esquema
 
-## Esquema y migraciones
+Las tablas iniciales se definen en [`supabase/migrations`](../../supabase/migrations); las ampliaciones sobre bandas, diccionario, presets, scores híbridos y decisiones están en [`drizzle/migrations`](../../drizzle/migrations). [`drizzle/schema.ts`](../../drizzle/schema.ts) está vacío intencionalmente. Para reconstruir la base hay que revisar las dependencias de ambas carpetas.
 
-El esquema está repartido entre dos series de migraciones: `supabase/migrations/` crea las tablas y los enumerados originales; `drizzle/migrations/` añade bandas, restricciones de acceso, diccionario, decisiones y preselección. Para reconstruir un entorno, hay que revisar el orden de ambas series y las migraciones ya aplicadas. [`drizzle/schema.ts`](../../drizzle/schema.ts) está pendiente de completar.
+## Trazabilidad del cálculo
 
-## Historial y reproducibilidad
+Se guardan los scores del motor, IA y final, además de una copia de los puntajes usados al decidir. Los pesos globales motor/IA aplicados al cálculo final y los motivos de descarte no se conservan por ejecución. Para reproducir por completo un cálculo histórico hace falta persistir esos datos y la versión de las reglas.
 
-Se guardan los criterios determinísticos y las puntuaciones de la decisión. Para reproducir una comparación también haría falta conservar la versión del catálogo, las entradas normalizadas y los pesos híbridos aplicados. El catálogo y las decisiones pueden editarse, y una nueva consulta a la IA puede producir una respuesta distinta.
-
-[Motor](03-motor-deterministico.md) · [Estados](05-flujos-y-estados.md) · [Seguridad](07-seguridad-y-limitaciones.md).
+[Motor](03-motor-deterministico.md) · [Flujos y estados](05-flujos-y-estados.md) · [Riesgos](07-seguridad-y-limitaciones.md)

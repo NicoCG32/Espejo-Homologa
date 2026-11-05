@@ -1,111 +1,104 @@
-# 01 · Arquitectura
+# 01 · Arquitectura, de afuera hacia adentro
 
-La interfaz se ejecuta en el navegador. Las funciones de servidor consultan la base de datos, ejecutan el motor y se comunican con los proveedores de IA.
+La arquitectura separa la **interfaz**, las **operaciones del servidor**, el **cálculo de homologación** y los **servicios externos**.
 
-## Nivel 1 · Contexto
+## Nivel 1 — Contexto del sistema
 
 ```mermaid
 flowchart LR
-  Analista([Analista]) -->|fichas, criterios y decisión| App[Espejo · Homologa]
-  App -->|comparación e historial| Analista
-  Encuesta[(Planillas propias<br/>y encuesta)] -->|importación| App
-  App <-->|lectura y escritura| Datos[(PostgreSQL<br/>Supabase)]
-  App -->|candidatos sin sueldo| IA[Gemini / Groq]
-  IA -->|scores y texto estructurado| App
-  classDef actor fill:#FFF0D2,stroke:#B68A3D,color:#4B3718,stroke-width:2px;
-  classDef app fill:#143D58,stroke:#3B8BAA,color:#FFF,stroke-width:2px;
-  classDef ext fill:#EDF5F8,stroke:#8EAFC0,color:#214255;
-  class Analista actor;
-  class App app;
-  class Encuesta,Datos,IA ext;
+  A([Analista]) -->|fichas, pesos y decisión| S["Espejo · Homologa"]
+  S -->|comparaciones e informes| A
+  X[(Planillas de cargos<br/>y encuesta)] -->|importación| S
+  S <-->|lectura y escritura| D[("PostgreSQL · Supabase")]
+  S -->|texto de cargos<br/>sin remuneración| I["Proveedores de IA<br/>Gemini / respaldo Groq"]
+  I -->|resultados estructurados| S
+  classDef human fill:#FFF2D6,stroke:#BD9556,color:#563C18,stroke-width:2px;
+  classDef core fill:#123B5B,stroke:#2699BC,color:#FFFFFF,stroke-width:2px;
+  classDef ext fill:#EAF4F8,stroke:#8BB4C4,color:#193A4D;
+  class A human;
+  class S core;
+  class X,D,I ext;
 ```
 
-Las planillas se procesan desde la interfaz. El análisis semántico usa información textual del cargo interno y de los candidatos admitidos; no incorpora sueldo ni tamaño de empresa al payload de comparación.
+La persona decide qué cargo considera equivalente. Las planillas aportan el catálogo y las bandas; los proveedores de IA aportan interpretación textual, no una decisión laboral definitiva.
 
-## Nivel 2 · Contenedores y límites de ejecución
+## Nivel 2 — Contenedores y ubicación de las operaciones
 
 ```mermaid
 flowchart TB
-  subgraph Cliente[«Navegador»]
-    UI[React + TanStack Router<br/>formularios, vistas y exportaciones]
-    Parse[xlsx / CSV<br/>lectura previa de planillas]
+  subgraph B["Navegador"]
+    UI["React · rutas y formularios"]
+    ARCH["Lectores de planillas<br/>y exportaciones"]
+    UI <--> ARCH
   end
-  subgraph Servidor[«TanStack Start / servidor SSR»]
-    RPC[Server functions<br/>validación y orquestación]
-    Nucleo[Motor determinístico]
-    Normaliza[Normalización de textos]
-    Semantica[Comparación semántica]
-    Adaptador[Cliente privilegiado Supabase]
+  subgraph W["Servidor TanStack Start"]
+    FN["Funciones del servidor<br/>validación y orquestación"]
+    MOTOR["Motor determinístico"]
+    IA["Normalización y comparación IA"]
+    DBAPI["Cliente Supabase privilegiado"]
+    FN --> MOTOR
+    FN --> IA
+    FN --> DBAPI
   end
-  DB[(PostgreSQL)]
-  Gemini[Gemini]
-  Groq[Groq: respaldo]
-  UI -->|solicitudes| RPC
-  Parse --> UI
-  RPC --> Nucleo
-  RPC --> Normaliza
-  RPC --> Semantica
-  RPC --> Adaptador --> DB
-  Normaliza --> Gemini
-  Semantica --> Gemini
-  Normaliza -.->|fallo transitorio agotado| Groq
-  Semantica -.->|fallo transitorio agotado| Groq
-  classDef core fill:#163A58,color:#fff,stroke:#4289A9;
-  classDef service fill:#EAF4F7,color:#193B50,stroke:#89B0C1;
-  classDef db fill:#FFF2D7,color:#624A23,stroke:#C49B50;
-  class RPC,Nucleo,Normaliza,Semantica core;
-  class UI,Parse,Adaptador,Gemini,Groq service;
-  class DB db;
+  UI <-->|solicitudes| FN
+  DBAPI <--> PG[("PostgreSQL")]
+  IA --> G["Google Gemini"]
+  IA -.->|respaldo bajo condiciones| Q["Groq"]
+  classDef app fill:#143E60,stroke:#3B96B6,color:#FFF;
+  classDef light fill:#EAF4F8,stroke:#9BBAC9,color:#153A51;
+  classDef data fill:#FFF2DB,stroke:#C39C59,color:#5D451C;
+  class FN,MOTOR,IA app;
+  class UI,ARCH,DBAPI,G,Q light;
+  class PG data;
 ```
 
-El cliente de base de datos utiliza un rol de servicio que puede omitir RLS. Cada operación necesita validar identidad y permisos antes de usarlo. [Controles de acceso pendientes](07-seguridad-y-limitaciones.md).
+La lectura de planillas y la preparación de informes ocurren en el navegador; las consultas a base y llamadas de IA se hacen a través del servidor. El cliente de base usa `SUPABASE_SERVICE_ROLE_KEY`: esa credencial **no debe salir al navegador**.
 
-## Nivel 3 · Componentes del servidor
+## Nivel 3 — Componentes relevantes del repositorio
 
 ```mermaid
 flowchart LR
-  UI[Routes y componentes] --> F[*.functions.ts<br/>server functions]
-  F --> M[motor.server.ts]
-  F --> N[normalizacion.server.ts]
-  F --> S[semantica.server.ts]
-  S --> R[gemini-retry.server.ts]
-  N --> R
-  S -.-> G[groq.server.ts]
-  N -.-> G
-  F --> DB[supabase-public.server.ts]
-  DB --> P[(PostgreSQL)]
-  UI --> X[exportacion.ts<br/>Excel y PDF en navegador]
-  UI --> I[cargos-import.ts<br/>interpretación de planillas]
-  classDef core fill:#153B56,color:#fff,stroke:#5A9DB9;
-  classDef aux fill:#F0F5F8,color:#26495C,stroke:#9CB6C3;
-  class F,M,N,S,DB core;
-  class UI,R,G,X,I aux;
+  ROUTES["src/routes<br/>src/components"] --> F["*.functions.ts<br/>operaciones de negocio"]
+  F --> M["motor.server.ts"]
+  F --> N["normalizacion.server.ts"]
+  F --> S["semantica.server.ts"]
+  N --> RET["gemini-retry.server.ts"]
+  S --> RET
+  N -.-> GROQ["groq.server.ts"]
+  S -.-> GROQ
+  F --> DB["supabase-public.server.ts"]
+  ROUTES --> XLS["cargos-import.ts<br/>exportacion.ts"]
+  classDef main fill:#143D5B,stroke:#3896B7,color:#FFFFFF;
+  classDef aux fill:#EEF6F9,stroke:#95B6C6,color:#22435A;
+  class F,M,N,S,DB main;
+  class ROUTES,RET,GROQ,XLS aux;
 ```
 
-| Capa | Referencia del repositorio | Responsabilidad |
-| --- | --- | --- |
-| Interfaz y navegación | [`src/routes`](../../src/routes) y [`src/components`](../../src/components) | Mostrar pasos, comparar fichas y registrar acciones |
-| Funciones del servidor | [`src/lib/homologacion.functions.ts`](../../src/lib/homologacion.functions.ts) y módulos equivalentes | Recibir solicitudes y consultar/actualizar datos |
-| Dominio | [`src/lib/motor.server.ts`](../../src/lib/motor.server.ts) | Evaluar criterios sin llamadas de red |
-| Normalización/IA | [`normalizacion.server.ts`](../../src/lib/normalizacion.server.ts), [`semantica.server.ts`](../../src/lib/semantica.server.ts) | Preparar fichas y evaluar texto |
-| Persistencia | [`supabase-public.server.ts`](../../src/lib/supabase-public.server.ts), [`supabase/migrations`](../../supabase/migrations), [`drizzle/migrations`](../../drizzle/migrations) | Consulta privilegiada y evolución del esquema |
-| Informes | [`exportacion.ts`](../../src/lib/exportacion.ts) | Crear Excel y abrir un informe imprimible en el navegador |
+| Componente                                                                                                                      | Responsabilidad                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| [`src/routes`](../../src/routes) / [`src/components`](../../src/components)                                                     | Navegación, presentación del score, panel del benchmark y decisión.                                |
+| [`homologacion.functions.ts`](../../src/lib/homologacion.functions.ts)                                                          | Crear/ejecutar homologación, coordinar IA, preseleccionar, guardar decisión y consultar historial. |
+| [`motor.server.ts`](../../src/lib/motor.server.ts)                                                                              | Calcular similitud por campo, pesos y descartes, sin consultas de red.                             |
+| [`normalizacion.server.ts`](../../src/lib/normalizacion.server.ts) / [`semantica.server.ts`](../../src/lib/semantica.server.ts) | Estructurar experiencia/formación y evaluar semánticamente candidatos.                             |
+| [`supabase-public.server.ts`](../../src/lib/supabase-public.server.ts)                                                          | Acceso a Supabase con credenciales de servidor.                                                    |
+| [`cargos-import.ts`](../../src/lib/cargos-import.ts) / [`exportacion.ts`](../../src/lib/exportacion.ts)                         | Interpretar hojas y construir Excel / informe imprimible.                                          |
 
-## Nivel 4 · Despliegue lógico
+## Nivel 4 — Despliegue lógico
 
 ```mermaid
 flowchart LR
-  Usuario[Dispositivo / navegador] -->|HTTPS| Hosting[Hosting web<br/>SSR / server functions]
-  Hosting -->|API Supabase con clave de servicio| Pg[(Base gestionada)]
-  Hosting -->|API por HTTPS| Gemini[Google Gemini]
-  Hosting -.->|respaldo condicionado| Groq[Groq]
-  Hosting -->|recursos estáticos| Usuario
-  classDef main fill:#163C58,color:#fff,stroke:#3C88A5;
-  classDef ext fill:#ECF5F8,color:#153A51,stroke:#93B7C7;
-  class Hosting main;
-  class Usuario,Pg,Gemini,Groq ext;
+  U["Navegador de usuario"] -->|HTTPS| H["Hosting con SSR<br/>y server functions"]
+  H <-->|API de datos| P[("Supabase")]
+  H -->|HTTPS| G["Gemini"]
+  H -.->|respaldo| Q["Groq"]
+  classDef host fill:#123B5B,stroke:#2796BD,color:#FFF;
+  classDef ext fill:#EDF5F8,stroke:#92B3C4,color:#214153;
+  class H host;
+  class U,P,G,Q ext;
 ```
 
-Vite y TanStack Start generan la aplicación con una salida compatible con Workers. La plataforma de despliegue debe proporcionar las variables públicas y los secretos de servidor descritos en la [guía de entorno](../desarrollo/01-entorno-y-despliegue.md).
+[`vite.config.ts`](../../vite.config.ts) delega la configuración en `@lovable.dev/vite-tanstack-config`. El despliegue requiere un servidor compatible con TanStack Start y las credenciales de los servicios externos. Consulta [entorno y despliegue](../desarrollo/01-entorno-y-despliegue.md) para preparar la instalación.
 
-[Dominio y datos](02-dominio-y-datos.md) · [Flujo de secuencia](05-flujos-y-estados.md) · [Despliegue práctico](../desarrollo/01-entorno-y-despliegue.md).
+El cliente adjunta el token de sesión cuando existe y el servidor configura protección CSRF. La autorización de las operaciones con rol de servicio requiere los controles descritos en [seguridad](07-seguridad-y-limitaciones.md).
+
+[Dominio y datos](02-dominio-y-datos.md) · [Secuencia de operaciones](05-flujos-y-estados.md) · [Desarrollo local](../desarrollo/01-entorno-y-despliegue.md)

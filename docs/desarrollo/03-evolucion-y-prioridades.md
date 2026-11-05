@@ -1,21 +1,21 @@
-# 03 · Evolución y decisiones pendientes
+# 03 · Evolución y prioridades
 
-Las próximas etapas se centran en proteger los datos, mejorar el registro de las decisiones y validar las comparaciones con profesionales.
+Las siguientes prioridades buscan preparar el piloto para un uso más amplio y mejorar la trazabilidad de las homologaciones.
 
-## Prioridad 1 · Seguridad y consistencia
+## Prioridad alta — Seguridad y operación
 
-Exigir autenticación y autorización de funciones servidor, revisar privilegios de la cuenta de servicio, controlar el reinicio de datos y comprobar un proceso de migración/restauración. También conviene hacer atómica la actualización de preselecciones o definir recuperación ante fallos intermedios.
+Exigir identidad y autorización en cada función privilegiada, definir si habrá una sola organización o varias, limitar las operaciones destructivas y verificar la instalación, el respaldo y la restauración de la base.
 
-## Prioridad 2 · Trazabilidad suficiente
+## Prioridad alta — Coherencia del historial
 
-Guardar junto a cada ejecución el reparto motor/IA que realmente produjo el score final, identificar la versión de cálculo, conservar la procedencia del catálogo y determinar cómo se preservan las decisiones ante futuras ediciones de cargos. Considerar el registro de descartes cuando haga falta auditarlos después de cerrar la pantalla.
+Guardar por ejecución la versión de las reglas y los pesos globales motor/IA que efectivamente generaron `score_final`. Si se quiere poder explicar descartes antiguos, persistir también los motivos. Decidir si una confirmación se puede corregir y, en ese caso, cómo dejar historial de modificaciones en vez de solo reemplazar una fila.
 
-## Prioridad 3 · Validación con analistas
+## Prioridad media — Escrituras y pruebas
 
-Construir un conjunto pequeño de pares de cargos revisados por profesionales. Medir consistencia de criterios, casos con datos incompletos, diferencias entre revisores y claridad de los informes. Un score alto no es, por sí solo, una prueba de precisión.
+Hacer atómica la sustitución de la preselección (o definir recuperación comprobable). Añadir pruebas automatizadas del motor y de los lectores de planillas, además de verificaciones de autorización e integración con una base de prueba. Separar incidentes de proveedor de IA de errores de lógica o datos.
 
-## Prioridad 4 · Experiencia y ampliaciones
+## Prioridad media — Validación y accesibilidad
 
-Mejorar la accesibilidad y el recorrido móvil con pruebas de uso. La colaboración entre analistas requiere primero un diseño de permisos y reglas para editar decisiones compartidas.
+Trabajar con pares de cargos revisados por especialistas, evaluar las explicaciones y los errores del sistema, y probar el recorrido con personas que no participaron en su construcción. Revisar navegación con teclado, contraste, legibilidad y compatibilidad con lectores de pantalla.
 
-[Roadmap](../../roadmap.md) · [Seguridad y límites](../tecnica/07-seguridad-y-limitaciones.md) · [Origen formativo](../formativa/README.md).
+[Roadmap](../../roadmap.md) · [Experiencia formativa](../formativa/README.md)

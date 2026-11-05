@@ -1,33 +1,48 @@
-# Espejo · Homologa: el origen de una dupla
+# Espejo · Homologa, la historia detrás del código
 
-## De dónde surgió la idea
+El proyecto nació de la colaboración entre dos personas con trayectorias distintas: la experiencia profesional de Claudia Peña en recursos humanos y la formación técnica de Pablo Guzmán.
 
-Espejo · Homologa nació durante **Duplas Intergeneracionales Tech**, un programa de **Desafío Latam** vinculado al **Fondo 55+ Entel**. El desafío era aprender a desarrollar soluciones digitales con apoyo de inteligencia artificial, especialmente Lovable, y aplicar lo aprendido a un problema concreto trabajando entre generaciones.
+## Cómo comenzó
 
-En mi caso formé dupla con **Claudia Peña**. Yo, **Pablo Guzmán**, participé desde el rol *junior*, como estudiante de **Ingeniería Civil en Computación e Informática**. Claudia asumió el rol *senior*: es **economista** y aportó su experiencia en **recursos humanos**, particularmente en el **sector sanitario**, además de otros ámbitos en los que ha trabajado.
+La dupla se formó en **Duplas Intergeneracionales Tech**, programa de **Desafío Latam** vinculado al **Fondo 55+ Entel**. **Pablo Guzmán**, estudiante de **Ingeniería Civil en Computación e Informática**, participó en el rol _junior_. **Claudia Peña**, economista con experiencia en recursos humanos, incluido el **sector sanitario**, participó en el rol _senior_.
 
-Fue Claudia quien me acercó a las dificultades reales de comparar cargos entre organizaciones: las denominaciones no siempre son equivalentes, las responsabilidades pueden solaparse y la experiencia profesional sigue siendo necesaria para interpretar los resultados. A partir de esas conversaciones intentamos convertir un problema que ella conocía en un proceso comprensible, repetible y apoyado por software.
+Claudia planteó una dificultad que conocía en su trabajo: comparar cargos que, entre organizaciones y encuestas, pueden nombrarse o describirse de maneras distintas. Ese problema dio origen a Espejo y orientó la definición de sus criterios de homologación.
 
-## Cómo nos complementamos
+## Qué hizo cada persona
 
-Cada uno aportó su experiencia al trabajo de la dupla:
+**Claudia** aportó casos, criterios del rubro y pruebas de uso. Sus observaciones ayudaron a ajustar los resultados, la claridad de la interfaz y la facilidad para recorrerla.
 
-- **Claudia** aportó el problema y los criterios del dominio. Probaba las versiones de la aplicación, señalaba aspectos poco claros y hacía observaciones sobre lo que necesitaba una persona que analiza cargos. Su experiencia y perspectiva como usuaria senior también nos ayudaron a prestar atención a la legibilidad, el lenguaje y la facilidad para recorrer las pantallas.
-- **Yo** me encargué de redactar los *prompts*, conducir las iteraciones en Lovable y organizar el trabajo técnico, apoyándome también en ChatGPT y en un repositorio de GitHub para revisar, conservar y continuar los cambios.
-- **Gricel Sepúlveda** fue nuestra **tutora de proyecto**. Recibíamos su retroalimentación semanal, que nos ayudaba a revisar lo construido, cuestionar decisiones y orientar el siguiente avance.
+**Pablo** redactó los prompts, condujo las iteraciones con **Lovable** y organizó el trabajo técnico con apoyo de **ChatGPT** y **GitHub**. Su formación le permitió interpretar lo generado y traducir las observaciones de Claudia en cambios de la aplicación.
 
-Discutíamos qué debía hacer el sistema, construíamos una versión y la probábamos con Claudia. Sus observaciones nos ayudaban a decidir qué ajustar en la siguiente iteración.
+**Gricel Sepúlveda**, tutora del proyecto, entregó retroalimentación semanal para revisar los avances y orientar las siguientes decisiones.
 
-## Qué nos dejó el curso
+## El ciclo de trabajo
 
-El programa separaba el aprendizaje en dos espacios complementarios. En el **bloque técnico** practicábamos cómo dar instrucciones claras a Lovable, modelar datos, conectar pantallas y revisar la experiencia de uso. En el **bloque de proyectos** aplicábamos esas habilidades al desafío de la dupla: explorar, investigar, acotar, construir, probar y preparar la demostración final.
+Cada observación de Claudia se convertía en un objetivo de implementación. Pablo preparaba las instrucciones, revisaba la respuesta de Lovable y comprobaba los cambios. Claudia probaba la nueva versión y aportaba comentarios para la siguiente iteración. La tutoría semanal permitía contrastar los avances con los objetivos del curso.
 
-Terminamos el curso con una **calificación final de 7,0**. La experiencia nos permitió llevar un problema del ámbito laboral a un prototipo que podíamos probar y mejorar juntos.
+```mermaid
+flowchart LR
+  C["Claudia<br/>problema y criterio"] --> P["Pablo<br/>prompts e iteración"]
+  P --> L["Lovable + apoyo ChatGPT<br/>construcción asistida"]
+  L --> G["Pablo<br/>revisión técnica / GitHub"]
+  G --> V["Claudia<br/>pruebas y observaciones"]
+  V -->|nuevos ajustes| P
+  T["Gricel<br/>tutoría semanal"] -.-> P
+  T -.-> V
+  classDef human fill:#FFF0D9,stroke:#BF985E,color:#60451E;
+  classDef tech fill:#123E5D,stroke:#369FC1,color:#FFF;
+  class C,P,G,V,T human;
+  class L tech;
+```
 
-Lo más valioso para mí fue comprobar que la experiencia de quien conoce el problema y las herramientas de quien puede construir una solución se necesitan mutuamente. Ese aprendizaje también explica por qué la aplicación termina con una **decisión humana informada**, incluso cuando sus cálculos y su análisis semántico sugieren una equivalencia.
+## La perspectiva intergeneracional
 
-## Para seguir leyendo
+Las distintas trayectorias permitieron revisar tanto la implementación como su utilidad profesional. Pablo se concentró en convertir las decisiones en una aplicación; Claudia evaluó si lo que aparecía en pantalla tenía sentido para el análisis de cargos.
 
-- [Cómo trabajamos: método y etapas del curso](01-metodologia-y-fuentes.md)
-- [Por qué existe el piloto y cuál es su alcance](../general/01-proposito-y-alcance.md)
-- [Qué aspectos técnicos siguen pendientes](../desarrollo/03-evolucion-y-prioridades.md)
+Esa colaboración también se refleja en el producto: el motor y la IA aportan información, y el analista confirma la homologación con conocimiento del contexto.
+
+## Evaluación final
+
+La dupla obtuvo **nota final 7,0**, máxima de la escala chilena, en la evaluación del curso.
+
+[Etapas del curso y materiales consultados](01-metodologia-y-fuentes.md) · [Qué hace el piloto](../general/01-proposito-y-alcance.md) · [Volver al índice](../README.md)

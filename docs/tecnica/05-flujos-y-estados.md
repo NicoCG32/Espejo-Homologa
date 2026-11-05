@@ -1,114 +1,113 @@
 # 05 · Flujos, secuencia y estados
 
-Los pasos de la interfaz y los estados guardados en la base se gestionan por separado. Retroceder en el asistente no revierte una ejecución ya guardada.
+Para interpretar el historial hay que distinguir **lo que sucede en la pantalla** de **lo que se guarda en tablas distintas**. Una ejecución que terminó de calcular no implica que la IA haya funcionado ni que alguien haya confirmado un cargo.
 
-## Actividad completa de homologación
+## Actividad de una homologación
 
 ```mermaid
 flowchart TD
-  IN([Iniciar desde un cargo interno]) --> VALID{¿Hay referencias y<br/>criterios con peso?}
-  VALID -->|No| FIX[Corregir catálogo<br/>o criterios]
-  FIX --> VALID
-  VALID -->|Sí| N[Normalizar texto si hace falta<br/>con alternativa al original]
-  N --> M[Ejecutar motor<br/>y guardar resultados]
-  M --> Q{¿Hay candidatos?}
-  Q -->|No| FIN0([Revisar criterios o datos])
-  Q -->|Sí| IA[Solicitar análisis IA]
-  IA --> OK{¿IA válida?}
-  OK -->|Sí| H[Guardar score semántico<br/>y score final]
-  OK -->|No| P[Conservar sólo score motor]
-  H --> S[Analista preselecciona uno o más]
-  P --> S
-  S --> D[Analista confirma uno]
-  D --> B[Consultar bandas por tamaño]
-  B --> E([Historial · Excel · PDF])
-  classDef base fill:#EBF4F7,stroke:#9BBAC8,color:#17384D;
-  classDef human fill:#FFF0D5,stroke:#BE984E,color:#5D441D,stroke-width:2px;
-  classDef finish fill:#143C57,stroke:#4286A7,color:#fff;
-  class IN,VALID,FIX,N,M,Q,IA,OK,H,P,B base;
-  class S,D human;
-  class FIN0,E finish;
+  IN(["Seleccionar cargo interno"]) --> R{"¿Hay referencias y<br/>pesos positivos?"}
+  R -->|No| AJ["Corregir catálogo o criterios"]
+  AJ --> R
+  R -->|Sí| N["Normalizar experiencia/formación<br/>si corresponde"]
+  N --> M["Calcular y persistir resultados del motor"]
+  M --> C{"¿Hay candidatos admitidos?"}
+  C -->|No| STOP(["Revisar la información"])
+  C -->|Sí| IA["Solicitar comparación semántica"]
+  IA --> OK{"¿IA válida?"}
+  OK -->|Sí| S["Guardar score IA y final"]
+  OK -->|No| P["Continuar con score del motor"]
+  S --> PRE["Analista marca varios candidatos"]
+  P --> PRE
+  PRE --> D["Analista elige un definitivo"]
+  D --> B["Consultar benchmark por tamaño"]
+  B --> H(["Historial e informes"])
+  classDef process fill:#EAF4F7,stroke:#8AB6C7,color:#164057;
+  classDef human fill:#FFF1D7,stroke:#C29B5E,color:#5A411B,stroke-width:2px;
+  classDef decision fill:#123E5E,stroke:#3299BB,color:#FFFFFF;
+  class IN,N,M,C,IA,S,P,B,STOP,H process;
+  class AJ,PRE,D human;
+  class R,OK decision;
 ```
 
-El análisis de IA es asistencial: una falla no elimina candidatos determinísticos. La decisión final la registra el analista; el backend no obliga a un score semántico presente.
+La etapa de IA no debe leerse como requisito para registrar una decisión. Si el análisis falla, el motor se conserva y el analista puede continuar. La preselección de esta etapa es **humana**, distinta de la lista que el motor llamó internamente `preseleccionados`.
 
-## Secuencia de componentes
+## Secuencia — Quién llama a quién
 
 ```mermaid
 sequenceDiagram
   autonumber
-  actor Analista
-  participant UI as React / navegador
-  participant RPC as Funciones del servidor
-  participant Motor as Motor puro
-  participant DB as PostgreSQL
-  participant IA as Proveedor IA
-  Analista->>UI: Selecciona cargo y pesos
-  UI->>RPC: ejecutarHomologacion(cargo, pesos)
-  RPC->>DB: Leer cargo, referencias y criterios
-  opt Fichas no normalizadas
-    RPC->>IA: Normalizar experiencia/formación
-    IA-->>RPC: Fichas o error
-    RPC->>DB: Guardar fichas válidas
+  actor A as Analista
+  participant UI as Navegador / React
+  participant SF as Funciones servidor
+  participant DB as Supabase / PostgreSQL
+  participant M as Motor
+  participant AI as Gemini o Groq
+  A->>UI: Selecciona cargo y pesos
+  UI->>SF: ejecutarHomologacion
+  SF->>DB: Leer cargo, referencias y criterios
+  opt Existen textos sin ficha vigente
+    SF->>AI: Normalizar experiencia y formación
+    AI-->>SF: Fichas estructuradas o error
+    SF->>DB: Guardar fichas válidas
   end
-  RPC->>Motor: ejecutarMotor(datos, criterios)
-  Motor-->>RPC: Admitidos, scores y descartes
-  RPC->>DB: Guardar ejecución + resultados
-  RPC-->>UI: Ejecución y evaluación
-  Analista->>UI: Solicita análisis semántico
-  UI->>RPC: analizarSemantica(ejecucion)
-  RPC->>DB: Leer candidatos del motor
-  RPC->>IA: Comparar sólo candidatos admitidos, sin sueldo
-  IA-->>RPC: JSON validable o error
-  RPC->>DB: Guardar análisis y scores si son válidos
-  RPC-->>UI: Resultado IA o aviso
-  Analista->>UI: Marca varios candidatos
-  UI->>RPC: guardarPreseleccion(ids)
-  RPC->>DB: Guardar marcas y scores
-  Analista->>UI: Confirma un candidato
-  UI->>RPC: guardarDecision(id, analista, comentario)
-  RPC->>DB: Guardar decisión única por ejecución
-  UI->>RPC: getEjecucion(id)
-  RPC->>DB: Leer decisión y bandas si hay confirmación
-  RPC-->>UI: Historial + benchmark
+  SF->>M: Ejecutar reglas
+  M-->>SF: Scores, admitidos y descartados
+  SF->>DB: Guardar ejecución y admitidos
+  SF-->>UI: Resultados del motor
+  A->>UI: Solicitar análisis semántico
+  UI->>SF: analizarSemantica
+  SF->>DB: Leer candidatos admitidos
+  SF->>AI: Comparar sin sueldo ni tamaño
+  AI-->>SF: Scores estructurados o fallo
+  SF->>DB: Guardar análisis y scores si válidos
+  SF-->>UI: Scores IA/final o aviso
+  A->>UI: Marcar varios
+  UI->>SF: guardarPreseleccion
+  SF->>DB: Reemplazar filas de preselección
+  A->>UI: Confirmar uno + analista + comentario
+  UI->>SF: guardarDecision
+  SF->>DB: Upsert de decisión por ejecución
+  UI->>SF: getEjecucion
+  SF->>DB: Leer historial y banda del definitivo
+  SF-->>UI: Decisión, comparación y benchmark
 ```
 
-La preselección se guarda mediante varias consultas. Un fallo intermedio o solicitudes concurrentes pueden dejar cambios parciales; la actualización atómica está pendiente.
+**El diagrama muestra operaciones lógicas, no una transacción ACID única.** `guardarPreseleccion` elimina las marcas anteriores e inserta las nuevas mediante consultas separadas. Ante errores intermedios o concurrencia, la aplicación necesita protección o recuperación adicional.
 
-## Máquina de estados de ejecución (persistida)
+## Estados persistidos de la ejecución
 
 ```mermaid
 stateDiagram-v2
   [*] --> EN_PROCESO: ejecutarHomologacion
-  [*] --> PENDIENTE: createEjecucion (ruta alternativa)
-  EN_PROCESO --> COMPLETADA: motor y persistencia correctos
-  EN_PROCESO --> ERROR: excepción en el cálculo/guardado
+  EN_PROCESO --> COMPLETADA: motor y escritura completados
+  EN_PROCESO --> ERROR: fallo de cálculo/escritura
+  [*] --> PENDIENTE: createEjecucion (otra función)
   note right of COMPLETADA
-    El motor terminó.
-    No implica análisis IA
-    ni decisión confirmada.
+    Se terminó la fase del motor.
+    No hay implicación de IA válida
+    ni decisión humana registrada.
   end note
 ```
 
-El esquema define `PENDIENTE`, `EN_PROCESO`, `COMPLETADA` y `ERROR`. `createEjecucion` crea una ejecución `PENDIENTE`; el flujo principal, `ejecutarHomologacion`, crea una nueva directamente como `EN_PROCESO`.
+El enum de base incluye `PENDIENTE`, `EN_PROCESO`, `COMPLETADA` y `ERROR`. El flujo principal crea directamente una ejecución `EN_PROCESO`. `createEjecucion` crea una fila `PENDIENTE`, sin una transición automática hacia la ejecución del motor.
 
-## Estados de análisis y decisión (persistencias distintas)
+## Resultado de IA y elección humana: no son el mismo estado
 
 ```mermaid
 flowchart LR
-  E[Motor completado] --> I{Intento de IA}
-  I -->|Válido| OK[analisis_semanticos: OK<br/>resultados con score IA/final]
-  I -->|Fallido| ERROR[analisis_semanticos: ERROR<br/>score IA/final pueden quedar null]
-  OK --> PRE[decision_preseleccion:<br/>0 a N candidatos]
-  ERROR --> PRE
-  PRE --> DEC[decisiones:<br/>0 o 1 fila por ejecución]
-  DEC --> BEN[Consulta de bandas<br/>si existe decisión]
-  classDef normal fill:#EAF3F7,color:#1C4258,stroke:#98B7C6;
-  classDef human fill:#FFF1D7,color:#664D22,stroke:#C39C50;
-  class E,I,OK,ERROR normal;
-  class PRE,DEC,BEN human;
+  M["Motor completado"] --> I{"¿Se intentó IA?"}
+  I -->|No| PRE["0..N preseleccionados<br/>por analista"]
+  I -->|Sí| A["analisis_semanticos<br/>OK o ERROR"]
+  A --> PRE
+  PRE --> D["0..1 decisión definitiva<br/>por ejecución"]
+  D --> B["Benchmark disponible<br/>para el definitivo"]
+  classDef cool fill:#E8F4F7,stroke:#9BBBC9,color:#1B3D54;
+  classDef warm fill:#FFF0D8,stroke:#C7A061,color:#60471F;
+  class M,I,A cool;
+  class PRE,D,B warm;
 ```
 
-El análisis, la preselección y la decisión se guardan en tablas separadas. El `upsert` de `decisiones` permite actualizar la referencia confirmada para un mismo `ejecucion_id`.
+`analisis_semanticos` guarda intentos `OK` o `ERROR`; `decision_preseleccion` guarda de cero a muchos marcados y `decisiones` permite como máximo una fila por ejecución. El servidor usa `upsert` en esa última tabla, de modo que **«única» no significa «inmutable»**. El estado del motor y la decisión del analista se interpretan por separado.
 
-[Guía general](../general/02-recorrido-del-analista.md) · [ER](02-dominio-y-datos.md) · [Seguridad](07-seguridad-y-limitaciones.md).
+[Recorrido general](../general/02-recorrido-del-analista.md) · [Modelo de datos](02-dominio-y-datos.md) · [Seguridad](07-seguridad-y-limitaciones.md)

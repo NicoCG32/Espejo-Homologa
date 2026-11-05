@@ -2,69 +2,65 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="branding/banners/espejo-banner-oscuro.svg" />
-  <img src="branding/banners/espejo-banner-claro.svg" alt="Espejo · Homologa: dos perspectivas de un mismo cargo" width="100%" />
+  <img src="branding/banners/espejo-banner-claro.svg" alt="Espejo · Homologa: comparación de cargos por contenido" width="100%" />
 </picture>
 
 # Espejo · Homologa
 
 **Comparar por contenido. Decidir con criterio.**
 
-**Espejo · Homologa** es un piloto web para profesionales que comparan cargos internos con referencias de encuestas salariales. Combina criterios ponderados y análisis asistido por IA para apoyar la decisión del analista, registrar los resultados y consultar bandas salariales. La referencia definitiva la confirma el profesional.
+[![Estado: piloto](https://img.shields.io/badge/Estado-Piloto-52647A?style=flat-square)](docs/general/01-proposito-y-alcance.md) [![React 19](https://img.shields.io/badge/React-19-24618A?style=flat-square&logo=react)](package.json) [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](package.json) [![Calidad](https://github.com/NicoCG32/Espejo-Homologa/actions/workflows/calidad.yml/badge.svg)](https://github.com/NicoCG32/Espejo-Homologa/actions/workflows/calidad.yml)
 
-[![Estado: piloto](https://img.shields.io/badge/Estado-Piloto-52647A?style=flat-square)](docs/general/01-proposito-y-alcance.md) [![React 19](https://img.shields.io/badge/React-19-1F6285?style=flat-square&logo=react)](package.json) [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](package.json) [![Calidad](https://github.com/NicoCG32/Espejo-Homologa/actions/workflows/calidad.yml/badge.svg)](https://github.com/NicoCG32/Espejo-Homologa/actions/workflows/calidad.yml)
-
-[Documentación](docs/README.md) · [Cómo funciona](docs/general/02-recorrido-del-analista.md) · [Arquitectura](docs/tecnica/01-arquitectura.md) · [Proyecto en GitHub](https://github.com/NicoCG32/Espejo-Homologa)
+[Documentación](docs/README.md) · [Recorrido del analista](docs/general/02-recorrido-del-analista.md) · [Arquitectura](docs/tecnica/01-arquitectura.md) · [Origen del proyecto](docs/formativa/README.md)
 
 </div>
 
-## Por qué existe
+## Resumen ejecutivo
 
-Cuando dos cargos tienen nombres distintos, no necesariamente hacen trabajos distintos. También ocurre lo contrario: compartir un nombre no garantiza equivalencia. Desarrollamos **Espejo · Homologa** para ayudar a comparar cargos internos con referencias de una encuesta, documentar los criterios y dejar la decisión final en manos de quien conoce el contexto.
+**Espejo · Homologa** es un piloto web que ayuda a comparar cargos internos con referencias de encuestas salariales. Combina criterios ponderados y análisis semántico asistido por IA; el analista revisa los candidatos y confirma la homologación. Conserva los resultados y las decisiones para consultar el historial, contrastar bandas salariales y generar informes Excel o PDF. La remuneración se consulta como referencia de mercado y queda fuera del cálculo de similitud.
 
-El piloto combina un **motor determinístico**, un **análisis semántico asistido por IA** y una **decisión del analista**. La remuneración queda fuera del cálculo de similitud: se consulta como información de mercado, no como argumento para declarar que dos cargos son equivalentes.
+## Lo que se puede hacer
 
-## El origen y las personas detrás
+1. Administrar empresas, cargos internos y cargos de referencia; importar planillas y revisar su información antes de guardarla.
+2. Ajustar criterios y pesos; ejecutar la comparación determinística, con explicación de coincidencias y diferencias.
+3. Solicitar un análisis semántico de los candidatos admitidos y consultar los puntajes del motor, IA y combinado.
+4. Preseleccionar varios candidatos, contrastar sus fichas y confirmar uno como referencia de la ejecución, dejando analista y comentario.
+5. Consultar P25, P50, P75 y promedio por tamaño de empresa; revisar el historial y exportar Excel o una vista imprimible como PDF.
 
-El proyecto nació en **Duplas Intergeneracionales Tech**, una experiencia de aprendizaje de Desafío Latam vinculada al Fondo 55+ Entel. La dupla estuvo formada por **Claudia Peña**, economista con experiencia en recursos humanos, y **Pablo Guzmán**, estudiante de Ingeniería Civil en Computación e Informática. Claudia aportó los criterios del rubro, las pruebas y la retroalimentación; Pablo condujo la implementación mediante prompts e iteraciones con Lovable, ChatGPT y GitHub. Contamos con tutoría semanal de **Gricel Sepúlveda**.
+El proyecto está en etapa de piloto. Antes de utilizar información confidencial, deben resolverse los [controles de acceso pendientes](docs/tecnica/07-seguridad-y-limitaciones.md).
 
-La experiencia de la dupla y la metodología del curso están en [el origen de Espejo](docs/formativa/README.md).
+## Cómo surgió
 
-## Lo que hace el piloto
+El proyecto nació en **Duplas Intergeneracionales Tech**, una iniciativa formativa de **Desafío Latam** vinculada al **Fondo 55+ Entel**. **Claudia Peña**, economista con experiencia en recursos humanos y en el sector sanitario, aportó el problema, los criterios profesionales y las pruebas de uso. **Pablo Guzmán**, estudiante de Ingeniería Civil en Computación e Informática, condujo los prompts y las iteraciones técnicas con Lovable, ChatGPT y GitHub. La dupla contó con tutoría semanal de **Gricel Sepúlveda**.
 
-1. Permite cargar empresas, cargos internos, referencias y bandas salariales desde planillas, con revisión previa de los datos.
-2. Compara el contenido con criterios configurables y conserva los pesos usados en cada ejecución.
-3. Interpreta semánticamente los candidatos admitidos por el motor, cuando el servicio de IA está disponible.
-4. Deja **preseleccionar varios** candidatos y confirmar **uno** como referencia definitiva para la ejecución.
-5. Presenta las bandas P25, P50, P75 y promedio según el tamaño escogido, y permite obtener informes Excel/PDF desde el historial.
+[Historia de la dupla y metodología del curso](docs/formativa/README.md).
 
-El proyecto está en etapa de piloto. Para trabajar con información confidencial o desplegarlo en producción, revisa los [controles de acceso pendientes](docs/tecnica/07-seguridad-y-limitaciones.md).
+## Guía de lectura
 
-## Cómo leer la documentación
+| Área           | Para empezar                                                                                                                                                                          |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **General**    | [Propósito y alcance](docs/general/01-proposito-y-alcance.md) · [Recorrido del analista](docs/general/02-recorrido-del-analista.md)                                                   |
+| **Técnica**    | [Arquitectura por niveles](docs/tecnica/01-arquitectura.md) · [Dominio y base de datos](docs/tecnica/02-dominio-y-datos.md) · [Flujos y estados](docs/tecnica/05-flujos-y-estados.md) |
+| **Desarrollo** | [Puesta en marcha](docs/desarrollo/01-entorno-y-despliegue.md) · [Validación](docs/desarrollo/02-validacion-y-mantenimiento.md)                                                       |
+| **Formativa**  | [Origen de la dupla](docs/formativa/README.md) · [Método y fuentes del curso](docs/formativa/01-metodologia-y-fuentes.md)                                                             |
 
-| Área | Para quién | Punto de partida |
-| --- | --- | --- |
-| **General** | Personas que quieren entender o utilizar la propuesta | [Propósito](docs/general/01-proposito-y-alcance.md) · [Recorrido del analista](docs/general/02-recorrido-del-analista.md) |
-| **Técnica** | Quienes necesitan revisar el funcionamiento y sus límites | [Arquitectura](docs/tecnica/01-arquitectura.md) · [Datos y relaciones](docs/tecnica/02-dominio-y-datos.md) |
-| **Desarrollo** | Quienes van a ejecutar, mantener o extender el código | [Entorno local](docs/desarrollo/01-entorno-y-despliegue.md) · [Pruebas](docs/desarrollo/02-validacion-y-mantenimiento.md) |
-| **Formativa** | Quienes quieren conocer el origen y lo aprendido | [Contexto](docs/formativa/README.md) |
+**[Índice completo y mapa del sistema](docs/README.md)**
 
-**[Índice completo con diagramas y rutas de lectura](docs/README.md)**
+## Tecnologías utilizadas
 
-## Tecnologías principales
-
-React 19 · TypeScript · TanStack Start/Router · Vite · Tailwind CSS 4 · PostgreSQL mediante Supabase · Gemini con respaldo Groq · Excel (`xlsx`). El código de la aplicación utiliza funciones de servidor para sus operaciones de datos.
+React 19, TypeScript, TanStack Router/Start, Vite y Tailwind CSS para la interfaz y el servidor; PostgreSQL mediante Supabase para persistencia; Google Gemini con respaldo condicionado de Groq para IA. La lectura de planillas y la exportación Excel utilizan `xlsx`; el informe PDF se obtiene mediante la impresión del navegador. Las dependencias están en [`package.json`](package.json).
 
 ## Ejecutarlo localmente
 
-Con Bun instalado y las variables de entorno configuradas:
+Configura las variables de entorno y la base de datos según la [guía de instalación y despliegue](docs/desarrollo/01-entorno-y-despliegue.md). Con Bun instalado:
 
 ```bash
 bun install --frozen-lockfile
 bun run dev
 ```
 
-Las operaciones sobre cargos y ejecuciones requieren una base configurada; el análisis IA requiere credenciales del proveedor. Consulta [instalación y despliegue](docs/desarrollo/01-entorno-y-despliegue.md) para configurar las variables públicas y los secretos del servidor.
+Las operaciones con datos requieren Supabase configurado; las funciones de IA requieren credenciales del proveedor en el servidor.
 
 ## Licencia y autoría
 
-[Licencia](LICENSE) · [Alcance no comercial y créditos](LICENSING.md) · [Avisos](NOTICE) · [Identidad visual](branding/README.md). El uso comercial adicional requiere el acuerdo indicado en la licencia y sus condiciones complementarias.
+[Licencia del código](LICENSE) · [Condiciones, créditos y uso comercial](LICENSING.md) · [Avisos](NOTICE) · [Recursos visuales](branding/README.md).

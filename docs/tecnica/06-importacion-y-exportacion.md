@@ -1,44 +1,56 @@
-# 06 · Importación, benchmark y exportación
+# 06 · Planillas, benchmark e informes
 
-Las planillas se leen en el navegador y sus datos se revisan antes de guardarlos. Los informes se construyen a partir de la ejecución y la decisión registradas.
+La información de cargos y de encuesta llega principalmente en archivos. Por eso conviene explicar qué reconoce la aplicación, qué conserva y qué **no debe completar por su cuenta**.
 
-## Entradas de planillas
-
-[`cargos-import.ts`](../../src/lib/cargos-import.ts) incluye lectores para cargos, diccionario y bandas; [`cargos.functions.ts`](../../src/lib/cargos.functions.ts) y funciones relacionadas gestionan la persistencia. El proceso admite carga de datos de empresa y catálogo de referencia mediante la interfaz.
+## Importación — del archivo a la base
 
 ```mermaid
 flowchart LR
-  X[(Excel / CSV)] --> L[Lectura en navegador]
-  L --> T{Tipo de hoja}
-  T -->|Cargos| C[Extraer código, nombre,<br/>empresa y atributos]
-  T -->|Diccionario| D[Extraer código y nombre<br/>de área, subárea y nivel]
-  T -->|Bandas| B[Extraer P25, P50, P75 y<br/>promedio por tamaño]
-  C --> V[Previsualizar y validar]
+  A[("Excel / CSV")] --> L["Lectura de hojas<br/>en navegador"]
+  L --> T{"¿Qué datos contiene?"}
+  T --> C["Cargos y atributos"]
+  T --> D["Diccionario de códigos"]
+  T --> B["Bandas por tamaño"]
+  C --> V["Previsualización y avisos"]
   D --> V
   B --> V
-  V --> A{¿Confirma<br/>el analista?}
-  A -->|No| R([No escribir])
-  A -->|Sí| S[Funciones servidor]
-  S --> P[(PostgreSQL)]
-  classDef p fill:#EAF3F7,color:#1F4256,stroke:#89ADBD;
-  classDef h fill:#FFF0D3,color:#61471B,stroke:#C09B50;
-  class X,L,T,C,D,B,V,S,P p;
-  class A,R h;
+  V --> H{"¿Confirmar importación?"}
+  H -->|No| N(["No guardar"])
+  H -->|Sí| S["Funciones servidor"]
+  S --> P[("PostgreSQL")]
+  classDef light fill:#EAF4F7,stroke:#94B4C3,color:#1C4054;
+  classDef dark fill:#133E5C,stroke:#379CC0,color:#FFFFFF;
+  classDef accent fill:#FFF0D6,stroke:#C3A065,color:#634619;
+  class A,L,T,C,D,B,V,S,P light;
+  class H dark;
+  class N accent;
 ```
 
-El lector de cargos reconoce variantes de encabezados, exige código y nombre y marca códigos duplicados dentro del archivo. El lector salarial requiere encabezados agrupados por tamaño (pequeña, mediana o grande) y los símbolos `P25`, `P50`, `P75` o `PP`. Los códigos y nombres originales se conservan al interpretar los campos.
+[`cargos-import.ts`](../../src/lib/cargos-import.ts) reconoce variantes concretas de encabezados para cargos (por ejemplo, código y nombre), marca códigos duplicados dentro de la hoja y puede utilizar un diccionario de área, subárea y nivel. No es un lector universal de Excel: **si el archivo no sigue las estructuras esperadas habrá que adaptarlo o corregir la planilla**. Las bandas se leen de encabezados agrupados por empresa pequeña, mediana y grande, con `P25`, `P50`, `P75` y `PP` como promedio.
 
-## Bandas y remuneración
+La base registra además fuente y año de bandas si se entregan: el sistema no debe inventarlos. Los valores faltantes quedan ausentes, no se rellenan con cero.
 
-La tabla `bandas_salariales` almacena P25, P50, P75 y promedio para cada cargo de referencia y tamaño de empresa, además de `fuente` y `anio` cuando se proporcionan. Una banda ausente no se interpola ni se traduce en cero.
+## Remuneración: qué se compara y qué no
 
-La **remuneración interna** está disponible como información de contexto y para calcular brechas contra la encuesta. En la pantalla de decisión se ven bandas salariales de los candidatos preseleccionados antes de confirmar el definitivo; después de confirmar, **los gráficos del benchmark web y del informe PDF** muestran únicamente los cuatro valores de encuesta, mientras las tablas de comparación mantienen la remuneración interna y las brechas. No es una serie estadística de la encuesta ni interviene en el puntaje de homologación. La brecha se interpreta como `remuneración interna − valor de encuesta`; si falta alguno de los datos o el denominador es cero, no se calcula el porcentaje.
+`cargos.sueldo` pertenece al contexto del cargo interno. `bandas_salariales` pertenece al catálogo de referencia y almacena **P25, P50, P75 y promedio**, separados por tamaño `P`, `M` o `G`, con fuente y año cuando existen.
 
-## Exportaciones existentes
+La regla acordada para los gráficos es muy específica: **solo se grafican los cuatro valores de encuesta** tanto en el panel web como en el informe imprimible. La remuneración interna se muestra en fichas y tablas de brechas, no como una barra adicional. La diferencia es:
 
-En el detalle del historial, **después de confirmar una decisión**, se construyen los datos del informe sin llamar nuevamente a IA. [`exportacion.ts`](../../src/lib/exportacion.ts) implementa dos salidas:
+$$
+\text{brecha absoluta}=\text{remuneración interna}-\text{valor de encuesta}
+$$
 
-- **Excel (`xlsx`)**: libro con candidatos y scores, comparación salarial y contexto de la decisión. Parte de la preselección humana guardada; en ejecuciones antiguas sin preselección, utiliza el definitivo.
-- **PDF imprimible**: abre una vista HTML para imprimir o guardar como PDF desde el navegador. Su gráfico muestra **P25, P50, P75 y promedio de la encuesta**, igual que el panel web. La remuneración interna aparece en la tabla de comparación y brechas. El navegador debe permitir la ventana emergente del informe.
+Si falta un valor o el de encuesta es cero, no se calcula el porcentaje de brecha. Ninguno de estos montos participa en el motor o la llamada semántica.
 
-[Ciclo completo](05-flujos-y-estados.md) · [Datos](02-dominio-y-datos.md).
+## Salidas desde el historial
+
+| Salida    | Archivo responsable                                      | Qué genera                                                                                             |
+| --------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| **Excel** | [`src/lib/exportacion.ts`](../../src/lib/exportacion.ts) | Hojas de resumen, candidatos/scores y comparación salarial, con información de la decisión registrada. |
+| **PDF**   | `abrirInformePdf` del mismo archivo                      | Abre un documento HTML imprimible en otra ventana para guardar como PDF con el navegador.              |
+
+Los candidatos incluidos en los informes se toman de la preselección guardada; en ejecuciones anteriores sin esa lista, la interfaz contempla utilizar el definitivo. Los informes **leen información persistida** y no vuelven a ejecutar IA. La vista PDF necesita que el navegador permita la apertura de la ventana.
+
+Las cifras y las bandas se consultan desde el catálogo vigente. El historial no conserva una copia de las bandas del momento de la ejecución.
+
+[Recorrido](../general/02-recorrido-del-analista.md) · [Modelo de datos](02-dominio-y-datos.md) · [Validación](../desarrollo/02-validacion-y-mantenimiento.md)

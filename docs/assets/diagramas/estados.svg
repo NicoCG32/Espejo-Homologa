@@ -12,7 +12,7 @@
 <g id="node1" class="node">
 <title>start</title>
 <ellipse fill="#2c6c90" stroke="#2c6c90" stroke-width="1.6" cx="45.25" cy="-91" rx="45.01" ry="45.01"/>
-<text text-anchor="middle" x="45.25" y="-87.6" font-family="DejaVu Sans" font-size="13.00" fill="#1e4558">Inicio</text>
+<text text-anchor="middle" x="45.25" y="-87.6" font-family="DejaVu Sans" font-size="13.00" fill="white">Inicio</text>
 </g>
 <!-- pending -->
 <g id="node2" class="node">
