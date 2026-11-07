@@ -29,6 +29,21 @@
 
 El proyecto está en etapa de piloto. Antes de utilizar información confidencial, deben resolverse los [controles de acceso pendientes](docs/tecnica/07-seguridad-y-limitaciones.md).
 
+## Estado real del proyecto
+
+| Nivel | Alcance de esta versión |
+| --- | --- |
+| ✅ **Implementado** | Piloto web con comparación determinística por contenido, análisis semántico opcional, intervención del analista, historial y consulta de bandas salariales. Los sueldos no forman parte de la similitud. |
+| 🧪 **En validación** | Seguridad y control de acceso para datos empresariales, calidad de comparaciones con casos reales, trazabilidad y procedimientos operativos antes de una adopción productiva. |
+| 🧭 **No acreditado como entrega final** | Una solución comercial lista para datos confidenciales, automatización de la decisión humana y equivalencia salarial basada en el sueldo del cargo. |
+
+<details>
+<summary><strong>¿Qué significa cada estado?</strong></summary>
+
+«Implementado» describe algo respaldado por código o una entrega identificable; no garantiza una validación completa. «En validación» necesita pruebas adicionales, y «propuesto» es una aspiración, no una función disponible. Las notas de versión y los documentos especializados detallan los límites concretos.
+
+</details>
+
 ## Cómo surgió
 
 El proyecto nació en **Duplas Intergeneracionales Tech**, una iniciativa formativa de **Desafío Latam** vinculada al **Fondo 55+ Entel**. **Claudia Peña**, economista con experiencia en recursos humanos y en el sector sanitario, aportó el problema, los criterios profesionales y las pruebas de uso. **Pablo Guzmán**, estudiante de Ingeniería Civil en Computación e Informática, condujo los prompts y las iteraciones técnicas con Lovable, ChatGPT y GitHub. La dupla contó con tutoría semanal de **Gricel Sepúlveda**.
