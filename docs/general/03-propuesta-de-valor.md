@@ -14,6 +14,12 @@ Pero mi visión de crecimiento no es vender la misma herramienta a más empresas
 
 Esta ampliación es **una propuesta estratégica posterior a la presentación de la dupla**, no una afirmación de que ya existan esos productos. [Desarrollo de la visión](04-vision-de-plataforma.md).
 
+## Por qué es una oportunidad más que un eslogan
+
+El estudio de [LinkedIn Economic Graph (2025)](https://economicgraph.linkedin.com/content/dam/me/economicgraph/en-us/PDF/skills-based-hiring-march-2025.pdf) modeló que, para Chile, una búsqueda por competencias podría considerar **5,6 veces** el grupo potencial de una búsqueda por cargos previos; la [Guía Salarial Buk 2025](https://supportcenter.buk.cl/hc/es-419/articles/52869060867355-Gu%C3%ADa-Salarial-Buk-2025-Qu%C3%A9-es-y-c%C3%B3mo-interpretar-el-estudio-de-remuneraciones-en-Chile) documenta homologación de **más de 200.000 denominaciones**. **No son resultados de Espejo ni un mercado cautivo:** son dos señales independientes de que los nombres pueden ocultar correspondencias relevantes.
+
+Lo comercialmente interesante no es «comparar todo con IA» sino **ofrecer una comparación con razones verificables** para cada contexto. La competencia ya existe —incluidos Workday, Eightfold y Workana—; por eso elegimos **una entrada especializada, evidencias observables y expansión gradual**, en vez de pretender dominar mercados enormes desde un prototipo. [Estudio comparativo del mercado](../desarrollo/07-estudio-de-mercado-y-posicionamiento.md).
+
 ## El producto que sí podemos mostrar hoy
 
 | Lo que hace Homologa | Valor que permite defender | Límite |
@@ -54,6 +60,8 @@ Las fuentes, definiciones y límites están documentados en [Visión y evidencia
 
 ## ¿Dónde podría existir ingreso?
 
+**Dos clientes pueden beneficiarse de la misma idea sin comprar el mismo producto.** Un consultor paga por mejorar su capacidad de entregar homologaciones; una persona postulante quiere orientación; una agencia puede pagar por especificaciones comparables de servicios; un equipo de selección necesitaría garantías de auditoría. Por eso la **estrategia de venta debe definirse por problema, comprador y entrega**, no solo por el motor.
+
 | Posible oferta | Qué recibe quien contrata o usa | Posible modelo (todavía sin ventas) |
 | --- | --- | --- |
 | **Homologa para especialistas** | Comparaciones revisadas y reportes defendibles | Servicio profesional por proyecto, mantenimiento de estudios o licencia especializada |
@@ -83,4 +91,4 @@ Veo un futuro en el que muchas personas combinarán empleo, proyectos, consultor
 
 **La frase del pitch sigue siendo válida:** «La IA no reemplaza al experto. Potencia su trabajo». La oportunidad adicional —**conectar capacidades con necesidades en otros mercados**— es una visión de expansión que todavía debe construirse y validarse.
 
-[Pitch histórico](../formativa/02-pitch-y-vision.md) · [Modelo económico medible](../desarrollo/04-viabilidad-y-metricas.md) · [Ruta de expansión](../desarrollo/06-expansion-y-pilotos.md).
+[Mercados, competencia y entrada comercial](../desarrollo/07-estudio-de-mercado-y-posicionamiento.md) · [Pitch histórico](../formativa/02-pitch-y-vision.md) · [Modelo económico medible](../desarrollo/04-viabilidad-y-metricas.md) · [Ruta de expansión](../desarrollo/06-expansion-y-pilotos.md).
