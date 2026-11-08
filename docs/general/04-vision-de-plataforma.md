@@ -12,6 +12,8 @@ En una encuesta, dos cargos pueden hacer prácticamente lo mismo aunque tengan n
 
 Nuestro primer paso fue demostrar una manera de trabajar: **estructurar la información, aplicar criterios transparentes, usar IA para interpretar matices y devolver la decisión a una persona**. La oportunidad que veo es llevar ese método a otros encuentros entre **necesidades y capacidades**, sin reducir a nadie a un porcentaje.
 
+**La posible tecnología detrás de la marca es un motor de correspondencias con razones verificables:** una necesidad expresada en términos propios entra al sistema, se normaliza, se contrasta con evidencias y restricciones del dominio, se explican acuerdos y vacíos y una persona decide. El valor transversal sería la **infraestructura para justificar comparaciones**, no un único modelo universal de puntuación ni un marketplace listo para usarse.
+
 **Una misma idea, distintas decisiones humanas.** En el caso actual, decide el analista de compensaciones. En una futura herramienta de postulaciones, decide la persona dónde postularse. En una contratación, una evaluación responsable y documentada corresponde a profesionales autorizados. En servicios independientes, ambas partes conservan la decisión de negociar.
 
 ## El precedente que ya construimos
@@ -56,6 +58,10 @@ Una futura Espejo Servicios podría descomponer el proyecto en **entregables, te
 
 ## Por qué el mercado hace que esta visión sea razonable
 
+**Hay una evidencia especialmente pertinente para Chile:** [LinkedIn Economic Graph, *Skills-Based Hiring 2025*, pp. 2–4](https://economicgraph.linkedin.com/content/dam/me/economicgraph/en-us/PDF/skills-based-hiring-march-2025.pdf) estimó que, al considerar habilidades y transiciones en vez de cargos anteriores, el grupo **potencial** de personas elegibles podría ser **5,6 veces mayor en Chile** (mediana global: **6,1×**). Es una comparación modelada sobre datos de LinkedIn: **no representa contrataciones adicionales, resultados de Espejo ni precisión del algoritmo**. Apoya directamente nuestra hipótesis de que **las etiquetas laborales esconden capacidades transferibles**.
+
+La [OIT, estudio regional de plataformas digitales 2025](https://www.ilo.org/es/publications/encuesta-sobre-trabajadores-en-plataformas-digitales-basadas-en-la-web), encuestó a **1.153 trabajadores en 21 países**: **52 %** usaba esas plataformas como complemento de ingresos. La oportunidad de una herramienta para freelancers debe combinar mejor definición de alcance con **condiciones dignas**, evitando un sistema que presione únicamente por precios bajos. [Estudio de mercado y mapa competitivo](../desarrollo/07-estudio-de-mercado-y-posicionamiento.md).
+
 | Dato publicado | Qué indica y qué **no** demuestra |
 | --- | --- |
 | **Foro Económico Mundial, *Future of Jobs 2025***: los empleadores encuestados anticipan que **39 % de las competencias** cambien o queden desactualizadas para 2030; **63 %** identifica brechas de competencias como barrera importante. [Fuente](https://es.weforum.org/publications/the-future-of-jobs-report-2025) | La traducción entre necesidades y habilidades será relevante. Son **proyecciones y respuestas de empleadores**, no clientes dispuestos a pagar a Espejo. |
@@ -64,6 +70,12 @@ Una futura Espejo Servicios podría descomponer el proyecto en **entregables, te
 | **Upwork, *Future Workforce Index 2026***: en encuesta a **2.400 trabajadores cualificados de EE. UU.**, el **38 %** señaló trabajar de manera freelance; el informe identifica crecimiento de servicios profesionales aumentados por IA. [Fuente](https://www.upwork.com/press/releases/upworks-future-workforce-index-2026-how-ai-is-redefining-the-value-of-work-as-skilled-freelancing-accelerates) | Sugiere interés en servicios independientes. **Es una investigación de una plataforma interesada, del mercado estadounidense; no predice el fin del empleo asalariado ni el tamaño del mercado chileno**. |
 
 El mismo cambio abre oportunidades para personas que quieren **ofrecer sus capacidades como un servicio**, pero no obliga a abandonar contratos de trabajo ni garantiza mejores ingresos. Es una visión de opciones profesionales más amplias, no un reemplazo universal de empleos tradicionales.
+
+## La posición frente a soluciones que ya existen
+
+**No inventamos el concepto de matching por habilidades.** [Buk](https://supportcenter.buk.cl/hc/es-419/articles/52869060867355-Gu%C3%ADa-Salarial-Buk-2025-Qu%C3%A9-es-y-c%C3%B3mo-interpretar-el-estudio-de-remuneraciones-en-Chile) ya homologa cargos con IA; [Workday Skills Cloud](https://doc.workday.com/admin-guide/en-us/human-capital-management/skills-and-skills-cloud/skills-cloud/ilb1557158988004.html) enlaza habilidades con vacantes, aprendizaje y movilidad; [Eightfold](https://eightfold.ai/products/) desarrolla inteligencia de talento; [Workana](https://help.workana.com/hc/es/articles/360041829933--C%C3%B3mo-funcionan-los-proyectos-en-Workana) resuelve publicación y contratación de servicios.
+
+**El espacio que proponemos explorar:** una herramienta especializada, modular y explicable que haga visibles requisitos, evidencia, divergencias, dudas y responsabilidades. **Todavía debemos probar que esa experiencia resulte mejor** que las alternativas en un flujo concreto y no afirmar ventajas comparativas no medidas. [Competencia, compradores y secuencia de entrada](../desarrollo/07-estudio-de-mercado-y-posicionamiento.md).
 
 ## Tres formas distintas de escalar
 
@@ -106,4 +118,4 @@ En Europa, herramientas de IA para **clasificar o filtrar postulantes** pueden c
 
 Para llevar esta visión a la práctica se requieren nuevos controles: identidad y autorización, propósito claro, minimización de datos, criterios pertinentes, pruebas de sesgos, explicación accesible, revisión humana significativa, posibilidad de corregir la información y registros auditables. El prototipo actual **no cumple todavía esa preparación para nuevas verticales**.
 
-[Prioridades reales](../desarrollo/03-evolucion-y-prioridades.md) · [Estrategia de piloto](../desarrollo/06-expansion-y-pilotos.md) · [Seguridad actual](../tecnica/07-seguridad-y-limitaciones.md).
+[Mercado y competencia](../desarrollo/07-estudio-de-mercado-y-posicionamiento.md) · [Prioridades reales](../desarrollo/03-evolucion-y-prioridades.md) · [Estrategia de piloto](../desarrollo/06-expansion-y-pilotos.md) · [Seguridad actual](../tecnica/07-seguridad-y-limitaciones.md).
