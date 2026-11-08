@@ -63,6 +63,14 @@ Para nosotros, una herramienta así tenía valor cuando **aumentaba la capacidad
 
 **Perspectiva personal de Pablo, más amplia que las siete láminas:** imagino un futuro donde la especialización, la reputación y la capacidad de ofrecer servicios concretos tendrán un peso creciente. Un profesional podrá complementar un empleo con trabajo independiente, consultoría o soluciones apoyadas en tecnología. No es una afirmación de que **todos** los trabajos de salario fijo desaparecerán, ni una conclusión respaldada por esta presentación. Lo que sí demuestra el caso de Espejo es cómo una herramienta puede **hacer más transferible y escalable el conocimiento profesional sin quitar la decisión a su titular**.
 
+### Una segunda idea que surgió al revisar la escalabilidad
+
+**Esta ampliación es posterior al pitch histórico** y corresponde a la propuesta estratégica actual de Pablo; **no debe atribuirse retroactivamente a las siete láminas ni presentarse como compromiso de Claudia, Gricel o el programa**.
+
+Lo que demostramos en Homologa es una forma de **comparar descripciones diferentes con reglas y una interpretación auxiliar, y conservar a quien decide**. Podemos explorar el mismo **método** para ayudar a una persona a postular, a un profesional a ofrecer servicios y a un cliente a describir una necesidad. No significa que la interfaz o el motor estén preparados para CV, portafolios o contratos: ese diseño es futuro.
+
+Este segundo horizonte tiene una narrativa comercial valiosa: **«Espejo resuelve hoy un problema concreto y abre la posibilidad de relacionar necesidades con capacidades en otros contextos»**. La oportunidad no elimina el empleo tradicional; ayuda a reconocer habilidades y ampliar las maneras de ofrecerlas. [Visión extendida y ejemplos](../general/04-vision-de-plataforma.md) · [Ruta gradual](../desarrollo/06-expansion-y-pilotos.md).
+
 ### Qué no probó la presentación
 
 - No se incluyó un **estado de resultados**, una tarifa efectivamente cobrada, clientes que hayan contratado, ingresos, margen ni retorno de inversión validado.

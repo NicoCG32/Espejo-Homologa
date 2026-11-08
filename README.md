@@ -7,11 +7,11 @@
 
 # Espejo · Homologa
 
-**Comparar por contenido. Decidir con criterio.**
+**Una comparación concreta hoy. Nuevas oportunidades para el talento mañana.**
 
 [![Estado: piloto](https://img.shields.io/badge/Estado-Piloto-52647A?style=flat-square)](docs/general/01-proposito-y-alcance.md) [![React 19](https://img.shields.io/badge/React-19-24618A?style=flat-square&logo=react)](package.json) [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](package.json) [![Calidad](https://github.com/NicoCG32/Espejo-Homologa/actions/workflows/calidad.yml/badge.svg)](https://github.com/NicoCG32/Espejo-Homologa/actions/workflows/calidad.yml)
 
-[Documentación](docs/README.md) · [Cómo funciona](docs/general/02-recorrido-del-analista.md) · [El pitch](docs/formativa/02-pitch-y-vision.md) · [Investigación económica](docs/desarrollo/05-evidencia-externa-y-escenarios.md) · [Colaboración](docs/formativa/03-colaboracion-y-atribucion.md)
+[Documentación](docs/README.md) · [Cómo funciona](docs/general/02-recorrido-del-analista.md) · [Visión de plataforma](docs/general/04-vision-de-plataforma.md) · [El pitch](docs/formativa/02-pitch-y-vision.md) · [Investigación económica](docs/desarrollo/05-evidencia-externa-y-escenarios.md) · [Colaboración](docs/formativa/03-colaboracion-y-atribucion.md)
 
 </div>
 
@@ -20,6 +20,8 @@
 **Espejo · Homologa** es un piloto web de origen **colaborativo e intergeneracional** que compara cargos internos con referencias de encuestas salariales. Un **motor determinístico** filtra candidatos con reglas ponderadas; la **IA semántica, cuando se solicita**, añade una segunda lectura; el **analista humano preselecciona, revisa y decide**. Solo después se consulta el benchmark de encuesta P25/P50/P75/promedio y se puede generar un informe Excel o una vista imprimible como PDF. **El sueldo no participa en el score de equivalencia**.
 
 El proyecto también fue un ejercicio formativo de **presentación y comercialización de una solución ante un jurado**: convertir un problema experto en un pitch sobre utilidad, escalabilidad, alcance y valor. **La IA no reemplaza al experto: potencia su trabajo**. [Cómo se construyó el pitch](docs/formativa/02-pitch-y-vision.md).
+
+**La visión de expansión que planteamos ahora es mayor que la homologación salarial:** explorar cómo un método de comparaciones explicables podría ayudar a **postular a empleos, presentar servicios independientes, describir proyectos y relacionar competencias con necesidades**. El motor actual sigue siendo específico para cargos; **esas otras experiencias son propuestas futuras**. [Visión de Espejo a largo plazo](docs/general/04-vision-de-plataforma.md).
 
 ## Lo que se puede hacer
 
@@ -46,13 +48,26 @@ flowchart LR
 
 El producto asiste a especialistas y a las organizaciones que necesitan decisiones defendibles. **La escala del software no sustituye la responsabilidad, experiencia ni criterio de quien presta el servicio.** [Propuesta de valor y posibles modelos de servicio](docs/general/03-propuesta-de-valor.md).
 
+## La oportunidad que abre el primer producto
+
+**No estamos proponiendo otra aplicación que decide quién merece un empleo.** La oportunidad consiste en **interpretar mejor necesidades, capacidades y evidencias** para que las personas puedan tomar decisiones más fundamentadas. En la actualidad hacemos eso para cargos; a futuro, podríamos llevarlo a postulaciones, proyectos y servicios.
+
+| Horizonte | Problema | Estado |
+| --- | --- | --- |
+| **Homologa** | ¿Qué cargo de encuesta equivale por contenido a este puesto? | **Piloto implementado** |
+| **Postula** | ¿Qué oportunidades encajan con mis habilidades demostrables? | **Visión futura de autoorientación** |
+| **Servicios** | ¿Qué especialista puede cubrir un alcance con entregables claros? | **Visión futura para proyectos y freelancers** |
+| **Talento** | ¿Cómo asistir una evaluación de competencias responsable? | **Posibilidad futura con controles reforzados** |
+
+La expansión exige nuevos modelos, autorización de datos y evaluación propia; **no son módulos escondidos en la versión actual**. [Visión completa, evidencia externa y ejemplos](docs/general/04-vision-de-plataforma.md) · [Arquitectura futura y riesgos](docs/tecnica/08-arquitectura-de-expansion.md) · [Estrategia gradual de validación](docs/desarrollo/06-expansion-y-pilotos.md).
+
 ## Estado real del proyecto
 
 | Nivel | Alcance de esta versión |
 | --- | --- |
 | ✅ **Implementado** | Motor por contenido, IA semántica opcional, preselección múltiple y una referencia definitiva por ejecución, historial y bandas salariales posteriores a la decisión. |
 | 🧪 **En validación** | Seguridad y control de acceso para datos empresariales, calidad de comparaciones con casos reales, trazabilidad y procedimientos operativos antes de una adopción productiva. |
-| 🧭 **No acreditado como entrega final** | SaaS multiempresa seguro, ingresos y rentabilidad medidos, reducción de tiempo demostrada, decisión humana automatizada o equivalencia calculada a partir del sueldo. |
+| 🧭 **No acreditado como entrega final** | SaaS multiempresa seguro, ingresos y rentabilidad medidos, reducción de tiempo demostrada, reclutamiento, postulación, marketplace de freelancers, decisión humana automatizada o equivalencia calculada a partir del sueldo. |
 
 <details>
 <summary><strong>¿Qué significa cada estado?</strong></summary>
@@ -81,9 +96,9 @@ Reconocer esos aportes **no equivale a asignar por este README la titularidad ex
 
 | Área           | Para empezar                                                                                                                                                                          |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **General**    | [Propósito](docs/general/01-proposito-y-alcance.md) · [Recorrido](docs/general/02-recorrido-del-analista.md) · [Valor y escalabilidad](docs/general/03-propuesta-de-valor.md) |
-| **Técnica**    | [Arquitectura por niveles](docs/tecnica/01-arquitectura.md) · [Dominio y base de datos](docs/tecnica/02-dominio-y-datos.md) · [Flujos y estados](docs/tecnica/05-flujos-y-estados.md) |
-| **Desarrollo** | [Puesta en marcha](docs/desarrollo/01-entorno-y-despliegue.md) · [Validación](docs/desarrollo/02-validacion-y-mantenimiento.md) · [Métricas](docs/desarrollo/04-viabilidad-y-metricas.md) · [Fuentes y escenarios económicos](docs/desarrollo/05-evidencia-externa-y-escenarios.md) |
+| **General**    | [Propósito](docs/general/01-proposito-y-alcance.md) · [Recorrido](docs/general/02-recorrido-del-analista.md) · [Valor y escalabilidad](docs/general/03-propuesta-de-valor.md) · [Visión de plataforma](docs/general/04-vision-de-plataforma.md) |
+| **Técnica**    | [Arquitectura por niveles](docs/tecnica/01-arquitectura.md) · [Dominio y base de datos](docs/tecnica/02-dominio-y-datos.md) · [Flujos y estados](docs/tecnica/05-flujos-y-estados.md) · [Expansión futura](docs/tecnica/08-arquitectura-de-expansion.md) |
+| **Desarrollo** | [Puesta en marcha](docs/desarrollo/01-entorno-y-despliegue.md) · [Validación](docs/desarrollo/02-validacion-y-mantenimiento.md) · [Métricas](docs/desarrollo/04-viabilidad-y-metricas.md) · [Fuentes y escenarios económicos](docs/desarrollo/05-evidencia-externa-y-escenarios.md) · [Futuros pilotos](docs/desarrollo/06-expansion-y-pilotos.md) |
 | **Formativa**  | [Dupla](docs/formativa/README.md) · [Método](docs/formativa/01-metodologia-y-fuentes.md) · [Pitch](docs/formativa/02-pitch-y-vision.md) · [Créditos](docs/formativa/03-colaboracion-y-atribucion.md) |
 
 **[Índice completo y mapa del sistema](docs/README.md)**

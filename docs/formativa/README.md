@@ -51,6 +51,10 @@ Mi visión personal es que los profesionales podrán diferenciarse más mediante
 
 [El pitch, lámina por lámina](02-pitch-y-vision.md) · [Atribución de la dupla](03-colaboracion-y-atribucion.md) · [Modelo de servicio](../general/03-propuesta-de-valor.md).
 
+## Expansión pensada después del pitch
+
+La propuesta original que defendimos ante el jurado fue **Homologa**, con criterios salariales solo al final del análisis de equivalencia. Posteriormente, Pablo planteó explorar el mismo **método de correspondencia explicable** para postulación, servicios de freelancers y necesidades de organizaciones. **Es una visión nueva**, no una funcionalidad entregada, una declaración de Claudia ni un contenido añadido retroactivamente a nuestra presentación. [La ampliación de Espejo](../general/04-vision-de-plataforma.md).
+
 ## Evaluación final
 
 La dupla obtuvo **nota final 7,0**, máxima de la escala chilena, en la evaluación del curso.

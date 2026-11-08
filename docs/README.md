@@ -17,9 +17,9 @@ La documentación se organiza en cuatro áreas: **general, técnica y desarrollo
 
 | Área           | Contenido                                        | Documentos                                                                                                                                                                                                                                                                                                                                                      |
 | -------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **General**    | Problema, alcance y trabajo del analista.        | [Propósito y alcance](general/01-proposito-y-alcance.md) · [Uso paso a paso](general/02-recorrido-del-analista.md) · [Valor y escalabilidad](general/03-propuesta-de-valor.md)                                                                                                                                                                                                                                              |
-| **Técnica**    | Comparación de cargos, datos y resultados.       | [Arquitectura](tecnica/01-arquitectura.md) · [Dominio y datos](tecnica/02-dominio-y-datos.md) · [Motor](tecnica/03-motor-deterministico.md) · [IA](tecnica/04-ia-y-normalizacion.md) · [Flujos y estados](tecnica/05-flujos-y-estados.md) · [Entradas y salidas](tecnica/06-importacion-y-exportacion.md) · [Seguridad](tecnica/07-seguridad-y-limitaciones.md) |
-| **Desarrollo** | Instalación, mantenimiento y mejoras pendientes. | [Entorno y despliegue](desarrollo/01-entorno-y-despliegue.md) · [Validación](desarrollo/02-validacion-y-mantenimiento.md) · [Prioridades](desarrollo/03-evolucion-y-prioridades.md) · [Métricas](desarrollo/04-viabilidad-y-metricas.md) · [Investigación externa y escenarios de rentabilidad](desarrollo/05-evidencia-externa-y-escenarios.md)                                                                                                                                                                             |
+| **General**    | Problema, alcance y trabajo del analista.        | [Propósito y alcance](general/01-proposito-y-alcance.md) · [Uso paso a paso](general/02-recorrido-del-analista.md) · [Valor y escalabilidad](general/03-propuesta-de-valor.md) · [Plataforma futura, postulaciones y freelancers](general/04-vision-de-plataforma.md)                                                                                                                                                                                                                                              |
+| **Técnica**    | Comparación de cargos, datos y resultados.       | [Arquitectura](tecnica/01-arquitectura.md) · [Dominio y datos](tecnica/02-dominio-y-datos.md) · [Motor](tecnica/03-motor-deterministico.md) · [IA](tecnica/04-ia-y-normalizacion.md) · [Flujos y estados](tecnica/05-flujos-y-estados.md) · [Entradas y salidas](tecnica/06-importacion-y-exportacion.md) · [Seguridad](tecnica/07-seguridad-y-limitaciones.md) · [Arquitectura de expansión futura](tecnica/08-arquitectura-de-expansion.md) |
+| **Desarrollo** | Instalación, mantenimiento y mejoras pendientes. | [Entorno y despliegue](desarrollo/01-entorno-y-despliegue.md) · [Validación](desarrollo/02-validacion-y-mantenimiento.md) · [Prioridades](desarrollo/03-evolucion-y-prioridades.md) · [Métricas](desarrollo/04-viabilidad-y-metricas.md) · [Investigación externa y escenarios de rentabilidad](desarrollo/05-evidencia-externa-y-escenarios.md) · [Validar nuevas verticales](desarrollo/06-expansion-y-pilotos.md)                                                                                                                                                                             |
 | **Formativa**  | Origen del proyecto, colaboración y aprendizaje. | [Historia de la dupla](formativa/README.md) · [Método y fuentes](formativa/01-metodologia-y-fuentes.md) · [Pitch y visión](formativa/02-pitch-y-vision.md) · [Atribuciones](formativa/03-colaboracion-y-atribucion.md)                                                                                                                                                                                                                                                         |
 
 ## De construir un prototipo a defender su valor
@@ -33,6 +33,18 @@ flowchart LR
 ```
 
 [Cómo se presentó la solución](formativa/02-pitch-y-vision.md) · [Qué falta para acreditar rentabilidad](desarrollo/04-viabilidad-y-metricas.md) · [Fuentes oficiales y análisis en CLP](desarrollo/05-evidencia-externa-y-escenarios.md).
+
+### Del precedente al siguiente problema
+
+```mermaid
+flowchart LR
+    A["Homologa · hoy<br/>cargos por contenido"] --> B["Un método explicable<br/>para nuevas correspondencias"]
+    B -. "Futuro" .-> C["Postula · competencias y vacantes"]
+    B -. "Futuro" .-> D["Servicios · proyectos y freelancers"]
+    B -. "Alto riesgo / futuro" .-> E["Talento · evaluación de postulantes"]
+```
+
+**El motor actual es específico para cargos.** La reutilización transversal es una **visión de arquitectura y producto aún no implementada**. [Visión](general/04-vision-de-plataforma.md) · [Diseño de expansión](tecnica/08-arquitectura-de-expansion.md).
 
 ## El sistema, de un vistazo
 

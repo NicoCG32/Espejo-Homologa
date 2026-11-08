@@ -120,7 +120,24 @@ Hay tres modelos diferentes que no deben mezclarse:
 
 Para validar el reclamo de los **2–3 minutos** se propone medir al menos **30–50 cargos de distinta complejidad** con dos especialistas, registrar la preparación de insumos por separado, decisiones y correcciones, y cronometrar un procedimiento manual comparable **sin Espejo**. Los resultados deben incluir casos que no pueden homologarse, no solo aciertos.
 
-## 8. Qué puede afirmarse hoy y qué no
+## 8. Un mercado más amplio que las encuestas salariales
+
+La **visión posterior de Espejo** no consiste únicamente en homologar más cargos. Una comparación explicable también podría inspirar productos para relacionar **competencias con vacantes**, **necesidades de proyectos con servicios independientes** y **brechas de habilidades con trayectorias de desarrollo**. Las siguientes fuentes **no prueban demanda comercial por Espejo**; documentan la relevancia del problema en mercados adyacentes.
+
+| Fuente, fecha | Dato publicado | Interpretación adecuada |
+| --- | --- | --- |
+| [WEF, *Future of Jobs 2025*](https://es.weforum.org/publications/the-future-of-jobs-report-2025) | Los empleadores encuestados esperan que **39 %** de competencias actuales cambien o se vuelvan obsoletas de 2025 a 2030; **63 %** identifica brechas de habilidades como barrera importante | Demanda potencial de **interpretar y actualizar competencias**; es pronóstico de encuesta, no ingresos de Espejo |
+| [OCDE, *A Skills-First Labour Market* 2026](https://www.oecd.org/en/publications/a-skills-first-labour-market_2e1b85f0-en/full-report/positioning-skills-as-the-new-currency-of-work_40815b16.html) | **36 %** de trabajadores en países participantes de la encuesta PIAAC 2023 reportó habilidades por encima o por debajo de las requeridas por su puesto | Evidencia de **desajustes de habilidades**; la muestra no es un estimador específico de Chile |
+| [OCDE, 2026: prácticas *skills-first*](https://www.oecd.org/en/publications/a-skills-first-labour-market_2e1b85f0-en/full-report/promoting-skills-first-hiring-and-talent-management_81392a48.html) | Recomienda **pilotos focalizados, habilidades demostradas y controles contra sesgos** al contratar | Respaldan evaluar perfiles **con evidencia y revisión**, no automatizar rechazos |
+| [Upwork, *Future Workforce Index 2026*](https://www.upwork.com/press/releases/upworks-future-workforce-index-2026-how-ai-is-redefining-the-value-of-work-as-skilled-freelancing-accelerates) | Encuesta a **2.400 trabajadores cualificados estadounidenses**: **38 %** declara trabajo freelance; el volumen de servicios profesionales aumentados por IA creció **72 %** interanual en sus datos de plataforma | Señal de mercado de trabajo independiente **con sesgo de fuente comercial y de EE. UU.**; no predice fin del salario fijo ni el TAM chileno |
+
+**Competidores y diferenciación:** ya existen bolsas de trabajo, plataformas freelance, productos de IA de selección y soluciones *skills-first*. Espejo no puede presentarse como el primero. Su propuesta distintiva **por validar** es un método de correspondencias **con criterios explícitos, evidencias trazables, incertidumbres visibles y decisión humana**, adaptado a cada contexto.
+
+**Límite económico:** los **2–3 minutos reportados** pertenecen exclusivamente a Homologa. Ninguna tabla de ahorro o costo por cargo de este estudio sirve automáticamente como estimación de postulaciones, servicios freelance o reclutamiento. Cada vertical requiere usuarios, precios, calidad, costos y líneas base propios.
+
+**Límite ético y técnico:** la implementación actual compara `CargoMotor` y prompts sobre cargos; no almacena candidatos ni acuerdos de servicios. Las aplicaciones sobre personas tienen riesgos de privacidad y discriminación, por lo que deben diseñarse como nuevos módulos con validación específica. [Visión comercial](../general/04-vision-de-plataforma.md) · [Arquitectura a futuro](../tecnica/08-arquitectura-de-expansion.md) · [Secuencia de pilotos](06-expansion-y-pilotos.md).
+
+## 9. Qué puede afirmarse hoy y qué no
 
 **Sí:** existe un problema industrial documentado; hay soluciones de IA para homologar cargos en Chile (Buk); metodologías expertas exigen buena correspondencia y trazabilidad; Espejo combina motor, IA y decisión humana; un desarrollador **reporta 2–3 minutos** por homologación en su uso actual.
 

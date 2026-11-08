@@ -2,6 +2,12 @@
 
 Las siguientes prioridades buscan preparar el piloto para un uso más amplio y mejorar la trazabilidad de las homologaciones.
 
+## Una visión mayor con dependencias que no se pueden saltar
+
+El método de comparación podría aplicarse más adelante a **habilidades frente a vacantes**, **entregables de proyectos frente a profesionales independientes** y, con precauciones adicionales, apoyo al **reclutamiento**. Esta visión no constituye un módulo ya implementado ni sustituye la necesidad de consolidar primero Homologa.
+
+Secuencia sugerida: **seguridad y trazabilidad del piloto → validación de la homologación → autoorientación con datos sintéticos → pruebas de servicios independientes → eventual selección de terceros con auditoría especial**. [Argumento de mercado](../general/04-vision-de-plataforma.md) · [Arquitectura especializada](../tecnica/08-arquitectura-de-expansion.md) · [Pilotos y métricas](06-expansion-y-pilotos.md).
+
 ## Prioridad alta — Seguridad y operación
 
 Exigir identidad y autorización en cada función privilegiada, definir si habrá una sola organización o varias, limitar las operaciones destructivas y verificar la instalación, el respaldo y la restauración de la base.
