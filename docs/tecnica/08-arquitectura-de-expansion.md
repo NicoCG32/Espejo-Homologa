@@ -19,6 +19,14 @@ La implementación actual ya separa varias responsabilidades útiles:
 
 El flujo genérico **no** debe inferir que una persona tiene competencias por su cargo anterior, edad, origen, universidad o estilo de escritura. Para seleccionar personas se necesita **evidencia, contexto y un derecho a revisión**, no analogías automáticas con un score salarial.
 
+## La pieza nueva que cada dominio necesitaría
+
+Para que la visión comercial tenga una base técnica, propongo definir **un contrato de correspondencia explicable** antes de introducir nuevos verticales: (1) unidad de necesidad y sus requisitos; (2) unidad de evidencia consentida o autorizada; (3) restricciones obligatorias y excepciones; (4) reglas y fuentes versionadas; (5) explicación de coincidencias, faltantes y motivos de abstención; y (6) un proceso de revisión y corrección específico. **No es un contrato de software hoy implementado.**
+
+En lugar de usar una sola lista de ocho `CriterioCampo` para todo, una futura interfaz separaría **normalización**, **generación acotada de referencias**, **evaluación por dominio**, **explicación vinculada a evidencia** y **acto de decisión**. Habilidades y ocupaciones podrían mapearse a vocabularios como [ESCO](https://esco.ec.europa.eu/es/about-esco/what-esco) como referencia exploratoria; la adaptación regional, las licencias y la actualización de términos seguirían siendo trabajos propios.
+
+**Guardarraíl central:** en postulaciones y reclutamiento, una ausencia de evidencia es «información no acreditada», no prueba de incapacidad. No se infieren competencias de proxies personales. Una búsqueda que amplía oportunidades tampoco equivale a una autorización para descartar personas.
+
 ## Arquitectura objetivo de módulos, paso a paso
 
 ```mermaid
@@ -120,4 +128,4 @@ La [Ley chilena 21.719](https://www.bcn.cl/leychile/Navegar?idNorma=1209272) es 
 
 La expansión debe demostrar que el método puede aplicarse responsablemente a **otros objetos y decisiones**. No basta con multiplicar nombres de productos.
 
-[Hoja de ruta de expansión](../desarrollo/06-expansion-y-pilotos.md) · [Límites actuales](07-seguridad-y-limitaciones.md) · [Visión comercial](../general/04-vision-de-plataforma.md).
+[Estudio de competencia y posicionamiento](../desarrollo/07-estudio-de-mercado-y-posicionamiento.md) · [Hoja de ruta de expansión](../desarrollo/06-expansion-y-pilotos.md) · [Límites actuales](07-seguridad-y-limitaciones.md) · [Visión comercial](../general/04-vision-de-plataforma.md).
