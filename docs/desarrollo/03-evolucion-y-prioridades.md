@@ -14,6 +14,10 @@ Guardar por ejecución la versión de las reglas y los pesos globales motor/IA q
 
 Hacer atómica la sustitución de la preselección (o definir recuperación comprobable). Añadir pruebas automatizadas del motor y de los lectores de planillas, además de verificaciones de autorización e integración con una base de prueba. Separar incidentes de proveedor de IA de errores de lógica o datos.
 
+## Prioridad media — Validación económica sin promesas
+
+Antes de comunicar reducciones de tiempo, retorno o escalabilidad comercial, medir duración tradicional y asistida **incluyendo revisión humana**, errores, coste real de llamadas IA, coste de datos y horas profesionales. No tratar las cifras del pitch como resultados de producción. [Protocolo de medición y viabilidad](04-viabilidad-y-metricas.md).
+
 ## Prioridad media — Validación y accesibilidad
 
 Trabajar con pares de cargos revisados por especialistas, evaluar las explicaciones y los errores del sistema, y probar el recorrido con personas que no participaron en su construcción. Revisar navegación con teclado, contraste, legibilidad y compatibilidad con lectores de pantalla.

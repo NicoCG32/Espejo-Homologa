@@ -28,4 +28,4 @@ La interfaz usa **Epilogue** para texto y **Urbanist** para títulos, declaradas
 
 El catálogo completo se encuentra en las carpetas `logos/`, `banners/`, `portadas/`, `iconos/` y `referencias/`. `manifest.json` registra dimensiones y sumas SHA-256 de cada recurso.
 
-El archivo [original de referencia](referencias/espejo-homologa-original.jpg) se conserva para mantener el lenguaje visual. Consulta [licencias y créditos](../LICENSING.md) antes de reutilizar o distribuir los recursos.
+El archivo [original de referencia](referencias/espejo-homologa-original.jpg) se conserva para mantener el lenguaje visual. La presentación final incluye elementos gráficos y la identidad de la dupla; **no se ha verificado aquí el origen y la licencia de cada insumo, ni la autorización para redistribuir el PDF del pitch**. La identidad de Espejo no concede automáticamente derechos sobre marcas, retratos o fotografías de terceros. Consulta [colaboración y atribuciones](../docs/formativa/03-colaboracion-y-atribucion.md) y [licencias y créditos](../LICENSING.md) antes de reutilizar o distribuir los recursos.

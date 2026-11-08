@@ -11,13 +11,15 @@
 
 [![Estado: piloto](https://img.shields.io/badge/Estado-Piloto-52647A?style=flat-square)](docs/general/01-proposito-y-alcance.md) [![React 19](https://img.shields.io/badge/React-19-24618A?style=flat-square&logo=react)](package.json) [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](package.json) [![Calidad](https://github.com/NicoCG32/Espejo-Homologa/actions/workflows/calidad.yml/badge.svg)](https://github.com/NicoCG32/Espejo-Homologa/actions/workflows/calidad.yml)
 
-[Documentación](docs/README.md) · [Recorrido del analista](docs/general/02-recorrido-del-analista.md) · [Arquitectura](docs/tecnica/01-arquitectura.md) · [Origen del proyecto](docs/formativa/README.md)
+[Documentación](docs/README.md) · [Cómo funciona](docs/general/02-recorrido-del-analista.md) · [El pitch](docs/formativa/02-pitch-y-vision.md) · [Valor y escalabilidad](docs/general/03-propuesta-de-valor.md) · [Colaboración](docs/formativa/03-colaboracion-y-atribucion.md)
 
 </div>
 
 ## Resumen ejecutivo
 
-**Espejo · Homologa** es un piloto web que ayuda a comparar cargos internos con referencias de encuestas salariales. Combina criterios ponderados y análisis semántico asistido por IA; el analista revisa los candidatos y confirma la homologación. Conserva los resultados y las decisiones para consultar el historial, contrastar bandas salariales y generar informes Excel o PDF. La remuneración se consulta como referencia de mercado y queda fuera del cálculo de similitud.
+**Espejo · Homologa** es un piloto web de origen **colaborativo e intergeneracional** que compara cargos internos con referencias de encuestas salariales. Un **motor determinístico** filtra candidatos con reglas ponderadas; la **IA semántica, cuando se solicita**, añade una segunda lectura; el **analista humano preselecciona, revisa y decide**. Solo después se consulta el benchmark de encuesta P25/P50/P75/promedio y se puede generar un informe Excel o una vista imprimible como PDF. **El sueldo no participa en el score de equivalencia**.
+
+El proyecto también fue un ejercicio formativo de **presentación y comercialización de una solución ante un jurado**: convertir un problema experto en un pitch sobre utilidad, escalabilidad, alcance y valor. **La IA no reemplaza al experto: potencia su trabajo**. [Cómo se construyó el pitch](docs/formativa/02-pitch-y-vision.md).
 
 ## Lo que se puede hacer
 
@@ -27,15 +29,30 @@
 4. Preseleccionar varios candidatos, contrastar sus fichas y confirmar uno como referencia de la ejecución, dejando analista y comentario.
 5. Consultar P25, P50, P75 y promedio por tamaño de empresa; revisar el historial y exportar Excel o una vista imprimible como PDF.
 
-El proyecto está en etapa de piloto. Antes de utilizar información confidencial, deben resolverse los [controles de acceso pendientes](docs/tecnica/07-seguridad-y-limitaciones.md).
+El proyecto está en etapa de piloto. Antes de utilizar información confidencial o comercializarlo para distintas organizaciones, deben resolverse los [controles de acceso pendientes](docs/tecnica/07-seguridad-y-limitaciones.md) y validar [la viabilidad técnica y económica](docs/desarrollo/04-viabilidad-y-metricas.md).
+
+## De una buena decisión a una propuesta de valor
+
+```mermaid
+flowchart LR
+    A["Cargo interno"] --> B["Motor determinístico<br/>filtra por contenido"]
+    B --> C["IA opcional<br/>explica similitudes"]
+    C --> D["Profesional<br/>selecciona y decide"]
+    D --> E["Benchmark salarial<br/>solo después de decidir"]
+    E --> F["Informe<br/>y decisión documentada"]
+    classDef human fill:#DBF6F0,stroke:#128C87,color:#16483F,stroke-width:2px;
+    class D human;
+```
+
+El producto asiste a especialistas y a las organizaciones que necesitan decisiones defendibles. **La escala del software no sustituye la responsabilidad, experiencia ni criterio de quien presta el servicio.** [Propuesta de valor y posibles modelos de servicio](docs/general/03-propuesta-de-valor.md).
 
 ## Estado real del proyecto
 
 | Nivel | Alcance de esta versión |
 | --- | --- |
-| ✅ **Implementado** | Piloto web con comparación determinística por contenido, análisis semántico opcional, intervención del analista, historial y consulta de bandas salariales. Los sueldos no forman parte de la similitud. |
+| ✅ **Implementado** | Motor por contenido, IA semántica opcional, preselección múltiple y una referencia definitiva por ejecución, historial y bandas salariales posteriores a la decisión. |
 | 🧪 **En validación** | Seguridad y control de acceso para datos empresariales, calidad de comparaciones con casos reales, trazabilidad y procedimientos operativos antes de una adopción productiva. |
-| 🧭 **No acreditado como entrega final** | Una solución comercial lista para datos confidenciales, automatización de la decisión humana y equivalencia salarial basada en el sueldo del cargo. |
+| 🧭 **No acreditado como entrega final** | SaaS multiempresa seguro, ingresos y rentabilidad medidos, reducción de tiempo demostrada, decisión humana automatizada o equivalencia calculada a partir del sueldo. |
 
 <details>
 <summary><strong>¿Qué significa cada estado?</strong></summary>
@@ -44,20 +61,24 @@ El proyecto está en etapa de piloto. Antes de utilizar información confidencia
 
 </details>
 
+## Las cifras del pitch son hipótesis, no resultados medidos
+
+La presentación final utilizó **2 horas por homologación** como referencia del problema, una advertencia de **hasta 15 % de desviación de mercado** (rotulada «Mercer, 2024» en la lámina) y una proyección de **hasta 80 % menos tiempo**. **No se han aportado mediciones de campo ni una fuente primaria verificada que permita presentarlas como resultados del piloto.** Son cifras del discurso histórico, no KPIs ya comprobados. [Contexto del pitch](docs/formativa/02-pitch-y-vision.md) · [Cómo validarlas](docs/desarrollo/04-viabilidad-y-metricas.md).
+
 ## Cómo surgió
 
-El proyecto nació en **Duplas Intergeneracionales Tech**, una iniciativa formativa de **Desafío Latam** vinculada al **Fondo 55+ Entel**. **Claudia Peña**, economista con experiencia en recursos humanos y en el sector sanitario, aportó el problema, los criterios profesionales y las pruebas de uso. **Pablo Guzmán**, estudiante de Ingeniería Civil en Computación e Informática, condujo los prompts y las iteraciones técnicas con Lovable, ChatGPT y GitHub. La dupla contó con tutoría semanal de **Gricel Sepúlveda**.
+El proyecto nació en **Duplas Intergeneracionales Tech**, iniciativa formativa de **Desafío Latam** vinculada al **Fondo 55+ Entel**. **Claudia Peña**, economista y consultora en regulación, aportó el problema de homologación, el criterio profesional, casos y pruebas de uso. **Pablo Guzmán**, estudiante de informática, condujo la especificación y las iteraciones técnicas con Lovable, ChatGPT y GitHub. **Claudia y Pablo presentaron juntos el pitch final**; **Gricel Sepúlveda** brindó tutoría semanal.
 
-[Historia de la dupla y metodología del curso](docs/formativa/README.md).
+Reconocer esos aportes **no equivale a asignar por este README la titularidad exclusiva del código, la marca o los derechos comerciales**. [Historia de la dupla](docs/formativa/README.md) · [Créditos precisos](docs/formativa/03-colaboracion-y-atribucion.md).
 
 ## Guía de lectura
 
 | Área           | Para empezar                                                                                                                                                                          |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **General**    | [Propósito y alcance](docs/general/01-proposito-y-alcance.md) · [Recorrido del analista](docs/general/02-recorrido-del-analista.md)                                                   |
+| **General**    | [Propósito](docs/general/01-proposito-y-alcance.md) · [Recorrido](docs/general/02-recorrido-del-analista.md) · [Valor y escalabilidad](docs/general/03-propuesta-de-valor.md) |
 | **Técnica**    | [Arquitectura por niveles](docs/tecnica/01-arquitectura.md) · [Dominio y base de datos](docs/tecnica/02-dominio-y-datos.md) · [Flujos y estados](docs/tecnica/05-flujos-y-estados.md) |
-| **Desarrollo** | [Puesta en marcha](docs/desarrollo/01-entorno-y-despliegue.md) · [Validación](docs/desarrollo/02-validacion-y-mantenimiento.md)                                                       |
-| **Formativa**  | [Origen de la dupla](docs/formativa/README.md) · [Método y fuentes del curso](docs/formativa/01-metodologia-y-fuentes.md)                                                             |
+| **Desarrollo** | [Puesta en marcha](docs/desarrollo/01-entorno-y-despliegue.md) · [Validación](docs/desarrollo/02-validacion-y-mantenimiento.md) · [Métricas y rentabilidad](docs/desarrollo/04-viabilidad-y-metricas.md) |
+| **Formativa**  | [Dupla](docs/formativa/README.md) · [Método](docs/formativa/01-metodologia-y-fuentes.md) · [Pitch](docs/formativa/02-pitch-y-vision.md) · [Créditos](docs/formativa/03-colaboracion-y-atribucion.md) |
 
 **[Índice completo y mapa del sistema](docs/README.md)**
 
@@ -78,4 +99,6 @@ Las operaciones con datos requieren Supabase configurado; las funciones de IA re
 
 ## Licencia y autoría
 
-[Licencia del código](LICENSE) · [Condiciones, créditos y uso comercial](LICENSING.md) · [Avisos](NOTICE) · [Recursos visuales](branding/README.md).
+[Licencia del código](LICENSE) · [Condiciones y límites de comercialización](LICENSING.md) · [Créditos de la colaboración](docs/formativa/03-colaboracion-y-atribucion.md) · [Avisos](NOTICE) · [Recursos visuales](branding/README.md).
+
+El repositorio está bajo el perfil de Pablo, pero **la colaboración humana y la titularidad jurídica de eventuales aportes son cuestiones distintas**. No se presupone un acuerdo de participación en ganancias que no esté documentado.

@@ -17,7 +17,7 @@ El curso usaba ejemplos compartidos, como **Registro de Postulantes**, para prac
 | Alcance              | Distinguir lo esencial de lo deseable y fijar un criterio verificable. | La comparación de cargos por contenido definió el alcance. |
 | Construcción V1      | Obtener una versión funcional demostrable.                             | Iteraciones dirigidas mediante prompts en Lovable.         |
 | Validación y V2      | Probar, recibir observaciones y mejorar.                               | Claudia probaba el programa y comentaba los cambios.       |
-| Pitch final          | Explicar problema, solución, demo, impacto y cierre.                   | La dupla presentó el resultado del proyecto.               |
+| Pitch final          | Explicar problema, solución, demo, propuesta de valor y defensa ante jurado. | Claudia y Pablo presentaron una solución donde la IA apoya y el experto decide. |
 
 ## Método de la dupla
 
@@ -30,6 +30,12 @@ El curso usaba ejemplos compartidos, como **Registro de Postulantes**, para prac
 ## Dos funciones diferentes de la inteligencia artificial
 
 Lovable y ChatGPT apoyaron la construcción del software. Las funciones de IA de la aplicación utilizan Gemini y, bajo ciertas condiciones, Groq para normalizar texto y comparar cargos. Su funcionamiento se describe en [IA y normalización](../tecnica/04-ia-y-normalizacion.md).
+
+## Presentación final de la dupla
+
+La fuente primaria más concreta para la **propuesta comercial y el discurso de valor** es la presentación final de **siete diapositivas** suministrada por uno de los presentadores para esta revisión. Se documentó su contenido en [Pitch y visión](02-pitch-y-vision.md): portada de Claudia y Pablo; problema de cargo equivalente; flujo profesional; motor + IA + decisión humana; demostración; propuesta de consistencia, eficiencia y trazabilidad. **El archivo PDF no se agrega aquí**, por lo que no se declara permiso de publicación ni autoría exclusiva de sus recursos gráficos.
+
+La misma presentación utiliza cifras de **2 horas**, **15 %** y **hasta 80 %**; ninguna se da por resultado medido sin protocolo y fuente verificables. [Validación económica](../desarrollo/04-viabilidad-y-metricas.md).
 
 ## Referencias documentales consultadas
 

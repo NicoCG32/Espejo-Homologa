@@ -1,6 +1,6 @@
 # Espejo · Homologa, la historia detrás del código
 
-El proyecto nació de la colaboración entre dos personas con trayectorias distintas: la experiencia profesional de Claudia Peña en recursos humanos y la formación técnica de Pablo Guzmán.
+El proyecto nació de la colaboración entre dos personas con trayectorias distintas: la experiencia profesional de Claudia Peña en recursos humanos y la formación técnica de Pablo Guzmán. **Además de construir una aplicación, debíamos aprender a explicar su alcance, defender sus beneficios y vender una solución tecnológica en una presentación ante un jurado.** La dupla preparó un pitch que conectó problema, gobernanza de IA, demostración y valor potencial.
 
 ## Cómo comenzó
 
@@ -41,8 +41,18 @@ Las distintas trayectorias permitieron revisar tanto la implementación como su 
 
 Esa colaboración también se refleja en el producto: el motor y la IA aportan información, y el analista confirma la homologación con conocimiento del contexto.
 
+## Aprender a presentar y ofrecer un servicio
+
+El pitch final no se redujo a enumerar funciones. Mostramos por qué **un mismo nombre no equivale necesariamente al mismo trabajo**, describimos el flujo de reglas e IA y destacamos que **la decisión final sigue siendo del profesional**. Después demostramos la aplicación y defendimos la propuesta de consistencia, eficiencia y trazabilidad.
+
+Las cifras del material —**2 horas por caso**, **hasta 15 % de desviación** y **hasta 80 % menos tiempo**— deben conservarse como **referencias e hipótesis del pitch**, no como resultados que ya hayamos medido. No se adjuntaron en esa presentación los costos, los precios o la muestra necesaria para certificar rentabilidad.
+
+Mi visión personal es que los profesionales podrán diferenciarse más mediante **especialización y servicios de alto valor**, con herramientas digitales que amplían sus capacidades. Eso **no implica** que esté demostrado el fin de todos los empleos de salario fijo. Lo que defendimos juntos fue algo más preciso: **la IA no reemplaza al experto, potencia su trabajo**.
+
+[El pitch, lámina por lámina](02-pitch-y-vision.md) · [Atribución de la dupla](03-colaboracion-y-atribucion.md) · [Modelo de servicio](../general/03-propuesta-de-valor.md).
+
 ## Evaluación final
 
 La dupla obtuvo **nota final 7,0**, máxima de la escala chilena, en la evaluación del curso.
 
-[Etapas del curso y materiales consultados](01-metodologia-y-fuentes.md) · [Qué hace el piloto](../general/01-proposito-y-alcance.md) · [Volver al índice](../README.md)
+[Etapas del curso y materiales consultados](01-metodologia-y-fuentes.md) · [Qué hace el piloto](../general/01-proposito-y-alcance.md) · [Pitch](02-pitch-y-vision.md) · [Créditos](03-colaboracion-y-atribucion.md) · [Volver al índice](../README.md)
