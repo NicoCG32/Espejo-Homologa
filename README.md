@@ -11,7 +11,7 @@
 
 [![Estado: piloto](https://img.shields.io/badge/Estado-Piloto-52647A?style=flat-square)](docs/general/01-proposito-y-alcance.md) [![React 19](https://img.shields.io/badge/React-19-24618A?style=flat-square&logo=react)](package.json) [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](package.json) [![Calidad](https://github.com/NicoCG32/Espejo-Homologa/actions/workflows/calidad.yml/badge.svg)](https://github.com/NicoCG32/Espejo-Homologa/actions/workflows/calidad.yml)
 
-[Documentación](docs/README.md) · [Cómo funciona](docs/general/02-recorrido-del-analista.md) · [Visión de plataforma](docs/general/04-vision-de-plataforma.md) · [El pitch](docs/formativa/02-pitch-y-vision.md) · [Investigación económica](docs/desarrollo/05-evidencia-externa-y-escenarios.md) · [Colaboración](docs/formativa/03-colaboracion-y-atribucion.md)
+[Documentación](docs/README.md) · [Cómo funciona](docs/general/02-recorrido-del-analista.md) · [Visión de plataforma](docs/general/04-vision-de-plataforma.md) · [El pitch](docs/formativa/02-pitch-y-vision.md) · [Investigación económica](docs/desarrollo/05-evidencia-externa-y-escenarios.md) · [Mercado y competencia](docs/desarrollo/07-estudio-de-mercado-y-posicionamiento.md) · [Colaboración](docs/formativa/03-colaboracion-y-atribucion.md)
 
 </div>
 
@@ -49,6 +49,10 @@ flowchart LR
 El producto asiste a especialistas y a las organizaciones que necesitan decisiones defendibles. **La escala del software no sustituye la responsabilidad, experiencia ni criterio de quien presta el servicio.** [Propuesta de valor y posibles modelos de servicio](docs/general/03-propuesta-de-valor.md).
 
 ## La oportunidad que abre el primer producto
+
+**El primer producto compara cargos; el horizonte tecnológico es comparar necesidades con capacidades mediante criterios y evidencias explicables.** En una encuesta, esa correspondencia ayuda a revisar referencias salariales. En una postulación, podría revelar habilidades transferibles; en un proyecto freelance, aclarar entregables y evitar equívocos de alcance. **No es el mismo modelo de datos ni la misma decisión:** cada mercado exige reglas, autorización y validación propias.
+
+**Una oportunidad concreta en Chile:** [LinkedIn Economic Graph (2025)](https://economicgraph.linkedin.com/content/dam/me/economicgraph/en-us/PDF/skills-based-hiring-march-2025.pdf) estimó que las búsquedas basadas en habilidades podrían ampliar **5,6 veces la reserva potencial de candidatos** frente a búsquedas por cargo anterior, bajo su metodología. **No mide contrataciones ni resultados de Espejo**. La comparación ofrece una señal sólida para investigar la brecha entre el nombre de un rol y las capacidades reales. [Estudio de mercado, competidores y rutas de monetización](docs/desarrollo/07-estudio-de-mercado-y-posicionamiento.md).
 
 **No estamos proponiendo otra aplicación que decide quién merece un empleo.** La oportunidad consiste en **interpretar mejor necesidades, capacidades y evidencias** para que las personas puedan tomar decisiones más fundamentadas. En la actualidad hacemos eso para cargos; a futuro, podríamos llevarlo a postulaciones, proyectos y servicios.
 
@@ -98,7 +102,7 @@ Reconocer esos aportes **no equivale a asignar por este README la titularidad ex
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **General**    | [Propósito](docs/general/01-proposito-y-alcance.md) · [Recorrido](docs/general/02-recorrido-del-analista.md) · [Valor y escalabilidad](docs/general/03-propuesta-de-valor.md) · [Visión de plataforma](docs/general/04-vision-de-plataforma.md) |
 | **Técnica**    | [Arquitectura por niveles](docs/tecnica/01-arquitectura.md) · [Dominio y base de datos](docs/tecnica/02-dominio-y-datos.md) · [Flujos y estados](docs/tecnica/05-flujos-y-estados.md) · [Expansión futura](docs/tecnica/08-arquitectura-de-expansion.md) |
-| **Desarrollo** | [Puesta en marcha](docs/desarrollo/01-entorno-y-despliegue.md) · [Validación](docs/desarrollo/02-validacion-y-mantenimiento.md) · [Métricas](docs/desarrollo/04-viabilidad-y-metricas.md) · [Fuentes y escenarios económicos](docs/desarrollo/05-evidencia-externa-y-escenarios.md) · [Futuros pilotos](docs/desarrollo/06-expansion-y-pilotos.md) |
+| **Desarrollo** | [Puesta en marcha](docs/desarrollo/01-entorno-y-despliegue.md) · [Validación](docs/desarrollo/02-validacion-y-mantenimiento.md) · [Métricas](docs/desarrollo/04-viabilidad-y-metricas.md) · [Fuentes y escenarios económicos](docs/desarrollo/05-evidencia-externa-y-escenarios.md) · [Mercado y competencia](docs/desarrollo/07-estudio-de-mercado-y-posicionamiento.md) · [Futuros pilotos](docs/desarrollo/06-expansion-y-pilotos.md) · [Mercado y posicionamiento](docs/desarrollo/07-estudio-de-mercado-y-posicionamiento.md) |
 | **Formativa**  | [Dupla](docs/formativa/README.md) · [Método](docs/formativa/01-metodologia-y-fuentes.md) · [Pitch](docs/formativa/02-pitch-y-vision.md) · [Créditos](docs/formativa/03-colaboracion-y-atribucion.md) |
 
 **[Índice completo y mapa del sistema](docs/README.md)**
