@@ -51,7 +51,9 @@ La presentación contiene tres cifras visuales importantes, pero **no adjunta la
 | **«Hasta 15 % de desviación de mercado»** | 2 | **Advertencia ilustrativa**; la diapositiva menciona «Mercer, 2024» sin identificar aquí publicación, página y metodología comprobables |
 | **«Hasta 80 % menos tiempo de análisis por cargo»** | 7 | **Meta o beneficio potencial del pitch**, no reducción alcanzada y verificada con datos del piloto |
 
-Estos números forman parte **del material efectivamente presentado**; no deben eliminarse de la historia. Pero tampoco es correcto convertirlos en «80 % de ahorro demostrado», «15 % de error de clientes» o «dos horas medidas en Inmomaq/una empresa real».
+Estos números forman parte **del material efectivamente presentado**; no deben eliminarse de la historia. Pero tampoco es correcto convertirlos en «80 % de ahorro demostrado», «15 % de error de clientes» o «dos horas medidas en una empresa real».
+
+**Observación posterior al pitch:** Pablo informa que, con fichas disponibles, la herramienta permite terminar una homologación justificada en **unos 2–3 minutos**. Compararla con el supuesto de 120 minutos da matemáticamente una reducción de **97,5–98,33 %**, pero **no existe una medición controlada de esa línea base**. Para evidencias externas concretas —incluida la metodología de **Buk Chile sobre más de 200.000 cargos**— y condiciones de rentabilidad, consulta [Investigación y escenarios](../desarrollo/05-evidencia-externa-y-escenarios.md).
 
 Para convertirlos en evidencia verificable hace falta el [protocolo de medición](../desarrollo/04-viabilidad-y-metricas.md): muestra de pares de cargos, criterio de aceptación profesional, tiempos antes/después, costes y tratamiento de errores.
 

@@ -4,6 +4,8 @@
 
 El pitch comunicó un **potencial** de ahorro de tiempo y de reducción del riesgo de escoger referencias inadecuadas. Este capítulo explica cómo convertir esos beneficios en evidencia y cómo estudiar un modelo económico sin fabricar clientes, ingresos o resultados.
 
+**Investigación externa posterior (8 de noviembre de 2026):** [fuentes de Buk, Mercer, WTW, OCDE, INE, SII, NBER/OIT; tiempo reportado de 2–3 minutos, costos públicos de Gemini/Supabase y escenarios CLP](05-evidencia-externa-y-escenarios.md). Ese análisis separa cada cifra según procedencia: fuente publicada, declaración, cálculo o hipótesis.
+
 ## Distinguir declaración, hipótesis y medición
 
 | Indicador del pitch | Qué sabemos | Evidencia todavía necesaria |
@@ -13,6 +15,8 @@ El pitch comunicó un **potencial** de ahorro de tiempo y de reducción del ries
 | **Hasta 80 % menos tiempo por cargo** | Se propuso como impacto potencial en la lámina 7 | Experimento antes/después o comparación controlada con casos equivalentes, incluyendo revisión humana |
 
 **Ninguno es hoy un KPI medido de Espejo.** No deben colocarse en el README como logros alcanzados, ni en propuestas comerciales sin aclarar la condición hipotética.
+
+**Dato nuevo comunicado por Pablo:** con el flujo de Espejo y las fichas disponibles, una homologación justificada tarda **aproximadamente 2–3 minutos**. Es una **observación reportada**, no resultado de una muestra cronometrada. Tomando el punto medio 2,5 min y comparándolo con 15, 30, 60 y 120 minutos manuales **solo como hipótesis**, las reducciones matemáticas serían 83,33 %, 91,67 %, 95,83 % y 97,92 %. [Supuestos, horas y equilibrio económico](05-evidencia-externa-y-escenarios.md).
 
 ## Protocolo reproducible para una prueba con especialistas
 
@@ -41,6 +45,10 @@ Punto de equilibrio (casos) = costos fijos / contribución positiva por caso
 ```
 
 Estas expresiones ayudan a planificar un modelo de **consultoría, licencia o servicio**, pero **no prueban rentabilidad por sí solas**. El punto de equilibrio solo tiene sentido si el margen por caso es positivo y los costes están medidos. La disponibilidad de una opción gratuita de IA no asegura costo cero a escala.
+
+## Diferenciar ahorro de tiempo, valor económico y utilidad
+
+El tiempo liberado puede convertirse en **mayor capacidad para revisar casos**, reducción de costos o nuevos servicios vendidos. **No equivale automáticamente a ingresos ni a dinero ahorrado**. El escenario ilustrativo de 100 casos, valor hora hipotético $20.000 CLP, costo fijo $250.000 CLP/mes y variable $250 CLP/caso está desarrollado, con casos de equilibrio, en [Evidencia externa y escenarios](05-evidencia-externa-y-escenarios.md). Ninguno de estos parámetros es una cotización ni un costo de producción medido.
 
 ## Los costos que no se deberían omitir
 

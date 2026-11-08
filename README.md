@@ -11,7 +11,7 @@
 
 [![Estado: piloto](https://img.shields.io/badge/Estado-Piloto-52647A?style=flat-square)](docs/general/01-proposito-y-alcance.md) [![React 19](https://img.shields.io/badge/React-19-24618A?style=flat-square&logo=react)](package.json) [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)](package.json) [![Calidad](https://github.com/NicoCG32/Espejo-Homologa/actions/workflows/calidad.yml/badge.svg)](https://github.com/NicoCG32/Espejo-Homologa/actions/workflows/calidad.yml)
 
-[Documentación](docs/README.md) · [Cómo funciona](docs/general/02-recorrido-del-analista.md) · [El pitch](docs/formativa/02-pitch-y-vision.md) · [Valor y escalabilidad](docs/general/03-propuesta-de-valor.md) · [Colaboración](docs/formativa/03-colaboracion-y-atribucion.md)
+[Documentación](docs/README.md) · [Cómo funciona](docs/general/02-recorrido-del-analista.md) · [El pitch](docs/formativa/02-pitch-y-vision.md) · [Investigación económica](docs/desarrollo/05-evidencia-externa-y-escenarios.md) · [Colaboración](docs/formativa/03-colaboracion-y-atribucion.md)
 
 </div>
 
@@ -61,6 +61,12 @@ El producto asiste a especialistas y a las organizaciones que necesitan decision
 
 </details>
 
+## El problema tiene evidencia externa
+
+La **Guía Salarial Buk Chile 2025** documentó la homologación asistida por IA de **más de 200.000 denominaciones de cargos** sobre un catálogo de **525 cargos estándar**, como parte de un estudio que publicó bandas para 147 cargos con datos de **31.756 personas y 3.270 organizaciones**. Es una prueba de que el problema existe a gran escala en Chile y de que **Espejo no es el primero en emplear IA para homologar cargos**. Nuestra propuesta se centra en **mantener al profesional como responsable de una decisión revisable**. [Fuente y contraste del mercado](docs/desarrollo/05-evidencia-externa-y-escenarios.md).
+
+**Tiempo comunicado por su desarrollador:** una homologación justificada con Espejo **puede realizarse en aproximadamente 2–3 minutos** cuando la información está disponible. Este dato es una **observación reportada, no una mediana validada**; debe comprobarse con un estudio que incluya preparación, revisión y casos difíciles. Compararlo matemáticamente con las dos horas del pitch produciría **97,5–98,33 % de reducción**, **pero esa base de dos horas no está medida**. [Sensibilidad económica y costos reales de proveedores](docs/desarrollo/05-evidencia-externa-y-escenarios.md).
+
 ## Las cifras del pitch son hipótesis, no resultados medidos
 
 La presentación final utilizó **2 horas por homologación** como referencia del problema, una advertencia de **hasta 15 % de desviación de mercado** (rotulada «Mercer, 2024» en la lámina) y una proyección de **hasta 80 % menos tiempo**. **No se han aportado mediciones de campo ni una fuente primaria verificada que permita presentarlas como resultados del piloto.** Son cifras del discurso histórico, no KPIs ya comprobados. [Contexto del pitch](docs/formativa/02-pitch-y-vision.md) · [Cómo validarlas](docs/desarrollo/04-viabilidad-y-metricas.md).
@@ -77,7 +83,7 @@ Reconocer esos aportes **no equivale a asignar por este README la titularidad ex
 | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **General**    | [Propósito](docs/general/01-proposito-y-alcance.md) · [Recorrido](docs/general/02-recorrido-del-analista.md) · [Valor y escalabilidad](docs/general/03-propuesta-de-valor.md) |
 | **Técnica**    | [Arquitectura por niveles](docs/tecnica/01-arquitectura.md) · [Dominio y base de datos](docs/tecnica/02-dominio-y-datos.md) · [Flujos y estados](docs/tecnica/05-flujos-y-estados.md) |
-| **Desarrollo** | [Puesta en marcha](docs/desarrollo/01-entorno-y-despliegue.md) · [Validación](docs/desarrollo/02-validacion-y-mantenimiento.md) · [Métricas y rentabilidad](docs/desarrollo/04-viabilidad-y-metricas.md) |
+| **Desarrollo** | [Puesta en marcha](docs/desarrollo/01-entorno-y-despliegue.md) · [Validación](docs/desarrollo/02-validacion-y-mantenimiento.md) · [Métricas](docs/desarrollo/04-viabilidad-y-metricas.md) · [Fuentes y escenarios económicos](docs/desarrollo/05-evidencia-externa-y-escenarios.md) |
 | **Formativa**  | [Dupla](docs/formativa/README.md) · [Método](docs/formativa/01-metodologia-y-fuentes.md) · [Pitch](docs/formativa/02-pitch-y-vision.md) · [Créditos](docs/formativa/03-colaboracion-y-atribucion.md) |
 
 **[Índice completo y mapa del sistema](docs/README.md)**

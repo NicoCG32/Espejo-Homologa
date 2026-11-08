@@ -8,7 +8,7 @@ En compensaciones y análisis de cargos, el riesgo no es solo perder tiempo **bu
 
 **Espejo · Homologa** plantea una respuesta concreta: transformar la búsqueda de equivalencias en una secuencia revisable de criterios, candidatos, interpretación semántica y **decisión profesional**. **La remuneración aparece después**, cuando ya se eligió la referencia contra la que se consultará la encuesta.
 
-El valor esperado es que la persona experta emplee menos esfuerzo en tareas repetitivas y más tiempo en justificar decisiones complejas. Es una **propuesta de valor**, no una reducción de horas demostrada por el código.
+El valor esperado es que la persona experta emplee menos esfuerzo en tareas repetitivas y más tiempo en justificar decisiones complejas. **Pablo reporta unos 2–3 minutos por homologación justificada en su flujo actual**, cuando las fichas están disponibles; **falta verificar el resultado con una muestra y una comparación controlada**, especialmente la preparación de datos y la revisión. Este dato es una observación, no un KPI demostrado. [Fuentes y sensibilidad económica](../desarrollo/05-evidencia-externa-y-escenarios.md).
 
 ## Qué puede ofrecer un profesional con Espejo
 
