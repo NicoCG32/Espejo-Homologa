@@ -88,16 +88,17 @@ Margen de un servicio entregado =
   - adquisición y soporte
   - revisiones y correcciones esperadas
 
-Resultado incremental acumulado =
-  beneficio incremental verificable
-  - costo de construir, operar y mantener esa vertical
+Beneficio neto incremental antes de inversión =
+  ingresos adicionales efectivamente cobrados
+  + ahorros efectivamente realizables
+  - costos operativos adicionales del periodo
 
-ROI (%) =
-  100 × (beneficio incremental acumulado - inversión adicional inicial)
-      / inversión adicional inicial
+ROI de la vertical (%) =
+  100 × (beneficio neto incremental acumulado - inversión inicial)
+      / inversión inicial
 
-(Usar la fórmula de ROI solo si la inversión es positiva;
- evitar descontar dos veces el costo inicial y definir el periodo.)
+(Definir un periodo, inversión inicial positiva y evitar
+descontarla otra vez dentro de los costos operativos.)
 ```
 
 No basta sumar ingresos hipotéticos de todos los mercados. Primero se necesita **un producto inicial creíble, compradores reales y una ventaja medida**.
