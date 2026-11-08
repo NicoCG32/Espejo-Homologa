@@ -20,6 +20,23 @@ La oportunidad es atractiva: distintas personas necesitan traducir **competencia
 
 **Este orden es una recomendación estratégica posterior a la experiencia formativa**, no una agenda comprometida por Claudia ni un calendario aprobado por el programa.
 
+## Una matriz de validación que puede invalidar la expansión
+
+| Experimento propuesto | Qué se compara | Evidencia a registrar | Señal para continuar / detener |
+| --- | --- | --- | --- |
+| **Homologa** | Procedimiento manual frente a Espejo con revisión y mismas fichas | Tiempo completo p50/p95, discrepancias, correcciones, costos, trazabilidad y permisos | Avanzar solo si especialistas confirman calidad y menor costo total; detener si aumenta el retrabajo o no existe permiso de datos |
+| **Postula, prototipo privado** | Orientación tradicional frente a correspondencia explicada de vacantes y experiencia ficticia o voluntaria | Si la persona comprende oportunidades, corrige errores y encuentra recomendaciones accionables | Avanzar si mejora utilidad sin inventar competencias; detener ante recomendaciones engañosas o tratamiento no autorizado |
+| **Servicios, sin marketplace** | Brief libre frente a brief asistido, con revisión bilateral | Requisitos ambiguos, preguntas resueltas, cambios de alcance y aceptación de ambos lados | Avanzar si el alcance queda más claro y hay disposición pagadora; no añadir pagos ni búsqueda de profesionales por inercia |
+| **Talento** | Evaluación estructurada humana frente a apoyo experimental **sin decisiones automáticas** | Consistencia, explicaciones, desigualdad de errores, posibilidades de rectificación | No iniciar con personas reales sin autorizaciones, seguridad y evaluación jurídica del caso |
+
+**Recomendación de experimentación:** preinscribir muestra, contrafactual, definición de éxito y criterios de interrupción antes de ver los resultados. Las muestras o objetivos numéricos se fijan con especialistas y recursos reales; un umbral inventado no prueba ajuste de producto al mercado.
+
+### Compradores, distribución y ciclo de confianza
+
+**Homologa** puede llegar al mercado mediante especialistas de compensaciones que ya entregan informes, sin necesitar un marketplace. **Postula** necesita distribuir una utilidad personal verificable sin aprovechar vulnerabilidades de quienes buscan trabajo. **Servicios** puede empezar como herramienta para formular requerimientos y ofertas antes de intentar un mercado bilateral; operar pagos y reputación multiplicaría la complejidad. **Talento** demanda relaciones B2B, revisión humana significativa y mecanismos de reclamo.
+
+[Competencia, mercado chileno y modelos comerciales](07-estudio-de-mercado-y-posicionamiento.md).
+
 ## ¿Quién pagaría y por qué?
 
 | Tipo de cliente futuro | Propuesta de valor | Modelo posible, **no contratado** |
@@ -71,9 +88,16 @@ Margen de un servicio entregado =
   - adquisición y soporte
   - revisiones y correcciones esperadas
 
-Retorno de inversión de una nueva vertical =
+Resultado incremental acumulado =
   beneficio incremental verificable
   - costo de construir, operar y mantener esa vertical
+
+ROI (%) =
+  100 × (beneficio incremental acumulado - inversión adicional inicial)
+      / inversión adicional inicial
+
+(Usar la fórmula de ROI solo si la inversión es positiva;
+ evitar descontar dos veces el costo inicial y definir el periodo.)
 ```
 
 No basta sumar ingresos hipotéticos de todos los mercados. Primero se necesita **un producto inicial creíble, compradores reales y una ventaja medida**.
@@ -90,4 +114,4 @@ No basta sumar ingresos hipotéticos de todos los mercados. Primero se necesita 
 
 Esta narrativa es **una propuesta de evolución posterior**, no una frase presentada necesariamente por toda la dupla en el pitch original. La atribución de los aportes y los derechos de comercialización se mantienen pendientes de un acuerdo entre las personas titulares correspondientes.
 
-[Historia de la dupla](../formativa/README.md) · [Derechos y créditos](../formativa/03-colaboracion-y-atribucion.md) · [Calidad antes de expandir](03-evolucion-y-prioridades.md).
+[Mapa competitivo y tamaño de mercado](07-estudio-de-mercado-y-posicionamiento.md) · [Historia de la dupla](../formativa/README.md) · [Derechos y créditos](../formativa/03-colaboracion-y-atribucion.md) · [Calidad antes de expandir](03-evolucion-y-prioridades.md).
