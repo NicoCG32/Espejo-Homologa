@@ -64,6 +64,8 @@ El tiempo liberado puede convertirse en **mayor capacidad para revisar casos**, 
 
 ## Escenario simple de validación comercial
 
+**La oportunidad total de la plataforma no es el número de trabajadores o empresas multiplicado por un precio hipotético.** Para cada mercado debemos identificar por separado el **comprador**, la **frecuencia del problema**, la **alternativa disponible**, la **disposición a pagar**, la **ruta de adquisición** y el costo de cumplir una entrega de calidad. El [estudio de mercado y competencia](07-estudio-de-mercado-y-posicionamiento.md) explica un dimensionamiento TAM/SAM/SOM de abajo hacia arriba sin mezclar clientes de compensaciones con postulantes y freelancers.
+
 Antes de emitir una cifra de rentabilidad debemos responder con evidencias: **¿quién pagaría?, ¿por qué entregable?, ¿a qué tarifa?, ¿cuántos cargos por periodo?, ¿qué tiempo exige el experto?, ¿cuál es el costo de los datos y la IA?, ¿qué controles de seguridad se necesitan?**
 
 Cuando existan respuestas, comparar tres situaciones sin mezclar supuestos:
