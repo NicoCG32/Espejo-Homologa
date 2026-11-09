@@ -2,34 +2,34 @@
 
 [← Desarrollo](../README.md) · [Visión comercial](../general/04-vision-de-plataforma.md) · [Arquitectura futura](../tecnica/08-arquitectura-de-expansion.md) · [Evidencia económica](05-evidencia-externa-y-escenarios.md)
 
-## La propuesta, sin prometer cinco productos que todavía no tenemos
+## Punto de partida
 
 El primer resultado concreto de Espejo es **Homologa**: una herramienta de decisión asistida para comparar cargos por contenido. La siguiente apuesta no es convertirla de golpe en una bolsa de empleo o un marketplace, sino **probar que su método de comparación explicable ofrece valor en otro contexto**.
 
-La oportunidad es atractiva: distintas personas necesitan traducir **competencias, necesidades y evidencias**. Pero cada aplicación tendrá costos, participantes, responsabilidades y riesgos distintos. **No se puede sumar el tamaño del mercado salarial, de reclutamiento y del freelance para inventar un mercado disponible único.**
+Cada aplicación relaciona competencias, necesidades y evidencias con participantes, costos y responsabilidades distintos. El mercado se dimensiona por caso de uso y comprador.
 
 ## Una entrada al mercado y una secuencia racional
 
-| Etapa | Qué ofrecer o estudiar | Resultado medible | Condición antes de avanzar |
-| --- | --- | --- | --- |
-| **0 · Confiabilidad de Homologa** | Mejorar autorización, reproducibilidad, historiales, pruebas del motor y medición de 2–3 minutos | Casos comparables con tiempos, criterios, fuente, cambios y decisiones reconstruibles | No datos empresariales reales sin autorización de acceso y confidencialidad |
-| **1 · Servicio profesional especializado** | Demostración de homologación con datos autorizados y supervisión de un especialista | Tiempo total revisado, consistencia, necesidad de corrección y disposición real a pagar | Permisos de datos y acuerdo sobre aportes y explotación de la dupla |
-| **2 · Postula como autoorientación** | Comparar **un perfil voluntario ficticio** con ofertas publicadas con permiso; explicar brechas y recomendaciones para la propia persona | Comprensión de la explicación, utilidad de recomendaciones, ausencia de habilidades inventadas | Modelo específico, consentimiento, privacidad y prueba con usuarios |
-| **3 · Servicios y proyectos freelance** | Comparar necesidad redactada por un cliente con entregables y trabajos acreditados de un profesional | Porcentaje de requisitos aclarados, correspondencias verificadas y calidad de propuestas | Evidencia y autoría de portafolios; condiciones y acuerdo de las dos partes |
-| **4 · Reclutamiento para terceros** | Solo si existe demanda específica: apoyo a evaluadores humanos con criterios transparentes, revisiones y reclamos | Equidad, calidad, experiencia de candidatos y personal de selección, auditoría | **Controles reforzados y revisión legal**, sin rechazo automatizado ni ranking sin evaluación de impacto |
+| Etapa                                      | Qué ofrecer o estudiar                                                                                                                   | Resultado medible                                                                              | Condición antes de avanzar                                                                               |
+| ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| **0 · Confiabilidad de Homologa**          | Mejorar autorización, reproducibilidad, historiales, pruebas del motor y medición de 2–3 minutos                                         | Casos comparables con tiempos, criterios, fuente, cambios y decisiones reconstruibles          | No datos empresariales reales sin autorización de acceso y confidencialidad                              |
+| **1 · Servicio profesional especializado** | Demostración de homologación con datos autorizados y supervisión de un especialista                                                      | Tiempo total revisado, consistencia, necesidad de corrección y disposición real a pagar        | Permisos de datos y acuerdo sobre aportes y explotación de la dupla                                      |
+| **2 · Postula como autoorientación**       | Comparar **un perfil voluntario ficticio** con ofertas publicadas con permiso; explicar brechas y recomendaciones para la propia persona | Comprensión de la explicación, utilidad de recomendaciones, ausencia de habilidades inventadas | Modelo específico, consentimiento, privacidad y prueba con usuarios                                      |
+| **3 · Servicios y proyectos freelance**    | Comparar necesidad redactada por un cliente con entregables y trabajos acreditados de un profesional                                     | Porcentaje de requisitos aclarados, correspondencias verificadas y calidad de propuestas       | Evidencia y autoría de portafolios; condiciones y acuerdo de las dos partes                              |
+| **4 · Reclutamiento para terceros**        | Solo si existe demanda específica: apoyo a evaluadores humanos con criterios transparentes, revisiones y reclamos                        | Equidad, calidad, experiencia de candidatos y personal de selección, trazabilidad              | **Controles reforzados y revisión legal**, sin rechazo automatizado ni ranking sin evaluación de impacto |
 
-**Este orden es una recomendación estratégica posterior a la experiencia formativa**, no una agenda comprometida por Claudia ni un calendario aprobado por el programa.
+La secuencia desarrolla la visión de expansión propuesta por Pablo después del curso.
 
-## Una matriz de validación que puede invalidar la expansión
+## Experimentos y criterios de avance
 
-| Experimento propuesto | Qué se compara | Evidencia a registrar | Señal para continuar / detener |
-| --- | --- | --- | --- |
-| **Homologa** | Procedimiento manual frente a Espejo con revisión y mismas fichas | Tiempo completo p50/p95, discrepancias, correcciones, costos, trazabilidad y permisos | Avanzar solo si especialistas confirman calidad y menor costo total; detener si aumenta el retrabajo o no existe permiso de datos |
-| **Postula, prototipo privado** | Orientación tradicional frente a correspondencia explicada de vacantes y experiencia ficticia o voluntaria | Si la persona comprende oportunidades, corrige errores y encuentra recomendaciones accionables | Avanzar si mejora utilidad sin inventar competencias; detener ante recomendaciones engañosas o tratamiento no autorizado |
-| **Servicios, sin marketplace** | Brief libre frente a brief asistido, con revisión bilateral | Requisitos ambiguos, preguntas resueltas, cambios de alcance y aceptación de ambos lados | Avanzar si el alcance queda más claro y hay disposición pagadora; no añadir pagos ni búsqueda de profesionales por inercia |
-| **Talento** | Evaluación estructurada humana frente a apoyo experimental **sin decisiones automáticas** | Consistencia, explicaciones, desigualdad de errores, posibilidades de rectificación | No iniciar con personas reales sin autorizaciones, seguridad y evaluación jurídica del caso |
+| Experimento propuesto          | Qué se compara                                                                                             | Evidencia a registrar                                                                          | Señal para continuar / detener                                                                                                    |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| **Homologa**                   | Procedimiento manual frente a Espejo con revisión y mismas fichas                                          | Tiempo completo p50/p95, discrepancias, correcciones, costos, trazabilidad y permisos          | Avanzar solo si especialistas confirman calidad y menor costo total; detener si aumenta el retrabajo o no existe permiso de datos |
+| **Postula, prototipo privado** | Orientación tradicional frente a correspondencia explicada de vacantes y experiencia ficticia o voluntaria | Si la persona comprende oportunidades, corrige errores y encuentra recomendaciones accionables | Avanzar si mejora utilidad sin inventar competencias; detener ante recomendaciones engañosas o tratamiento no autorizado          |
+| **Servicios, sin marketplace** | Brief libre frente a brief asistido, con revisión bilateral                                                | Requisitos ambiguos, preguntas resueltas, cambios de alcance y aceptación de ambos lados       | Avanzar si el alcance queda más claro y hay disposición pagadora; no añadir pagos ni búsqueda de profesionales por inercia        |
+| **Talento**                    | Evaluación estructurada humana frente a apoyo experimental **sin decisiones automáticas**                  | Consistencia, explicaciones, desigualdad de errores, posibilidades de rectificación            | No iniciar con personas reales sin autorizaciones, seguridad y evaluación jurídica del caso                                       |
 
-**Recomendación de experimentación:** preinscribir muestra, contrafactual, definición de éxito y criterios de interrupción antes de ver los resultados. Las muestras o objetivos numéricos se fijan con especialistas y recursos reales; un umbral inventado no prueba ajuste de producto al mercado.
+Define muestra, comparación, criterio de éxito y condiciones de interrupción antes de ejecutar cada experimento.
 
 ### Compradores, distribución y ciclo de confianza
 
@@ -39,17 +39,17 @@ La oportunidad es atractiva: distintas personas necesitan traducir **competencia
 
 ## ¿Quién pagaría y por qué?
 
-| Tipo de cliente futuro | Propuesta de valor | Modelo posible, **no contratado** |
-| --- | --- | --- |
-| **Consultores y analistas de cargos** | Reducir tareas repetitivas y ganar explicaciones defendibles | Servicio por proyecto, soporte profesional o licencia especializada |
-| **Personas que buscan empleo** | Descubrir oportunidades y describir mejor competencias demostrables | Herramienta gratuita acotada o ayuda profesional opcional y voluntaria |
-| **Profesionales independientes** | Traducir su portafolio en entregables claros y evitar cotizaciones mal definidas | Suscripción opcional para gestionar propuestas o servicio de preparación |
-| **Empresas que contratan servicios** | Evaluar alcances y entregables ofrecidos sin depender de etiquetas ambiguas | Pago por solicitud revisada o paquete de contratación asistida |
-| **Equipos de reclutamiento** | Evaluaciones mejor estructuradas y auditables | Licencia B2B **solo después de controles y validación legal** |
+| Tipo de cliente futuro                | Propuesta de valor                                                               | Modelo posible, **no contratado**                                        |
+| ------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| **Consultores y analistas de cargos** | Reducir tareas repetitivas y ganar explicaciones defendibles                     | Servicio por proyecto, soporte profesional o licencia especializada      |
+| **Personas que buscan empleo**        | Descubrir oportunidades y describir mejor competencias demostrables              | Herramienta gratuita acotada o ayuda profesional opcional y voluntaria   |
+| **Profesionales independientes**      | Traducir su portafolio en entregables claros y evitar cotizaciones mal definidas | Suscripción opcional para gestionar propuestas o servicio de preparación |
+| **Empresas que contratan servicios**  | Evaluar alcances y entregables ofrecidos sin depender de etiquetas ambiguas      | Pago por solicitud revisada o paquete de contratación asistida           |
+| **Equipos de reclutamiento**          | Evaluaciones mejor estructuradas y auditables                                    | Licencia B2B **solo después de controles y validación legal**            |
 
-No hay tarifa establecida, cliente firmado, conversión observada ni cuota de mercado asignada. **La calidad de la explicación y la decisión del profesional son el valor**, no vender datos personales, automatizar descartes o prometer la contratación.
+Las ofertas y los modelos de pago requieren validación con usuarios y compradores. El valor propuesto es la calidad de la explicación y del entregable revisado.
 
-## Preguntas reales que pondría ante posibles usuarios
+## Preguntas para posibles usuarios
 
 Antes de construir una vertical nueva conviene realizar entrevistas y pruebas específicas, sin tomar aprobación verbal como disposición a pagar.
 
@@ -62,12 +62,12 @@ Los resultados deben incluir **objeciones, casos donde el sistema no aporta valo
 
 ## Indicadores por caso de uso
 
-| Vertical | Métrica que importa | Métrica que **no basta** |
-| --- | --- | --- |
-| **Homologa** | Tiempo completo con revisión, calidad de equivalencias y trazabilidad histórica | Duración aislada de una llamada IA |
-| **Postula** | Claridad de brechas, correcciones verificables y utilidad percibida por la persona | Porcentaje «match» interpretado como probabilidad de contratación |
-| **Servicios** | Menos ambigüedad de alcance, acuerdos mejor definidos y satisfacción de ambas partes | Cantidad de perfiles recomendados o de contactos generados |
-| **Talento** | Consistencia frente a criterios, equidad, revisiones y corrección de decisiones | Velocidad de descartar personas o puntuación sin calibración |
+| Vertical      | Métrica que importa                                                                  | Métrica que **no basta**                                          |
+| ------------- | ------------------------------------------------------------------------------------ | ----------------------------------------------------------------- |
+| **Homologa**  | Tiempo completo con revisión, calidad de equivalencias y trazabilidad histórica      | Duración aislada de una llamada IA                                |
+| **Postula**   | Claridad de brechas, correcciones verificables y utilidad percibida por la persona   | Porcentaje «match» interpretado como probabilidad de contratación |
+| **Servicios** | Menos ambigüedad de alcance, acuerdos mejor definidos y satisfacción de ambas partes | Cantidad de perfiles recomendados o de contactos generados        |
+| **Talento**   | Consistencia frente a criterios, equidad, revisiones y corrección de decisiones      | Velocidad de descartar personas o puntuación sin calibración      |
 
 Los **2–3 minutos reportados para la homologación** son específicos de Homologa. **No se trasladan a entrevistar personas, revisar portafolios, contratar freelancers o verificar candidatos**. Cada vertical necesita una línea base y un experimento propio.
 
@@ -113,6 +113,6 @@ No basta sumar ingresos hipotéticos de todos los mercados. Primero se necesita 
 >
 > **Nuestra ambición es amplia, pero nuestro plan es gradual. No prometemos reemplazar expertos: queremos ayudarlos a convertir conocimiento en mejores decisiones y servicios.**
 
-Esta narrativa es **una propuesta de evolución posterior**, no una frase presentada necesariamente por toda la dupla en el pitch original. La atribución de los aportes y los derechos de comercialización se mantienen pendientes de un acuerdo entre las personas titulares correspondientes.
+La presentación de esta visión es posterior al pitch original. Los créditos están en [colaboración y atribución](../formativa/03-colaboracion-y-atribucion.md), y las condiciones de reutilización en [LICENSING.md](../../LICENSING.md).
 
 [Mapa competitivo y tamaño de mercado](07-estudio-de-mercado-y-posicionamiento.md) · [Historia de la dupla](../formativa/README.md) · [Derechos y créditos](../formativa/03-colaboracion-y-atribucion.md) · [Calidad antes de expandir](03-evolucion-y-prioridades.md).

@@ -2,7 +2,7 @@
 
 La arquitectura separa la **interfaz**, las **operaciones del servidor**, el **cálculo de homologación** y los **servicios externos**.
 
-> **Frontera actual del sistema:** toda esta arquitectura describe la comparación de **cargos** en el piloto Homologa. No representa un motor transversal ya refactorizado, un sistema de reclutamiento o un marketplace. El diseño técnico futuro y sus requisitos de seguridad se documentan aparte en [Evolución a correspondencias por dominio](08-arquitectura-de-expansion.md).
+Esta arquitectura describe el piloto de comparación de cargos. La propuesta para otros dominios está en [arquitectura de expansión](08-arquitectura-de-expansion.md).
 
 ## Nivel 1 — Contexto del sistema
 

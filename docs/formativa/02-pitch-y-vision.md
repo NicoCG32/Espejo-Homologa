@@ -2,27 +2,27 @@
 
 [← Experiencia formativa](README.md) · [Valor y alcance comercial](../general/03-propuesta-de-valor.md) · [Medición y viabilidad](../desarrollo/04-viabilidad-y-metricas.md)
 
-> **Documento de contexto del proyecto de duplas, no una ficha comercial con resultados validados.** Se reconstruye el argumento a partir de la presentación final de **siete diapositivas** compartida por la dupla. El archivo original de la presentación no se agrega a este repositorio: puede contener elementos gráficos o créditos cuya distribución debe acordarse.
+La presentación final de siete diapositivas expuso la propuesta de Homologa ante el jurado de Duplas Intergeneracionales Tech. Este capítulo recoge su argumento y distingue las cifras de la presentación de las mediciones pendientes.
 
-## También aprendimos a vender una solución tecnológica
+## Presentar una solución tecnológica
 
 El trabajo en **Duplas Intergeneracionales Tech** no terminaba en hacer funcionar la aplicación. Había que identificar una necesidad real, acotar el problema, construir una propuesta que pudiera demostrarse y **explicar por qué valía la pena adoptarla ante un jurado**.
 
-En nuestro caso, ese ejercicio conectó dos aportes: **Claudia Peña** podía defender el sentido profesional de homologar cargos por contenido; **Pablo Guzmán** podía explicar cómo las reglas, la IA y el diseño de la herramienta convertían ese criterio en un flujo técnico demostrable. Ambos presentamos la propuesta. [Créditos y responsabilidades](03-colaboracion-y-atribucion.md).
+**Claudia Peña** aportó la perspectiva profesional del problema; **Pablo Guzmán** explicó cómo las reglas, la IA y el diseño de la herramienta la llevaban a un flujo demostrable. Ambos presentaron la propuesta. [Créditos y responsabilidades](03-colaboracion-y-atribucion.md).
 
-No se presentó al analista como un obstáculo que debíamos automatizar. **Su experiencia era parte esencial del servicio**. La tecnología podía disminuir trabajo repetitivo, estructurar la búsqueda y registrar recomendaciones, pero debía dejarle a la persona la responsabilidad de confirmar la equivalencia.
+La experiencia del analista era parte esencial del servicio: interpretar responsabilidades, revisar los candidatos y confirmar la equivalencia. La herramienta buscaba reducir trabajo repetitivo y ordenar esa revisión.
 
-## Cómo construimos el relato en siete diapositivas
+## El relato en siete diapositivas
 
-| Lámina del pitch | Mensaje | Relación con lo implementado |
-| --- | --- | --- |
-| **1 · Proyecto** | «Transformar análisis experto en decisiones trazables»; aparecen Claudia y Pablo como presentadores | Visión y equipo del proyecto, no una certificación comercial |
-| **2 · Mensaje** | Un mismo nombre de cargo no demuestra el mismo trabajo; necesitamos equivalencias defendibles | Motor por atributos, no solo coincidencia nominal |
-| **3 · Contexto** | Cargo interno → comparación → remuneración de mercado; una mala homologación distorsiona la referencia | Separación de la equivalencia por contenido y del benchmark salarial |
-| **4 · Método** | **Filtrar → analizar → recomendar → decidir → valorizar** | Motor determinístico → IA semántica opcional → preselección/decisión humana → bandas |
-| **5 · Gobernanza** | IA compara, explica y recomienda; el profesional revisa, descarta, confirma y decide | La salida del modelo no escribe por sí sola una homologación final |
-| **6 · Demostración** | Recorrido de un cargo interno a una recomendación fundamentada | Prototipo web enlazado mediante QR en el material presentado |
-| **7 · Valor y cierre** | Consistencia, eficiencia y trazabilidad; «La IA no reemplaza al experto. Potencia su trabajo» | Propuesta de valor y **beneficios por validar**, no resultados productivos acreditados |
+| Lámina del pitch       | Mensaje                                                                                                | Relación con lo implementado                                                           |
+| ---------------------- | ------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- |
+| **1 · Proyecto**       | «Transformar análisis experto en decisiones trazables»; aparecen Claudia y Pablo como presentadores    | Visión y equipo del proyecto, no una certificación comercial                           |
+| **2 · Mensaje**        | Un mismo nombre de cargo no demuestra el mismo trabajo; necesitamos equivalencias defendibles          | Motor por atributos, no solo coincidencia nominal                                      |
+| **3 · Contexto**       | Cargo interno → comparación → remuneración de mercado; una mala homologación distorsiona la referencia | Separación de la equivalencia por contenido y del benchmark salarial                   |
+| **4 · Método**         | **Filtrar → analizar → recomendar → decidir → valorizar**                                              | Motor determinístico → IA semántica opcional → preselección/decisión humana → bandas   |
+| **5 · Gobernanza**     | IA compara, explica y recomienda; el profesional revisa, descarta, confirma y decide                   | La salida del modelo no escribe por sí sola una homologación final                     |
+| **6 · Demostración**   | Recorrido de un cargo interno a una recomendación fundamentada                                         | Prototipo web enlazado mediante QR en el material presentado                           |
+| **7 · Valor y cierre** | Consistencia, eficiencia y trazabilidad; «La IA no reemplaza al experto. Potencia su trabajo»          | Propuesta de valor y **beneficios por validar**, no resultados productivos acreditados |
 
 ### Cómo explicar el método en una sola imagen
 
@@ -41,42 +41,38 @@ flowchart LR
 
 El diagrama simplifica el discurso de presentación. En la implementación, **la IA es opcional**; cuando falla, el analista puede continuar con las comparaciones del motor. La etapa final de remuneración utiliza **bandas de encuesta**, no el sueldo como variable del score. [Flujos reales](../tecnica/05-flujos-y-estados.md).
 
-## Cifras del pitch: conservar sin inflarlas
+## Cifras del pitch y medición pendiente
 
-La presentación contiene tres cifras visuales importantes, pero **no adjunta las mediciones primarias, base de comparación o protocolo experimental** necesarios para tratarlas como resultados comprobados.
+El pitch utilizó tres cifras como referencias del problema y beneficios potenciales. La tabla indica la evidencia necesaria para evaluarlas.
 
-| Cifra en la presentación | Diapositiva | Clasificación responsable |
-| --- | --- | --- |
-| **«2 horas por homologación»** | 2 | **Referencia del problema**, no duración observada en una muestra documentada |
-| **«Hasta 15 % de desviación de mercado»** | 2 | **Advertencia ilustrativa**; la diapositiva menciona «Mercer, 2024» sin identificar aquí publicación, página y metodología comprobables |
-| **«Hasta 80 % menos tiempo de análisis por cargo»** | 7 | **Meta o beneficio potencial del pitch**, no reducción alcanzada y verificada con datos del piloto |
+| Cifra en la presentación                            | Diapositiva | Clasificación responsable                                                                                                               |
+| --------------------------------------------------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| **«2 horas por homologación»**                      | 2           | **Referencia del problema**, no duración observada en una muestra documentada                                                           |
+| **«Hasta 15 % de desviación de mercado»**           | 2           | **Advertencia ilustrativa**; la diapositiva menciona «Mercer, 2024» sin identificar aquí publicación, página y metodología comprobables |
+| **«Hasta 80 % menos tiempo de análisis por cargo»** | 7           | **Meta o beneficio potencial del pitch**, no reducción alcanzada y verificada con datos del piloto                                      |
 
-Estos números forman parte **del material efectivamente presentado**; no deben eliminarse de la historia. Pero tampoco es correcto convertirlos en «80 % de ahorro demostrado», «15 % de error de clientes» o «dos horas medidas en una empresa real».
+Estas cifras describen el argumento presentado. Para utilizarlas como indicadores de desempeño se necesita una línea base y una comparación controlada.
 
-**Observación posterior al pitch:** Pablo informa que, con fichas disponibles, la herramienta permite terminar una homologación justificada en **unos 2–3 minutos**. Compararla con el supuesto de 120 minutos da matemáticamente una reducción de **97,5–98,33 %**, pero **no existe una medición controlada de esa línea base**. Para evidencias externas concretas —incluida la metodología de **Buk Chile sobre más de 200.000 cargos**— y condiciones de rentabilidad, consulta [Investigación y escenarios](../desarrollo/05-evidencia-externa-y-escenarios.md).
+La observación posterior de Pablo sobre el tiempo de uso está documentada, junto con sus condiciones, en [evidencia y escenarios](../desarrollo/05-evidencia-externa-y-escenarios.md).
 
 Para convertirlos en evidencia verificable hace falta el [protocolo de medición](../desarrollo/04-viabilidad-y-metricas.md): muestra de pares de cargos, criterio de aceptación profesional, tiempos antes/después, costes y tratamiento de errores.
 
 ## La visión profesional que inspiró el cierre
 
-Para nosotros, una herramienta así tenía valor cuando **aumentaba la capacidad de un especialista para entregar servicios de mayor calidad**. En lugar de prometer «IA que reemplaza al analista», presentamos un modo en que la persona podía concentrarse en resolver lo complejo: interpretar responsabilidades, explicar descartes, discutir equivalencias y asesorar en decisiones.
+La propuesta se centró en ampliar la capacidad del especialista para interpretar responsabilidades, explicar descartes y asesorar con información ordenada.
 
-**Perspectiva personal de Pablo, más amplia que las siete láminas:** imagino un futuro donde la especialización, la reputación y la capacidad de ofrecer servicios concretos tendrán un peso creciente. Un profesional podrá complementar un empleo con trabajo independiente, consultoría o soluciones apoyadas en tecnología. No es una afirmación de que **todos** los trabajos de salario fijo desaparecerán, ni una conclusión respaldada por esta presentación. Lo que sí demuestra el caso de Espejo es cómo una herramienta puede **hacer más transferible y escalable el conocimiento profesional sin quitar la decisión a su titular**.
+Pablo plantea que la especialización y las herramientas digitales pueden ampliar las opciones de consultoría y trabajo independiente. Esa visión orienta la propuesta de expansión posterior al curso.
 
 ### Una segunda idea que surgió al revisar la escalabilidad
 
-**Esta ampliación es posterior al pitch histórico** y corresponde a la propuesta estratégica actual de Pablo; **no debe atribuirse retroactivamente a las siete láminas ni presentarse como compromiso de Claudia, Gricel o el programa**.
+La ampliación a nuevos casos de uso fue propuesta por Pablo después del pitch.
 
-Lo que demostramos en Homologa es una forma de **comparar descripciones diferentes con reglas y una interpretación auxiliar, y conservar a quien decide**. Podemos explorar el mismo **método** para ayudar a una persona a postular, a un profesional a ofrecer servicios y a un cliente a describir una necesidad. No significa que la interfaz o el motor estén preparados para CV, portafolios o contratos: ese diseño es futuro.
+Homologa ofrece un precedente para comparar descripciones con criterios explícitos, una lectura auxiliar de IA y revisión profesional. Aplicar ese método a postulaciones y servicios requiere nuevos modelos, reglas y pruebas.
 
-Este segundo horizonte tiene una narrativa comercial valiosa: **«Espejo resuelve hoy un problema concreto y abre la posibilidad de relacionar necesidades con capacidades en otros contextos»**. La oportunidad no elimina el empleo tradicional; ayuda a reconocer habilidades y ampliar las maneras de ofrecerlas. [Visión extendida y ejemplos](../general/04-vision-de-plataforma.md) · [Ruta gradual](../desarrollo/06-expansion-y-pilotos.md).
+La [visión extendida](../general/04-vision-de-plataforma.md) y la [ruta de pilotos](../desarrollo/06-expansion-y-pilotos.md) describen esa evolución.
 
-### Qué no probó la presentación
+### Próximos pasos
 
-- No se incluyó un **estado de resultados**, una tarifa efectivamente cobrada, clientes que hayan contratado, ingresos, margen ni retorno de inversión validado.
-- La capacidad de vender el servicio o replicarlo en otras organizaciones es una **hipótesis de negocio**; no acredita multi-tenencia, seguridad productiva ni una operación comercial instalada.
-- Los puntajes de la IA son recomendaciones de equivalencia, **no predicciones de salario** ni evaluaciones de personas.
-
-El pitch fue importante como **ejercicio de comunicación, posicionamiento y propuesta de valor**. Su resultado no debe confundirse con las pruebas técnicas que exige un producto comercial.
+La [validación de eficiencia y viabilidad](../desarrollo/04-viabilidad-y-metricas.md) debe medir calidad, tiempo completo, costos y disposición a pagar antes de convertir los beneficios propuestos en compromisos comerciales.
 
 [Presentación de la dupla](README.md) · [Propuesta de servicio](../general/03-propuesta-de-valor.md) · [Atribución](03-colaboracion-y-atribucion.md).

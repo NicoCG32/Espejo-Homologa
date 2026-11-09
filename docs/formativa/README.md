@@ -1,6 +1,6 @@
 # Espejo · Homologa, la historia detrás del código
 
-El proyecto nació de la colaboración entre dos personas con trayectorias distintas: la experiencia profesional de Claudia Peña en recursos humanos y la formación técnica de Pablo Guzmán. **Además de construir una aplicación, debíamos aprender a explicar su alcance, defender sus beneficios y vender una solución tecnológica en una presentación ante un jurado.** La dupla preparó un pitch que conectó problema, gobernanza de IA, demostración y valor potencial.
+El proyecto nació de la colaboración entre la experiencia profesional de Claudia Peña en recursos humanos y la formación técnica de Pablo Guzmán. La dupla construyó un prototipo y preparó una presentación para explicar su utilidad ante un jurado.
 
 ## Cómo comenzó
 
@@ -43,17 +43,17 @@ Esa colaboración también se refleja en el producto: el motor y la IA aportan i
 
 ## Aprender a presentar y ofrecer un servicio
 
-El pitch final no se redujo a enumerar funciones. Mostramos por qué **un mismo nombre no equivale necesariamente al mismo trabajo**, describimos el flujo de reglas e IA y destacamos que **la decisión final sigue siendo del profesional**. Después demostramos la aplicación y defendimos la propuesta de consistencia, eficiencia y trazabilidad.
+Claudia y Pablo presentaron el problema, el flujo de reglas e IA y una demostración de la aplicación. El cierre destacó la consistencia, la eficiencia y la trazabilidad como beneficios a evaluar, con la decisión final a cargo del profesional.
 
-Las cifras del material —**2 horas por caso**, **hasta 15 % de desviación** y **hasta 80 % menos tiempo**— deben conservarse como **referencias e hipótesis del pitch**, no como resultados que ya hayamos medido. No se adjuntaron en esa presentación los costos, los precios o la muestra necesaria para certificar rentabilidad.
+Las cifras utilizadas en la presentación se conservan con su contexto en [Pitch y visión](02-pitch-y-vision.md). Su validación requiere comparar tiempos y resultados con casos equivalentes.
 
-Mi visión personal es que los profesionales podrán diferenciarse más mediante **especialización y servicios de alto valor**, con herramientas digitales que amplían sus capacidades. Eso **no implica** que esté demostrado el fin de todos los empleos de salario fijo. Lo que defendimos juntos fue algo más preciso: **la IA no reemplaza al experto, potencia su trabajo**.
+La presentación cerró con una idea compartida: **«La IA no reemplaza al experto. Potencia su trabajo»**.
 
 [El pitch, lámina por lámina](02-pitch-y-vision.md) · [Atribución de la dupla](03-colaboracion-y-atribucion.md) · [Modelo de servicio](../general/03-propuesta-de-valor.md).
 
 ## Expansión pensada después del pitch
 
-La propuesta original que defendimos ante el jurado fue **Homologa**, con criterios salariales solo al final del análisis de equivalencia. Posteriormente, Pablo planteó explorar el mismo **método de correspondencia explicable** para postulación, servicios de freelancers y necesidades de organizaciones. **Es una visión nueva**, no una funcionalidad entregada, una declaración de Claudia ni un contenido añadido retroactivamente a nuestra presentación. [La ampliación de Espejo](../general/04-vision-de-plataforma.md).
+El pitch de la dupla se centró en **Homologa**. Posteriormente, Pablo planteó explorar el método de comparación para postulaciones, servicios independientes y competencias. Esa propuesta se desarrolla en [visión de plataforma](../general/04-vision-de-plataforma.md).
 
 ## Evaluación final
 

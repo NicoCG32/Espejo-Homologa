@@ -2,21 +2,21 @@
 
 [← Desarrollo](../README.md) · [Pitch](../formativa/02-pitch-y-vision.md) · [Propuesta de valor](../general/03-propuesta-de-valor.md)
 
-El pitch comunicó un **potencial** de ahorro de tiempo y de reducción del riesgo de escoger referencias inadecuadas. Este capítulo explica cómo convertir esos beneficios en evidencia y cómo estudiar un modelo económico sin fabricar clientes, ingresos o resultados.
+El pitch propuso reducir el tiempo de análisis y el riesgo de escoger referencias inadecuadas. Este capítulo define cómo medir esos beneficios y evaluar la viabilidad del servicio.
 
-**Investigación externa posterior (8 de noviembre de 2026):** [fuentes de Buk, Mercer, WTW, OCDE, INE, SII, NBER/OIT; tiempo reportado de 2–3 minutos, costos públicos de Gemini/Supabase y escenarios CLP](05-evidencia-externa-y-escenarios.md). Ese análisis separa cada cifra según procedencia: fuente publicada, declaración, cálculo o hipótesis.
+Las [fuentes y escenarios económicos](05-evidencia-externa-y-escenarios.md) reúnen referencias del mercado, costos de proveedores y cálculos con supuestos explícitos, con fecha de corte al 8 de noviembre de 2026.
 
 ## Distinguir declaración, hipótesis y medición
 
-| Indicador del pitch | Qué sabemos | Evidencia todavía necesaria |
-| --- | --- | --- |
-| **2 horas por homologación** | Se utilizó como referencia en la lámina 2 | Muestra de procesos reales, definición de inicio/fin, mediana y dispersión |
+| Indicador del pitch                     | Qué sabemos                                             | Evidencia todavía necesaria                                                                             |
+| --------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| **2 horas por homologación**            | Se utilizó como referencia en la lámina 2               | Muestra de procesos reales, definición de inicio/fin, mediana y dispersión                              |
 | **Hasta 15 % de desviación de mercado** | Cifra ilustrada en la lámina 2 con texto «Mercer, 2024» | Publicación exacta, página, población y método de cálculo; no se ha validado esa cita en el repositorio |
-| **Hasta 80 % menos tiempo por cargo** | Se propuso como impacto potencial en la lámina 7 | Experimento antes/después o comparación controlada con casos equivalentes, incluyendo revisión humana |
+| **Hasta 80 % menos tiempo por cargo**   | Se propuso como impacto potencial en la lámina 7        | Experimento antes/después o comparación controlada con casos equivalentes, incluyendo revisión humana   |
 
-**Ninguno es hoy un KPI medido de Espejo.** No deben colocarse en el README como logros alcanzados, ni en propuestas comerciales sin aclarar la condición hipotética.
+Estas cifras siguen pendientes de validación con casos comparables.
 
-**Dato nuevo comunicado por Pablo:** con el flujo de Espejo y las fichas disponibles, una homologación justificada tarda **aproximadamente 2–3 minutos**. Es una **observación reportada**, no resultado de una muestra cronometrada. Tomando el punto medio 2,5 min y comparándolo con 15, 30, 60 y 120 minutos manuales **solo como hipótesis**, las reducciones matemáticas serían 83,33 %, 91,67 %, 95,83 % y 97,92 %. [Supuestos, horas y equilibrio económico](05-evidencia-externa-y-escenarios.md).
+Pablo reporta unos 2–3 minutos por homologación con fichas disponibles. El [análisis de sensibilidad](05-evidencia-externa-y-escenarios.md) utiliza esa observación como supuesto; el protocolo siguiente debe medir también preparación, revisión y correcciones.
 
 ## Protocolo reproducible para una prueba con especialistas
 
@@ -28,8 +28,6 @@ El pitch comunicó un **potencial** de ahorro de tiempo y de reducción del ries
 6. Reportar tamaño de muestra, medianas, rangos, casos fallidos y acuerdos/discrepancias. No extrapolar de diez ejemplos a todo un sector.
 7. Registrar coste de procesamiento, intervención profesional, alojamiento, datos, soporte y riesgos de confidencialidad.
 
-Claudia puede aportar criterio sobre pertinencia de equivalencias dentro de su experiencia profesional, sin que eso signifique que haya validado automáticamente **todas** las decisiones del algoritmo.
-
 ## Fórmulas de evaluación, no resultados
 
 Para un periodo y muestra explícitos:
@@ -37,7 +35,7 @@ Para un periodo y muestra explícitos:
 ```text
 Ahorro de tiempo por caso = tiempo tradicional - tiempo asistido (con revisión)
 Reducción relativa (%) = 100 × ahorro / tiempo tradicional
-Horas netas liberadas = número de casos × ahorro promedio por caso
+Horas netas liberadas = número de casos × ahorro promedio en minutos / 60
 Costo variable por caso = costo IA + infraestructura marginal + revisión humana
 Contribución por caso = ingreso efectivamente cobrado por caso - costo variable
 Resultado operativo del periodo = ingresos efectivos - costos variables - costos fijos
@@ -52,15 +50,15 @@ El tiempo liberado puede convertirse en **mayor capacidad para revisar casos**, 
 
 ## Los costos que no se deberían omitir
 
-| Categoría | Variable a registrar |
-| --- | --- |
-| **Experiencia profesional** | Horas de revisión, corrección, aclaraciones y elaboración de informe |
-| **IA y cómputo** | Llamadas de normalización y análisis por ejecución, tokens, errores, reintentos y tarifa vigente |
-| **Base y alojamiento** | Almacenamiento, backups, tráfico, despliegue, monitorización y plan de proveedores |
-| **Fuentes salariales** | Licencias o contratos para utilizar y redistribuir encuestas y estadísticas |
-| **Seguridad y privacidad** | Aislamiento entre organizaciones, acceso, incidentes, retención y cumplimiento contractual |
-| **Venta y atención** | Adquisición de clientes, formación, seguimiento y mantenimiento |
-| **Riesgo de calidad** | Revisiones adicionales por falsas equivalencias, datos incompletos o fallos de proveedores |
+| Categoría                   | Variable a registrar                                                                             |
+| --------------------------- | ------------------------------------------------------------------------------------------------ |
+| **Experiencia profesional** | Horas de revisión, corrección, aclaraciones y elaboración de informe                             |
+| **IA y cómputo**            | Llamadas de normalización y análisis por ejecución, tokens, errores, reintentos y tarifa vigente |
+| **Base y alojamiento**      | Almacenamiento, backups, tráfico, despliegue, monitorización y plan de proveedores               |
+| **Fuentes salariales**      | Licencias o contratos para utilizar y redistribuir encuestas y estadísticas                      |
+| **Seguridad y privacidad**  | Aislamiento entre organizaciones, acceso, incidentes, retención y cumplimiento contractual       |
+| **Venta y atención**        | Adquisición de clientes, formación, seguimiento y mantenimiento                                  |
+| **Riesgo de calidad**       | Revisiones adicionales por falsas equivalencias, datos incompletos o fallos de proveedores       |
 
 ## Escenario simple de validación comercial
 
@@ -74,7 +72,7 @@ Cuando existan respuestas, comparar tres situaciones sin mezclar supuestos:
 - **Servicio profesional asistido:** ahorro neto y consistencia **con** revisión humana.
 - **Producto licenciado:** inversión, soporte, seguridad y mantenimiento de una plataforma de varias organizaciones, **todavía no implementada** como oferta lista para vender.
 
-Una mejora de tiempo **no se transforma automáticamente en ingresos**: pueden liberar capacidad, reducir costo operativo o mejorar un servicio, dependiendo del contrato y la demanda.
+Una mejora de tiempo **no se transforma automáticamente en ingresos**: puede liberar capacidad, reducir costo operativo o mejorar un servicio, dependiendo del contrato y la demanda.
 
 ## Condiciones antes de decir «escalable»
 

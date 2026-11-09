@@ -1,4 +1,4 @@
-# 03 · Propuesta de valor y escalabilidad: de una comparación a muchos problemas
+# 03 · Propuesta de valor y escalabilidad
 
 [← General](../README.md) · [Visión completa](04-vision-de-plataforma.md) · [El pitch original](../formativa/02-pitch-y-vision.md) · [Evidencia y costos](../desarrollo/05-evidencia-externa-y-escenarios.md)
 
@@ -8,68 +8,64 @@
 
 Desarrollamos **Espejo · Homologa** para ordenar esa comparación: **reglas explícitas que filtran, IA opcional que ayuda a interpretar, criterios y razones visibles, y un profesional que decide**. Solo después de determinar la equivalencia entra el benchmark salarial.
 
-Pero mi visión de crecimiento no es vender la misma herramienta a más empresas y detenernos allí. **El problema de fondo se repite cuando alguien describe lo que necesita y otra persona describe lo que sabe hacer.** Lo vemos en el reclutamiento, en las postulaciones, en el trabajo independiente y en la evolución profesional.
+La visión de expansión propuesta por Pablo parte de un problema que también aparece en postulaciones y servicios independientes: traducir lo que alguien necesita y lo que otra persona puede demostrar que sabe hacer.
 
 > **Espejo empezó encontrando equivalencias entre cargos. Puede llegar a ayudar a encontrar correspondencias entre capacidades y oportunidades. La decisión sigue siendo humana.**
 
-Esta ampliación es **una propuesta estratégica posterior a la presentación de la dupla**, no una afirmación de que ya existan esos productos. [Desarrollo de la visión](04-vision-de-plataforma.md).
+La ampliación es una propuesta posterior al pitch de la dupla. [Desarrollo de la visión](04-vision-de-plataforma.md).
 
-## Por qué es una oportunidad más que un eslogan
+## Señales del mercado
 
-El estudio de [LinkedIn Economic Graph (2025)](https://economicgraph.linkedin.com/content/dam/me/economicgraph/en-us/PDF/skills-based-hiring-march-2025.pdf) modeló que, para Chile, una búsqueda por competencias podría considerar **5,6 veces** el grupo potencial de una búsqueda por cargos previos; la [Guía Salarial Buk 2025](https://supportcenter.buk.cl/hc/es-419/articles/52869060867355-Gu%C3%ADa-Salarial-Buk-2025-Qu%C3%A9-es-y-c%C3%B3mo-interpretar-el-estudio-de-remuneraciones-en-Chile) documenta homologación de **más de 200.000 denominaciones**. **No son resultados de Espejo ni un mercado cautivo:** son dos señales independientes de que los nombres pueden ocultar correspondencias relevantes.
+Las investigaciones de LinkedIn sobre habilidades y la metodología de Buk para estandarizar cargos muestran la importancia de comparar contenido más allá de las etiquetas. Los datos y sus fuentes están en [evidencia externa](../desarrollo/05-evidencia-externa-y-escenarios.md).
 
-Lo comercialmente interesante no es «comparar todo con IA» sino **ofrecer una comparación con razones verificables** para cada contexto. La competencia ya existe —incluidos Workday, Eightfold y Workana—; por eso elegimos **una entrada especializada, evidencias observables y expansión gradual**, en vez de pretender dominar mercados enormes desde un prototipo. [Estudio comparativo del mercado](../desarrollo/07-estudio-de-mercado-y-posicionamiento.md).
+La propuesta es ofrecer comparaciones con razones verificables en tareas especializadas. El [estudio de mercado](../desarrollo/07-estudio-de-mercado-y-posicionamiento.md) contrasta esta posibilidad con Buk, Workday, Eightfold y Workana.
 
 ## El producto que sí podemos mostrar hoy
 
-| Lo que hace Homologa | Valor que permite defender | Límite |
-| --- | --- | --- |
-| Compara cargos por **contenido**, no sueldo | Menos dependencia del nombre de un puesto | La calidad depende de fichas y criterios |
-| Expone un motor determinístico reproducible con fichas fijas | Reglas explicables y resultados contrastables | Falta completar el historial de parámetros y descartes |
-| Ofrece una segunda lectura semántica opcional | Ayuda a comprender similitudes que no caben en un nombre | La IA puede equivocarse y no decide |
-| Permite preseleccionar varios y confirmar uno | Deja la responsabilidad al profesional y registra su comentario | La decisión puede actualizarse; faltan auditorías completas |
-| Consulta bandas salariales al final | Aporta contexto de mercado después de la homologación | No determina sueldos ni verifica la calidad de cualquier encuesta |
+| Lo que hace Homologa                                         | Valor que permite defender                                      | Límite                                                                 |
+| ------------------------------------------------------------ | --------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| Compara cargos por **contenido**, no sueldo                  | Menos dependencia del nombre de un puesto                       | La calidad depende de fichas y criterios                               |
+| Expone un motor determinístico reproducible con fichas fijas | Reglas explicables y resultados contrastables                   | Falta completar el historial de parámetros y descartes                 |
+| Ofrece una segunda lectura semántica opcional                | Ayuda a comprender similitudes que no caben en un nombre        | La IA puede equivocarse y no decide                                    |
+| Permite preseleccionar varios y confirmar uno                | Deja la responsabilidad al profesional y registra su comentario | La decisión puede actualizarse; falta un historial completo de cambios |
+| Consulta bandas salariales al final                          | Aporta contexto de mercado después de la homologación           | No determina sueldos ni verifica la calidad de cualquier encuesta      |
 
-**Referencia de desempeño comunicada por Pablo:** aproximadamente **2–3 minutos por homologación justificada con información disponible**, todavía pendiente de una medición controlada que incluya preparación y correcciones. No se aplica ese tiempo a otros mercados. [Evidencia económica](../desarrollo/05-evidencia-externa-y-escenarios.md).
+El tiempo de uso reportado y el método para medirlo están en [evidencia económica](../desarrollo/05-evidencia-externa-y-escenarios.md).
 
-## El movimiento comercial: tres saltos, no tres promesas
+## Secuencia de expansión propuesta
 
 ```mermaid
 flowchart LR
     H["01 · Resolver<br/>Homologa · cargos"] --> P["02 · Reutilizar método<br/>Postula · habilidades"]
     P --> S["03 · Abrir servicios<br/>proyectos · freelancers"]
-    S -. "Solo después de auditorías" .-> T["04 · Selección laboral<br/>evaluación responsable"]
+    S -. "Tras validación específica" .-> T["04 · Selección laboral<br/>evaluación responsable"]
     classDef active fill:#DCF3ED,stroke:#17795D,color:#153F35,stroke-width:2px;
     class H active;
 ```
 
 - **Primero**, una herramienta de compensaciones con un problema, usuarios y entregables claros. Es el núcleo existente.
-- **Después**, una experiencia donde la persona pueda identificar vacantes pertinentes, mostrar competencias demostradas y descubrir qué le falta aclarar. **No es un clasificador de valor humano ni un rechazo automático.**
+- **Después**, una experiencia donde la persona pueda identificar vacantes pertinentes, mostrar competencias demostradas y descubrir qué le falta aclarar. La orientación queda bajo el control de la persona.
 - **Más adelante**, ayudar a profesionales independientes y clientes a definir mejor proyectos y evaluar entregables comparables, sin sustituir la negociación.
 - **Finalmente, si hay evidencia y controles suficientes**, estudiar una herramienta de apoyo a selección. Ese uso requiere medidas de seguridad, equidad, privacidad y revisión mucho más estrictas.
 
-El propósito comercial es **transformar conocimientos especializados en servicios que resuelvan problemas claros**, no fabricar un marketplace de la noche a la mañana.
+El propósito comercial es transformar conocimientos especializados en servicios con un alcance y un entregable claros.
 
-## Un mercado que ya cambia su manera de describir el talento
+## Contexto de mercado
 
-La **OCDE (2026)** señala que **36 %** de los trabajadores de las economías participantes en su Encuesta de Competencias de Adultos reportó un desajuste entre las habilidades que posee y las que exige su trabajo. El **Foro Económico Mundial (2025)** recoge que **63 %** de los empleadores encuestados considera las brechas de competencias una barrera importante. Son indicadores del desafío, **no usuarios o ventas del producto**.
-
-El **Future Workforce Index 2026 de Upwork**, basado en una muestra de **2.400 trabajadores cualificados de Estados Unidos**, comunica que **38 %** trabaja como freelance y encuentra crecimiento en servicios profesionales que combinan conocimiento de dominio e IA. **No equivale a un porcentaje de trabajadores chilenos ni predice que desaparecerán los sueldos fijos**.
-
-Las fuentes, definiciones y límites están documentados en [Visión y evidencia](04-vision-de-plataforma.md). Por separado, el informe de [Buk Chile](../desarrollo/05-evidencia-externa-y-escenarios.md) demuestra que la **homologación de cargos ya tiene competidores y aplicaciones reales a escala**, lo que obliga a diferenciarnos por calidad, especialización y trazabilidad, no por ser los primeros en automatizar.
+Los estudios sobre competencias y trabajo independiente ayudan a identificar problemas y posibles usuarios. La disposición a pagar requiere investigación específica en cada segmento. [Fuentes y escenarios](../desarrollo/05-evidencia-externa-y-escenarios.md) · [Mercado y competencia](../desarrollo/07-estudio-de-mercado-y-posicionamiento.md).
 
 ## ¿Dónde podría existir ingreso?
 
-**Dos clientes pueden beneficiarse de la misma idea sin comprar el mismo producto.** Un consultor paga por mejorar su capacidad de entregar homologaciones; una persona postulante quiere orientación; una agencia puede pagar por especificaciones comparables de servicios; un equipo de selección necesitaría garantías de auditoría. Por eso la **estrategia de venta debe definirse por problema, comprador y entrega**, no solo por el motor.
+**Dos clientes pueden beneficiarse de la misma idea sin comprar el mismo producto.** Un consultor paga por mejorar su capacidad de entregar homologaciones; una persona postulante quiere orientación; una agencia puede pagar por especificaciones comparables de servicios; un equipo de selección necesitaría un historial verificable. Por eso la **estrategia de venta debe definirse por problema, comprador y entrega**, no solo por el motor.
 
-| Posible oferta | Qué recibe quien contrata o usa | Posible modelo (todavía sin ventas) |
-| --- | --- | --- |
-| **Homologa para especialistas** | Comparaciones revisadas y reportes defendibles | Servicio profesional por proyecto, mantenimiento de estudios o licencia especializada |
-| **Postula para personas** | Brechas explicadas, evidencia y ayuda para preparar mejores candidaturas | Acceso básico abierto y ayuda profesional opcional, sin vender sus datos |
-| **Servicios para freelancers y clientes** | Claridad de alcance, comparación de entregables y propuestas mejor definidas | Herramienta de propuestas o servicio por solicitud revisada |
-| **Selección asistida responsable** | Requisitos claros, revisión humana y documentación de criterios | B2B solo tras seguridad y validación legal, sin selección automática |
+| Posible oferta                            | Qué recibe quien contrata o usa                                              | Posible modelo (todavía sin ventas)                                                   |
+| ----------------------------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| **Homologa para especialistas**           | Comparaciones revisadas y reportes defendibles                               | Servicio profesional por proyecto, mantenimiento de estudios o licencia especializada |
+| **Postula para personas**                 | Brechas explicadas, evidencia y ayuda para preparar mejores candidaturas     | Acceso básico abierto y ayuda profesional opcional, sin vender sus datos              |
+| **Servicios para freelancers y clientes** | Claridad de alcance, comparación de entregables y propuestas mejor definidas | Herramienta de propuestas o servicio por solicitud revisada                           |
+| **Selección asistida responsable**        | Requisitos claros, revisión humana y documentación de criterios              | B2B solo tras seguridad y validación legal, sin selección automática                  |
 
-**No hemos vendido estas ofertas ni fijado precios.** La oportunidad se valida entrevistando personas, observando si las recomendaciones ayudan y probando disposición real a pagar. [Estrategia de piloto](../desarrollo/06-expansion-y-pilotos.md).
+Las ofertas son hipótesis comerciales. Su evaluación requiere entrevistas, observación de uso y pruebas de disposición a pagar. [Estrategia de piloto](../desarrollo/06-expansion-y-pilotos.md).
 
 ## Dos maneras de escalar que conviene distinguir
 
@@ -79,15 +75,13 @@ Las fuentes, definiciones y límites están documentados en [Visión y evidencia
 
 La tercera dimensión es **escala operacional**: varias organizaciones, niveles de tráfico, costos, protección de datos y soporte. Esa capacidad **no está resuelta**. Las funciones usan una clave de servicio de Supabase sin controles generales de autorización por organización; no debe venderse como un SaaS seguro para empresas o CV reales. [Riesgos actuales](../tecnica/07-seguridad-y-limitaciones.md).
 
-[Arquitectura futura sin inventar funciones](../tecnica/08-arquitectura-de-expansion.md).
+[Arquitectura propuesta](../tecnica/08-arquitectura-de-expansion.md).
 
 ## La tesis sobre los profesionales
 
 La IA puede acortar tareas mecánicas. **El valor del profesional está en saber qué preguntar, qué comparar, cuándo desconfiar de un resultado, a quién escuchar y qué recomendar con responsabilidad.**
 
-Veo un futuro en el que muchas personas combinarán empleo, proyectos, consultoría y servicios propios; querrán demostrar habilidades que no siempre caben en un título. La evidencia del mercado permite **explorar ese escenario**, no afirmar que todos los empleos asalariados desaparecerán.
-
-**Nuestra ventaja narrativa es sencilla: no queremos que Espejo decida por las personas. Queremos que la experiencia de las personas pueda llegar más lejos.**
+La visión de expansión contempla que las personas puedan combinar empleo, proyectos y servicios propios, mostrando habilidades que no siempre quedan visibles en un título.
 
 **La frase del pitch sigue siendo válida:** «La IA no reemplaza al experto. Potencia su trabajo». La oportunidad adicional —**conectar capacidades con necesidades en otros mercados**— es una visión de expansión que todavía debe construirse y validarse.
 
