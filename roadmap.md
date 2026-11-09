@@ -19,4 +19,13 @@ Estado de las funcionalidades y prioridades de desarrollo del piloto.
 - [ ] Automatizar pruebas de negocio, permisos e informes.
 - [ ] Validar flujo y precisión con analistas, datos autorizados y escenarios representativos.
 
+## Propuestas de expansión
+
+Una vez consolidado Homologa, la [ruta de pilotos](docs/desarrollo/06-expansion-y-pilotos.md) propone:
+
+- [ ] Probar autoorientación de postulaciones con perfiles sintéticos y evidencia de habilidades.
+- [ ] Evaluar claridad de alcances y entregables en servicios independientes.
+- [ ] Diseñar adaptadores y reglas por dominio según la [arquitectura propuesta](docs/tecnica/08-arquitectura-de-expansion.md).
+- [ ] Evaluar desarrollo de competencias y apoyo a selección con pruebas y controles específicos.
+
 [Documentación](docs/README.md) · [Detalle de prioridades](docs/desarrollo/03-evolucion-y-prioridades.md).

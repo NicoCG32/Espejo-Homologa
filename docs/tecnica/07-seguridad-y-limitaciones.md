@@ -19,6 +19,12 @@ Las fichas de cargos, las remuneraciones y las decisiones pueden contener inform
 | Reproducción de cálculos | No se guardan por ejecución los pesos globales motor/IA ni los motivos de todos los descartes.        |
 | Escrituras compuestas    | El reemplazo de la preselección utiliza consultas separadas y puede quedar incompleto ante un fallo.  |
 
+## Riesgos adicionales de una posible expansión a personas y servicios
+
+**No están implementados módulos de reclutamiento, candidaturas, portafolios ni freelancers.** Si se diseñan, habrá que separar perfiles personales, permisos, fines legítimos de tratamiento y revisiones. **No se debe usar la puntuación del motor actual de cargos para asignar valor a personas, descartar solicitantes automáticamente o inferir capacidades por características protegidas.**
+
+La selección asistida por IA puede constituir un uso **de alto riesgo en la Unión Europea** ([referencia oficial AI Act](https://ai-act-service-desk.ec.europa.eu/en/employment-0)); la aplicabilidad en Chile u otras jurisdicciones debe estudiarse por separado. La normativa chilena de datos personales también requiere revisión antes de tratar perfiles o CV. [Diseño propuesto y barreras](08-arquitectura-de-expansion.md).
+
 ## Qué resolver antes de tratar datos reales
 
 1. **Exigir autenticación y autorización en cada función del servidor**, con alcance por usuario/organización, antes de utilizar la credencial privilegiada. La protección CSRF no cumple esa función.

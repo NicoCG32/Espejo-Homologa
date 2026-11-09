@@ -4,6 +4,8 @@
 
 El código y la documentación originales sobre los que NicoCG32 puede conceder derechos se ofrecen bajo [PolyForm Noncommercial 1.0.0](LICENSE), con los avisos de [NOTICE](NOTICE). Se conserva el texto oficial sin modificaciones. No se presenta el proyecto como software de código abierto sin restricciones de uso comercial.
 
+El proyecto se desarrolló de forma colaborativa en Duplas Intergeneracionales Tech. Los aportes de Claudia Peña, Pablo Guzmán y la tutoría de Gricel Sepúlveda se describen en [colaboración y atribución](docs/formativa/03-colaboracion-y-atribucion.md).
+
 Esta autorización no cambia licencias de dependencias, código ajeno, recursos visuales o sonoros, fuentes, datos, marcas ni materiales incorporados de terceros. Sus avisos y permisos se conservan. No concede derechos que correspondan a otros titulares ni retira permisos concedidos previamente mediante otros acuerdos.
 
 ## Uso sin compensación económica

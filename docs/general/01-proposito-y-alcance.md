@@ -8,7 +8,7 @@ Espejo ayuda al analista a ordenar esa comparación y justificar su elección. L
 
 **Espejo · Homologa** compara fichas por nombre, descripción, área, subárea, código, nivel jerárquico, experiencia y formación, según los criterios habilitados. Primero aplica reglas ponderadas; después, si se solicita y hay un proveedor disponible, utiliza IA para interpretar los textos. La persona revisa los resultados y confirma la referencia que considera apropiada. El benchmark permite consultar la remuneración interna frente a las bandas de esa referencia.
 
-El objetivo es apoyar la decisión profesional con criterios visibles y resultados que se puedan consultar.
+El objetivo es apoyar la decisión profesional con reglas visibles, explicaciones semánticas y resultados que se puedan consultar. La [propuesta de valor](03-propuesta-de-valor.md) desarrolla su utilidad y posibilidades de expansión.
 
 ## Qué incluye hoy
 

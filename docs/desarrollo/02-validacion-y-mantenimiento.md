@@ -2,6 +2,10 @@
 
 El workflow de calidad ejecuta lint, comprobación de tipos y compilación. Los escenarios de esta guía forman el plan de pruebas funcionales y de integración pendiente; el proyecto todavía no dispone de una suite automatizada de dominio.
 
+## Investigación económica y contraste con el mercado
+
+Una [revisión de fuentes externas al 8-11-2026](05-evidencia-externa-y-escenarios.md) confirmó un caso de homologación masiva mediante IA en Chile (Buk), referencias metodológicas de Mercer y WTW, datos salariales del INE y precios de proveedores. **Ninguna prueba por sí sola valida los 2–3 minutos reportados ni la cifra de 80 % del pitch**. Para evaluarla, medir al menos 30–50 casos, comparar tiempos manuales y asistidos con el mismo entregable, registrar p50/p95, discrepancias profesionales y costo de corrección. No hacer pruebas con datos empresariales sensibles mientras los permisos de servidor continúen pendientes.
+
 ## Matriz mínima de pruebas
 
 | Área             | Escenarios recomendados                                                           | Resultado que deberíamos comprobar                                                                   |

@@ -10,14 +10,14 @@ El curso usaba ejemplos compartidos, como **Registro de Postulantes**, para prac
 
 ## Bloque de proyectos: llevarlo a una necesidad real
 
-| Momento del programa | Qué se buscaba                                                         | Cómo se relaciona con Espejo                               |
-| -------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------- |
-| Match Day y V0       | Formar la dupla, escoger desafío y hacer un boceto exploratorio.       | Claudia presentó el problema de homologación de cargos.    |
-| Diagnóstico          | Revisar el V0, investigar y precisar el problema.                      | La idea se contrastó con su experiencia profesional.       |
-| Alcance              | Distinguir lo esencial de lo deseable y fijar un criterio verificable. | La comparación de cargos por contenido definió el alcance. |
-| Construcción V1      | Obtener una versión funcional demostrable.                             | Iteraciones dirigidas mediante prompts en Lovable.         |
-| Validación y V2      | Probar, recibir observaciones y mejorar.                               | Claudia probaba el programa y comentaba los cambios.       |
-| Pitch final          | Explicar problema, solución, demo, impacto y cierre.                   | La dupla presentó el resultado del proyecto.               |
+| Momento del programa | Qué se buscaba                                                               | Cómo se relaciona con Espejo                                                    |
+| -------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Match Day y V0       | Formar la dupla, escoger desafío y hacer un boceto exploratorio.             | Claudia presentó el problema de homologación de cargos.                         |
+| Diagnóstico          | Revisar el V0, investigar y precisar el problema.                            | La idea se contrastó con su experiencia profesional.                            |
+| Alcance              | Distinguir lo esencial de lo deseable y fijar un criterio verificable.       | La comparación de cargos por contenido definió el alcance.                      |
+| Construcción V1      | Obtener una versión funcional demostrable.                                   | Iteraciones dirigidas mediante prompts en Lovable.                              |
+| Validación y V2      | Probar, recibir observaciones y mejorar.                                     | Claudia probaba el programa y comentaba los cambios.                            |
+| Pitch final          | Explicar problema, solución, demo, propuesta de valor y defensa ante jurado. | Claudia y Pablo presentaron una solución donde la IA apoya y el experto decide. |
 
 ## Método de la dupla
 
@@ -30,6 +30,12 @@ El curso usaba ejemplos compartidos, como **Registro de Postulantes**, para prac
 ## Dos funciones diferentes de la inteligencia artificial
 
 Lovable y ChatGPT apoyaron la construcción del software. Las funciones de IA de la aplicación utilizan Gemini y, bajo ciertas condiciones, Groq para normalizar texto y comparar cargos. Su funcionamiento se describe en [IA y normalización](../tecnica/04-ia-y-normalizacion.md).
+
+## Presentación final de la dupla
+
+La presentación final de **siete diapositivas** reunió el problema, el flujo profesional, la combinación de motor e IA, la demostración y la propuesta de valor. Claudia y Pablo presentaron juntos el proyecto. [Pitch y visión](02-pitch-y-vision.md) recoge ese recorrido.
+
+Las cifras del pitch y el procedimiento para evaluarlas están en [viabilidad y métricas](../desarrollo/04-viabilidad-y-metricas.md).
 
 ## Referencias documentales consultadas
 

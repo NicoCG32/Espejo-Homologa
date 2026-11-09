@@ -2,6 +2,8 @@
 
 La arquitectura separa la **interfaz**, las **operaciones del servidor**, el **cálculo de homologación** y los **servicios externos**.
 
+Esta arquitectura describe el piloto de comparación de cargos. La propuesta para otros dominios está en [arquitectura de expansión](08-arquitectura-de-expansion.md).
+
 ## Nivel 1 — Contexto del sistema
 
 ```mermaid
